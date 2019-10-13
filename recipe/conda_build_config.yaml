@@ -21,6 +21,7 @@ ctng_target_platform:
   - linux-32  # [linux32]
   - linux-64  # [linux64]
   - linux-ppc64le  # [ppc64le]
+  - linux-aarch64  # [aarch64]
 ctng_vendor:
   - conda_cos6  # [linux32 or linux64]
   - conda_cos7  # [aarch64 or ppc64le]
