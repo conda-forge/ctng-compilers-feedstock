@@ -13,6 +13,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-gdb-cross
   rm ${PREFIX}/share/info/bfd.info
 popd
 
+set +x
 # Strip executables, we may want to install to a different prefix
 # and strip in there so that we do not change files that are not
 # part of this package.

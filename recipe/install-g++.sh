@@ -35,6 +35,7 @@ popd
 # Test:
 ${PREFIX}/bin/${CHOST}-g++ "${RECIPE_DIR}"/hello-world.cpp
 
+set +x
 # Strip executables, we may want to install to a different prefix
 # and strip in there so that we do not change files that are not
 # part of this package.

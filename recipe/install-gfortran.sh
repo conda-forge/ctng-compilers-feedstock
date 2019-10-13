@@ -54,6 +54,7 @@ echo '#!/bin/sh' > $PREFIX/bin/${CHOST}-gfortran
 echo $PREFIX/bin/${CHOST}-gfortran.bin -specs=$specdir/specs '"$@"' >> $PREFIX/bin/${CHOST}-gfortran
 chmod +x $PREFIX/bin/${CHOST}-gfortran
 
+set +x
 # Strip executables, we may want to install to a different prefix
 # and strip in there so that we do not change files that are not
 # part of this package.
