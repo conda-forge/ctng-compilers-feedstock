@@ -16,5 +16,7 @@ ctng_gcc:
 - 7.3.0
 ctng_libc:
 - gnu
+ctng_target_platform:
+- linux-aarch64
 docker_image:
 - condaforge/linux-anvil-aarch64
