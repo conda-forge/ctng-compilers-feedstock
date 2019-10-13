@@ -1,0 +1,16 @@
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+ctng_binutils:
+- 2.31.1
+ctng_cpu_arch:
+- x86_64
+ctng_gcc:
+- 7.3.0
+ctng_libc:
+- gnu
+ctng_target_platform:
+- linux-64
+docker_image:
+- condaforge/linux-anvil-comp7
