@@ -233,7 +233,7 @@ outputs:
       license: GPL
   {% endif %}
 
-  {% if False %}
+  {% if ctng_duma is defined %}
   - name: duma_{{ ctng_target_platform }}
     target: {{ ctng_target_platform }}
     version: {{ ctng_duma }}
