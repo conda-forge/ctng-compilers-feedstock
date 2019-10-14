@@ -94,7 +94,7 @@ if [[ ! -n $(find ${SRC_DIR}/gcc_built -iname ${ctng_cpu_arch}-${ctng_vendor}-*-
       fi
     fi
     unset CFLAGS CXXFLAGS LDFLAGS
-    ct-ng build || (cat build.log && exit 1)
+    ct-ng build || (tail -n 1000 build.log && exit 1)
 fi
 
 # increase stack size to prevent test failures
