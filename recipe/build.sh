@@ -53,6 +53,7 @@ fi
 
 if [[ "${ctng_cpu_arch}" == "aarch64" ]]; then
   export CT_BINUTILS_EXTRA_CONFIG_ARRAY="--disable-relro"
+  sed -i.bak '/^    select BINUTILS_REQUIRE_older_than_2_30/d' $PREFIX/share/crosstool-ng/config/libc/glibc.in
 fi
 
 BUILD_NCPUS=$(($CPU_COUNT * 2))
