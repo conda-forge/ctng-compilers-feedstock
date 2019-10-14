@@ -157,8 +157,8 @@ outputs:
         - "*"
     test:
       commands:
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-*/bin/ar
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-*/bin/ld
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ar
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ld
     about:
       summary: The GNU Binutils are a collection of binary tools.
       home: https://www.gnu.org/software/binutils/
