@@ -9,7 +9,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 ctng_binutils:
-- 2.29.1
+- 2.31.1
 ctng_cpu_arch:
 - aarch64
 ctng_gcc:
