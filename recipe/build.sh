@@ -51,9 +51,6 @@ if [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/expat-2.2.0.tar.bz2" ]]; then
   ${DOWNLOADER_INSECURE} http://mirror.opencompute.org/onie/crosstool-NG/expat-2.2.0.tar.bz2 ${DOWNLOADER_OUT} ${SYS_PREFIX}/conda-bld/src_cache/expat-2.2.0.tar.bz2
 fi
 
-if [[ "${ctng_cpu_arch}" == "aarch64" ]]; then
-  export CT_BINUTILS_EXTRA_CONFIG_ARRAY="--disable-relro"
-fi
 
 BUILD_NCPUS=$(($CPU_COUNT * 2))
 
