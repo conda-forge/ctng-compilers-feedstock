@@ -9,3 +9,5 @@ sed
 findutils
 make
 file
+autoconf
+automake

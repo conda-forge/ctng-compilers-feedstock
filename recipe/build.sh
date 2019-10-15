@@ -56,6 +56,9 @@ BUILD_NCPUS=$(($CPU_COUNT * 2))
 
 [[ -d ${SRC_DIR}/gcc_built ]] || mkdir -p ${SRC_DIR}/gcc_built
 
+export CT_COMP_TOOLS_AUTOCONF=n
+export CT_COMP_TOOLS_AUTOMAKE=n
+
 # If the gfortran binary doesn't exist yet, then run ct-ng
 if [[ ! -n $(find ${SRC_DIR}/gcc_built -iname ${ctng_cpu_arch}-${ctng_vendor}-*-gfortran) ]]; then
     source ${RECIPE_DIR}/write_ctng_config
