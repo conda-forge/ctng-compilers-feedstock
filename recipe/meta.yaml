@@ -157,8 +157,8 @@ outputs:
         - "*"
     test:
       commands:
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-*/bin/ar
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-*/bin/ld
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ar
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ld
     about:
       summary: The GNU Binutils are a collection of binary tools.
       home: https://www.gnu.org/software/binutils/
@@ -233,7 +233,7 @@ outputs:
       license: GPL
   {% endif %}
 
-  {% if False %}
+  {% if ctng_duma is defined %}
   - name: duma_{{ ctng_target_platform }}
     target: {{ ctng_target_platform }}
     version: {{ ctng_duma }}

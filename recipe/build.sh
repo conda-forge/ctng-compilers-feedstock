@@ -41,8 +41,10 @@ else
 fi
 
 # Necessary because CentOS5.11 is having some certificate issues.
-if [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/duma_${ctng_duma//./_}.tar.gz" ]]; then
-  ${DOWNLOADER_INSECURE} http://mirror.opencompute.org/onie/crosstool-NG/duma_${ctng_duma//./_}.tar.gz ${DOWNLOADER_OUT} ${SYS_PREFIX}/conda-bld/src_cache/duma_${ctng_duma//./_}.tar.gz
+if [[ -n "${ctng_duma}" ]]; then
+  if [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/duma_${ctng_duma//./_}.tar.gz" ]]; then
+    ${DOWNLOADER_INSECURE} http://mirror.opencompute.org/onie/crosstool-NG/duma_${ctng_duma//./_}.tar.gz ${DOWNLOADER_OUT} ${SYS_PREFIX}/conda-bld/src_cache/duma_${ctng_duma//./_}.tar.gz
+  fi
 fi
 
 if [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/expat-2.2.0.tar.bz2" ]]; then
@@ -50,7 +52,7 @@ if [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/expat-2.2.0.tar.bz2" ]]; then
 fi
 
 
-BUILD_NCPUS=${CPU_COUNT}
+BUILD_NCPUS=$(($CPU_COUNT * 2))
 
 [[ -d ${SRC_DIR}/gcc_built ]] || mkdir -p ${SRC_DIR}/gcc_built
 
@@ -92,7 +94,7 @@ if [[ ! -n $(find ${SRC_DIR}/gcc_built -iname ${ctng_cpu_arch}-${ctng_vendor}-*-
       fi
     fi
     unset CFLAGS CXXFLAGS LDFLAGS
-    ct-ng build || (cat build.log && exit 1)
+    ct-ng build || (tail -n 1000 build.log && exit 1)
 fi
 
 # increase stack size to prevent test failures

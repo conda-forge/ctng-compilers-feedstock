@@ -175,6 +175,9 @@ function write_ctng_config_before() {
       echo "CT_GDB_GDBSERVER_HAS_IPA_LIB=y"                             >> "${_dst}"
       echo "CT_GDB_GDBSERVER_STATIC=n"                                  >> "${_dst}"
     fi
+  else
+    echo "CT_DEBUG_gdb=n"                                               >> "${_dst}"
+    echo "CT_DEBUG_GDB=n"                                               >> "${_dst}"
   fi
   echo "CT_DISABLE_MULTILIB_LIB_OSDIRNAMES=y"                           >> "${_dst}"
   echo "CT_CC_GCC_LIBGOMP=y"                                            >> "${_dst}"

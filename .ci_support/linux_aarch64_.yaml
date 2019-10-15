@@ -1,0 +1,22 @@
+BUILD:
+- aarch64-conda_cos7-linux-gnu
+cdt_arch:
+- aarch64
+cdt_name:
+- cos7
+channel_sources:
+- conda-forge,c4aarch64,defaults
+channel_targets:
+- conda-forge main
+ctng_binutils:
+- 2.29.1
+ctng_cpu_arch:
+- aarch64
+ctng_gcc:
+- 7.3.0
+ctng_libc:
+- gnu
+ctng_target_platform:
+- linux-aarch64
+docker_image:
+- condaforge/linux-anvil-aarch64

@@ -8,4 +8,4 @@ rsync
 sed
 findutils
 make
-
+file
