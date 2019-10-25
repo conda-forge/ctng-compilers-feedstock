@@ -27,7 +27,8 @@ requirements:
     - crosstool-ng >=1.23.0
 
 outputs:
-  - name: sysroot_{{ ctng_sample }}
+  - name: sysroot_{{ target_platform }}
+    version: "{{ gnu }}"
     build:
       number: {{ build_num }}
       track_features:
