@@ -1,6 +1,6 @@
 ctng_sample:
-  - i686-centos6-linux-gnu  # [linux32]
-  - x86_64-centos6-linux-gnu  # [linux64]
+  - i686-centos7-linux-gnu  # [linux32]
+  - x86_64-centos7-linux-gnu  # [linux64]
   - powerpc64le-unknown-linux-gnu  # [ppc64le]
   - aarch64-unknown-linux-gnu  # [aarch64]
 ctng_cpu_arch:
@@ -23,7 +23,7 @@ ctng_target_platform:
   - linux-ppc64le  # [ppc64le]
   - linux-aarch64  # [aarch64]
 ctng_vendor:
-  - conda_cos6  # [linux32 or linux64]
+  - conda_cos7  # [linux32 or linux64]
   - conda_cos7  # [aarch64 or ppc64le]
 #ctng_duma:
 #  - 2.5.15
@@ -47,5 +47,5 @@ ctng_nature:
 ctng_ncurses:
   - 6.1
 gnu:
-  - 2.17    # [ppc64le or aarch64]
-  - 2.12.2  # [linux32 or linux64]
+  - 2.17  # [ppc64le or aarch64]
+  - 2.17  # [linux32 or linux64]

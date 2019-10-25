@@ -27,6 +27,12 @@ requirements:
     - crosstool-ng >=1.23.0
 
 outputs:
+  - name: sysroot_{{ ctng_sample }}
+    build:
+      number: {{ build_num }}
+    about:
+      summary: Metapackage for targeting a particular version of sysroot
+
   - name: gcc_impl_{{ ctng_target_platform }}
     script: install-gcc.sh
     build:
@@ -47,6 +53,7 @@ outputs:
         - "x86_64-conda_cos6-linux-gnu/sysroot/lib/libpthread-2.12.2.so"
     requirements:
       run:
+        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, exact=True) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
@@ -84,6 +91,7 @@ outputs:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
       run:
+        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
     run_exports:
@@ -116,6 +124,7 @@ outputs:
         - "*"
     requirements:
       build:
+        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
       run:
@@ -155,6 +164,9 @@ outputs:
         - 'libexec/**/*.so*'
       missing_dso_whitelist:
         - "*"
+    requirements:
+      run:
+        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
     test:
       commands:
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ar
@@ -173,6 +185,9 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+    requirements:
+      run:
+        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libstdc++.so
@@ -186,6 +201,7 @@ outputs:
     script: install-libgcc.sh
     requirements:
       run:
+        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
         - _libgcc_mutex * main
     build:
       number: {{ build_num }}
@@ -210,6 +226,9 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+    requirements:
+      run:
+        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
@@ -227,6 +246,9 @@ outputs:
       number: {{ build_num }}
       missing_dso_whitelist:
         - "*"
+    requirements:
+      run:
+        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
     about:
       summary: The GNU Project Debugger
       home: https://www.gnu.org/software/gdb/
@@ -247,6 +269,9 @@ outputs:
         - 'libexec/**/*.so*'
       missing_dso_whitelist:
         - "*"
+    requirements:
+      run:
+        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
     about:
       summary: DUMA is an open-source library to detect buffer overruns and under-runs in C and C++ programs.
       home: http://duma.sourceforge.net/
@@ -256,3 +281,4 @@ outputs:
 extra:
   recipe-maintainers:
     - isuruf
+    - scopatz
