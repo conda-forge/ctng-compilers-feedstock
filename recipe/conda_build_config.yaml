@@ -1,5 +1,6 @@
 ctng_sample:
   - i686-centos7-linux-gnu  # [linux32]
+  - x86_64-centos6-linux-gnu  # [linux64]
   - x86_64-centos7-linux-gnu  # [linux64]
   - powerpc64le-unknown-linux-gnu  # [ppc64le]
   - aarch64-unknown-linux-gnu  # [aarch64]
