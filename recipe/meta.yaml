@@ -168,7 +168,7 @@ outputs:
       missing_dso_whitelist:
         - "*"
     requirements:
-      run:
+      run_constrained:
         - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
     test:
       commands:
