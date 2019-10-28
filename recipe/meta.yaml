@@ -32,7 +32,7 @@ outputs:
     build:
       number: {{ build_num }}
       track_features:
-        - glibc_{{gnu.replace(".","_") }}    # [(target_platform == "linux-64" or target_platform == "linux-32") and ctng_vendor =="cos7"]
+        - glibc_{{ gnu | replace(".", "_") }}    # [(target_platform == "linux-64" or target_platform == "linux-32") and ctng_vendor =="cos7"]
     about:
       summary: Metapackage for targeting a particular version of sysroot
 
