@@ -7,6 +7,7 @@ ctng_sample:
 ctng_cpu_arch:
   - i686  # [linux32]
   - x86_64  # [linux64]
+  - x86_64  # [linux64]
   - powerpc  # [ppc64le]
   - aarch64  # [aarch64]
 # gdb is optional - commenting this will disable gdb from being built.  For gcc 8.2, that's what we need to do.
@@ -21,11 +22,15 @@ ctng_binutils:
 ctng_target_platform:
   - linux-32  # [linux32]
   - linux-64  # [linux64]
+  - linux-64  # [linux64]
   - linux-ppc64le  # [ppc64le]
   - linux-aarch64  # [aarch64]
 ctng_vendor:
-  - conda_cos7  # [linux32 or linux64]
-  - conda_cos7  # [aarch64 or ppc64le]
+  - conda_cos7  # [linux32]
+  - conda_cos6  # [linux64]
+  - conda_cos7  # [linux64]
+  - conda_cos7  # [aarch64]
+  - conda_cos7  # [ppc64le]
 #ctng_duma:
 #  - 2.5.15
 ctng_gcc_build_number:
@@ -48,5 +53,8 @@ ctng_nature:
 ctng_ncurses:
   - 6.1
 gnu:
-  - 2.17  # [ppc64le or aarch64]
-  - 2.17  # [linux32 or linux64]
+  - 2.17  # [linux32]
+  - 2.12.2 # [linux64]
+  - 2.17  # [linux64]
+  - 2.17  # [ppc64le]
+  - 2.17  # [aarch64]
