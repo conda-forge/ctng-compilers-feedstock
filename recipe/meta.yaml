@@ -127,12 +127,12 @@ outputs:
         - "*"
     requirements:
       build:
-        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
+        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
         - {{ pin_subpackage("libgfortran-ng") }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
     run_exports:
@@ -189,7 +189,7 @@ outputs:
       missing_dso_whitelist:
         - "*"
     requirements:
-      run:
+      run_constrained:
         - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
     test:
       commands:
@@ -203,8 +203,9 @@ outputs:
     target: {{ ctng_target_platform }}
     script: install-libgcc.sh
     requirements:
-      run:
+      run_constrained:
         - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
+      run:
         - _libgcc_mutex * main
     build:
       number: {{ build_num }}
@@ -230,7 +231,7 @@ outputs:
       missing_dso_whitelist:
         - "*"
     requirements:
-      run:
+      run_constrained:
         - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
     test:
       commands:
@@ -250,7 +251,7 @@ outputs:
       missing_dso_whitelist:
         - "*"
     requirements:
-      run:
+      run_constrained:
         - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
     about:
       summary: The GNU Project Debugger
@@ -273,7 +274,7 @@ outputs:
       missing_dso_whitelist:
         - "*"
     requirements:
-      run:
+      run_constrained:
         - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
     about:
       summary: DUMA is an open-source library to detect buffer overruns and under-runs in C and C++ programs.
