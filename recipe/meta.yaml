@@ -22,6 +22,9 @@ requirements:
     - crosstool-ng >=1.24.0
     - make
     - bash  # [osx]
+    - automake
+    - autoconf
+    - libtool
   # Need something here so that build does not get installed to a long prefix
   # as that breaks on some systems.
   host:
