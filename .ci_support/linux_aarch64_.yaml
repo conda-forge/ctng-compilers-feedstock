@@ -8,14 +8,8 @@ channel_sources:
 - conda-forge,c4aarch64,defaults
 channel_targets:
 - conda-forge main
-ctng_binutils:
-- 2.29.1
-ctng_cpu_arch:
-- aarch64
 ctng_gcc:
-- 7.3.0
-ctng_libc:
-- gnu
+- 9.2.0
 ctng_target_platform:
 - linux-aarch64
 docker_image:
