@@ -18,8 +18,8 @@ Current build status
 <table><tr>
     <td>Travis</td>
     <td>
-      <a href="https://travis-ci.org/conda-forge/ctng-compilers-feedstock">
-        <img alt="macOS" src="https://img.shields.io/travis/conda-forge/ctng-compilers-feedstock/master.svg?label=macOS">
+      <a href="https://travis-ci.com/conda-forge/ctng-compilers-feedstock">
+        <img alt="macOS" src="https://img.shields.io/travis/com/conda-forge/ctng-compilers-feedstock/master.svg?label=macOS">
       </a>
     </td>
   </tr><tr>
@@ -94,7 +94,9 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gxx_impl_linux--64-green.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_linux-64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_linux-64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_linux-64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--ng-green.svg)](https://anaconda.org/conda-forge/libgcc-ng) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-ng.svg)](https://anaconda.org/conda-forge/libgcc-ng) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-ng.svg)](https://anaconda.org/conda-forge/libgcc-ng) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-ng.svg)](https://anaconda.org/conda-forge/libgcc-ng) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgfortran--ng-green.svg)](https://anaconda.org/conda-forge/libgfortran-ng) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgfortran-ng.svg)](https://anaconda.org/conda-forge/libgfortran-ng) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgfortran-ng.svg)](https://anaconda.org/conda-forge/libgfortran-ng) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgfortran-ng.svg)](https://anaconda.org/conda-forge/libgfortran-ng) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgomp-green.svg)](https://anaconda.org/conda-forge/libgomp) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgomp.svg)](https://anaconda.org/conda-forge/libgomp) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgomp.svg)](https://anaconda.org/conda-forge/libgomp) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgomp.svg)](https://anaconda.org/conda-forge/libgomp) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libstdcxx--ng-green.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libstdcxx-ng.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libstdcxx-ng.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libstdcxx-ng.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-openmp_impl-green.svg)](https://anaconda.org/conda-forge/openmp_impl) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmp_impl.svg)](https://anaconda.org/conda-forge/openmp_impl) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmp_impl.svg)](https://anaconda.org/conda-forge/openmp_impl) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmp_impl.svg)](https://anaconda.org/conda-forge/openmp_impl) |
 
 Installing ctng-compilers
 =========================
@@ -105,10 +107,10 @@ Installing `ctng-compilers` from the `conda-forge` channel can be achieved by ad
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `binutils_impl_linux-64, gcc_impl_linux-64, gfortran_impl_linux-64, gxx_impl_linux-64, libgcc-ng, libgfortran-ng, libstdcxx-ng` can be installed with:
+Once the `conda-forge` channel has been enabled, `binutils_impl_linux-64, gcc_impl_linux-64, gfortran_impl_linux-64, gxx_impl_linux-64, libgcc-ng, libgfortran-ng, libgomp, libstdcxx-ng, openmp_impl` can be installed with:
 
 ```
-conda install binutils_impl_linux-64 gcc_impl_linux-64 gfortran_impl_linux-64 gxx_impl_linux-64 libgcc-ng libgfortran-ng libstdcxx-ng
+conda install binutils_impl_linux-64 gcc_impl_linux-64 gfortran_impl_linux-64 gxx_impl_linux-64 libgcc-ng libgfortran-ng libgomp libstdcxx-ng openmp_impl
 ```
 
 It is possible to list all of the versions of `binutils_impl_linux-64` available on your platform with:
@@ -132,7 +134,7 @@ A feedstock is made up of a conda recipe (the instructions on what and how to bu
 the package) and the necessary configurations for automatic building using freely
 available continuous integration services. Thanks to the awesome service provided by
 [CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/)
-and [TravisCI](https://travis-ci.org/) it is possible to build and upload installable
+and [TravisCI](https://travis-ci.com/) it is possible to build and upload installable
 packages to the [conda-forge](https://anaconda.org/conda-forge)
 [Anaconda-Cloud](https://anaconda.org/) channel for Linux, Windows and OSX respectively.
 
