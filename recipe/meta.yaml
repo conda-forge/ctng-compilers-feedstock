@@ -1,5 +1,5 @@
 {% set build_num = ctng_gcc_build_number %}
-{% set ompenmp_ver = "4.5" %}
+{% set openmp_ver = "4.5" %}
 
 package:
   name: ctng-compilers
