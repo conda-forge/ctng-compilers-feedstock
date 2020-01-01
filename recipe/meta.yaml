@@ -20,12 +20,12 @@ build:
 
 requirements:
   build:
-    - crosstool-ng >=1.23.0
+    - crosstool-ng >=1.23.0,<1.24
     - bash  # [osx]
   # Need something here so that build does not get installed to a long prefix
   # as that breaks on some systems.
   host:
-    - crosstool-ng >=1.23.0
+    - crosstool-ng >=1.23.0,<1.24
 
 outputs:
   - name: gcc_impl_{{ ctng_target_platform }}
