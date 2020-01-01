@@ -8,8 +8,6 @@ export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:$
 
 pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
 
-  make -C ${CHOST}/libgcc prefix=${PREFIX} install-shared
-
   mkdir -p ${PREFIX}/${CHOST}/sysroot/lib || true
   for lib in libgomp; do
     if [[ -d ${CHOST}/${lib} ]]; then
