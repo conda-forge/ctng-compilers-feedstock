@@ -200,6 +200,7 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
+        - test -f ${PREFIX}/lib/libgomp.so
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
