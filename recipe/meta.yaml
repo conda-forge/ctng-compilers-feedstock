@@ -1,4 +1,5 @@
 {% set build_num = ctng_gcc_build_number %}
+{% set ompenmp_ver = "4.5" %}
 
 package:
   name: ctng-compilers
@@ -193,6 +194,9 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+      run_exports:
+        strong:
+          - {{ pin_subpackage("openmp_impl", max_pin="x.x") }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
@@ -200,6 +204,45 @@ outputs:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
       license: GPL
+
+  - name: libgomp
+    version: "1.0.0"
+    target: {{ ctng_target_platform }}
+    script: install-libgomp.sh
+    requirements:
+      run:
+        - _libgcc_mutex * main
+    build:
+      number: {{ build_num }}
+      detect_binary_files_with_prefix: False
+      binary_relocation: False
+      missing_dso_whitelist:
+        - "*"
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/libgomp.so.1.0.0
+    about:
+      summary: The GCC OpenMP implementation.
+      home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+      license: GPL
+
+  - name: openmp_impl
+    script: install-openmp_impl.sh
+    version: {{ openmp_ver }}
+    requirements:
+      run:
+        - _libgcc_mutex * main
+        - {{ pin_subpackage("libgomp", max_pin="x") }}
+    build:
+      string: 0_gomp
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/libgomp.so.1
+        - test -f ${PREFIX}/lib/libgomp.so.1.0.0
+    about:
+      summary: OpenMP Implementation Mutex
+      license: GPL
+      home: https://gcc.gnu.org/
 
   - name: libgfortran-ng
     target: {{ ctng_target_platform }}
