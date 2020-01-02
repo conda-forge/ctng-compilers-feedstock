@@ -47,8 +47,8 @@ for lib in libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
   done
 done
 
-# make openmp symlink
-ln -s $PREFIX/lib/libgomp.so.1 $PREFIX/lib/libgomp.so
+# make openmp symlinks
+ln -s ${PREFIX}/lib/libgomp.so.1 ${PREFIX}/lib/libgomp.so
 ln -s ${PREFIX}/lib/libgomp.so ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so
 
 # no static libs
