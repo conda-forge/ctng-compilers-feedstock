@@ -52,10 +52,11 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
   make -C gcc prefix=${PREFIX} install-mkheaders
 
   if [[ -d ${CHOST}/libgomp ]]; then
-    BASEDIR=$(dirname "$0")
+    PATCH_DIR=$(dirname "$0")
+    PREV_DIR=$PWD
     cd $SRC_DIR/.build/src/gcc-${PKG_VERSION}/libgomp
-    patch < ${BASEDIR}/gomp-safe-fork.patch
-    cd $BASEDIR
+    patch < ${PATCH_DIR}/gomp-safe-fork.patch
+    cd $PREV_DIR
     make -C ${CHOST}/libgomp prefix=${PREFIX} install-nodist_{libsubinclude,toolexeclib}HEADERS
   fi
 
