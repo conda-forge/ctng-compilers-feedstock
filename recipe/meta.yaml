@@ -306,7 +306,8 @@ outputs:
 about:
   summary: GNU Compiler Collection
   home: https://gcc.gnu.org/
-  license: GPL-3.0-with-GCC-exception
+  license: GPL-3.0-or-later
+  license_file: LICENSE
 
 extra:
   recipe-maintainers:
