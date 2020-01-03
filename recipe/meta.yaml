@@ -247,8 +247,9 @@ outputs:
         - test -f ${PREFIX}/bin/.openmp_impl-pre-unlink.sh
     about:
       summary: OpenMP Implementation Mutex
-      license: GPL
-      home: https://gcc.gnu.org/
+      license: BSD-3-Clause
+      license_file: LICENSE
+      home: https://github.com/conda-forge/ctng-compilers-feedstock
 
   - name: libgfortran-ng
     target: {{ ctng_target_platform }}
