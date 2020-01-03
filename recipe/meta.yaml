@@ -188,6 +188,7 @@ outputs:
     requirements:
       run:
         - _libgcc_mutex * main
+        - {{ pin_subpackage("openmp_impl", max_pin='x.x') }}
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -224,6 +225,8 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.1.0.0
+        - ! test -f ${PREFIX}/lib/libgomp.so
+        - ! test -f ${PREFIX}/lib/libgomp.so.1
         - test -f ${PREFIX}/include/omp.h
     about:
       summary: The GCC OpenMP implementation.
@@ -242,7 +245,6 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.1
-        - test -f ${PREFIX}/lib/libgomp.so.1.0.0
         - test -f ${PREFIX}/bin/.openmp_impl-post-link.sh
         - test -f ${PREFIX}/bin/.openmp_impl-pre-unlink.sh
     about:
