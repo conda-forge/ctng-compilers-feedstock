@@ -15,7 +15,7 @@ Index: team.c
  #endif
  
 +/* This is to enable best-effort cleanup after fork.  */
-+static bool gomp_we_are_forked;
++static bool gomp_we_are_forked;syntax_error
  
  /* This structure is used to communicate across pthread_create.  */
  
