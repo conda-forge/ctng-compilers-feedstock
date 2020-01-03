@@ -53,7 +53,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
 
   if [[ -d ${CHOST}/libgomp ]]; then
     BASEDIR=$(dirname "$0")
-    cd ${CHOST}/libgomp
+    cd ${SRC_DIR}/libgomp
     patch < ${BASEDIR}/gomp-safe-fork.patch
     cd $BASEDIR
     make -C ${CHOST}/libgomp prefix=${PREFIX} install-nodist_{libsubinclude,toolexeclib}HEADERS
