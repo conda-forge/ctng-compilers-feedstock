@@ -47,9 +47,19 @@ for lib in libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
   done
 done
 
-# make openmp symlinks
-ln -s ${PREFIX}/lib/libgomp.so.1 ${PREFIX}/lib/libgomp.so
-ln -s ${PREFIX}/lib/libgomp.so ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so
+# TODO remove for conda build > 3.18.11
+# hack for conda build bug on symlinks
+mkdir -p $PREFIX/bin
+for action in post-link pre-unlink; do
+    sed -i "1iCHOST=${CHOST}" $RECIPE_DIR/libgcc-ng-${action}.sh
+    cp $RECIPE_DIR/libgcc-ng-${action}.sh $PREFIX/bin/.libgcc-ng-${action}.sh
+done
+# end of hack
+
+# actual code for later
+# # make openmp symlinks
+# ln -s ${PREFIX}/lib/libgomp.so.1 ${PREFIX}/lib/libgomp.so
+# ln -s ${PREFIX}/lib/libgomp.so ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so
 
 # no static libs
 find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;

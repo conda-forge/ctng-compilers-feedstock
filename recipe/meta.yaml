@@ -201,6 +201,8 @@ outputs:
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so
+        - test -f ${PREFIX}/bin/.libgcc-ng-post-link.sh
+        - test -f ${PREFIX}/bin/.libgcc-ng-pre-unlink.sh
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -222,6 +224,7 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.1.0.0
+        - test -f ${PREFIX}/include/omp.h
     about:
       summary: The GCC OpenMP implementation.
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -240,6 +243,8 @@ outputs:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.1
         - test -f ${PREFIX}/lib/libgomp.so.1.0.0
+        - test -f ${PREFIX}/bin/.openmp_impl-post-link.sh
+        - test -f ${PREFIX}/bin/.openmp_impl-pre-unlink.sh
     about:
       summary: OpenMP Implementation Mutex
       license: GPL
@@ -297,6 +302,13 @@ outputs:
       license: GPL
   {% endif %}
 
+# here to make the linter happier
+about:
+  summary: GNU Compiler Collection
+  home: https://gcc.gnu.org/
+  license: GPL-3.0-with-GCC-exception
+
 extra:
   recipe-maintainers:
     - isuruf
+    - beckermr
