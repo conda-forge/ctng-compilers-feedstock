@@ -302,13 +302,6 @@ outputs:
       license: GPL
   {% endif %}
 
-# here to make the linter happier
-about:
-  summary: GNU Compiler Collection
-  home: https://gcc.gnu.org/
-  license: GPL-3.0-or-later
-  license_file: LICENSE
-
 extra:
   recipe-maintainers:
     - isuruf
