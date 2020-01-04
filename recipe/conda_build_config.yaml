@@ -49,3 +49,9 @@ ctng_ncurses:
 gnu:
   - 2.17    # [ppc64le or aarch64]
   - 2.12.2  # [linux32 or linux64]
+
+# openmp versions
+openmp_ver:
+  - 4.5
+libgomp_ver:
+  - 1.0.0

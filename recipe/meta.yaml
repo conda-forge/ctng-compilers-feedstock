@@ -1,5 +1,4 @@
 {% set build_num = ctng_gcc_build_number %}
-{% set openmp_ver = "4.5" %}
 
 package:
   name: ctng-compilers
@@ -182,9 +181,29 @@ outputs:
       home: https://gcc.gnu.org/
       license: GPL-3.0-with-GCC-exception
 
-  - name: libgcc-ng
+  - name: libgcc-ng-build
     target: {{ ctng_target_platform }}
     script: install-libgcc.sh
+    requirements:
+      run:
+        - _libgcc_mutex * main
+    build:
+      number: {{ build_num }}
+      detect_binary_files_with_prefix: False
+      binary_relocation: False
+      missing_dso_whitelist:
+        - "*"
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/libgcc_s.so
+    about:
+      summary: The GCC low-level runtime library
+      home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+      license: GPL
+
+  - name: libgcc-ng
+    target: {{ ctng_target_platform }}
+    script: install-libgcc-no-gomp.sh
     requirements:
       run:
         - _libgcc_mutex * main
@@ -195,25 +214,23 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
-      run_exports:
-        strong:
-          - {{ pin_subpackage("openmp_impl", max_pin="x.x") }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so
-        - test -f ${PREFIX}/bin/.libgcc-ng-post-link.sh
-        - test -f ${PREFIX}/bin/.libgcc-ng-pre-unlink.sh
+        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
       license: GPL
 
   - name: libgomp
-    version: "1.0.0"
+    version: {{ libgomp_ver }}
     target: {{ ctng_target_platform }}
     script: install-libgomp.sh
     requirements:
+      host:
+        - {{ pin_subpackage('libgcc-ng-build', exact=True) }}
       run:
         - _libgcc_mutex * main
     build:
@@ -222,11 +239,15 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+      always_include_files:
+        - lib/libgomp.so.{{ libgomp_ver }}
+        - */sysroot/lib/libgomp.so.{{ libgomp_ver }}
     test:
       commands:
-        - test -f ${PREFIX}/lib/libgomp.so.1.0.0
+        - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
+        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}
         - if [ -f ${PREFIX}/lib/libgomp.so ]; then exit 1; fi
-        - if [ -f ${PREFIX}/lib/libgomp.so.1 ]; then exit 1; fi
+        - if [ -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }} ]; then exit 1; fi
     about:
       summary: The GCC OpenMP implementation.
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -236,16 +257,20 @@ outputs:
     script: install-openmp_impl.sh
     version: {{ openmp_ver }}
     requirements:
+      host:
+        - {{ pin_subpackage('libgomp', exact=True) }}
       run:
         - _libgcc_mutex * main
         - {{ pin_subpackage("libgomp", max_pin="x") }}
     build:
       string: 0_gomp
+      run_exports:
+        strong:
+          - {{ pin_subpackage("openmp_impl", max_pin="x.x") }}
     test:
       commands:
-        - test -f ${PREFIX}/lib/libgomp.so.1
-        - test -f ${PREFIX}/bin/.openmp_impl-post-link.sh
-        - test -f ${PREFIX}/bin/.openmp_impl-pre-unlink.sh
+        - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
+        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
     about:
       summary: OpenMP Implementation Mutex
       license: BSD-3-Clause
