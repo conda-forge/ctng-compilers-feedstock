@@ -6,8 +6,8 @@ CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine
 # hack for conda build bug on symlinks
 mkdir -p $PREFIX/bin
 for action in post-link pre-unlink; do
-    sed -i "1iCHOST=${CHOST}" $RECIPE_DIR/openmp_impl-${action}.sh
     cp $RECIPE_DIR/openmp_impl-${action}.sh $PREFIX/bin/.openmp_impl-${action}.sh
+    sed -i "1iCHOST=${CHOST}" $PREFIX/bin/.openmp_impl-${action}.sh
 done
 # end of hack
 
