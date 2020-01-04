@@ -51,8 +51,8 @@ done
 # hack for conda build bug on symlinks
 mkdir -p $PREFIX/bin
 for action in post-link pre-unlink; do
-    sed -i "1iCHOST=${CHOST}" $RECIPE_DIR/libgcc-ng-${action}.sh
     cp $RECIPE_DIR/libgcc-ng-${action}.sh $PREFIX/bin/.libgcc-ng-${action}.sh
+    sed -i "1iCHOST=${CHOST}" $PREFIX/bin/.libgcc-ng-${action}.sh
 done
 # end of hack
 
