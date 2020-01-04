@@ -241,7 +241,7 @@ outputs:
         - "*"
       always_include_files:
         - lib/libgomp.so.{{ libgomp_ver }}
-        - */sysroot/lib/libgomp.so.{{ libgomp_ver }}
+        - "*/sysroot/lib/libgomp.so.{{ libgomp_ver }}"
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
