@@ -225,8 +225,8 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.1.0.0
-        - ! test -f ${PREFIX}/lib/libgomp.so
-        - ! test -f ${PREFIX}/lib/libgomp.so.1
+        - if [ -f ${PREFIX}/lib/libgomp.so ]; then exit 1; fi
+        - if [ -f ${PREFIX}/lib/libgomp.so.1 ]; then exit 1; fi
         - test -f ${PREFIX}/include/omp.h
     about:
       summary: The GCC OpenMP implementation.
