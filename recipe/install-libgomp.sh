@@ -49,5 +49,5 @@ find ${PREFIX}/lib -name "*\.la" -exec rm -rf {} \;
 rm -rf ${PREFIX}/lib/gcc
 
 # Install Runtime Library Exception
-install -Dm644 ${SRC_DIR}/.build/src/gcc-${PKG_VERSION}/COPYING.RUNTIME \
+install -Dm644 ${SRC_DIR}/.build/src/gcc-${ctng_gcc}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION
