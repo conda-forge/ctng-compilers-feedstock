@@ -1,6 +1,16 @@
 GFORTRAN=$(${PREFIX}/bin/*-gcc -dumpmachine)-gfortran
 FFLAGS="-fopenmp -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe"
 
+echo " "
+echo "++++++++++++++++++++++++++++++++++++"
+echo "++++++++++++++++++++++++++++++++++++"
+echo "libs:"
+ls -lah ${PREFIX}/lib/*
+echo "++++++++++++++++++++++++++++++++++++"
+echo "++++++++++++++++++++++++++++++++++++"
+echo " "
+
+echo "building the test code:"
 cmake \
     -H${SRC_DIR} \
     -Bbuild \
