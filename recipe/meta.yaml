@@ -181,26 +181,6 @@ outputs:
       home: https://gcc.gnu.org/
       license: GPL-3.0-with-GCC-exception
 
-  - name: libgcc-ng-build
-    target: {{ ctng_target_platform }}
-    script: install-libgcc.sh
-    requirements:
-      run:
-        - _libgcc_mutex * main
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      binary_relocation: False
-      missing_dso_whitelist:
-        - "*"
-    test:
-      commands:
-        - test -f ${PREFIX}/lib/libgcc_s.so
-    about:
-      summary: The GCC low-level runtime library
-      home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
-      license: GPL
-
   - name: libgcc-ng
     target: {{ ctng_target_platform }}
     script: install-libgcc-no-gomp.sh
@@ -229,8 +209,6 @@ outputs:
     target: {{ ctng_target_platform }}
     script: install-libgomp.sh
     requirements:
-      host:
-        - {{ pin_subpackage('libgcc-ng-build', exact=True) }}
       run:
         - _libgcc_mutex * main
     build:
@@ -239,9 +217,6 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
-      always_include_files:
-        - lib/libgomp.so.{{ libgomp_ver }}
-        - "*/sysroot/lib/libgomp.so.{{ libgomp_ver }}"
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
@@ -263,7 +238,7 @@ outputs:
         - _libgcc_mutex * main
         - {{ pin_subpackage("libgomp", max_pin="x") }}
     build:
-      string: 0_gomp
+      string: 0_gnu
       run_exports:
         strong:
           - {{ pin_subpackage("openmp_impl", max_pin="x.x") }}
