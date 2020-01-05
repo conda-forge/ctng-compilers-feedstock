@@ -201,10 +201,6 @@ outputs:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so
-        - >
-          if [[ `realpath $(readlink ${PREFIX}/lib/libgomp.so)` != $(realpath ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}) ]];
-          then exit 1;
-          fi
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
