@@ -64,8 +64,6 @@ outputs:
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - ${CC} -Wall tests/aligned_alloc.c -o c_aligned
         - ./c_aligned
-        - ls -lah ${PREFIX}/lib/libgomp*
-        - ls -lah ${PREFIX}/*/sysroot/lib/libgomp*
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
@@ -98,11 +96,11 @@ outputs:
       files:
         - tests
       commands:
+        - ls -lah ${PREFIX}/lib/libgomp*
+        - ls -lah ${PREFIX}/*/sysroot/lib/libgomp*
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -o cpp_aligned --std=c++17
         - ./cpp_aligned
-        - ls -lah ${PREFIX}/lib/libgomp*
-        - ls -lah ${PREFIX}/*/sysroot/lib/libgomp*
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
@@ -138,6 +136,8 @@ outputs:
       requires:
         - cmake >=3.11
       commands:
+        - ls -lah ${PREFIX}/lib/libgomp*
+        - ls -lah ${PREFIX}/*/sysroot/lib/libgomp*
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
         - pushd tests/fortomp
@@ -209,7 +209,19 @@ outputs:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so
-        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}        
+        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
+        - >
+          if [[ `readlink ${PREFIX}/lib/libgomp.so` != "libgomp.so.{{ libgomp_ver }}" ]];
+          then exit 1;
+          fi
+        - >
+          if [[ `readlink ${PREFIX}/*/sysroot/lib/libgomp.so` != "../../../lib/libgomp.so" ]];
+          then exit 1;
+          fi
+        - >
+          if [[ `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` != "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}" ]];
+          then exit 1;
+          fi
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -233,6 +245,10 @@ outputs:
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}
         - if [ -f ${PREFIX}/lib/libgomp.so ]; then exit 1; fi
         - if [ -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }} ]; then exit 1; fi
+        - >
+          if [[ `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}` != "../../../lib/libgomp.so.{{ libgomp_ver }}" ]];
+          then exit 1;
+          fi
     about:
       summary: The GCC OpenMP implementation.
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -255,6 +271,10 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
+        - >
+          if [[ `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` != "libgomp.so.{{ libgomp_ver }}" ]];
+          then exit 1;
+          fi
     about:
       summary: OpenMP Implementation Mutex
       license: BSD-3-Clause
