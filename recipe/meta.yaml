@@ -186,9 +186,11 @@ outputs:
     script: install-libgcc-no-gomp.sh
     requirements:
       host:
+        - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('openmp_impl', exact=True) }}
       run:
         - _libgcc_mutex * main
+        - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage("openmp_impl", max_pin='x.x') }}
     build:
       number: {{ build_num }}
