@@ -62,6 +62,8 @@ outputs:
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - ${CC} -Wall tests/aligned_alloc.c -o c_aligned
         - ./c_aligned
+        - ls -lah ${PREFIX}/lib/libgomp*
+        - ls -lah ${PREFIX}/*/sysroot/lib/libgomp*
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
@@ -97,6 +99,8 @@ outputs:
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -o cpp_aligned --std=c++17
         - ./cpp_aligned
+        - ls -lah ${PREFIX}/lib/libgomp*
+        - ls -lah ${PREFIX}/*/sysroot/lib/libgomp*
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
@@ -193,7 +197,7 @@ outputs:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage("openmp_impl", max_pin=None) }}
     build:
-      number: {{ build_num }}
+      string: openmp_impl_h{{ PKG_HASH }}_{{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
       missing_dso_whitelist:
@@ -239,7 +243,9 @@ outputs:
         - {{ pin_subpackage('libgomp', exact=True) }}
       run:
         - _libgcc_mutex * main
-        - {{ pin_subpackage("libgomp", max_pin="x") }}
+        - {{ pin_subpackage("libgomp", max_pin=None) }}
+      run_constrained:
+        - libgcc-ng * openmp_impl*
     build:
       string: 0_gnu
       run_exports:
