@@ -195,7 +195,7 @@ outputs:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('openmp_impl', exact=True) }}
       run:
-        - _libgcc_mutex * main
+        - _libgcc_mutex 0.1 conda_forge
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage("openmp_impl", max_pin=None) }}
     build:
@@ -219,7 +219,7 @@ outputs:
     script: install-libgomp.sh
     requirements:
       run:
-        - _libgcc_mutex * main
+        - _libgcc_mutex 0.1 conda_forge
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -244,10 +244,8 @@ outputs:
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
       run:
-        - _libgcc_mutex * main
+        - _libgcc_mutex 0.1 conda_forge
         - {{ pin_subpackage("libgomp", max_pin=None) }}
-      run_constrained:
-        - libgcc-ng * openmp_impl*
     build:
       string: 0_gnu
       run_exports:

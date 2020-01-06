@@ -55,3 +55,9 @@ openmp_ver:
   - 4.5
 libgomp_ver:
   - 1.0.0
+
+# mutex version for conda-forge
+# this can be bumped if some non-backward compatible
+# change is made the libraries
+libgcc_mutex_ver:
+  - 0.1

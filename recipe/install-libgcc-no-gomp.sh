@@ -18,13 +18,17 @@ rm -f ${PREFIX}/lib/libgomp.so.${libgomp_ver:0:1}
 rm -f ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so.${libgomp_ver:0:1}
 rm -f ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so.${libgomp_ver}
 
-# make the right links
-ln -s ${PREFIX}/lib/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so.${libgomp_ver:0:1}
-ln -s ${PREFIX}/lib/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so
+# (re)make the right links
+pushd ${PREFIX}/lib
+ln -s libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver:0:1}
+ln -s libgomp.so.${libgomp_ver} libgomp.so
+popd
 
-ln -s ${PREFIX}/lib/libgomp.so.${libgomp_ver} ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so.${libgomp_ver}
-ln -s ${PREFIX}/lib/libgomp.so.${libgomp_ver:0:1} ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so.${libgomp_ver:0:1}
-ln -s ${PREFIX}/lib/libgomp.so ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so
+pushd ${PREFIX}/${CHOST}/sysroot/lib
+ln -s ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
+ln -s ../../../lib/libgomp.so.${libgomp_ver:0:1} libgomp.so.${libgomp_ver:0:1}
+ln -s ../../../lib/libgomp.so libgomp.so
+popd
 
 # debugging
 echo "debug the links..."
