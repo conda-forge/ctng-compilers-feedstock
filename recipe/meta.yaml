@@ -209,6 +209,7 @@ outputs:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so
+        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}        
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -254,7 +255,6 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
     about:
       summary: OpenMP Implementation Mutex
       license: BSD-3-Clause
