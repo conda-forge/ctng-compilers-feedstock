@@ -59,8 +59,6 @@ outputs:
       files:
         - tests
       commands:
-        - ls -lah ${PREFIX}/lib/libgomp*
-        - ls -lah ${PREFIX}/*/sysroot/lib/libgomp*
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - ${CC} -Wall tests/aligned_alloc.c -o c_aligned
         - ./c_aligned
@@ -96,8 +94,6 @@ outputs:
       files:
         - tests
       commands:
-        - ls -lah ${PREFIX}/lib/libgomp*
-        - ls -lah ${PREFIX}/*/sysroot/lib/libgomp*
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -o cpp_aligned --std=c++17
         - ./cpp_aligned
@@ -136,8 +132,6 @@ outputs:
       requires:
         - cmake >=3.11
       commands:
-        - ls -lah ${PREFIX}/lib/libgomp*
-        - ls -lah ${PREFIX}/*/sysroot/lib/libgomp*
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
         - pushd tests/fortomp
