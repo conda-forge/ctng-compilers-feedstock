@@ -55,6 +55,7 @@ outputs:
       # impose this requirement across the build/host boundary
       strong:
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+        - {{ pin_subpackage("openmp_impl", max_pin=None) }}
     test:
       files:
         - tests
@@ -90,6 +91,7 @@ outputs:
       # impose this requirement across the build/host boundary
       strong:
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
+        - {{ pin_subpackage("openmp_impl", max_pin=None) }}
     test:
       files:
         - tests
@@ -128,6 +130,7 @@ outputs:
       strong:
         - {{ pin_subpackage("libgfortran-ng") }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+        - {{ pin_subpackage("openmp_impl", max_pin=None) }}
     test:
       requires:
         - cmake >=3.11
@@ -247,9 +250,6 @@ outputs:
         - {{ pin_subpackage("libgomp", max_pin=None) }}
     build:
       string: 0_gnu
-      run_exports:
-        strong:
-          - {{ pin_subpackage("openmp_impl", max_pin=None) }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
