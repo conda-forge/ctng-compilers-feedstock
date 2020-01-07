@@ -192,10 +192,15 @@ outputs:
 
   - name: libgcc-ng
     target: {{ ctng_target_platform }}
-    script: install-libgcc.sh
+    script: install-libgcc-no-gomp.sh
     requirements:
+      host:
+        - {{ pin_subpackage("libgomp", exact=True) }}
+        - {{ pin_subpackage('openmp_impl', exact=True) }}
       run:
-        - _libgcc_mutex * main
+        - _libgcc_mutex {{ _libgcc_mutex }}
+        - {{ pin_subpackage("libgomp", exact=True) }}
+        - {{ pin_subpackage("openmp_impl", max_pin=None) }}
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -205,10 +210,64 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
+        - test -f ${PREFIX}/lib/libgomp.so
+        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so
+        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
+        - test `readlink ${PREFIX}/lib/libgomp.so` == "libgomp.so.{{ libgomp_ver }}"
+        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so` == "../../../lib/libgomp.so"
+        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
       license: GPL
+
+  - name: libgomp
+    target: {{ ctng_target_platform }}
+    script: install-libgomp.sh
+    requirements:
+      run:
+        - _libgcc_mutex {{ _libgcc_mutex }}
+    build:
+      number: {{ build_num }}
+      detect_binary_files_with_prefix: False
+      binary_relocation: False
+      missing_dso_whitelist:
+        - "*"
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
+        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}
+        - if [ -f ${PREFIX}/lib/libgomp.so ]; then exit 1; fi
+        - if [ -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }} ]; then exit 1; fi
+        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}` == "../../../lib/libgomp.so.{{ libgomp_ver }}"
+    about:
+      summary: The GCC OpenMP implementation.
+      home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+      license: GPL
+
+  - name: openmp_impl
+    script: install-openmp_impl.sh
+    version: {{ openmp_ver }}
+    requirements:
+      host:
+        - {{ pin_subpackage('libgomp', exact=True) }}
+      run:
+        - _libgcc_mutex {{ _libgcc_mutex }}
+        - {{ pin_subpackage("libgomp", max_pin=None) }}
+    build:
+      string: 0_gnu
+      run_exports:
+        strong:
+          - {{ pin_subpackage("openmp_impl", max_pin=None) }}
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
+        - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"
+    about:
+      summary: OpenMP Implementation Mutex
+      license: BSD-3-Clause
+      license_file: LICENSE
+      home: https://github.com/conda-forge/ctng-compilers-feedstock
 
   - name: libgfortran-ng
     target: {{ ctng_target_platform }}
@@ -266,3 +325,4 @@ outputs:
 extra:
   recipe-maintainers:
     - isuruf
+    - beckermr
