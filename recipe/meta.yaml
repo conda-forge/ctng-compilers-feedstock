@@ -210,18 +210,9 @@ outputs:
         - test -f ${PREFIX}/lib/libgomp.so
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-        - >
-          if [[ `readlink ${PREFIX}/lib/libgomp.so` != "libgomp.so.{{ libgomp_ver }}" ]];
-          then exit 1;
-          fi
-        - >
-          if [[ `readlink ${PREFIX}/*/sysroot/lib/libgomp.so` != "../../../lib/libgomp.so" ]];
-          then exit 1;
-          fi
-        - >
-          if [[ `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` != "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}" ]];
-          then exit 1;
-          fi
+        - test `readlink ${PREFIX}/lib/libgomp.so` == "libgomp.so.{{ libgomp_ver }}"
+        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so` == "../../../lib/libgomp.so"
+        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -245,10 +236,7 @@ outputs:
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}
         - if [ -f ${PREFIX}/lib/libgomp.so ]; then exit 1; fi
         - if [ -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }} ]; then exit 1; fi
-        - >
-          if [[ `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}` != "../../../lib/libgomp.so.{{ libgomp_ver }}" ]];
-          then exit 1;
-          fi
+        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}` == "../../../lib/libgomp.so.{{ libgomp_ver }}"
     about:
       summary: The GCC OpenMP implementation.
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -271,10 +259,7 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-        - >
-          if [[ `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` != "libgomp.so.{{ libgomp_ver }}" ]];
-          then exit 1;
-          fi
+        - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"
     about:
       summary: OpenMP Implementation Mutex
       license: BSD-3-Clause
