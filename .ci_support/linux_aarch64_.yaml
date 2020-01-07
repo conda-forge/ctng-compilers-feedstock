@@ -1,7 +1,5 @@
 BUILD:
 - aarch64-conda_cos7-linux-gnu
-_libgcc_mutex:
-- 0.1 conda_forge
 cdt_arch:
 - aarch64
 cdt_name:
