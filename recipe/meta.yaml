@@ -19,17 +19,23 @@ build:
 
 requirements:
   build:
-    - crosstool-ng >=1.23.0,<1.24
+    - crosstool-ng >=1.24.0
+    - make
     - bash  # [osx]
+    - automake
+    - autoconf
+    - libtool
   # Need something here so that build does not get installed to a long prefix
   # as that breaks on some systems.
   host:
-    - crosstool-ng >=1.23.0,<1.24
+    - make
+    - crosstool-ng >=1.24.0
 
 outputs:
   - name: gcc_impl_{{ ctng_target_platform }}
     script: install-gcc.sh
     build:
+      skip: True
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation:
@@ -70,6 +76,7 @@ outputs:
   - name: gxx_impl_{{ ctng_target_platform }}
     script: install-g++.sh
     build:
+      skip: True
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation:
@@ -105,6 +112,7 @@ outputs:
   - name: gfortran_impl_{{ ctng_target_platform }}
     script: install-gfortran.sh
     build:
+      skip: True
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation:
@@ -147,6 +155,7 @@ outputs:
     version: "{{ ctng_binutils }}"
     script: install-binutils.sh
     build:
+      skip: True
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation:
@@ -264,6 +273,7 @@ outputs:
     target: {{ ctng_target_platform }}
     script: install-libgfortran.sh
     build:
+      skip: True
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
