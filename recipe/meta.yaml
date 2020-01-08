@@ -57,6 +57,10 @@ outputs:
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
     test:
+      requires:
+        - {{ pin_subpackage("libgcc-ng", exact=True) }}
+        - {{ pin_subpackage("libstdcxx-ng", exact=True) }}
+        - {{ pin_subpackage("_openmp_mutex", exact=True) }}
       files:
         - tests
       commands:
@@ -88,6 +92,10 @@ outputs:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
     test:
+      requires:
+        - {{ pin_subpackage("libgcc-ng", exact=True) }}
+        - {{ pin_subpackage("libstdcxx-ng", exact=True) }}
+        - {{ pin_subpackage("_openmp_mutex", exact=True) }}
       files:
         - tests
       commands:
@@ -123,6 +131,9 @@ outputs:
     test:
       requires:
         - cmake >=3.11
+        - {{ pin_subpackage("libgcc-ng", exact=True) }}
+        - {{ pin_subpackage("libgfortran-ng", exact=True) }}
+        - {{ pin_subpackage("_openmp_mutex", exact=True) }}
       commands:
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
@@ -194,7 +205,6 @@ outputs:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so
-        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
         - test `readlink ${PREFIX}/lib/libgomp.so` == "libgomp.so.{{ libgomp_ver }}"
         - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so` == "../../../lib/libgomp.so"
         - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
