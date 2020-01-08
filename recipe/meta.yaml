@@ -55,7 +55,7 @@ outputs:
       # impose this requirement across the build/host boundary
       strong:
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
-        - {{ pin_subpackage("openmp_impl", max_pin=None) }}
+        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       files:
         - tests
@@ -91,7 +91,7 @@ outputs:
       # impose this requirement across the build/host boundary
       strong:
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
-        - {{ pin_subpackage("openmp_impl", max_pin=None) }}
+        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       files:
         - tests
@@ -130,7 +130,7 @@ outputs:
       strong:
         - {{ pin_subpackage("libgfortran-ng") }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
-        - {{ pin_subpackage("openmp_impl", max_pin=None) }}
+        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       requires:
         - cmake >=3.11
@@ -190,11 +190,11 @@ outputs:
     requirements:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
-        - {{ pin_subpackage('openmp_impl', exact=True) }}
+        - {{ pin_subpackage('_openmp_mutex', exact=True) }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}
         - {{ pin_subpackage("libgomp", exact=True) }}
-        - {{ pin_subpackage("openmp_impl", max_pin=None) }}
+        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -239,7 +239,7 @@ outputs:
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
       license: GPL
 
-  - name: openmp_impl
+  - name: _openmp_mutex
     script: install-openmp_impl.sh
     version: {{ openmp_ver }}
     requirements:
