@@ -26,6 +26,11 @@ requirements:
   host:
     - crosstool-ng >=1.23.0,<1.24
 
+# NOTE: All run exports for these packages are only defined in the
+# compiler activation scripts.
+
+# NOTE: There cannot be any dependencies on _openmp_mutex in these recipes.
+# These are also defined in the compiler activation scripts.
 outputs:
   - name: gcc_impl_{{ ctng_target_platform }}
     script: install-gcc.sh
@@ -51,11 +56,6 @@ outputs:
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
-    run_exports:
-      # impose this requirement across the build/host boundary
-      strong:
-        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
-        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       files:
         - tests
@@ -87,11 +87,6 @@ outputs:
       run:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
-    run_exports:
-      # impose this requirement across the build/host boundary
-      strong:
-        - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
-        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       files:
         - tests
@@ -125,12 +120,6 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
         - {{ pin_subpackage("libgfortran-ng") }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
-    run_exports:
-      # impose this requirement across the build/host boundary
-      strong:
-        - {{ pin_subpackage("libgfortran-ng") }}
-        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
-        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       requires:
         - cmake >=3.11
@@ -194,7 +183,6 @@ outputs:
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}
         - {{ pin_subpackage("libgomp", exact=True) }}
-        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
