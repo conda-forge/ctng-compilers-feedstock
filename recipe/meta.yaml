@@ -56,11 +56,11 @@ outputs:
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+        - {{ pin_subpackage("libgomp", max_pin=None) }}
     test:
       requires:
         - {{ pin_subpackage("libgcc-ng", exact=True) }}
         - {{ pin_subpackage("libstdcxx-ng", exact=True) }}
-        - {{ pin_subpackage("_openmp_mutex", exact=True) }}
       files:
         - tests
       commands:
@@ -95,7 +95,6 @@ outputs:
       requires:
         - {{ pin_subpackage("libgcc-ng", exact=True) }}
         - {{ pin_subpackage("libstdcxx-ng", exact=True) }}
-        - {{ pin_subpackage("_openmp_mutex", exact=True) }}
       files:
         - tests
       commands:
@@ -133,7 +132,6 @@ outputs:
         - cmake >=3.11
         - {{ pin_subpackage("libgcc-ng", exact=True) }}
         - {{ pin_subpackage("libgfortran-ng", exact=True) }}
-        - {{ pin_subpackage("_openmp_mutex", exact=True) }}
       commands:
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
@@ -193,7 +191,7 @@ outputs:
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}
-        - {{ pin_subpackage("libgomp", exact=True) }}
+        # _openmp_mutex is added by run_exports here.
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -223,6 +221,9 @@ outputs:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
+      run_exports:
+        strong:
+          - _openmp_mutex >={{ openmp_ver }}
       missing_dso_whitelist:
         - "*"
     test:
