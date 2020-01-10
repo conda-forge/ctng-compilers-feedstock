@@ -21,13 +21,11 @@ rm -f ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so.${libgomp_ver}
 # (re)make the right links
 pushd ${PREFIX}/lib
 ln -s libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver:0:1}
-ln -s libgomp.so.${libgomp_ver} libgomp.so
 popd
 
 pushd ${PREFIX}/${CHOST}/sysroot/lib
 ln -s ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
 ln -s ../../../lib/libgomp.so.${libgomp_ver:0:1} libgomp.so.${libgomp_ver:0:1}
-ln -s ../../../lib/libgomp.so libgomp.so
 popd
 
 # debugging

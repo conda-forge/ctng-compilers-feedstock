@@ -52,11 +52,14 @@ outputs:
       runpath_whitelist:
         - "x86_64-conda_cos6-linux-gnu/sysroot/lib/libpthread-2.12.2.so"
     requirements:
+      host:
+        - {{ pin_subpackage("libgomp", exact=True) }}
       run:
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, exact=True) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+        - {{ pin_subpackage("libgomp", max_pin=None) }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
@@ -196,11 +199,12 @@ outputs:
     requirements:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
-        - {{ pin_subpackage('openmp_impl', exact=True) }}
+        - {{ pin_subpackage('_openmp_mutex', exact=True) }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}
+        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
+      run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
-        - {{ pin_subpackage("openmp_impl", max_pin=None) }}
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -210,11 +214,9 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
-        - test -f ${PREFIX}/lib/libgomp.so
-        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so
+        - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-        - test `readlink ${PREFIX}/lib/libgomp.so` == "libgomp.so.{{ libgomp_ver }}"
-        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so` == "../../../lib/libgomp.so"
+        - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"
         - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
     about:
       summary: The GCC low-level runtime library
@@ -233,19 +235,22 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+      run_exports: 
+        strong:
+          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}
-        - if [ -f ${PREFIX}/lib/libgomp.so ]; then exit 1; fi
-        - if [ -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }} ]; then exit 1; fi
+        - test ! -f ${PREFIX}/lib/libgomp.so
+        - test ! -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
         - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}` == "../../../lib/libgomp.so.{{ libgomp_ver }}"
     about:
       summary: The GCC OpenMP implementation.
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
       license: GPL
 
-  - name: openmp_impl
+  - name: _openmp_mutex
     script: install-openmp_impl.sh
     version: {{ openmp_ver }}
     requirements:
@@ -254,11 +259,14 @@ outputs:
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}
         - {{ pin_subpackage("libgomp", max_pin=None) }}
+      run_constrained:
+        # conflict with previous name
+        - openmp_impl 9999
     build:
       string: 0_gnu
       run_exports:
         strong:
-          - {{ pin_subpackage("openmp_impl", max_pin=None) }}
+          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}

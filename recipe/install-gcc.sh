@@ -214,3 +214,11 @@ pushd ${PREFIX}
 popd
 
 #${PREFIX}/bin/${CHOST}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
+
+pushd ${PREFIX}/lib
+ln -sf libgomp.so.${libgomp_ver} libgomp.so
+popd
+
+pushd ${PREFIX}/${CHOST}/sysroot/lib
+ln -sf ../../../lib/libgomp.so libgomp.so
+popd
