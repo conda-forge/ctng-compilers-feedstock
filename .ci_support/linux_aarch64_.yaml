@@ -1,5 +1,7 @@
 BUILD:
 - aarch64-conda_cos7-linux-gnu
+_libgcc_mutex:
+- 0.1 conda_forge
 cdt_arch:
 - aarch64
 cdt_name:
@@ -18,5 +20,3 @@ libgomp_ver:
 - 1.0.0
 openmp_ver:
 - '4.5'
-_libgcc_mutex:
-- 0.1 conda_forge
