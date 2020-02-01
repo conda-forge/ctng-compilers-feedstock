@@ -49,7 +49,7 @@ outputs:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
       run:
-        - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, exact=True) }}
+        - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, max_pin=None) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
