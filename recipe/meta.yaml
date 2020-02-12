@@ -192,7 +192,7 @@ outputs:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
       run:
-        - _libgcc_mutex {{ _libgcc_mutex }}
+        - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
@@ -219,7 +219,7 @@ outputs:
     script: install-libgomp.sh
     requirements:
       run:
-        - _libgcc_mutex {{ _libgcc_mutex }}
+        - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -248,7 +248,7 @@ outputs:
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
       run:
-        - _libgcc_mutex {{ _libgcc_mutex }}
+        - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - {{ pin_subpackage("libgomp", max_pin=None) }}
       run_constrained:
         # conflict with previous name
