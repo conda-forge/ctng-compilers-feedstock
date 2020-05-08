@@ -36,6 +36,10 @@ outputs:
         - '*'
       runpath_whitelist:
         - "x86_64-conda_cos6-linux-gnu/sysroot/lib/libpthread-2.12.2.so"
+    requirements:
+      host:
+        - {{ pin_subpackage("libgomp", exact=True) }}
+
     about:
       summary: GNU C Compiler sysroot
       home: https://gcc.gnu.org/
