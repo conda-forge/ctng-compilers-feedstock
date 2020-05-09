@@ -59,14 +59,14 @@ set +x
 # and strip in there so that we do not change files that are not
 # part of this package.
 pushd ${PREFIX}
-  _files=$(find . -type f -not -path "${CHOST}/sysroot/*")
+  _files=$(find . -type f)
   for _file in ${_files}; do
     _type="$( file "${_file}" | cut -d ' ' -f 2- )"
     case "${_type}" in
       *script*executable*)
       ;;
       *executable*)
-        ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}"
+        ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}" || :
       ;;
     esac
   done
