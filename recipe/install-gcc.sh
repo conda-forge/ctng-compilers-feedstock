@@ -212,7 +212,6 @@ cp ${SRC_DIR}/gcc_built/bin/${CHOST}-ct-ng.config ${PREFIX}/bin
 
 set +x
 
-set +e
 # Strip executables, we may want to install to a different prefix
 # and strip in there so that we do not change files that are not
 # part of this package.
@@ -224,13 +223,11 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-        { ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}" } || { : }
+      ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}" || :
       ;;
     esac
   done
 popd
-
-set -e
 
 #${PREFIX}/bin/${CHOST}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
