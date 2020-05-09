@@ -130,16 +130,27 @@ elif [[ ${kernel_arch} == i686 ]]; then
   kernel_arch=x86
 fi
 
-make -C ${SRC_DIR}/.build/src/linux-* CROSS_COMPILE=${CHOST}- O=${SRC_DIR}/.build/${CHOST}/build/build-kernel-headers ARCH=${kernel_arch} INSTALL_HDR_PATH=${PREFIX}/${CHOST}/sysroot/usr ${VERBOSE_AT} headers_install
-
 if [[ ${ctng_libc} == gnu ]]; then
-  # Install libc libraries
-  pushd ${SRC_DIR}/.build/${CHOST}/build/build-libc-final/multilib
-    make -l BUILD_CFLAGS="-O2 -g -I${SRC_DIR}/.build/${CHOST}/buildtools/include" \
-            BUILD_LDFLAGS="-L${SRC_DIR}/.build/${CHOST}/buildtools/lib"           \
-            install_root=${PREFIX}/${CHOST}/sysroot install
-  popd
+  # we are using the centos CDTs instead
+
+  # # libc header install
+  # make -C ${SRC_DIR}/.build/src/linux-* \
+  #   CROSS_COMPILE=${CHOST}- O=${SRC_DIR}/.build/${CHOST}/build/build-kernel-headers \
+  #   ARCH=${kernel_arch} INSTALL_HDR_PATH=${PREFIX}/${CHOST}/sysroot/usr ${VERBOSE_AT} headers_install
+  #
+  #
+  # # Install libc libraries
+  # pushd ${SRC_DIR}/.build/${CHOST}/build/build-libc-final/multilib
+  #   make -l BUILD_CFLAGS="-O2 -g -I${SRC_DIR}/.build/${CHOST}/buildtools/include" \
+  #           BUILD_LDFLAGS="-L${SRC_DIR}/.build/${CHOST}/buildtools/lib"           \
+  #           install_root=${PREFIX}/${CHOST}/sysroot install
+  # popd
+  :
 else
+  make -C ${SRC_DIR}/.build/src/linux-* \
+    CROSS_COMPILE=${CHOST}- O=${SRC_DIR}/.build/${CHOST}/build/build-kernel-headers \
+    ARCH=${kernel_arch} INSTALL_HDR_PATH=${PREFIX}/${CHOST}/sysroot/usr ${VERBOSE_AT} headers_install
+
   # Install uClibc headers
   pushd ${SRC_DIR}/.build/${CHOST}/build/build-libc-startfiles/multilib
     make CROSS_COMPILE=${CHOST}- PREFIX=${PREFIX}/${CHOST}/sysroot MULTILIB_DIR=lib \

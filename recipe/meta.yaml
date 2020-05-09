@@ -27,23 +27,23 @@ requirements:
     - crosstool-ng >=1.23.0,<1.24
 
 outputs:
-  - name: sysroot_{{ ctng_target_platform }}
-    script: install-sysroot.sh
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      missing_dso_whitelist:
-        - '*'
-      runpath_whitelist:
-        - "x86_64-conda_cos6-linux-gnu/sysroot/lib/libpthread-2.12.2.so"
-    requirements:
-      host:
-        - {{ pin_subpackage("libgomp", exact=True) }}
-
-    about:
-      summary: GNU C Compiler sysroot
-      home: https://gcc.gnu.org/
-      license: GPL-3.0-with-GCC-exception
+  # - name: sysroot_{{ ctng_target_platform }}
+  #   script: install-sysroot.sh
+  #   build:
+  #     number: {{ build_num }}
+  #     detect_binary_files_with_prefix: False
+  #     missing_dso_whitelist:
+  #       - '*'
+  #     runpath_whitelist:
+  #       - "x86_64-conda_cos6-linux-gnu/sysroot/lib/libpthread-2.12.2.so"
+  #   requirements:
+  #     host:
+  #       - {{ pin_subpackage("libgomp", exact=True) }}
+  #
+  #   about:
+  #     summary: GNU C Compiler sysroot
+  #     home: https://gcc.gnu.org/
+  #     license: GPL-3.0-with-GCC-exception
 
   - name: gcc_impl_{{ ctng_target_platform }}
     script: install-gcc.sh
@@ -66,9 +66,9 @@ outputs:
     requirements:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
-        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
+        - sysroot_{{ ctng_target_platform }}
       run:
-        - {{ pin_subpackage("sysroot_" ~ ctng_target_platform, exact=True) }}
+        - sysroot_{{ ctng_target_platform }}
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, max_pin=None) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
