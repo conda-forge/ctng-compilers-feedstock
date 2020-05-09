@@ -132,6 +132,8 @@ fi
 
 if [[ ${ctng_libc} == gnu ]]; then
   # we are using the centos CDTs instead
+  # we need this symlink
+  ln -s "${PREFIX}/${ctng_cpu_arch}-conda-linux-gnu" ${PREFIX}/${CHOST}/sysroot
 
   # # libc header install
   # make -C ${SRC_DIR}/.build/src/linux-* \
