@@ -23,7 +23,6 @@ for file in f951; do
   fi
 done
 
-mkdir -p ${PREFIX}/${CHOST}/sysroot/lib
 cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/sysroot/lib
 
 pushd ${PREFIX}/bin

@@ -14,11 +14,10 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
 popd
 
 mkdir -p ${PREFIX}/lib
-mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
-mkdir -p ${PREFIX}/${CHOST}/sysroot/lib || true
-symtargets=$(find ${PREFIX}/lib -name "libstdc++*.so*")
+symtargets=$(find ${PREFIX}/${CHOST}/lib/ -name "libstdc++*.so*")
 for symtarget in ${symtargets}; do
   symtargetname=$(basename ${symtarget})
+  mv ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname} ${PREFIX}/lib/${symtargetname}
   ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
 done
 

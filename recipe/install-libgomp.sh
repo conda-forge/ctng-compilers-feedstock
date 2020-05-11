@@ -4,12 +4,15 @@ source ${RECIPE_DIR}/install-libgcc.sh
 tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
 cp ${PREFIX}/lib/libgomp.so.${libgomp_ver} ${tmp_dir}/libgomp.so.${libgomp_ver}
 cp -r ${PREFIX}/conda-meta ${tmp_dir}/conda-meta
+cp -r "${PREFIX}/${ctng_cpu_arch}-conda-linux-gnu" ${tmp_dir}/${ctng_cpu_arch}-conda-linux-gnu
 rm -rf ${PREFIX}/*
 
 # copy back and make the right links
 cp -r ${tmp_dir}/conda-meta ${PREFIX}/conda-meta
+cp -r ${tmp_dir}/${ctng_cpu_arch}-conda-linux-gnu "${PREFIX}/${ctng_cpu_arch}-conda-linux-gnu"
+ln -s "${PREFIX}/${ctng_cpu_arch}-conda-linux-gnu" ${PREFIX}/${CHOST}
+
 mkdir -p ${PREFIX}/lib
-mkdir -p ${PREFIX}/${CHOST}/sysroot/lib
 cp ${tmp_dir}/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so.${libgomp_ver}
 
 pushd ${PREFIX}/${CHOST}/sysroot/lib
