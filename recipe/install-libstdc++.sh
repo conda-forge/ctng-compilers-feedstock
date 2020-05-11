@@ -17,7 +17,7 @@ mkdir -p ${PREFIX}/lib
 symtargets=$(find ${PREFIX}/${CHOST}/lib/ -name "libstdc++*.so*")
 for symtarget in ${symtargets}; do
   symtargetname=$(basename ${symtarget})
-  mv ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname} ${PREFIX}/lib/${symtargetname}
+  mv ${PREFIX}/${CHOST}/lib/${symtargetname} ${PREFIX}/lib/${symtargetname}
   ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
 done
 
