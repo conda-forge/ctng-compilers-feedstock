@@ -40,6 +40,7 @@ for lib in libatomic libgomp libquadmath libitm libvtv lib{a,l,ub,t}san; do
   symtargets=$(find ${PREFIX}/lib -name "${lib}.so*")
   for symtarget in ${symtargets}; do
     symtargetname=$(basename ${symtarget})
+    rm -f ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
     ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
   done
 done
