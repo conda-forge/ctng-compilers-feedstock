@@ -16,6 +16,7 @@ mkdir -p ${PREFIX}/lib
 cp ${tmp_dir}/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so.${libgomp_ver}
 
 pushd ${PREFIX}/${CHOST}/sysroot/lib
+rm -f libgomp.so.${libgomp_ver}
 ln -s ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
 popd
 
