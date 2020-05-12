@@ -96,7 +96,7 @@ function write_ctng_package_versions() {
     ctng_vendor,CT_TARGET_VENDOR               \
     ctng_linux_version,CT_KERNEL_VERSION       \
     ctng_libc_version,CT_LIBC_VERSION2         \
-    ctng_compiler_version,CT_CC_VERSION3       \
+    ctng_compiler_version,CT_GCC_VERSION       \
     ctng_binutils_version,CT_BINUTILS_VERSION  \
     ctng_libiconv,CT_LIBICONV_NEEDED           \
     ctng_gettext,CT_GETTEXT_NEEDED             \
