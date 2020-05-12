@@ -130,17 +130,27 @@ elif [[ ${kernel_arch} == i686 ]]; then
   kernel_arch=x86
 fi
 
-make -C ${SRC_DIR}/.build/src/linux-* CROSS_COMPILE=${CHOST}- O=${SRC_DIR}/.build/${CHOST}/build/build-kernel-headers ARCH=${kernel_arch} INSTALL_HDR_PATH=${PREFIX}/${CHOST}/sysroot/usr ${VERBOSE_AT} headers_install
 
 if [[ ${ctng_libc} == gnu ]]; then
+  # using the cos CDTs
   # Install libc libraries
-  pushd ${SRC_DIR}/.build/${CHOST}/build/build-libc-final/multilib
-    make -l BUILD_CFLAGS="-O2 -g -I${SRC_DIR}/.build/${CHOST}/buildtools/include" \
-            BUILD_LDFLAGS="-L${SRC_DIR}/.build/${CHOST}/buildtools/lib"           \
-            install_root=${PREFIX}/${CHOST}/sysroot install
-  popd
+  # make -C ${SRC_DIR}/.build/src/linux-* \
+  #   CROSS_COMPILE=${CHOST}- O=${SRC_DIR}/.build/${CHOST}/build/build-kernel-headers \
+  #   ARCH=${kernel_arch} \
+  #   INSTALL_HDR_PATH=${PREFIX}/${CHOST}/sysroot/usr ${VERBOSE_AT} headers_install
+  #
+  # pushd ${SRC_DIR}/.build/${CHOST}/build/build-libc-final/multilib
+  #   make -l BUILD_CFLAGS="-O2 -g -I${SRC_DIR}/.build/${CHOST}/buildtools/include" \
+  #           BUILD_LDFLAGS="-L${SRC_DIR}/.build/${CHOST}/buildtools/lib"           \
+  #           install_root=${PREFIX}/${CHOST}/sysroot install
+  # popd
 else
   # Install uClibc headers
+  make -C ${SRC_DIR}/.build/src/linux-* \
+    CROSS_COMPILE=${CHOST}- O=${SRC_DIR}/.build/${CHOST}/build/build-kernel-headers \
+    ARCH=${kernel_arch} \
+    INSTALL_HDR_PATH=${PREFIX}/${CHOST}/sysroot/usr ${VERBOSE_AT} headers_install
+
   pushd ${SRC_DIR}/.build/${CHOST}/build/build-libc-startfiles/multilib
     make CROSS_COMPILE=${CHOST}- PREFIX=${PREFIX}/${CHOST}/sysroot MULTILIB_DIR=lib \
 	     LOCALE_DATA_FILENAME=uClibc-locale-030818.tgz STRIPTOOL=true V=2 UCLIBC_EXTRA_CFLAGS=-pipe headers
