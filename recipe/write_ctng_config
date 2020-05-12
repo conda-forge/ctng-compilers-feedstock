@@ -84,7 +84,7 @@ function write_ctng_package_versions() {
     _libc=glibc
   fi
   local ctng_libc_version=${_libc},${!ctng_libc}
-  local ctng_compiler_version=gcc,${ctng_gcc:0:1}
+  local ctng_compiler_version=gcc,${ctng_gcc}
   local ctng_binutils_version=binutils,${ctng_binutils}
   local ctng_gdb_version=gdb,${ctng_gdb}
   # TODO :: Fix this in crosstool-ng, 200-duma.sh requires
@@ -275,7 +275,7 @@ function write_ctng_config_before() {
       echo "CT_BINUTILS_LINKER_LD_GOLD=y"                               >> "${_dst}"
       echo "CT_BINUTILS_LINKERS_LIST=\"ld,gold\""                       >> "${_dst}"
   fi
-
+  echo "CT_GCC_V_{ctng_gcc:0:1}=y"        >> "${_dst}"
   write_ctng_package_versions "${_dst}"
 }
 
