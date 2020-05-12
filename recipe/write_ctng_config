@@ -84,7 +84,7 @@ function write_ctng_package_versions() {
     _libc=glibc
   fi
   local ctng_libc_version=${_libc},${!ctng_libc}
-  local ctng_compiler_version=gcc,${ctng_gcc}
+  local ctng_compiler_version=gcc,${ctng_gcc:0:1}
   local ctng_binutils_version=binutils,${ctng_binutils}
   local ctng_gdb_version=gdb,${ctng_gdb}
   # TODO :: Fix this in crosstool-ng, 200-duma.sh requires
