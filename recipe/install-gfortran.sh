@@ -66,7 +66,7 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-        ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}"
+        ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}" || :
       ;;
     esac
   done

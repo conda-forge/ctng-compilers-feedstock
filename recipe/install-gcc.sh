@@ -144,6 +144,7 @@ if [[ ${ctng_libc} == gnu ]]; then
   #           BUILD_LDFLAGS="-L${SRC_DIR}/.build/${CHOST}/buildtools/lib"           \
   #           install_root=${PREFIX}/${CHOST}/sysroot install
   # popd
+  :
 else
   # Install uClibc headers
   make -C ${SRC_DIR}/.build/src/linux-* \
@@ -217,7 +218,7 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-        ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}"
+        ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}" || :
       ;;
     esac
   done
