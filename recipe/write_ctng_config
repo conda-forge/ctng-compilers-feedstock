@@ -275,7 +275,7 @@ function write_ctng_config_before() {
       echo "CT_BINUTILS_LINKER_LD_GOLD=y"                               >> "${_dst}"
       echo "CT_BINUTILS_LINKERS_LIST=\"ld,gold\""                       >> "${_dst}"
   fi
-  echo "CT_GCC_V_{ctng_gcc:0:1}=y"        >> "${_dst}"
+  echo "CT_GCC_V_${ctng_gcc:0:1}=y"        >> "${_dst}"
   write_ctng_package_versions "${_dst}"
 }
 
