@@ -9,7 +9,7 @@ ctng_binutils:
 ctng_cpu_arch:
 - powerpc
 ctng_gcc:
-- 8.2.0
+- 8.4.0
 ctng_libc:
 - gnu
 ctng_target_platform:
