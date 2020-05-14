@@ -275,7 +275,9 @@ function write_ctng_config_before() {
       echo "CT_BINUTILS_LINKER_LD_GOLD=y"                               >> "${_dst}"
       echo "CT_BINUTILS_LINKERS_LIST=\"ld,gold\""                       >> "${_dst}"
   fi
-  echo "CT_GCC_V_${ctng_gcc:0:1}=y"        >> "${_dst}"
+  echo "CT_GCC_V_$(echo ${ctng_gcc} | awk -F \. {'print $1'})=y"        >> "${_dst}"
+  echo "CT_LINUX_V_$(echo $ctng_kernel | tr . _)=y"                     >> "${_dst}"
+  echo "CT_GLIBC_V_$(echo $gnu | tr . _)=y"                             >> "${_dst}"
   write_ctng_package_versions "${_dst}"
 }
 
