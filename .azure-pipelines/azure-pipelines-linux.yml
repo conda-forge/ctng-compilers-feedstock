@@ -11,7 +11,7 @@ jobs:
       linux_:
         CONFIG: linux_
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
+        DOCKER_IMAGE: condaforge/linux-anvil-cos7-x86_64
     maxParallel: 8
   timeoutInMinutes: 360
 
