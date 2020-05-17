@@ -48,14 +48,14 @@ outputs:
     requirements:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }} >=2.17
       run:
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, max_pin=None) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
         - {{ pin_subpackage("libgomp", max_pin=None) }}
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }} >=2.17
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
