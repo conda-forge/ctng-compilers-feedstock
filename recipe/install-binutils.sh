@@ -15,7 +15,9 @@ pushd ${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-core-pass-2/gcc/
 popd
 
 for exe in `ls ${PREFIX}/bin/*-conda-linux-gnu-*`; do
-  nm=`basename nm`
+  nm=`basename ${exe}`
   new_nm=${nm/"-conda-linux-gnu-"/"-conda_cos6-linux-gnu-"}
-  ln -s ${exe} ${PREFIX}/bin/${new_nm}
+  if [ ! -f ${PREFIX}/bin/${new_nm} ]; then
+    ln -s ${exe} ${PREFIX}/bin/${new_nm}
+  fi
 done
