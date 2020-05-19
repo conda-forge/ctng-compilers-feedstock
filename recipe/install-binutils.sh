@@ -13,3 +13,9 @@ pushd ${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-core-pass-2/gcc/
   mkdir -p ${PREFIX}/libexec/gcc/${CHOST}/${TOP_PKG_VERSION}/
   cp -a liblto* ${PREFIX}/libexec/gcc/${CHOST}/${TOP_PKG_VERSION}/
 popd
+
+for exe in `ls ${PREFIX}/bin/*-conda-linux-gnu-*`; do
+  nm=`basename nm`
+  new_nm=${nm/"-conda-linux-gnu-"/"-conda_cos6-linux-gnu-"}
+  ln -s ${exe} ${PREFIX}/bin/${new_nm}
+done
