@@ -167,8 +167,8 @@ outputs:
         - ls -lah ${PREFIX}/bin/*
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ar
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ld
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch}}-conda_cos6-linux-gnu-ar  # [x86_64]
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch}}-conda_cos6-linux-gnu-ld  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ar  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ld  # [x86_64]
     about:
       summary: The GNU Binutils are a collection of binary tools.
       home: https://www.gnu.org/software/binutils/
