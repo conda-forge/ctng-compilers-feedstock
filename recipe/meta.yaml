@@ -66,6 +66,8 @@ outputs:
       files:
         - tests
       commands:
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-gcc  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-gcc  # [not x86_64]
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - ${CC} -Wall tests/aligned_alloc.c -o c_aligned
         - ./c_aligned
@@ -101,6 +103,8 @@ outputs:
       files:
         - tests
       commands:
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-g++  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-g++  # [not x86_64]
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -o cpp_aligned --std=c++17
         - ./cpp_aligned
@@ -139,6 +143,8 @@ outputs:
       requires:
         - cmake >=3.11
       commands:
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-gfortran  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-gfortran  # [not x86_64]
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
         - pushd tests/fortomp
@@ -168,7 +174,9 @@ outputs:
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ar
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ld
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ar  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-ar  # [not x86_64]
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ld  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-ld  # [not x86_64]
     about:
       summary: The GNU Binutils are a collection of binary tools.
       home: https://www.gnu.org/software/binutils/
