@@ -18,6 +18,8 @@ ctng_libc:
 - gnu
 ctng_target_platform:
 - linux-aarch64
+ctng_vendor:
+- conda
 docker_image:
 - condaforge/linux-anvil-aarch64
 libgomp_ver:

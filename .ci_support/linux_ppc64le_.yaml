@@ -14,6 +14,8 @@ ctng_libc:
 - gnu
 ctng_target_platform:
 - linux-ppc64le
+ctng_vendor:
+- conda
 docker_image:
 - condaforge/linux-anvil-ppc64le
 libgomp_ver:
