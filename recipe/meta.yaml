@@ -168,6 +168,9 @@ outputs:
         - 'libexec/**/*.so*'
       missing_dso_whitelist:
         - "*"
+     requirements:
+       run_constrained:
+         - gcc_impl_{{ ctng_target_platform }} >={{ ctng_gcc|default("0") }}
     test:
       commands:
         - ls -lah ${PREFIX}/bin/*
