@@ -170,7 +170,7 @@ outputs:
         - "*"
     requirements:
       run_constrained:
-        - gcc_impl_{{ ctng_target_platform }} >={{ ctng_gcc|default("0") }}
+        - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     test:
       commands:
         - ls -lah ${PREFIX}/bin/*
