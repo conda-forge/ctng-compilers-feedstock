@@ -7,7 +7,7 @@ channel_targets:
 ctng_binutils:
 - 2.31.1
 ctng_cpu_arch:
-- powerpc
+- powerpc64le
 ctng_gcc:
 - 8.4.0
 ctng_libc:
