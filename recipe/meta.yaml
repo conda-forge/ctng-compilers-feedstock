@@ -171,6 +171,7 @@ outputs:
     requirements:
       run_constrained:
         - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
+        - gfortran_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     test:
       commands:
         - ls -lah ${PREFIX}/bin/*
