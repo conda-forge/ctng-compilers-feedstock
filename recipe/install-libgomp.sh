@@ -9,6 +9,7 @@ rm -rf ${PREFIX}/*
 
 # copy back and make the right links
 cp -r ${tmp_dir}/conda-meta ${PREFIX}/conda-meta
+mkdir -p ${PREFIX}/${CHOST}
 cp -r ${tmp_dir}/sysroot ${PREFIX}/${CHOST}/sysroot
 mkdir -p ${PREFIX}/lib
 cp ${tmp_dir}/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so.${libgomp_ver}
