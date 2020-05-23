@@ -1,9 +1,11 @@
+# stash what we need and rm -rf the rest
+tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
+cp -r ${PREFIX}/${CHOST}/sysroot ${tmp_dir}/sysroot
+
 source ${RECIPE_DIR}/install-libgcc.sh
 
 # stash what we need and rm -rf the rest
-tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
 cp ${PREFIX}/lib/libgomp.so.${libgomp_ver} ${tmp_dir}/libgomp.so.${libgomp_ver}
-cp -r ${PREFIX}/${CHOST}/sysroot ${tmp_dir}/sysroot
 cp -r ${PREFIX}/conda-meta ${tmp_dir}/conda-meta
 rm -rf ${PREFIX}/*
 
@@ -15,6 +17,7 @@ mkdir -p ${PREFIX}/lib
 cp ${tmp_dir}/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so.${libgomp_ver}
 
 pushd ${PREFIX}/${CHOST}/sysroot/lib
+rm -f libgomp.so.${libgomp_ver}
 ln -s ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
 popd
 
