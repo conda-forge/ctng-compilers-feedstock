@@ -47,7 +47,7 @@ outputs:
       missing_dso_whitelist:
         - '*'
       runpath_whitelist:
-        - "x86_64-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libpthread-2.12.2.so"
+        - "x86_64-{{ ctng_vendor }}-linux-gnu/sysroot/lib64/libpthread-2.12.2.so"
     requirements:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
@@ -234,7 +234,7 @@ outputs:
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
+        - test -f ${PREFIX}/*/sysroot/lib64/libgomp.so.{{ libgomp_ver[0:1] }}
         - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"
         - test `readlink ${PREFIX}/*/sysroot/lib64/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
     about:
@@ -263,7 +263,7 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
-        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}
+        - test -f ${PREFIX}/*/sysroot/lib64/libgomp.so.{{ libgomp_ver }}
         - test ! -f ${PREFIX}/lib/libgomp.so
         - test ! -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
         - test `readlink ${PREFIX}/*/sysroot/lib64/libgomp.so.{{ libgomp_ver }}` == "../../../lib/libgomp.so.{{ libgomp_ver }}"
