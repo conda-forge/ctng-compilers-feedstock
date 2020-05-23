@@ -4,7 +4,6 @@ CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine
 
 # we have to remove existing links/files so that the libgcc install works
 rm -rf ${PREFIX}/lib/*
-rm -rf ${PREFIX}/${CHOST}/sysroot/lib/*
 rm -rf ${PREFIX}/share/*
 
 # now run install of libgcc

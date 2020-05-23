@@ -49,8 +49,8 @@ outputs:
         - "x86_64-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libpthread-2.12.2.so"
     requirements:
       host:
-        - {{ pin_subpackage("libgomp", exact=True) }}
         - sysroot_{{ ctng_target_platform }}
+        - {{ pin_subpackage("libgomp", exact=True) }}
       run:
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, max_pin=None) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
@@ -125,10 +125,14 @@ outputs:
         - 'libexec/**/f951'
       missing_dso_whitelist:
         - "*"
+      ignore_run_exports:
+        - __glibc
     requirements:
       build:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
+      host:
+        - sysroot_{{ ctng_target_platform }}
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
@@ -195,6 +199,11 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+      ignore_run_exports:
+        - __glibc
+    requirements:
+      host:
+        - sysroot_{{ ctng_target_platform }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libstdc++.so
@@ -210,6 +219,7 @@ outputs:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
+        - sysroot_{{ ctng_target_platform }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
@@ -221,6 +231,8 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+      ignore_run_exports:
+        - __glibc        
     test:
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
@@ -237,6 +249,8 @@ outputs:
     target: {{ ctng_target_platform }}
     script: install-libgomp.sh
     requirements:
+      host:
+        - sysroot_{{ ctng_target_platform }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
     build:
@@ -248,6 +262,8 @@ outputs:
       run_exports:
         strong:
           - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
+      ignore_run_exports:
+        - __glibc
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
@@ -296,6 +312,11 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+      ignore_run_exports:
+        - __glibc
+    requirements:
+      host:
+        - sysroot_{{ ctng_target_platform }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so

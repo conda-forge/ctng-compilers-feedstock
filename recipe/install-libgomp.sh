@@ -3,13 +3,14 @@ source ${RECIPE_DIR}/install-libgcc.sh
 # stash what we need and rm -rf the rest
 tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
 cp ${PREFIX}/lib/libgomp.so.${libgomp_ver} ${tmp_dir}/libgomp.so.${libgomp_ver}
+cp -r ${PREFIX}/${CHOST}/sysroot ${tmp_dir}/sysroot
 cp -r ${PREFIX}/conda-meta ${tmp_dir}/conda-meta
 rm -rf ${PREFIX}/*
 
 # copy back and make the right links
 cp -r ${tmp_dir}/conda-meta ${PREFIX}/conda-meta
+cp -r ${tmp_dir}/sysroot ${PREFIX}/${CHOST}/sysroot
 mkdir -p ${PREFIX}/lib
-mkdir -p ${PREFIX}/${CHOST}/sysroot/lib
 cp ${tmp_dir}/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so.${libgomp_ver}
 
 pushd ${PREFIX}/${CHOST}/sysroot/lib

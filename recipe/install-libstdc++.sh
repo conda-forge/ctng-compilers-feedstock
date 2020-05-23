@@ -15,7 +15,6 @@ popd
 
 mkdir -p ${PREFIX}/lib
 mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
-mkdir -p ${PREFIX}/${CHOST}/sysroot/lib || true
 symtargets=$(find ${PREFIX}/lib -name "libstdc++*.so*")
 for symtarget in ${symtargets}; do
   symtargetname=$(basename ${symtarget})
