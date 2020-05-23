@@ -11,11 +11,11 @@ rm -f ${PREFIX}/lib/libgfortran* || true
 
 cp -f --no-dereference ${SRC_DIR}/gcc_built/${CHOST}/sysroot/lib/libgfortran*.so* ${PREFIX}/lib/
 
-source ${RECIPE_DIR}/relocate_sysroot_lib_to_lib64.sh
+mkdir -p ${PREFIX}/${CHOST}/sysroot/lib || true
 symtargets=$(find ${PREFIX}/lib -name "libgfortran*.so*")
 for symtarget in ${symtargets}; do
   symtargetname=$(basename ${symtarget})
-  ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib64/${symtargetname}
+  ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
 done
 
 # Install Runtime Library Exception

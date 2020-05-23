@@ -15,12 +15,11 @@ popd
 
 mkdir -p ${PREFIX}/lib
 mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
-
-source ${RECIPE_DIR}/relocate_sysroot_lib_to_lib64.sh
+mkdir -p ${PREFIX}/${CHOST}/sysroot/lib || true
 symtargets=$(find ${PREFIX}/lib -name "libstdc++*.so*")
 for symtarget in ${symtargets}; do
   symtargetname=$(basename ${symtarget})
-  ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib64/${symtargetname}
+  ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
 done
 
 # no static libs
