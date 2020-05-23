@@ -37,11 +37,12 @@ popd
 mkdir -p ${PREFIX}/lib
 mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
 
+source ${RECIPE_DIR}/relocate_sysroot_lib_to_lib64.sh
 for lib in libatomic libgomp libquadmath libitm libvtv lib{a,l,ub,t}san; do
   symtargets=$(find ${PREFIX}/lib -name "${lib}.so*")
   for symtarget in ${symtargets}; do
     symtargetname=$(basename ${symtarget})
-    ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
+    ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib64/${symtargetname}
   done
 done
 

@@ -1,5 +1,6 @@
 {% set build_num = ctng_gcc_build_number %}
 
+
 package:
   name: ctng-compilers
   version: {{ ctng_gcc }}
@@ -134,6 +135,8 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
         - {{ pin_subpackage("libgfortran-ng") }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+      run_constrained:
+        - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
@@ -189,6 +192,10 @@ outputs:
   - name: libstdcxx-ng
     target: {{ ctng_target_platform }}
     script: install-libstdc++.sh
+    requirements:
+      run_constrained:
+        - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
+        - gfortran_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -215,6 +222,8 @@ outputs:
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
+        - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
+        - gfortran_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -227,7 +236,7 @@ outputs:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
         - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"
-        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
+        - test `readlink ${PREFIX}/*/sysroot/lib64/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -239,6 +248,9 @@ outputs:
     requirements:
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
+      run_constrained:
+        - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
+        - gfortran_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -254,7 +266,7 @@ outputs:
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}
         - test ! -f ${PREFIX}/lib/libgomp.so
         - test ! -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}` == "../../../lib/libgomp.so.{{ libgomp_ver }}"
+        - test `readlink ${PREFIX}/*/sysroot/lib64/libgomp.so.{{ libgomp_ver }}` == "../../../lib/libgomp.so.{{ libgomp_ver }}"
     about:
       summary: The GCC OpenMP implementation.
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -296,6 +308,10 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+    requirements:
+      run_constrained:
+        - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
+        - gfortran_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so

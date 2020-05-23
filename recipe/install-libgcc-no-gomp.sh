@@ -4,7 +4,8 @@ CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine
 
 # we have to remove existing links/files so that the libgcc install works
 rm -rf ${PREFIX}/lib/*
-rm -rf ${PREFIX}/${CHOST}/sysroot/lib/*
+rm -rf ${PREFIX}/${CHOST}/sysroot/lib
+rm -rf ${PREFIX}/${CHOST}/sysroot/lib64
 rm -rf ${PREFIX}/share/*
 
 # now run install of libgcc
@@ -13,17 +14,17 @@ source ${RECIPE_DIR}/install-libgcc.sh
 
 # remove and relink things for openmp
 rm -f ${PREFIX}/lib/libgomp.so
-rm -f ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so
+rm -f ${PREFIX}/${CHOST}/sysroot/lib64/libgomp.so
 rm -f ${PREFIX}/lib/libgomp.so.${libgomp_ver:0:1}
-rm -f ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so.${libgomp_ver:0:1}
-rm -f ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so.${libgomp_ver}
+rm -f ${PREFIX}/${CHOST}/sysroot/lib64/libgomp.so.${libgomp_ver:0:1}
+rm -f ${PREFIX}/${CHOST}/sysroot/lib64/libgomp.so.${libgomp_ver}
 
 # (re)make the right links
 pushd ${PREFIX}/lib
 ln -s libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver:0:1}
 popd
 
-pushd ${PREFIX}/${CHOST}/sysroot/lib
+pushd ${PREFIX}/${CHOST}/sysroot/lib64
 ln -s ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
 ln -s ../../../lib/libgomp.so.${libgomp_ver:0:1} libgomp.so.${libgomp_ver:0:1}
 popd
@@ -31,4 +32,4 @@ popd
 # debugging
 echo "debug the links..."
 ls -lah ${PREFIX}/lib/libgomp.so*
-ls -lah ${PREFIX}/${CHOST}/sysroot/lib/libgomp.so*
+ls -lah ${PREFIX}/${CHOST}/sysroot/lib64/libgomp.so*

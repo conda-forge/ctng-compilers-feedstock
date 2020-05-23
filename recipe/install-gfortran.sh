@@ -23,8 +23,8 @@ for file in f951; do
   fi
 done
 
-mkdir -p ${PREFIX}/${CHOST}/sysroot/lib
-cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/sysroot/lib
+source ${RECIPE_DIR}/relocate_sysroot_lib_to_lib64.sh
+cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/sysroot/lib64
 
 pushd ${PREFIX}/bin
   ln -s ${CHOST}-gfortran ${CHOST}-f95
