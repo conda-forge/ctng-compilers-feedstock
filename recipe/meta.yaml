@@ -133,6 +133,7 @@ outputs:
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
       host:
         - sysroot_{{ ctng_target_platform }}
+        - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
@@ -232,7 +233,7 @@ outputs:
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
-        - __glibc        
+        - __glibc
     test:
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
