@@ -235,6 +235,8 @@ outputs:
       ignore_run_exports:
         - __glibc
     test:
+      requires:
+        - sysroot_{{ ctng_target_platform }}      
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
