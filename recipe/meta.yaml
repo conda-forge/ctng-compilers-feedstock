@@ -65,6 +65,8 @@ outputs:
       strong:
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
     test:
+      requires:
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       files:
         - tests
       commands:
@@ -104,6 +106,8 @@ outputs:
       strong:
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
     test:
+      requires:
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       files:
         - tests
       commands:
@@ -150,6 +154,7 @@ outputs:
     test:
       requires:
         - cmake >=3.11
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       commands:
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-gfortran  # [x86_64]
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-gfortran  # [not x86_64]
@@ -182,7 +187,6 @@ outputs:
         - gfortran_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     test:
       commands:
-        - ls -lah ${PREFIX}/bin/*
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ar
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ld
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ar  # [x86_64]
