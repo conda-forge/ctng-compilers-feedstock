@@ -49,6 +49,10 @@ gnu:
   - 2.17    # [ppc64le or aarch64]
   - 2.12.2  # [linux32 or linux64]
 
+conda_glibc_ver:
+  - 2.17    # [ppc64le or aarch64]
+  - 2.12    # [linux32 or linux64]
+
 # openmp versions
 openmp_ver:
   - 4.5
