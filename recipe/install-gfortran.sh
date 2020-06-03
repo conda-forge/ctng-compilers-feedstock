@@ -71,10 +71,4 @@ pushd ${PREFIX}
   done
 popd
 
-symtargets=$(find ${PREFIX}/lib -name "libgfortran*.so*")
-for symtarget in ${symtargets}; do
-  symtargetname=$(basename ${symtarget})
-  ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
-done
-
 source ${RECIPE_DIR}/make_tool_links.sh
