@@ -53,6 +53,8 @@ outputs:
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         - {{ pin_subpackage("libgomp", exact=True) }}
+        - {{ pin_subpackage("libstdcxx-ng", exact=True) }}
+        - {{ pin_subpackage("libgcc-ng", exact=True) }}
       run:
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, max_pin=None) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
@@ -60,6 +62,16 @@ outputs:
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
         - {{ pin_subpackage("libgomp", max_pin=None) }}
         - sysroot_{{ ctng_target_platform }}
+      run_constrained:
+        - libgcc-ng !=7.3,!=9.2     # [x86_64]
+        - libstdcxx-ng !=7.3,!=9.2  # [x86_64]
+        - libgomp !=7.3,!=9.2       # [x86_64]
+        - libgcc-ng !=8.2           # [ppc64le]
+        - libstdcxx-ng !=8.2        # [ppc64le]
+        - libgomp !=8.2             # [ppc64le]
+        - libgcc-ng !=7.3           # [aarch64]
+        - libstdcxx-ng !=7.3        # [aarch64]
+        - libgomp !=7.3             # [aarch64]
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
@@ -70,6 +82,10 @@ outputs:
       files:
         - tests
       commands:
+        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}        
+        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
+        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
+        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}` == "../../../lib/libgomp.so.{{ libgomp_ver }}"
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-gcc  # [x86_64]
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-gcc  # [not x86_64]
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
@@ -141,6 +157,7 @@ outputs:
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
       host:
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
+        - {{ pin_subpackage("libgfortran-ng", exact=True) }}
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
@@ -247,9 +264,7 @@ outputs:
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
         - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"
-        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -279,10 +294,8 @@ outputs:
         - sysroot_{{ ctng_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
-        - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}
         - test ! -f ${PREFIX}/lib/libgomp.so
         - test ! -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-        - test `readlink ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}` == "../../../lib/libgomp.so.{{ libgomp_ver }}"
     about:
       summary: The GCC OpenMP implementation.
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html

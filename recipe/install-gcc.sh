@@ -232,6 +232,23 @@ popd
 
 pushd ${PREFIX}/${CHOST}/sysroot/lib
 ln -sf ../../../lib/libgomp.so libgomp.so
+ln -sf ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
+ln -sf ../../../lib/libgomp.so.${libgomp_ver:0:1} libgomp.so.${libgomp_ver:0:1}
 popd
+
+# make links to libs in the sysroot
+symtargets=$(find ${PREFIX}/lib -name "libstdc++*.so*")
+for symtarget in ${symtargets}; do
+  symtargetname=$(basename ${symtarget})
+  ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
+done
+
+for lib in libatomic libgomp libquadmath libitm libvtv lib{a,l,ub,t}san; do
+  symtargets=$(find ${PREFIX}/lib -name "${lib}.so*")
+  for symtarget in ${symtargets}; do
+    symtargetname=$(basename ${symtarget})
+    ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
+  done
+done
 
 source ${RECIPE_DIR}/make_tool_links.sh

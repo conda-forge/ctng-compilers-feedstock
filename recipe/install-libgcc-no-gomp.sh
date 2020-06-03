@@ -25,11 +25,6 @@ pushd ${PREFIX}/lib
 ln -s libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver:0:1}
 popd
 
-pushd ${PREFIX}/${CHOST}/sysroot/lib
-ln -s ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
-ln -s ../../../lib/libgomp.so.${libgomp_ver:0:1} libgomp.so.${libgomp_ver:0:1}
-popd
-
 # debugging
 echo "debug the links..."
 ls -lah ${PREFIX}/lib/libgomp.so*

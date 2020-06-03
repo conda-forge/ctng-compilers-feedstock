@@ -18,11 +18,6 @@ cp -r ${tmp_dir}/sysroot ${PREFIX}/${CHOST}/sysroot
 mkdir -p ${PREFIX}/lib
 cp ${tmp_dir}/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so.${libgomp_ver}
 
-pushd ${PREFIX}/${CHOST}/sysroot/lib
-rm -f libgomp.so.${libgomp_ver}
-ln -s ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
-popd
-
 # Install Runtime Library Exception
 install -Dm644 ${SRC_DIR}/.build/src/gcc-${ctng_gcc}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION.gomp_copy
