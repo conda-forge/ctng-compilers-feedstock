@@ -46,9 +46,12 @@ outputs:
       missing_dso_whitelist:
         - '*'
       runpath_whitelist:
-        - "x86_64-conda_cos6-linux-gnu/sysroot/lib/libpthread-2.12.2.so"
+        - "x86_64-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libpthread-2.12.2.so"
+      ignore_run_exports:
+        - __glibc
     requirements:
       host:
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         - {{ pin_subpackage("libgomp", exact=True) }}
       run:
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, max_pin=None) }}
@@ -56,16 +59,21 @@ outputs:
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
         - {{ pin_subpackage("libgomp", max_pin=None) }}
+        - sysroot_{{ ctng_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
     test:
+      requires:
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       files:
         - tests
       commands:
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-gcc  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-gcc  # [not x86_64]
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
-        - ${CC} -Wall tests/aligned_alloc.c -o c_aligned
+        - ${CC} -Wall tests/aligned_alloc.c -o c_aligned -v
         - ./c_aligned
     about:
       summary: GNU C Compiler
@@ -84,6 +92,8 @@ outputs:
         - 'libexec/**/cc1*'
       missing_dso_whitelist:
         - "*"
+      ignore_run_exports:
+        - __glibc
     requirements:
       build:
         # For cpp and crt{i,n}.o
@@ -96,9 +106,13 @@ outputs:
       strong:
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
     test:
+      requires:
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       files:
         - tests
       commands:
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-g++  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-g++  # [not x86_64]
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -o cpp_aligned --std=c++17
         - ./cpp_aligned
@@ -119,9 +133,13 @@ outputs:
         - 'libexec/**/f951'
       missing_dso_whitelist:
         - "*"
+      ignore_run_exports:
+        - __glibc
     requirements:
       build:
         # For cpp and crt{i,n}.o
+        - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
+      host:
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
       run:
         # For cpp and crt{i,n}.o
@@ -136,7 +154,10 @@ outputs:
     test:
       requires:
         - cmake >=3.11
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       commands:
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-gfortran  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-gfortran  # [not x86_64]
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
         - pushd tests/fortomp
@@ -160,10 +181,18 @@ outputs:
         - 'libexec/**/*.so*'
       missing_dso_whitelist:
         - "*"
+    requirements:
+      run_constrained:
+        - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
+        - gfortran_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     test:
       commands:
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ar
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ld
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ar  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-ar  # [not x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ld  # [x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-ld  # [not x86_64]
     about:
       summary: The GNU Binutils are a collection of binary tools.
       home: https://www.gnu.org/software/binutils/
@@ -178,6 +207,11 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+      ignore_run_exports:
+        - __glibc
+    requirements:
+      host:
+        - sysroot_{{ ctng_target_platform }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libstdc++.so
@@ -193,6 +227,7 @@ outputs:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
+        - sysroot_{{ ctng_target_platform }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
@@ -204,7 +239,11 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+      ignore_run_exports:
+        - __glibc
     test:
+      requires:
+        - sysroot_{{ ctng_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
@@ -220,6 +259,8 @@ outputs:
     target: {{ ctng_target_platform }}
     script: install-libgomp.sh
     requirements:
+      host:
+        - sysroot_{{ ctng_target_platform }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
     build:
@@ -228,10 +269,14 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
-      run_exports: 
+      run_exports:
         strong:
           - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
+      ignore_run_exports:
+        - __glibc
     test:
+      requires:
+        - sysroot_{{ ctng_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
         - test -f ${PREFIX}/*/sysroot/lib/libgomp.so.{{ libgomp_ver }}
@@ -279,6 +324,11 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+      ignore_run_exports:
+        - __glibc
+    requirements:
+      host:
+        - sysroot_{{ ctng_target_platform }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
