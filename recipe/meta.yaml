@@ -63,15 +63,9 @@ outputs:
         - {{ pin_subpackage("libgomp", max_pin=None) }}
         - sysroot_{{ ctng_target_platform }}
       run_constrained:
-        - libgcc-ng !=7.3,!=9.2     # [x86_64]
-        - libstdcxx-ng !=7.3,!=9.2  # [x86_64]
-        - libgomp !=7.3,!=9.2       # [x86_64]
-        - libgcc-ng !=8.2           # [ppc64le]
-        - libstdcxx-ng !=8.2        # [ppc64le]
-        - libgomp !=8.2             # [ppc64le]
-        - libgcc-ng !=7.3           # [aarch64]
-        - libstdcxx-ng !=7.3        # [aarch64]
-        - libgomp !=7.3             # [aarch64]
+        - libgcc-ng !=5.4,!=7.2,!=7.3,!=8.2,!=9.2
+        - libstdcxx-ng !=5.4,!=7.2,!=7.3,!=8.2,!=9.2
+        - libgomp !=5.4,!=7.2,!=7.3,!=8.2,!=9.2
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
