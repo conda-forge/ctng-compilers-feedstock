@@ -67,6 +67,7 @@ outputs:
         - libgcc-ng !=5.4,!=7.2,!=7.3,!=8.2,!=9.2
         - libstdcxx-ng !=5.4,!=7.2,!=7.3,!=8.2,!=9.2
         - libgomp !=5.4,!=7.2,!=7.3,!=8.2,!=9.2
+        - libgfortran-ng !=5.4,!=7.2,!=7.3,!=8.2,!=9.2
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
