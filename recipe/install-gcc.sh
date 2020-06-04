@@ -3,17 +3,6 @@ set -e -x
 CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine)
 _libdir=libexec/gcc/${CHOST}/${PKG_VERSION}
 
-echo "==================================================================="
-echo "==================================================================="
-echo "==================================================================="
-echo "==================================================================="
-echo "before"
-ls -lah ${PREFIX}/${CHOST}/sysroot/lib/*
-echo "==================================================================="
-echo "==================================================================="
-echo "==================================================================="
-echo "==================================================================="
-
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
 export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
@@ -237,26 +226,8 @@ popd
 
 #${PREFIX}/bin/${CHOST}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
-echo "==================================================================="
-echo "==================================================================="
-echo "==================================================================="
-echo "==================================================================="
-echo "after"
-ls -lah ${PREFIX}/${CHOST}/sysroot/lib/*
-echo "==================================================================="
-echo "==================================================================="
-echo "==================================================================="
-echo "==================================================================="
-
-
 pushd ${PREFIX}/lib
 ln -sf libgomp.so.${libgomp_ver} libgomp.so
-popd
-
-pushd ${PREFIX}/${CHOST}/sysroot/lib
-ln -sf ../../../lib/libgomp.so libgomp.so
-ln -sf ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
-ln -sf ../../../lib/libgomp.so.${libgomp_ver:0:1} libgomp.so.${libgomp_ver:0:1}
 popd
 
 # make links to libs in the sysroot
