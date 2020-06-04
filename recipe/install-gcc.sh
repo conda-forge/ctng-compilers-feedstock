@@ -233,8 +233,6 @@ popd
 # making these this way so conda build doesn't muck with them
 pushd ${PREFIX}/${CHOST}/sysroot/lib
 ln -sf ../../../lib/libgomp.so libgomp.so
-ln -s ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
-ln -s ../../../lib/libgomp.so.${libgomp_ver:0:1} libgomp.so.${libgomp_ver:0:1}
 popd
 
 # make links to libs in the sysroot
