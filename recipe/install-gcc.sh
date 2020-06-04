@@ -236,20 +236,8 @@ ln -sf ../../../lib/libgomp.so libgomp.so
 popd
 
 # make links to libs in the sysroot
-ln -s ${PREFIX}/lib/libstdc++.so ${PREFIX}/${CHOST}/sysroot/lib/libstdc++.so
-
-for lib in libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
-  symtargets=$(find ${PREFIX}/lib -name "${lib}.so*")
-  for symtarget in ${symtargets}; do
-    symtargetname=$(basename ${symtarget})
-    ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
-  done
-done
-
-symtargets=$(find ${PREFIX}/lib -name "libgfortran*.so*")
-for symtarget in ${symtargets}; do
-  symtargetname=$(basename ${symtarget})
-  ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
+for lib in libstdc++ libgfortran libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
+  ln -s ${PREFIX}/lib/${lib}.so ${PREFIX}/${CHOST}/sysroot/lib/${lib}.so
 done
 
 source ${RECIPE_DIR}/make_tool_links.sh
