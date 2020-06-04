@@ -73,10 +73,10 @@ outputs:
       files:
         - tests
       commands:
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-conda-linux-gnu/sysroot/lib/libgomp.so.{{ libgomp_ver }}
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-conda-linux-gnu/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-        - test `readlink ${PREFIX}/{{ ctng_cpu_arch }}-conda-linux-gnu/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
-        - test `readlink ${PREFIX}/{{ ctng_cpu_arch }}-conda-linux-gnu/sysroot/lib/libgomp.so.{{ libgomp_ver }}` == "../../../lib/libgomp.so.{{ libgomp_ver }}"
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so.{{ libgomp_ver }}
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}
+        - test `readlink ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "../../../lib/libgomp.so.{{ libgomp_ver[0:1] }}"
+        - test `readlink ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so.{{ libgomp_ver }}` == "../../../lib/libgomp.so.{{ libgomp_ver }}"
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-gcc  # [x86_64]
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-gcc  # [not x86_64]
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
