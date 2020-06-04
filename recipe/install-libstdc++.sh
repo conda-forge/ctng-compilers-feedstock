@@ -15,11 +15,6 @@ popd
 
 mkdir -p ${PREFIX}/lib
 mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
-symtargets=$(find ${PREFIX}/lib -name "libstdc++*.so*")
-for symtarget in ${symtargets}; do
-  symtargetname=$(basename ${symtarget})
-  ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
-done
 
 # no static libs
 find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;

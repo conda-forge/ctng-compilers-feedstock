@@ -11,12 +11,6 @@ rm -f ${PREFIX}/lib/libgfortran* || true
 
 cp -f --no-dereference ${SRC_DIR}/gcc_built/${CHOST}/sysroot/lib/libgfortran*.so* ${PREFIX}/lib/
 
-symtargets=$(find ${PREFIX}/lib -name "libgfortran*.so*")
-for symtarget in ${symtargets}; do
-  symtargetname=$(basename ${symtarget})
-  ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
-done
-
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/.build/src/gcc-${PKG_VERSION}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/libgfortran/RUNTIME.LIBRARY.EXCEPTION

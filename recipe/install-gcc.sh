@@ -230,8 +230,14 @@ pushd ${PREFIX}/lib
 ln -sf libgomp.so.${libgomp_ver} libgomp.so
 popd
 
+# making these this way so conda build doesn't muck with them
 pushd ${PREFIX}/${CHOST}/sysroot/lib
 ln -sf ../../../lib/libgomp.so libgomp.so
 popd
+
+# make links to libs in the sysroot
+for lib in libstdc++ libgfortran libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
+  ln -s ${PREFIX}/lib/${lib}.so ${PREFIX}/${CHOST}/sysroot/lib/${lib}.so
+done
 
 source ${RECIPE_DIR}/make_tool_links.sh
