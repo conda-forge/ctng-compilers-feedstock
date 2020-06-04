@@ -230,10 +230,17 @@ pushd ${PREFIX}/lib
 ln -sf libgomp.so.${libgomp_ver} libgomp.so
 popd
 
+# making these this way so conda build doesn't muck with them
+pushd ${PREFIX}/${CHOST}/sysroot/lib
+ln -sf ../../../lib/libgomp.so libgomp.so
+ln -s ../../../lib/libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver}
+ln -s ../../../lib/libgomp.so.${libgomp_ver:0:1} libgomp.so.${libgomp_ver:0:1}
+popd
+
 # make links to libs in the sysroot
 ln -s ${PREFIX}/lib/libstdc++.so ${PREFIX}/${CHOST}/sysroot/lib/libstdc++.so
 
-for lib in libatomic libgomp libquadmath libitm libvtv lib{a,l,ub,t}san; do
+for lib in libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
   symtargets=$(find ${PREFIX}/lib -name "${lib}.so*")
   for symtarget in ${symtargets}; do
     symtargetname=$(basename ${symtarget})
