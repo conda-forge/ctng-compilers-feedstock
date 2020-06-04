@@ -231,11 +231,7 @@ ln -sf libgomp.so.${libgomp_ver} libgomp.so
 popd
 
 # make links to libs in the sysroot
-symtargets=$(find ${PREFIX}/lib -name "libstdc++*.so*")
-for symtarget in ${symtargets}; do
-  symtargetname=$(basename ${symtarget})
-  ln -s ${PREFIX}/lib/${symtargetname} ${PREFIX}/${CHOST}/sysroot/lib/${symtargetname}
-done
+ln -s ${PREFIX}/lib/libstdc++.so ${PREFIX}/${CHOST}/sysroot/lib/libstdc++.so
 
 for lib in libatomic libgomp libquadmath libitm libvtv lib{a,l,ub,t}san; do
   symtargets=$(find ${PREFIX}/lib -name "${lib}.so*")
