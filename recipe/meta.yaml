@@ -103,6 +103,11 @@ outputs:
       build:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
+      host:
+        # For cpp and crt{i,n}.o
+        - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
       run:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
@@ -144,8 +149,10 @@ outputs:
       build:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
       host:
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
