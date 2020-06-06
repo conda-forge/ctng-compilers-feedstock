@@ -24,10 +24,13 @@ ctng_target_platform:
   - linux-aarch64  # [aarch64]
 ctng_vendor:
   - conda
+runtime_ctng_vendor:
+  - conda_cos6  # [linux32 or linux64]
+  - conda_cos7  # [ppc64le or aarch64]
 #ctng_duma:
 #  - 2.5.15
 ctng_gcc_build_number:
-  - 8
+  - 9
 ctng_gmp:
   - 6.1.2
 ctng_isl:

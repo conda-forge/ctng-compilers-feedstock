@@ -51,7 +51,7 @@ outputs:
         - __glibc
     requirements:
       host:
-        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage("libstdcxx-ng", exact=True) }}
         - {{ pin_subpackage("libgcc-ng", exact=True) }}
@@ -69,7 +69,7 @@ outputs:
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
     test:
       requires:
-        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ runtime_ctng_vendor }}_variant_*
       files:
         - tests
       commands:
@@ -112,7 +112,7 @@ outputs:
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
     test:
       requires:
-        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ runtime_ctng_vendor }}_variant_*
       files:
         - tests
       commands:
@@ -159,7 +159,7 @@ outputs:
     test:
       requires:
         - cmake >=3.11
-        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ runtime_ctng_vendor }}_variant_*
       commands:
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-gfortran  # [x86_64]
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-gfortran  # [not x86_64]
@@ -216,7 +216,7 @@ outputs:
         - __glibc
     requirements:
       host:
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
     test:
       commands:
         - test -f ${PREFIX}/lib/libstdc++.so
@@ -232,7 +232,7 @@ outputs:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
@@ -247,8 +247,6 @@ outputs:
       ignore_run_exports:
         - __glibc
     test:
-      requires:
-        - sysroot_{{ ctng_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
@@ -263,7 +261,7 @@ outputs:
     script: install-libgomp.sh
     requirements:
       host:
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
     build:
@@ -278,8 +276,6 @@ outputs:
       ignore_run_exports:
         - __glibc
     test:
-      requires:
-        - sysroot_{{ ctng_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
         - test ! -f ${PREFIX}/lib/libgomp.so
@@ -329,7 +325,7 @@ outputs:
         - __glibc
     requirements:
       host:
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
