@@ -36,3 +36,4 @@ jobs:
 
   - publish: build_artifacts/linux-64/
     artifact: conda_pkgs_linux
+    condition: always()
