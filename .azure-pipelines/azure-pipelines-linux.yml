@@ -34,6 +34,10 @@ jobs:
       FEEDSTOCK_TOKEN: $(FEEDSTOCK_TOKEN)
       STAGING_BINSTAR_TOKEN: $(STAGING_BINSTAR_TOKEN)
 
-  - publish: build_artifacts/
+  - publish: build_artifacts/broken/
+    artifact: conda_pkgs_linux_broken
+    condition: always()
+
+  - publish: build_artifacts/linux-64/
     artifact: conda_pkgs_linux
     condition: always()
