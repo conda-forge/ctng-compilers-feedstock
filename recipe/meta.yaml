@@ -197,14 +197,14 @@ outputs:
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
       run:
-        - sysroot_{{ ctng_target_platform }}        
+        - sysroot_{{ ctng_target_platform }}
       run_constrained:
         - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
         - gfortran_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     test:
       commands:
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ar
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ld
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/bin/ar
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/bin/ld
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ar  # [x86_64]
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-ar  # [not x86_64]
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ld  # [x86_64]
