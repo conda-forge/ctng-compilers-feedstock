@@ -194,6 +194,10 @@ outputs:
       missing_dso_whitelist:
         - "*"
     requirements:
+      host:
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }} {{ ctng_vendor }}_variant_*
+      run:
+        - sysroot_{{ ctng_target_platform }}        
       run_constrained:
         - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
         - gfortran_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
