@@ -256,7 +256,7 @@ outputs:
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
-      license: GPL
+      license: GPL-3.0-with-GCC-exception
 
   - name: libgomp
     target: {{ ctng_target_platform }}
