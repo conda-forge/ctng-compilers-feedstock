@@ -5,7 +5,7 @@ Home: https://www.gnu.org/software/binutils/
 
 Package license: GPL-3.0-or-later
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: The GNU Binutils are a collection of binary tools.
 
@@ -185,3 +185,4 @@ Feedstock Maintainers
 
 * [@beckermr](https://github.com/beckermr/)
 * [@isuruf](https://github.com/isuruf/)
+
