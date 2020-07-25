@@ -155,6 +155,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
         - {{ pin_subpackage("libgfortran-ng") }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+        - sysroot_{{ ctng_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
@@ -223,6 +224,8 @@ outputs:
     requirements:
       host:
         - sysroot_{{ ctng_target_platform }}
+      run_constrained:
+        - sysroot_{{ ctng_target_platform }} >=2.12
     test:
       commands:
         - test -f ${PREFIX}/lib/libstdc++.so
@@ -244,6 +247,7 @@ outputs:
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
+        - sysroot_{{ ctng_target_platform }} >=2.12
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -272,6 +276,8 @@ outputs:
         - sysroot_{{ ctng_target_platform }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
+      run_constrained:
+        - sysroot_{{ ctng_target_platform }} >=2.12
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -307,6 +313,7 @@ outputs:
       run_constrained:
         # conflict with previous name
         - openmp_impl 9999
+        - sysroot_{{ ctng_target_platform }} >=2.12
     build:
       string: 0_gnu
       run_exports:
@@ -336,6 +343,8 @@ outputs:
     requirements:
       host:
         - sysroot_{{ ctng_target_platform }}
+      run_constrained:
+        - sysroot_{{ ctng_target_platform }} >=2.12        
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
