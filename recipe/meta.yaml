@@ -313,7 +313,6 @@ outputs:
       run_constrained:
         # conflict with previous name
         - openmp_impl 9999
-        - sysroot_{{ ctng_target_platform }} >=2.12
     build:
       string: 0_gnu
       run_exports:
@@ -344,7 +343,7 @@ outputs:
       host:
         - sysroot_{{ ctng_target_platform }}
       run_constrained:
-        - sysroot_{{ ctng_target_platform }} >=2.12        
+        - sysroot_{{ ctng_target_platform }} >=2.12
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
