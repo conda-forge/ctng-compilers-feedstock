@@ -155,6 +155,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
         - {{ pin_subpackage("libgfortran-ng") }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+        - sysroot_{{ ctng_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
