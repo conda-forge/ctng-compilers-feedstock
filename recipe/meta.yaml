@@ -224,8 +224,6 @@ outputs:
     requirements:
       host:
         - sysroot_{{ ctng_target_platform }}
-      run_constrained:
-        - sysroot_{{ ctng_target_platform }} >=2.12
     test:
       commands:
         - test -f ${PREFIX}/lib/libstdc++.so
@@ -247,7 +245,6 @@ outputs:
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
-        - sysroot_{{ ctng_target_platform }} >=2.12
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -276,8 +273,6 @@ outputs:
         - sysroot_{{ ctng_target_platform }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
-      run_constrained:
-        - sysroot_{{ ctng_target_platform }} >=2.12
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -342,8 +337,6 @@ outputs:
     requirements:
       host:
         - sysroot_{{ ctng_target_platform }}
-      run_constrained:
-        - sysroot_{{ ctng_target_platform }} >=2.12
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
