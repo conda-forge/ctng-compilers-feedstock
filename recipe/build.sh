@@ -2,7 +2,7 @@
 
 set -x
 
-cp ${SRC_DIR}/fixed-patch-0001.patch $BUILD_PREFIX/share/crosstool-ng/packages/gcc/9.3.0/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patc
+cp ${SRC_DIR}/fixed-patch-0001.patch $BUILD_PREFIX/share/crosstool-ng/packages/gcc/9.3.0/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
 
 if [[ "${ctng_cpu_arch}" == "aarch64" ]]; then
     rm -f $BUILD_PREFIX/share/crosstool-ng/packages/glibc/2.17/*-glibc-*.patch
