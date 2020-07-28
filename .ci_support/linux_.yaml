@@ -4,10 +4,20 @@ channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
+conda_glibc_ver:
+- '2.12'
+ctng_binutils:
+- 2.31.1
+ctng_cpu_arch:
+- x86_64
 ctng_gcc:
 - 9.3.0
+ctng_libc:
+- gnu
 ctng_target_platform:
 - linux-64
+ctng_vendor:
+- conda
 docker_image:
 - condaforge/linux-anvil-comp7
 libgomp_ver:
