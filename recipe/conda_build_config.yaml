@@ -14,6 +14,7 @@ ctng_cpu_arch:
 ctng_gcc:
   - 7.5.0  # [linux64 or linux32 or aarch64]
   - 8.4.0  # [ppc64le]
+  - 9.3.0
 ctng_binutils:
   - 2.31.1  # [linux64 or linux32 or ppc64le]
   - 2.29.1  # [aarch64]
@@ -27,7 +28,7 @@ ctng_vendor:
 #ctng_duma:
 #  - 2.5.15
 ctng_gcc_build_number:
-  - 10
+  - 11
 ctng_gmp:
   - 6.1.2
 ctng_isl:
