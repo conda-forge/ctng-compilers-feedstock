@@ -4,7 +4,7 @@ set -x
 
 if [[ "${ctng_cpu_arch}" == "aarch64" ]]; then
     rm -f $BUILD_PREFIX/share/crosstool-ng/packages/glibc/2.17/*-glibc-*.patch
-fi    
+fi
 
 mkdir -p .build/src
 mkdir -p .build/tarballs

@@ -20,9 +20,11 @@ build:
 requirements:
   build:
     - crosstool-ng >=1.24.0,<1.25
+    - make
     - bash  # [osx]
     - autoconf  # [linux64]
     - automake  # [linux64]
+    - libtool
   # Need something here so that build does not get installed to a long prefix
   # as that breaks on some systems.
   host:
@@ -106,6 +108,8 @@ outputs:
       run:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
+        # not needed due to pinning above but marks this build as using the new sysroots
+        - sysroot_{{ ctng_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
@@ -146,11 +150,14 @@ outputs:
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
       host:
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
+        # not needed due to pinning above but marks this build as using the new sysroots
+        - sysroot_{{ ctng_target_platform }}
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
         - {{ pin_subpackage("libgfortran-ng") }}
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+        - sysroot_{{ ctng_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
@@ -187,13 +194,15 @@ outputs:
       missing_dso_whitelist:
         - "*"
     requirements:
+      run:
+        - sysroot_{{ ctng_target_platform }}
       run_constrained:
         - gcc_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
         - gfortran_impl_{{ ctng_target_platform }} {{ ctng_gcc }}.*
     test:
       commands:
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ar
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}*/bin/ld
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/bin/ar
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/bin/ld
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ar  # [x86_64]
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-ar  # [not x86_64]
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ld  # [x86_64]
