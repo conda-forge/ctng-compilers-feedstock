@@ -43,6 +43,20 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
+              <td>linux_64_ctng_gcc7.5.0</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_ctng_gcc7.5.0" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_ctng_gcc9.3.0</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_ctng_gcc9.3.0" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>linux_aarch64_ctng_gcc7.5.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
@@ -54,20 +68,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_ctng_gcc9.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ctng_gcc7.5.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ctng_gcc7.5.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ctng_gcc9.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ctng_gcc9.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -88,18 +88,6 @@ Current build status
           </tbody>
         </table>
       </details>
-    </td>
-  </tr>
-  <tr>
-    <td>OSX</td>
-    <td>
-      <img src="https://img.shields.io/badge/OSX-disabled-lightgrey.svg" alt="OSX disabled">
-    </td>
-  </tr>
-  <tr>
-    <td>Windows</td>
-    <td>
-      <img src="https://img.shields.io/badge/Windows-disabled-lightgrey.svg" alt="Windows disabled">
     </td>
   </tr>
 </table>
