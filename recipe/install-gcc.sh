@@ -234,7 +234,7 @@ if [[ "$target_platform" == "$ctng_target_platform" ]]; then
 
   # make links to libs in the sysroot
   for lib in libstdc++ libgfortran libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
-    ln -s ${PREFIX}/lib/${lib}.so ${PREFIX}/${CHOST}/sysroot/lib/${lib}.so
+    ln -s ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/sysroot/lib/
   done
 fi
 
