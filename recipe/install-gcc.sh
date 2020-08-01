@@ -36,7 +36,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
     fi
   done
 
-  make -C ${CHOST}/libgcc prefix=${PREFIX} install
+  # make -C ${CHOST}/libgcc prefix=${PREFIX} install
 
   # mkdir -p $PREFIX/$CHOST/sysroot/lib
 
@@ -182,11 +182,6 @@ $PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
 #   package is installed.
 sed -i -e "/\*link_libgcc:/,+1 s+%.*+& -rpath ${PREFIX}/lib+" $specdir/specs
 
-# Ensure that libgcc_s.so is found in the sysroot. I have done this to mask the fact that
-# strong run_export packages do not get installed into the host prefix (AFAICT) and we
-# should really fix that too. (ping @msarahan)
-cp -f ${PREFIX}/${CHOST}/lib/libgcc_s.so* ${PREFIX}/${CHOST}/sysroot/lib
-
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/.build/src/gcc-${PKG_VERSION}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc/RUNTIME.LIBRARY.EXCEPTION
@@ -233,7 +228,7 @@ if [[ "$target_platform" == "$ctng_target_platform" ]]; then
   popd
 
   # make links to libs in the sysroot
-  for lib in libstdc++ libgfortran libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
+  for lib in libgcc_s libstdc++ libgfortran libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
     ln -s ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/sysroot/lib/
   done
 fi

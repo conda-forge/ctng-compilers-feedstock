@@ -54,17 +54,20 @@ outputs:
     requirements:
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
-        - libgomp {{ ctng_gcc }}.*
-        - libstdcxx-ng {{ ctng_gcc }}.*
-        - libgcc-ng {{ ctng_gcc }}.*
-        - libgfortran-ng {{ ctng_gcc }}.*
+        - {{ pin_subpackage("libgomp", exact=True) }}           # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libstdcxx-ng", exact=True) }}      # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libgcc-ng", exact=True) }}         # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libgfortran-ng") }}                # [target_platform == ctng_target_platform]
       run:
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, max_pin=None) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
-        - libgomp >={{ ctng_gcc }}
-        - libstdcxx-ng >={{ ctng_gcc }}
-        - libgcc-ng >={{ ctng_gcc }}
+        - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}    # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}       # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libgomp", max_pin=None) }}         # [target_platform == ctng_target_platform]
         - sysroot_{{ ctng_target_platform }}
+        # Any version newer than the devtoolset works. This can be removed when bootstrapping.
+        - libstdcxx-ng >=4.9
+        - libgcc-ng >=4.9
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
@@ -83,8 +86,8 @@ outputs:
         - test `readlink ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so` == "../../../lib/libgomp.so" # [target_platform == ctng_target_platform]
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-gcc
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
-        - ${CC} -Wall tests/aligned_alloc.c -o c_aligned -v
-        - ./c_aligned   # [ctng_target_platform == target_platform]
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
+        - ${CC} -Wall aligned_alloc.o -o c_aligned -v && ./c_aligned   # [ctng_target_platform == target_platform]
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
@@ -126,8 +129,8 @@ outputs:
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-g++
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu-g++
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
-        - ${CXX} -Wall tests/aligned_alloc.cpp -o cpp_aligned --std=c++17
-        - ./cpp_aligned  # [ctng_target_platform == target_platform]
+        - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17
+        - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [ctng_target_platform == target_platform]
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
@@ -157,10 +160,12 @@ outputs:
         - sysroot_{{ ctng_target_platform }}
       run:
         # For cpp and crt{i,n}.o
-        - gcc_impl_{{ ctng_target_platform }} >=7.2.0
-        - libgfortran-ng {{ ctng_gcc }}.*
-        - libgcc-ng >={{ ctng_gcc }}
+        - gcc_impl_{{ ctng_target_platform }} >={{ ctng_gcc }}
+        - libgfortran-ng {{ ctng_gcc }}.*       # [target_platform == ctng_target_platform]
         - sysroot_{{ ctng_target_platform }}
+        # Any version newer than the devtoolset works. This can be removed when bootstrapping.
+        - libgcc-ng >=4.9
+        - libstdcxx-ng >=4.9
     run_exports:
       # impose this requirement across the build/host boundary
       strong:

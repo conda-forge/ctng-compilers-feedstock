@@ -33,7 +33,11 @@ make -C libcpp prefix=${PREFIX} install
 popd
 
 # Test:
-${PREFIX}/bin/${CHOST}-g++ "${RECIPE_DIR}"/hello-world.cpp
+if [[ "$target_platform" == "$ctng_target_platform" ]]; then
+  ${PREFIX}/bin/${CHOST}-g++ "${RECIPE_DIR}"/hello-world.cpp
+else
+  ${PREFIX}/bin/${CHOST}-g++ "${RECIPE_DIR}"/hello-world.cpp -c
+fi
 
 set +x
 # Strip executables, we may want to install to a different prefix
