@@ -17,6 +17,7 @@ mkdir -p ${PREFIX}/${CHOST}
 cp -r ${tmp_dir}/sysroot ${PREFIX}/${CHOST}/sysroot
 mkdir -p ${PREFIX}/lib
 cp ${tmp_dir}/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so.${libgomp_ver}
+ln -s ${PREFIX}/lib/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so
 
 # Install Runtime Library Exception
 install -Dm644 ${SRC_DIR}/.build/src/gcc-${ctng_gcc}/COPYING.RUNTIME \

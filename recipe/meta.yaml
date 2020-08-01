@@ -54,34 +54,37 @@ outputs:
     requirements:
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
-        - {{ pin_subpackage("libgomp", exact=True) }}
-        - {{ pin_subpackage("libstdcxx-ng", exact=True) }}
-        - {{ pin_subpackage("libgcc-ng", exact=True) }}
-        - {{ pin_subpackage("libgfortran-ng") }}
+        - libgomp {{ ctng_gcc }}.*
+        - libstdcxx-ng {{ ctng_gcc }}.*
+        - libgcc-ng {{ ctng_gcc }}.*
+        - libgfortran-ng {{ ctng_gcc }}.*
       run:
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, max_pin=None) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
-        - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
-        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
-        - {{ pin_subpackage("libgomp", max_pin=None) }}
+        - libgomp >={{ ctng_gcc }}
+        - libstdcxx-ng >={{ ctng_gcc }}
+        - libgcc-ng >={{ ctng_gcc }}
         - sysroot_{{ ctng_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
-        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+        - libgcc-ng >={{ ctng_gcc }}
     test:
       requires:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       files:
         - tests
       commands:
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so
-        - test `readlink ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so` == "../../../lib/libgomp.so"
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-gcc  # [x86_64]
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-gcc  # [not x86_64]
+        - echo {{ ctng_sample }}
+        - echo {{ gnu }}
+        - echo {{ old_ctng_vendor }}
+        - echo {{ ctng_kernel }}
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so   # [target_platform == ctng_target_platform]
+        - test `readlink ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so` == "../../../lib/libgomp.so" # [target_platform == ctng_target_platform]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-gcc
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - ${CC} -Wall tests/aligned_alloc.c -o c_aligned -v
-        - ./c_aligned
+        - ./c_aligned   # [ctng_target_platform == target_platform]
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
@@ -113,18 +116,18 @@ outputs:
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
-        - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}
+        - libstdcxx-ng >={{ ctng_gcc }}
     test:
       requires:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       files:
         - tests
       commands:
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-g++  # [x86_64]
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-g++  # [not x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-g++
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu-g++
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -o cpp_aligned --std=c++17
-        - ./cpp_aligned
+        - ./cpp_aligned  # [ctng_target_platform == target_platform]
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
@@ -155,25 +158,25 @@ outputs:
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ ctng_target_platform }} >=7.2.0
-        - {{ pin_subpackage("libgfortran-ng") }}
-        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+        - libgfortran-ng {{ ctng_gcc }}.*
+        - libgcc-ng >={{ ctng_gcc }}
         - sysroot_{{ ctng_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
-        - {{ pin_subpackage("libgfortran-ng") }}
-        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}
+        - libgfortran-ng {{ ctng_gcc }}.*
+        - libgcc-ng >={{ ctng_gcc }}
     test:
       requires:
         - cmake >=3.11
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       commands:
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-gfortran  # [x86_64]
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-gfortran  # [not x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-gfortran
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu-gfortran
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
         - pushd tests/fortomp
-        - sh test_fort.sh
+        - sh test_fort.sh   # [target_platform == ctng_target_platform]
       files:
         - tests/fortomp/*
     about:
@@ -203,10 +206,10 @@ outputs:
       commands:
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/bin/ar
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/bin/ld
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ar  # [x86_64]
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-ar  # [not x86_64]
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos6-linux-gnu-ld  # [x86_64]
-        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-conda_cos7-linux-gnu-ld  # [not x86_64]
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-ar
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu-ar
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-ld
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu-ld
     about:
       summary: The GNU Binutils are a collection of binary tools.
       home: https://www.gnu.org/software/binutils/
@@ -219,6 +222,7 @@ outputs:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
+      skip: True   # [target_platform != ctng_target_platform]
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
@@ -251,6 +255,7 @@ outputs:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
+      skip: True   # [target_platform != ctng_target_platform]
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
@@ -279,6 +284,7 @@ outputs:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
+      skip: True   # [target_platform != ctng_target_platform]
       missing_dso_whitelist:
         - "*"
       run_exports:
@@ -312,6 +318,7 @@ outputs:
         - openmp_impl 9999
     build:
       string: 0_gnu
+      skip: True   # [target_platform != ctng_target_platform]
       run_exports:
         strong:
           - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
@@ -332,6 +339,7 @@ outputs:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
+      skip: True   # [target_platform != ctng_target_platform]
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:

@@ -7,22 +7,39 @@ channel_targets:
 conda_glibc_ver:
 - '2.17'
 ctng_binutils:
-- 2.31.1
+- 2.29.1
 ctng_cpu_arch:
-- powerpc64le
+- aarch64
 ctng_gcc:
 - 9.3.0
+ctng_kernel:
+- '3.10'
 ctng_libc:
 - gnu
+ctng_sample:
+- aarch64-unknown-linux-gnu
 ctng_target_platform:
-- linux-ppc64le
+- linux-aarch64
 ctng_vendor:
 - conda
 docker_image:
 - condaforge/linux-anvil-ppc64le
+gnu:
+- '2.17'
 libgomp_ver:
 - 1.0.0
+old_ctng_vendor:
+- conda_cos7
 openmp_ver:
 - '4.5'
 target_platform:
 - linux-ppc64le
+zip_keys:
+- - conda_glibc_ver
+  - old_ctng_vendor
+  - gnu
+  - ctng_kernel
+  - ctng_sample
+  - ctng_cpu_arch
+  - ctng_binutils
+  - ctng_target_platform

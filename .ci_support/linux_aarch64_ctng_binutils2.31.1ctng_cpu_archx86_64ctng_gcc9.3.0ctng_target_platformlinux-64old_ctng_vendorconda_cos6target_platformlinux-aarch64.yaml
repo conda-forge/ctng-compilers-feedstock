@@ -1,0 +1,49 @@
+BUILD:
+- aarch64-conda_cos7-linux-gnu
+cdt_arch:
+- aarch64
+cdt_name:
+- cos7
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+conda_glibc_ver:
+- '2.12'
+ctng_binutils:
+- 2.31.1
+ctng_cpu_arch:
+- x86_64
+ctng_gcc:
+- 9.3.0
+ctng_kernel:
+- 2.6.32
+ctng_libc:
+- gnu
+ctng_sample:
+- x86_64-centos6-linux-gnu
+ctng_target_platform:
+- linux-64
+ctng_vendor:
+- conda
+docker_image:
+- condaforge/linux-anvil-aarch64
+gnu:
+- 2.12.2
+libgomp_ver:
+- 1.0.0
+old_ctng_vendor:
+- conda_cos6
+openmp_ver:
+- '4.5'
+target_platform:
+- linux-aarch64
+zip_keys:
+- - conda_glibc_ver
+  - old_ctng_vendor
+  - gnu
+  - ctng_kernel
+  - ctng_sample
+  - ctng_cpu_arch
+  - ctng_binutils
+  - ctng_target_platform

@@ -90,7 +90,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
   popd
 
   # POSIX conformance launcher scripts for c89 and c99
-  cat > ${PREFIX}/bin/c89 <<"EOF"
+  cat > ${PREFIX}/bin/${CHOST}-c89 <<"EOF"
 #!/bin/sh
 fl="-std=c89"
 for opt; do
@@ -103,7 +103,7 @@ done
 exec gcc $fl ${1+"$@"}
 EOF
 
-  cat > ${PREFIX}/bin/c99 <<"EOF"
+  cat > ${PREFIX}/bin/${CHOST}-c99 <<"EOF"
 #!/bin/sh
 fl="-std=c99"
 for opt; do
@@ -116,7 +116,7 @@ done
 exec gcc $fl ${1+"$@"}
 EOF
 
-  chmod 755 ${PREFIX}/bin/c{8,9}9
+  chmod 755 ${PREFIX}/bin/${CHOST}-c{8,9}9
 
   rm ${PREFIX}/bin/${CHOST}-gcc-${PKG_VERSION}
 
@@ -226,18 +226,16 @@ popd
 
 #${PREFIX}/bin/${CHOST}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
-pushd ${PREFIX}/lib
-ln -sf libgomp.so.${libgomp_ver} libgomp.so
-popd
+if [[ "$target_platform" == "$ctng_target_platform" ]]; then
+  # making these this way so conda build doesn't muck with them
+  pushd ${PREFIX}/${CHOST}/sysroot/lib
+    ln -sf ../../../lib/libgomp.so libgomp.so
+  popd
 
-# making these this way so conda build doesn't muck with them
-pushd ${PREFIX}/${CHOST}/sysroot/lib
-ln -sf ../../../lib/libgomp.so libgomp.so
-popd
-
-# make links to libs in the sysroot
-for lib in libstdc++ libgfortran libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
-  ln -s ${PREFIX}/lib/${lib}.so ${PREFIX}/${CHOST}/sysroot/lib/${lib}.so
-done
+  # make links to libs in the sysroot
+  for lib in libstdc++ libgfortran libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
+    ln -s ${PREFIX}/lib/${lib}.so ${PREFIX}/${CHOST}/sysroot/lib/${lib}.so
+  done
+fi
 
 source ${RECIPE_DIR}/make_tool_links.sh
