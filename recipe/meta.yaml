@@ -351,12 +351,12 @@ outputs:
         - {{ pin_subpackage('libgomp', exact=True) }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
-        - {{ pin_subpackage("libgomp", max_pin=None) }}
+        - libgomp >=7.5.0
       run_constrained:
         # conflict with previous name
         - openmp_impl 9999
     build:
-      string: 0_gnu
+      string: 1_gnu
       skip: True   # [target_platform != ctng_target_platform]
       run_exports:
         strong:
