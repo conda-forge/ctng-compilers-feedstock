@@ -330,7 +330,6 @@ outputs:
         - sysroot_{{ ctng_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
-        - test ! -f ${PREFIX}/lib/libgomp.so
         - test ! -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
     about:
       summary: The GCC OpenMP implementation.
