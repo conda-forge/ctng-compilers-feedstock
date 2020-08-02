@@ -114,7 +114,7 @@ outputs:
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-gcc
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
-        - ${CC} -Wall aligned_alloc.o -o c_aligned -v && ./c_aligned   # [ctng_target_platform == target_platform]
+        - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [ctng_target_platform == target_platform]
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
