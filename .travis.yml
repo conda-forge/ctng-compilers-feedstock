@@ -10,18 +10,6 @@ env:
 
 matrix:
   include:
-    - env: CONFIG=linux_ppc64le_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
-      os: linux
-      arch: ppc64le
-
-    - env: CONFIG=linux_ppc64le_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
-      os: linux
-      arch: ppc64le
-
-    - env: CONFIG=linux_ppc64le_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
-      os: linux
-      arch: ppc64le
-
     - env: CONFIG=linux_ppc64le_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
@@ -31,18 +19,6 @@ matrix:
       arch: ppc64le
 
     - env: CONFIG=linux_ppc64le_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
-      os: linux
-      arch: ppc64le
-
-    - env: CONFIG=linux_ppc64le_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
-      os: linux
-      arch: ppc64le
-
-    - env: CONFIG=linux_ppc64le_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
-      os: linux
-      arch: ppc64le
-
-    - env: CONFIG=linux_ppc64le_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
 
