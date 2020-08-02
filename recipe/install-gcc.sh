@@ -45,7 +45,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
   #   cp ${SRC_DIR}/gcc_built/$CHOST/sysroot/lib/libquadmath.so* $PREFIX/$CHOST/sysroot/lib
   # fi
 
-  make prefix=${PREFIX} install-libcc1
+  make prefix=${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc} install-libcc1
   install -d ${PREFIX}/share/gdb/auto-load/usr/lib
 
   make prefix=${PREFIX} install-fixincludes
@@ -77,7 +77,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
 
   make -C libiberty prefix=${PREFIX} install
   # install PIC version of libiberty
-  install -m644 libiberty/pic/libiberty.a ${PREFIX}/lib
+  install -m644 libiberty/pic/libiberty.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
 
   make -C gcc prefix=${PREFIX} install-man install-info
 
@@ -184,7 +184,7 @@ sed -i -e "/\*link_libgcc:/,+1 s+%.*+& -rpath ${PREFIX}/lib+" $specdir/specs
 
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/.build/src/gcc-${PKG_VERSION}/COPYING.RUNTIME \
-        ${PREFIX}/share/licenses/gcc/RUNTIME.LIBRARY.EXCEPTION
+        ${PREFIX}/share/licenses/gcc/$CHOST/RUNTIME.LIBRARY.EXCEPTION
 
 # Next problem: macOS targetting uClibc ends up with broken symlinks in sysroot/usr/lib:
 if [[ $(uname) == Darwin ]]; then

@@ -19,9 +19,10 @@ for file in cc1plus; do
   fi
 done
 
-make -C $CHOST/libstdc++-v3/src prefix=${PREFIX} install
-make -C $CHOST/libstdc++-v3/include prefix=${PREFIX} install
-make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX} install
+# Following 3 are in libstdcxx-devel
+#make -C $CHOST/libstdc++-v3/src prefix=${PREFIX} install
+#make -C $CHOST/libstdc++-v3/include prefix=${PREFIX} install
+#make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX} install
 make -C $CHOST/libstdc++-v3/python prefix=${PREFIX} install
 
 # Probably don't want to do this for cross-compilers
@@ -31,13 +32,6 @@ make -C $CHOST/libstdc++-v3/python prefix=${PREFIX} install
 make -C libcpp prefix=${PREFIX} install
 
 popd
-
-# Test:
-if [[ "$target_platform" == "$ctng_target_platform" ]]; then
-  ${PREFIX}/bin/${CHOST}-g++ "${RECIPE_DIR}"/hello-world.cpp
-else
-  ${PREFIX}/bin/${CHOST}-g++ "${RECIPE_DIR}"/hello-world.cpp -c
-fi
 
 set +x
 # Strip executables, we may want to install to a different prefix
