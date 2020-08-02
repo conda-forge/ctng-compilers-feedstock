@@ -39,6 +39,9 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/crtbegin.o
     about:
       summary: The GNU C development libraries and object files
       home: https://gcc.gnu.org/
@@ -52,6 +55,9 @@ outputs:
       binary_relocation: False
       missing_dso_whitelist:
         - "*"
+    test:
+      commands:
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/lib/libstdc++.a
     about:
       summary: The GNU C++ headers and development libraries
       home: https://gcc.gnu.org/
