@@ -36,7 +36,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
     fi
   done
 
-  make -C ${CHOST}/libgcc prefix=${PREFIX} install
+  # make -C ${CHOST}/libgcc prefix=${PREFIX} install
 
   # mkdir -p $PREFIX/$CHOST/sysroot/lib
 
@@ -45,7 +45,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
   #   cp ${SRC_DIR}/gcc_built/$CHOST/sysroot/lib/libquadmath.so* $PREFIX/$CHOST/sysroot/lib
   # fi
 
-  make prefix=${PREFIX} install-libcc1
+  make prefix=${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc} install-libcc1
   install -d ${PREFIX}/share/gdb/auto-load/usr/lib
 
   make prefix=${PREFIX} install-fixincludes
@@ -77,7 +77,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
 
   make -C libiberty prefix=${PREFIX} install
   # install PIC version of libiberty
-  install -m644 libiberty/pic/libiberty.a ${PREFIX}/lib
+  install -m644 libiberty/pic/libiberty.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
 
   make -C gcc prefix=${PREFIX} install-man install-info
 
@@ -90,7 +90,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
   popd
 
   # POSIX conformance launcher scripts for c89 and c99
-  cat > ${PREFIX}/bin/c89 <<"EOF"
+  cat > ${PREFIX}/bin/${CHOST}-c89 <<"EOF"
 #!/bin/sh
 fl="-std=c89"
 for opt; do
@@ -103,7 +103,7 @@ done
 exec gcc $fl ${1+"$@"}
 EOF
 
-  cat > ${PREFIX}/bin/c99 <<"EOF"
+  cat > ${PREFIX}/bin/${CHOST}-c99 <<"EOF"
 #!/bin/sh
 fl="-std=c99"
 for opt; do
@@ -116,7 +116,7 @@ done
 exec gcc $fl ${1+"$@"}
 EOF
 
-  chmod 755 ${PREFIX}/bin/c{8,9}9
+  chmod 755 ${PREFIX}/bin/${CHOST}-c{8,9}9
 
   rm ${PREFIX}/bin/${CHOST}-gcc-${PKG_VERSION}
 
@@ -175,21 +175,16 @@ fi
 #   setting LINK_LIBGCC_SPECS on configure
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
-specdir=`dirname $($PREFIX/bin/${CHOST}-gcc -print-libgcc-file-name)`
+specdir=$PREFIX/lib/gcc/$CHOST/${ctng_gcc}
 $PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
 # We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
 #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
 #   package is installed.
 sed -i -e "/\*link_libgcc:/,+1 s+%.*+& -rpath ${PREFIX}/lib+" $specdir/specs
 
-# Ensure that libgcc_s.so is found in the sysroot. I have done this to mask the fact that
-# strong run_export packages do not get installed into the host prefix (AFAICT) and we
-# should really fix that too. (ping @msarahan)
-cp -f ${PREFIX}/${CHOST}/lib/libgcc_s.so* ${PREFIX}/${CHOST}/sysroot/lib
-
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/.build/src/gcc-${PKG_VERSION}/COPYING.RUNTIME \
-        ${PREFIX}/share/licenses/gcc/RUNTIME.LIBRARY.EXCEPTION
+        ${PREFIX}/share/licenses/gcc/$CHOST/RUNTIME.LIBRARY.EXCEPTION
 
 # Next problem: macOS targetting uClibc ends up with broken symlinks in sysroot/usr/lib:
 if [[ $(uname) == Darwin ]]; then
@@ -226,18 +221,16 @@ popd
 
 #${PREFIX}/bin/${CHOST}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
-pushd ${PREFIX}/lib
-ln -sf libgomp.so.${libgomp_ver} libgomp.so
-popd
+if [[ "$target_platform" == "$ctng_target_platform" ]]; then
+  # making these this way so conda build doesn't muck with them
+  pushd ${PREFIX}/${CHOST}/sysroot/lib
+    ln -sf ../../../lib/libgomp.so libgomp.so
+  popd
 
-# making these this way so conda build doesn't muck with them
-pushd ${PREFIX}/${CHOST}/sysroot/lib
-ln -sf ../../../lib/libgomp.so libgomp.so
-popd
-
-# make links to libs in the sysroot
-for lib in libstdc++ libgfortran libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
-  ln -s ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/sysroot/lib/
-done
+  # make links to libs in the sysroot
+  for lib in libgcc_s libstdc++ libgfortran libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
+    ln -s ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/sysroot/lib/
+  done
+fi
 
 source ${RECIPE_DIR}/make_tool_links.sh
