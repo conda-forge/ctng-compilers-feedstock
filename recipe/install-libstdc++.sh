@@ -16,6 +16,8 @@ popd
 mkdir -p ${PREFIX}/lib
 mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
 
+patchelf --set-rpath '$ORIGIN' ${PREFIX}/lib/libstdc++.so
+
 # no static libs
 find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;
 # no libtool files
