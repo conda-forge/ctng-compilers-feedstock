@@ -30,7 +30,7 @@ ctng_vendor:
 #ctng_duma:
 #  - 2.5.15
 ctng_gcc_build_number:
-  - 15
+  - 16
 ctng_gmp:
   - 6.1.2
 ctng_isl:

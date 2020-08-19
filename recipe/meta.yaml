@@ -101,10 +101,6 @@ outputs:
         # Any version newer than the devtoolset works. This can be removed when bootstrapping.
         - libstdcxx-ng >=4.9
         - libgcc-ng >=4.9
-    run_exports:
-      # impose this requirement across the build/host boundary
-      strong:
-        - libgcc-ng >={{ ctng_gcc }}
     test:
       requires:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
@@ -150,10 +146,6 @@ outputs:
         # not needed due to pinning above but marks this build as using the new sysroots
         - sysroot_{{ ctng_target_platform }}
         - {{ pin_subpackage("libstdcxx-devel_" ~ ctng_target_platform, exact=True) }}
-    run_exports:
-      # impose this requirement across the build/host boundary
-      strong:
-        - libstdcxx-ng >={{ ctng_gcc }}
     test:
       requires:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
@@ -201,11 +193,6 @@ outputs:
         # Any version newer than the devtoolset works. This can be removed when bootstrapping.
         - libgcc-ng >=4.9
         - libstdcxx-ng >=4.9
-    run_exports:
-      # impose this requirement across the build/host boundary
-      strong:
-        - libgfortran-ng {{ ctng_gcc }}.*
-        - libgcc-ng >={{ ctng_gcc }}
     test:
       requires:
         - cmake >=3.11
