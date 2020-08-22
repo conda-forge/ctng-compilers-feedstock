@@ -228,9 +228,11 @@ if [[ "$target_platform" == "$ctng_target_platform" ]]; then
   popd
 
   # make links to libs in the sysroot
-  for lib in libgcc_s libstdc++ libgfortran libatomic libquadmath libitm libvtv lib{a,l,ub,t}san; do
+  for lib in libgcc_s libstdc++ libgfortran libatomic libquadmath libitm lib{a,l,ub,t}san; do
     ln -s ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/sysroot/lib/
   done
+else
+  source ${RECIPE_DIR}/install-libgcc.sh
 fi
 
 source ${RECIPE_DIR}/make_tool_links.sh
