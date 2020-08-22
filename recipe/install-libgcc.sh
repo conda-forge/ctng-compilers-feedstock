@@ -34,15 +34,18 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
 popd
 
 mkdir -p ${PREFIX}/lib
-mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
 
 # no static libs
-find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;
+find ${PREFIX}/${CHOST}/lib -name "*\.a" -exec rm -rf {} \;
 # no libtool files
-find ${PREFIX}/lib -name "*\.la" -exec rm -rf {} \;
-# clean up empty folder
-rm -rf ${PREFIX}/lib/gcc
+find ${PREFIX}/${CHOST}/lib -name "*\.la" -exec rm -rf {} \;
 
-# Install Runtime Library Exception
-install -Dm644 ${SRC_DIR}/.build/src/gcc-${ctng_gcc}/COPYING.RUNTIME \
+if [[ "${PKG_NAME}" == "libgcc" ]]; then
+  mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
+  # clean up empty folder
+  rm -rf ${PREFIX}/lib/gcc
+
+  # Install Runtime Library Exception
+  install -Dm644 ${SRC_DIR}/.build/src/gcc-${ctng_gcc}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION
+fi

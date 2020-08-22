@@ -232,10 +232,7 @@ if [[ "$target_platform" == "$ctng_target_platform" ]]; then
     ln -s ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/sysroot/lib/
   done
 else
-  # make copies to libs in the sysroot
-  for lib in libgcc_s libstdc++ libgfortran libatomic libquadmath libitm lib{a,l,ub,t}san libgomp; do
-    cp -av ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/sysroot/lib/
-  done
+  source ${RECIPE_DIR}/install-libgcc.sh
 fi
 
 source ${RECIPE_DIR}/make_tool_links.sh
