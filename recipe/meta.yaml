@@ -394,6 +394,8 @@ outputs:
     requirements:
       host:
         - sysroot_{{ ctng_target_platform }}
+      run_constrained:
+        - libgfortran-ng {{ ctng_gcc }} *_{{ build_number }}        
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
