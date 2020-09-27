@@ -196,7 +196,7 @@ outputs:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ ctng_target_platform }} >={{ ctng_gcc }}
         - libgfortran{{ libgfortran_soname }}-ng {{ ctng_gcc }} *_{{ build_num | default(0) }} # [target_platform == ctng_target_platform]
-        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}                   # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}                                      # [target_platform == ctng_target_platform]
         - sysroot_{{ ctng_target_platform }}
         # Any version newer than the devtoolset works. This can be removed when bootstrapping.
         - libgcc-ng >=4.9
