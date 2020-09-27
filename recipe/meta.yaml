@@ -89,7 +89,7 @@ outputs:
         - {{ pin_subpackage("libgomp", exact=True) }}                       # [target_platform == ctng_target_platform]
         - {{ pin_subpackage("libstdcxx-ng", exact=True) }}                  # [target_platform == ctng_target_platform]
         - {{ pin_subpackage("libgcc-ng", exact=True) }}                     # [target_platform == ctng_target_platform]
-        - {{ pin_subpackage("libgfortran" ~ libgfortran_soname ~ "-ng", exact=True) }}  # [target_platform == ctng_target_platform]
+        - libgfortran{{ libgfortran_soname }}-ng {{ ctng_gcc }} *_{{ build_num | default(0) }}  # [target_platform == ctng_target_platform]
       run:
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, max_pin=None) }}
         - {{ pin_subpackage("libgcc-devel_" ~ ctng_target_platform, exact=True) }}
