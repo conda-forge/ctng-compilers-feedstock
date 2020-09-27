@@ -86,10 +86,10 @@ outputs:
     requirements:
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
-        - {{ pin_subpackage("libgomp", exact=True) }}           # [target_platform == ctng_target_platform]
-        - {{ pin_subpackage("libstdcxx-ng", exact=True) }}      # [target_platform == ctng_target_platform]
-        - {{ pin_subpackage("libgcc-ng", exact=True) }}         # [target_platform == ctng_target_platform]
-        - {{ pin_subpackage("libgfortran-ng") }}                # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libgomp", exact=True) }}                       # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libstdcxx-ng", exact=True) }}                  # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libgcc-ng", exact=True) }}                     # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libgfortran" ~ libgfortran_soname ~ "-ng") }}  # [target_platform == ctng_target_platform]
       run:
         - {{ pin_subpackage("binutils_impl_" ~ ctng_target_platform, max_pin=None) }}
         - {{ pin_subpackage("libgcc-devel_" ~ ctng_target_platform, exact=True) }}
@@ -195,8 +195,8 @@ outputs:
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ ctng_target_platform }} >={{ ctng_gcc }}
-        - {{ pin_subpackage("libgfortran-ng") }}                # [target_platform == ctng_target_platform]
-        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}       # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libgfortran" ~ libgfortran_soname ~ "-ng") }}  # [target_platform == ctng_target_platform]
+        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}                   # [target_platform == ctng_target_platform]
         - sysroot_{{ ctng_target_platform }}
         # Any version newer than the devtoolset works. This can be removed when bootstrapping.
         - libgcc-ng >=4.9
@@ -204,7 +204,7 @@ outputs:
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
-        - libgfortran-ng {{ ctng_gcc }}.*
+        - libgfortran{{ libgfortran_soname }}-ng {{ ctng_gcc }}.*
         - libgcc-ng >={{ ctng_gcc }}
     test:
       requires:
@@ -372,6 +372,14 @@ outputs:
       home: https://github.com/conda-forge/ctng-compilers-feedstock
 
   - name: libgfortran-ng
+    target: {{ ctng_target_platform }}
+    build:
+      skip: True   # [target_platform != ctng_target_platform]
+    requirements:
+      run:
+        - libgfortran{{ libgfortran_soname }}-ng {{ ctng_gcc }}.*
+
+  - name: libgfortran{{ libgfortran_soname }}-ng
     target: {{ ctng_target_platform }}
     script: install-libgfortran.sh
     build:
