@@ -395,7 +395,7 @@ outputs:
       host:
         - sysroot_{{ ctng_target_platform }}
       run_constrained:
-        - libgfortran-ng {{ ctng_gcc }} *_{{ build_number }}        
+        - libgfortran-ng {{ ctng_gcc }} *_{{ build_num | default(0) }}        
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
