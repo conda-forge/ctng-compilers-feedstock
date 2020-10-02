@@ -204,7 +204,7 @@ outputs:
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
-        - libgfortran{{ libgfortran_soname }}-ng {{ ctng_gcc }}.*
+        - libgfortran{{ libgfortran_soname }} {{ ctng_gcc }}.*
         - libgcc-ng >={{ ctng_gcc }}
     test:
       requires:
@@ -377,9 +377,16 @@ outputs:
       skip: True   # [target_platform != ctng_target_platform]
     requirements:
       run:
-        - libgfortran{{ libgfortran_soname }}-ng {{ ctng_gcc }}.*
+        - libgfortran{{ libgfortran_soname }} {{ ctng_gcc }}.*
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/libgfortran.so
+    about:
+      summary: The GNU Fortran Runtime Library
+      home: https://gcc.gnu.org/
+      license: GPL-3.0-with-GCC-exception
 
-  - name: libgfortran{{ libgfortran_soname }}-ng
+  - name: libgfortran{{ libgfortran_soname }}
     target: {{ ctng_target_platform }}
     script: install-libgfortran.sh
     build:
@@ -438,6 +445,12 @@ outputs:
       home: http://duma.sourceforge.net/
       license: GPL
   {% endif %}
+
+# make the linter happy
+about:
+  summary: GNU C Compiler
+  home: https://gcc.gnu.org/
+  license: GPL-3.0-with-GCC-exception
 
 extra:
   recipe-maintainers:
