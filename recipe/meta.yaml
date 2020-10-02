@@ -253,7 +253,7 @@ outputs:
     about:
       summary: The GNU Binutils are a collection of binary tools.
       home: https://www.gnu.org/software/binutils/
-      license: GPL-3.0-or-later
+      license: GPL-3.0-only
 
   - name: libstdcxx-ng
     target: {{ ctng_target_platform }}
@@ -341,7 +341,7 @@ outputs:
     about:
       summary: The GCC OpenMP implementation.
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
-      license: GPL-3.0-or-later
+      license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: _openmp_mutex
     script: install-openmp_impl.sh
@@ -451,7 +451,12 @@ about:
   summary: GNU Compiler Collection
   home: https://gcc.gnu.org/
   license: GPL-3.0-only WITH GCC-exception-3.1
-  license_file: build/src/gcc-{{ ctng_gcc }}/COPYING.RUNTIME
+  license_file:
+    - build/src/gcc-{{ ctng_gcc }}/COPYING
+    - build/src/gcc-{{ ctng_gcc }}/COPYING.lib
+    - build/src/gcc-{{ ctng_gcc }}/COPYING.RUNTIME
+    - build/src/gcc-{{ ctng_gcc }}/COPYING3
+    - build/src/gcc-{{ ctng_gcc }}/COPYING3.lib
 
 extra:
   recipe-maintainers:
