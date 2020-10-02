@@ -45,7 +45,7 @@ outputs:
     about:
       summary: The GNU C development libraries and object files
       home: https://gcc.gnu.org/
-      license: GPL-3.0-only WITH GCC-exception-2.0
+      license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libstdcxx-devel_{{ ctng_target_platform }}
     script: install-libstdc++-devel.sh
@@ -61,7 +61,7 @@ outputs:
     about:
       summary: The GNU C++ headers and development libraries
       home: https://gcc.gnu.org/
-      license: GPL-3.0-only WITH GCC-exception-2.0
+      license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: gcc_impl_{{ ctng_target_platform }}
     script: install-gcc.sh
@@ -124,7 +124,7 @@ outputs:
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
-      license: GPL-3.0-only WITH GCC-exception-2.0
+      license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: gxx_impl_{{ ctng_target_platform }}
     script: install-g++.sh
@@ -168,7 +168,7 @@ outputs:
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
-      license: GPL-3.0-only WITH GCC-exception-2.0
+      license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: gfortran_impl_{{ ctng_target_platform }}
     script: install-gfortran.sh
@@ -222,7 +222,7 @@ outputs:
     about:
       summary: GNU Fortran Compiler
       home: https://gcc.gnu.org/
-      license: GPL-3.0-only WITH GCC-exception-2.0
+      license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: binutils_impl_{{ ctng_target_platform }}
     version: "{{ ctng_binutils }}"
@@ -276,7 +276,7 @@ outputs:
     about:
       summary: The GNU C++ Runtime Library
       home: https://gcc.gnu.org/
-      license: GPL-3.0-only WITH GCC-exception-2.0
+      license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libgcc-ng
     target: {{ ctng_target_platform }}
@@ -310,7 +310,7 @@ outputs:
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
-      license: GPL-3.0-only WITH GCC-exception-2.0
+      license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libgomp
     target: {{ ctng_target_platform }}
@@ -384,7 +384,7 @@ outputs:
     about:
       summary: The GNU Fortran Runtime Library
       home: https://gcc.gnu.org/
-      license: GPL-3.0-only WITH GCC-exception-2.0
+      license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libgfortran{{ libgfortran_soname }}
     target: {{ ctng_target_platform }}
@@ -409,7 +409,7 @@ outputs:
     about:
       summary: The GNU Fortran Runtime Library
       home: https://gcc.gnu.org/
-      license: GPL-3.0-only WITH GCC-exception-2.0
+      license: GPL-3.0-only WITH GCC-exception-3.1
 
   {% if ctng_gdb is defined %}
   - name: gdb_{{ ctng_target_platform }}
@@ -450,7 +450,7 @@ outputs:
 about:
   summary: GNU Compiler Collection
   home: https://gcc.gnu.org/
-  license: GPL-3.0-only WITH GCC-exception-2.0
+  license: GPL-3.0-only WITH GCC-exception-3.1
   license_file: build/src/gcc-{{ ctng_gcc }}/COPYING.RUNTIME
 
 extra:
