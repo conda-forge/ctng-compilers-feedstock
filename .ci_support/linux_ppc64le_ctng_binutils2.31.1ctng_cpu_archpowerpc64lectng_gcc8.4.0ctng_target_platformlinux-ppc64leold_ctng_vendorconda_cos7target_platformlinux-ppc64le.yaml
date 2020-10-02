@@ -26,6 +26,8 @@ docker_image:
 - condaforge/linux-anvil-ppc64le
 gnu:
 - '2.17'
+libgfortran_soname:
+- '5'
 libgomp_ver:
 - 1.0.0
 old_ctng_vendor:
@@ -43,3 +45,5 @@ zip_keys:
   - ctng_cpu_arch
   - ctng_binutils
   - ctng_target_platform
+- - ctng_gcc
+  - libgfortran_soname
