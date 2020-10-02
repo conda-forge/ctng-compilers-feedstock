@@ -448,9 +448,9 @@ outputs:
 
 # make the linter happy
 about:
-  summary: GNU C Compiler
+  summary: GNU Compiler Collection
   home: https://gcc.gnu.org/
-  license: GPL-3.0-with-GCC-exception
+  license: GPL-3.0-only-with-GCC-exception-2.0
 
 extra:
   recipe-maintainers:
