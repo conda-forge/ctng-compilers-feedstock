@@ -450,7 +450,7 @@ outputs:
 about:
   summary: GNU Compiler Collection
   home: https://gcc.gnu.org/
-  license: GPL-3.0-only-with-GCC-exception-2.0
+  license: GPL-3.0-only-WITH-GCC-exception-2.0
 
 extra:
   recipe-maintainers:
