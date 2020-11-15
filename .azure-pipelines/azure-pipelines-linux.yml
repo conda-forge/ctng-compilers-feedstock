@@ -8,43 +8,42 @@ jobs:
     vmImage: ubuntu-16.04
   strategy:
     matrix:
-      ? linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-64
-      : CONFIG: linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-64
+      linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7:
+        CONFIG: linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-64
-      : CONFIG: linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7:
+        CONFIG: linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-64
-      : CONFIG: linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7:
+        CONFIG: linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7target_platformlinux-64
-      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7target_platformlinux-64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      ? linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
+      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7target_platformlinux-64
-      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7target_platformlinux-64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      ? linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
+      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7target_platformlinux-64
-      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7target_platformlinux-64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      ? linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
+      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6target_platformlinux-64
-      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6target_platformlinux-64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6:
+        CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6target_platformlinux-64
-      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6target_platformlinux-64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6:
+        CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6target_platformlinux-64
-      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6target_platformlinux-64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6:
+        CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-    maxParallel: 8
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
   timeoutInMinutes: 360
 
   steps:

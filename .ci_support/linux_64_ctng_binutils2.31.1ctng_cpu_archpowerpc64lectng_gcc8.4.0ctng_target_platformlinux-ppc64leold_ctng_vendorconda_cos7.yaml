@@ -1,37 +1,39 @@
 _libgcc_mutex:
 - 0.1 conda_forge
+cdt_name:
+- cos6
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 conda_glibc_ver:
-- '2.12'
+- '2.17'
 ctng_binutils:
 - 2.31.1
 ctng_cpu_arch:
-- x86_64
+- powerpc64le
 ctng_gcc:
-- 7.5.0
+- 8.4.0
 ctng_kernel:
-- 2.6.32
+- '3.10'
 ctng_libc:
 - gnu
 ctng_sample:
-- x86_64-centos6-linux-gnu
+- powerpc64le-unknown-linux-gnu
 ctng_target_platform:
-- linux-64
+- linux-ppc64le
 ctng_vendor:
 - conda
 docker_image:
-- condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-comp7
 gnu:
-- 2.12.2
+- '2.17'
 libgfortran_soname:
-- '4'
+- '5'
 libgomp_ver:
 - 1.0.0
 old_ctng_vendor:
-- conda_cos6
+- conda_cos7
 openmp_ver:
 - '4.5'
 target_platform:

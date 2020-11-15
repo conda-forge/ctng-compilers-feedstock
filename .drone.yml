@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: linux_aarch64_ctng_binutils2.29.1ct_h35e05d6eee
+name: linux_aarch64_ctng_binutils2.29.1ct_h88e1c6e0fc
 
 platform:
   os: linux
@@ -8,9 +8,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-aarch64
+    CONFIG: linux_aarch64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -31,7 +31,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_binutils2.29.1ct_h7fb99294cf
+name: linux_aarch64_ctng_binutils2.29.1ct_h40eee1500f
 
 platform:
   os: linux
@@ -39,9 +39,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-aarch64
+    CONFIG: linux_aarch64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -62,7 +62,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_binutils2.29.1ct_hf5097a3d2f
+name: linux_aarch64_ctng_binutils2.29.1ct_h613eb8c399
 
 platform:
   os: linux
@@ -70,9 +70,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7target_platformlinux-aarch64
+    CONFIG: linux_aarch64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
