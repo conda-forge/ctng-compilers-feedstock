@@ -1,5 +1,7 @@
 _libgcc_mutex:
 - 0.1 conda_forge
+cdt_name:
+- cos6
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -7,9 +9,9 @@ channel_targets:
 conda_glibc_ver:
 - '2.17'
 ctng_binutils:
-- 2.31.1
+- 2.33.1
 ctng_cpu_arch:
-- powerpc64le
+- s390x
 ctng_gcc:
 - 7.5.0
 ctng_kernel:
@@ -17,13 +19,13 @@ ctng_kernel:
 ctng_libc:
 - gnu
 ctng_sample:
-- powerpc64le-unknown-linux-gnu
+- s390x-unknown-linux-gnu
 ctng_target_platform:
-- linux-ppc64le
+- linux-s390x
 ctng_vendor:
 - conda
 docker_image:
-- condaforge/linux-anvil-ppc64le
+- quay.io/condaforge/linux-anvil-comp7
 gnu:
 - '2.17'
 libgfortran_soname:
@@ -35,8 +37,10 @@ old_ctng_vendor:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-ppc64le
+- linux-64
 zip_keys:
+- - cdt_name
+  - docker_image
 - - conda_glibc_ver
   - old_ctng_vendor
   - gnu
