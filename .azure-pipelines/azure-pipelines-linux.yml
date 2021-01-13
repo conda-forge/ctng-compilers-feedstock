@@ -44,6 +44,18 @@ jobs:
       : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6target_platformlinux-64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      ? linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7target_platformlinux-64
+      : CONFIG: linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7target_platformlinux-64
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      ? linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7target_platformlinux-64
+      : CONFIG: linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7target_platformlinux-64
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      ? linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7target_platformlinux-64
+      : CONFIG: linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7target_platformlinux-64
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
     maxParallel: 8
   timeoutInMinutes: 360
 
