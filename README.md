@@ -146,6 +146,48 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>linux_aarch64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>linux_ppc64le_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
@@ -288,9 +330,9 @@ build distinct package versions.
 
 In order to produce a uniquely identifiable distribution:
  * If the version of a package **is not** being increased, please add or increase
-   the [``build/number``](https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#build-number-and-string).
+   the [``build/number``](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#build-number-and-string).
  * If the version of a package **is** being increased, please remember to return
-   the [``build/number``](https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#build-number-and-string)
+   the [``build/number``](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#build-number-and-string)
    back to 0.
 
 Feedstock Maintainers
