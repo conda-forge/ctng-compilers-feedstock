@@ -18,9 +18,11 @@ mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
 
 patchelf --set-rpath '$ORIGIN' ${PREFIX}/lib/libstdc++.so
 
-# no static libs
-find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;
-# no libtool files
+# we can't get rid of static libraries as this would lead to not working -static
+# option, which prevents then proper build we can't get rid of static libraries as this would lead to not working -static
+# option, which prevents then proper build from build-tools of qt
+# find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;
+# nevertheless we want no libtool files
 find ${PREFIX}/lib -name "*\.la" -exec rm -rf {} \;
 
 # Install Runtime Library Exception

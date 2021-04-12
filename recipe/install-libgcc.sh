@@ -35,9 +35,10 @@ popd
 
 mkdir -p ${PREFIX}/lib
 
-# no static libs
-find ${PREFIX}/${CHOST}/lib -name "*\.a" -exec rm -rf {} \;
-# no libtool files
+# we can't remove static base libraries, as it would make option -static not working
+# and things like qt won't build anymore.
+# find ${PREFIX}/${CHOST}/lib -name "*\.a" -exec rm -rf {} \;
+# neverhteless we want no libtool files
 find ${PREFIX}/${CHOST}/lib -name "*\.la" -exec rm -rf {} \;
 
 if [[ "${PKG_NAME}" != gcc_impl* ]]; then
