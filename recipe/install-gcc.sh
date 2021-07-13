@@ -164,13 +164,13 @@ popd
 
 if [[ "$target_platform" == "$ctng_target_platform" ]]; then
   # making these this way so conda build doesn't muck with them
-  pushd ${PREFIX}/${CHOST}/sysroot/lib
-    ln -sf ../../../lib/libgomp.so libgomp.so
+  pushd ${PREFIX}/${CHOST}/lib
+    ln -sf ../../lib/libgomp.so libgomp.so
   popd
 
   # make links to libs in the sysroot
   for lib in libgcc_s libstdc++ libgfortran libatomic libquadmath libitm lib{a,l,ub,t}san; do
-    ln -s ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/sysroot/lib/
+    ln -s ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/lib/
   done
 else
   source ${RECIPE_DIR}/install-libgcc.sh

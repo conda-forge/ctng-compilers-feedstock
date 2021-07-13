@@ -84,8 +84,8 @@ outputs:
         - tests
       commands:
         - echo {{ old_ctng_vendor }}
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so   # [target_platform == ctng_target_platform]
-        - test `readlink ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/sysroot/lib/libgomp.so` == "../../../lib/libgomp.so"  # [target_platform == ctng_target_platform]
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/lib/libgomp.so   # [target_platform == ctng_target_platform]
+        - test `readlink ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == ctng_target_platform]
         #- test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-gcc
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         #- ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
@@ -305,7 +305,9 @@ outputs:
         - libstdcxx-ng >={{ ctng_gcc }}
     test:
       commands:
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/lib/libstdc++.a
+        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libstdc++.a
+        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libstdc++fs.a
+        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libsupc++.a
     about:
       summary: The GNU C++ headers and development libraries
       home: https://gcc.gnu.org/

@@ -13,6 +13,8 @@ make -C $CHOST/libstdc++-v3/include prefix=${PREFIX}/${CHOST} install
 make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX}/${CHOST} install
 
 rm -rf ${PREFIX}/${CHOST}/lib/libstdc++.so*
+mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
+mv $PREFIX/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/
 
 popd
 
