@@ -1,13 +1,13 @@
 set -e -x
 
-CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine)
+export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
 _libdir=libexec/gcc/${CHOST}/${PKG_VERSION}
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
-export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
+#export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
 
-pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
+pushd ${SRC_DIR}/build
 
 # adapted from Arch install script from https://github.com/archlinuxarm/PKGBUILDs/blob/master/core/gcc/PKGBUILD
 # We cannot make install since .la files are not relocatable so libtool deliberately prevents it:
@@ -23,19 +23,19 @@ for file in f951; do
   fi
 done
 
+mkdir -p ${PREFIX}/${CHOST}/sysroot/lib
 cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/sysroot/lib
 
 pushd ${PREFIX}/bin
-  ln -s ${CHOST}-gfortran ${CHOST}-f95
+  ln -sf ${CHOST}-gfortran ${CHOST}-f95
 popd
 
-popd
-
+make install DESTDIR=$SRC_DIR/build-finclude
 mkdir -p $PREFIX/lib/gcc/${CHOST}/${ctng_gcc}/finclude
-rsync -av ${SRC_DIR}/gcc_built/lib/gcc/${CHOST}/${ctng_gcc}/finclude/ $PREFIX/lib/gcc/${CHOST}/${ctng_gcc}/finclude
+install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${ctng_gcc}/finclude/* $PREFIX/lib/gcc/${CHOST}/${ctng_gcc}/finclude/
 
 # Install Runtime Library Exception
-install -Dm644 $SRC_DIR/.build/src/gcc-${PKG_VERSION}/COPYING.RUNTIME \
+install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-fortran/RUNTIME.LIBRARY.EXCEPTION
 
 # generate specfile so that we can patch loader link path
@@ -65,7 +65,7 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-        ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}" || :
+        ${BUILD_PREFIX}/bin/${CHOST}-strip --strip-all -v "${_file}" || :
       ;;
     esac
   done

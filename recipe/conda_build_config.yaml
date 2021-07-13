@@ -1,90 +1,39 @@
-ctng_sample:
-  - x86_64-centos6-linux-gnu
-  - powerpc64le-unknown-linux-gnu
-  - aarch64-unknown-linux-gnu
-  - s390x-unknown-linux-gnu
 ctng_cpu_arch:
-  - x86_64
-  - powerpc64le
-  - aarch64
-  - s390x
-# gdb is optional - commenting this will disable gdb from being built.  For gcc 8.2, that's what we need to do.
-#ctng_gdb:     # [not ppc64le]
-#  - 7.12.1    # [not ppc64le]
-ctng_gcc:
-  - 7.5.0
-  - 8.4.0
-  - 9.3.0
-  - 9.3.0
-libgfortran_soname:
-  - 4
-  - 5
-  - 5
-  - 5
-ctng_binutils:
-  - 2.31.1
-  - 2.31.1
-  - 2.29.1
-  - 2.33.1
-ctng_target_platform:
-  - linux-64
-  - linux-ppc64le
-  - linux-aarch64
-  - linux-s390x
-old_ctng_vendor:
-  - conda_cos6
-  - conda_cos7
-  - conda_cos7
-  - conda_cos7
+  - i686  # [linux32]
+  - x86_64  # [linux64]
+  - powerpc64le  # [ppc64le]
+  - aarch64  # [aarch64]
 ctng_vendor:
   - conda
-#ctng_duma:
-#  - 2.5.15
-ctng_gcc_build_number:
-  - 19
-ctng_gmp:
-  - 6.1.2
-ctng_isl:
-  - 0.22
-ctng_libc:
-  - gnu
-ctng_kernel:
-  - 2.6.32
-  - 3.10
-  - 3.10
-  - 3.10
-ctng_libiconv:
-  - 1.15
-ctng_mpc:
-  - 1
-ctng_nature:
-  - shared
-ctng_ncurses:
-  - 6.1
-gnu:
-  - 2.12.2
-  - 2.17
-  - 2.17
-  - 2.17
+ctng_gcc:
+  - 7.3.0  # [linux64 or linux32 or aarch64]
+  - 8.2.0  # [ppc64le]
+libgfortran_soname:
+  - 4   # [linux64 or linux32 or aarch64]
+  - 5   # [ppc64le]
+ctng_binutils:
+  - 2.36.1
+old_ctng_vendor:
+  - conda_cos6  # [linux32]
+  - conda_cos6  # [linux64]
+  - conda_cos7  # [ppc64le]
+  - conda_cos7  # [aarch64]
 conda_glibc_ver:
-  - 2.12
-  - 2.17
-  - 2.17
-  - 2.17
+  - 2.12  # [linux32]
+  - 2.12  # [linux64]
+  - 2.17  # [ppc64le]
+  - 2.17  # [aarch64]
+ctng_target_platform:
+  - linux-32  # [linux32]
+  - linux-64  # [linux64]
+  - linux-ppc64le  # [ppc64le]
+  - linux-aarch64  # [aarch64]
+ctng_gcc_build_number:
+  - 5
 # openmp versions
 openmp_ver:
   - 4.5
 libgomp_ver:
   - 1.0.0
-
-zip_keys:
-  - - conda_glibc_ver
-    - old_ctng_vendor
-    - gnu
-    - ctng_kernel
-    - ctng_sample
-    - ctng_cpu_arch
-    - ctng_binutils
-    - ctng_target_platform
-  - - ctng_gcc
-    - libgfortran_soname
+_libgcc_mutex:
+  - 0.1 conda_forge

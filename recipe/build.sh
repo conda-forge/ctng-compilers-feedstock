@@ -1,132 +1,97 @@
 #!/bin/bash
 
-set -x
+set -e
 
-if [[ "${ctng_cpu_arch}" == "aarch64" ]]; then
-    rm -f $BUILD_PREFIX/share/crosstool-ng/packages/glibc/2.17/*-glibc-*.patch
-fi
+#for file in ./crosstool_ng/packages/gcc/$PKG_VERSION/*.patch; do
+#  patch -p1 < $file;
+#done
 
-mkdir -p .build/src
-mkdir -p .build/tarballs
+export HOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
 
-if [[ $(uname) == Darwin ]]; then
-  DOWNLOADER="curl -SL"
-  DOWNLOADER_INSECURE=${DOWNLOADER}" --insecure"
-  DOWNLOADER_OUT="-C - -o"
-else
-  DOWNLOADER="wget -c"
-  DOWNLOADER_INSECURE=${DOWNLOADER}" --no-check-certificate"
-  DOWNLOADER_OUT="-O"
-fi
+build_binutils () {
+  ../configure \
+  --prefix="$1" \
+  --target=$HOST \
+  --enable-ld=default \
+  --enable-gold=yes \
+  --enable-plugins \
+  --disable-multilib \
+  --disable-sim \
+  --disable-gdb \
+  --disable-nls \
+  --enable-default-pie \
+  --with-sysroot=$PREFIX/$HOST/sysroot \
+  --with-build-sysroot=$PREFIX/$HOST/sysroot
 
-mkdir -p ${SYS_PREFIX}/conda-bld/src_cache/
-# Some kernels are not on kernel.org, such as the CentOS 5.11 one used (and heavily patched) by RedHat.
-if [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/linux-${ctng_kernel}.tar.bz2" ]] && \
-   [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/linux-${ctng_kernel}.tar.xz" ]]; then
-  if [[ ${ctng_kernel} == 2.6.* ]]; then
-    ${DOWNLOADER} ftp://ftp.be.debian.org/pub/linux/kernel/v2.6/linux-${ctng_kernel}.tar.bz2 ${DOWNLOADER_OUT} ${SYS_PREFIX}/conda-bld/src_cache/linux-${ctng_kernel}.tar.bz2
-  elif [[ ${ctng_kernel} == 3.* ]]; then
-    # Necessary because crosstool-ng looks in the wrong location for this one.
-    ${DOWNLOADER} https://www.kernel.org/pub/linux/kernel/v3.x/linux-${ctng_kernel}.tar.bz2 ${DOWNLOADER_OUT} ${SYS_PREFIX}/conda-bld/src_cache/linux-${ctng_kernel}.tar.bz2
-  elif [[ ${ctng_kernel} == 4.* ]]; then
-    ${DOWNLOADER} https://www.kernel.org/pub/linux/kernel/v4.x/linux-${ctng_kernel}.tar.xz ${DOWNLOADER_OUT} ${SYS_PREFIX}/conda-bld/src_cache/linux-${ctng_kernel}.tar.xz
-  fi
-fi
-
-# Necessary because uclibc let their certificate expire, this is a bit hacky.
-if [[ ${ctng_libc} == uClibc ]]; then
-  if [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/uClibc-${ctng_uClibc}.tar.xz" ]]; then
-    ${DOWNLOADER_INSECURE} https://www.uclibc.org/downloads/uClibc-${ctng_uClibc}.tar.xz ${DOWNLOADER_OUT} ${SYS_PREFIX}/conda-bld/src_cache/uClibc-${ctng_uClibc}.tar.xz
-  fi
-else
-  if [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/glibc-${gnu}.tar.bz2" ]]; then
-    ${DOWNLOADER_INSECURE} https://ftp.gnu.org/gnu/libc/glibc-${gnu}.tar.bz2 ${DOWNLOADER_OUT} ${SYS_PREFIX}/conda-bld/src_cache/glibc-${gnu}.tar.bz2
-  fi
-fi
-
-# Necessary because CentOS5.11 is having some certificate issues.
-if [[ -n "${ctng_duma}" ]]; then
-  if [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/duma_${ctng_duma//./_}.tar.gz" ]]; then
-    ${DOWNLOADER_INSECURE} http://mirror.opencompute.org/onie/crosstool-NG/duma_${ctng_duma//./_}.tar.gz ${DOWNLOADER_OUT} ${SYS_PREFIX}/conda-bld/src_cache/duma_${ctng_duma//./_}.tar.gz
-  fi
-fi
-
-if [[ ! -e "${SYS_PREFIX}/conda-bld/src_cache/expat-2.2.0.tar.bz2" ]]; then
-  ${DOWNLOADER_INSECURE} http://mirror.opencompute.org/onie/crosstool-NG/expat-2.2.0.tar.bz2 ${DOWNLOADER_OUT} ${SYS_PREFIX}/conda-bld/src_cache/expat-2.2.0.tar.bz2
-fi
+  make -j${CPU_COUNT}
+}
 
 
-BUILD_NCPUS=$(($CPU_COUNT * 2))
+#pushd binutils-src
+#  for file in ../crosstool_ng/packages/binutils/${ctng_binutils}/*.patch; do
+#    patch -p1 < $file;
+#  done
+#  mkdir -p  build
+#  pushd build
+#    build_binutils $BUILD_PREFIX
+#    make install
+#    build_binutils $PREFIX
+#  popd
+#popd
 
-[[ -d ${SRC_DIR}/gcc_built ]] || mkdir -p ${SRC_DIR}/gcc_built
+for f in addr2line ar as c++filt dwp elfedit gprof ld ld.bfd ld.gold nm objcopy objdump ranlib readelf size strings strip; do
+    ln -s $BUILD_PREFIX/bin/${ctng_cpu_arch}-conda-linux-gnu-$f $BUILD_PREFIX/bin/$f
+    #ln -s $BUILD_PREFIX/bin/${ctng_cpu_arch}-conda_cos6-linux-gnu-$f $BUILD_PREFIX/bin/$f
+    #ln -s $BUILD_PREFIX/bin/${ctng_cpu_arch}-conda_cos6-linux-gnu-$f $BUILD_PREFIX/bin/$HOST-$f
+done
 
-# If the gfortran binary doesn't exist yet, then run ct-ng
-if [[ ! -n $(find ${SRC_DIR}/gcc_built -iname ${ctng_cpu_arch}-${ctng_vendor}-*-gfortran) ]]; then
-    source ${RECIPE_DIR}/write_ctng_config
+./contrib/download_prerequisites
 
-    yes "" | ct-ng ${ctng_sample}
-    write_ctng_config_before .config
-    # Apply some adjustments for conda.
-    sed -i.bak "s|# CT_DISABLE_MULTILIB_LIB_OSDIRNAMES is not set|CT_DISABLE_MULTILIB_LIB_OSDIRNAMES=y|g" .config
-    sed -i.bak "s|CT_CC_GCC_USE_LTO=n|CT_CC_GCC_USE_LTO=y|g" .config
-    cat .config | grep CT_DISABLE_MULTILIB_LIB_OSDIRNAMES=y || exit 1
-    cat .config | grep CT_CC_GCC_USE_LTO=y || exit 1
-    # Not sure why this is getting set to y since it depends on ! STATIC_TOOLCHAIN
-    if [[ ${ctng_nature} == static ]]; then
-      sed -i.bak "s|CT_CC_GCC_ENABLE_PLUGINS=y|CT_CC_GCC_ENABLE_PLUGINS=n|g" .config
-    fi
-    if [[ $(uname) == Darwin ]]; then
-        sed -i.bak "s|CT_WANTS_STATIC_LINK=y|CT_WANTS_STATIC_LINK=n|g" .config
-        sed -i.bak "s|CT_CC_GCC_STATIC_LIBSTDCXX=y|CT_CC_GCC_STATIC_LIBSTDCXX=n|g" .config
-        sed -i.bak "s|CT_STATIC_TOOLCHAIN=y|CT_STATIC_TOOLCHAIN=n|g" .config
-        sed -i.bak "s|CT_BUILD=\"x86_64-pc-linux-gnu\"|CT_BUILD=\"x86_64-apple-darwin11\"|g" .config
-    fi
-    # Now ensure any changes we made above pull in other requirements by running oldconfig.
-    yes "" | ct-ng oldconfig
-    # Now filter out 'things that cause problems'. For example, depending on the base sample, you can end up with
-    # two different glibc versions in-play.
-    sed -i.bak '/CT_LIBC/d' .config
-    sed -i.bak '/CT_LIBC_GLIBC/d' .config
-    # And undo any damage to version numbers => the seds above could be moved into this too probably.
-    write_ctng_config_after .config
-    if cat .config | grep "CT_GDB_NATIVE=y"; then
-      if ! cat .config | grep "CT_EXPAT_TARGET=y"; then
-        echo "ERROR: CT_GDB_NATIVE=y but CT_EXPAT_TARGET!=y"
-        cat .config
-        echo "ERROR: CT_GDB_NATIVE=y but CT_EXPAT_TARGET!=y"
-        exit 1
-      fi
-    fi
-    unset CFLAGS CXXFLAGS LDFLAGS
-    ct-ng build || (tail -n 1000 build.log && exit 1)
-fi
+# We want CONDA_PREFIX/usr/lib not CONDA_PREFIX/usr/lib64 and this
+# is the only way. It is incompatible with multilib (obviously).
+TINFO_FILES=$(find . -path "*/config/*/t-*")
+for TINFO_FILE in ${TINFO_FILES}; do
+  echo TINFO_FILE ${TINFO_FILE}
+  sed -i.bak 's#^\(MULTILIB_OSDIRNAMES.*\)\(lib64\)#\1lib#g' ${TINFO_FILE}
+  rm -f ${TINFO_FILE}.bak
+  sed -i.bak 's#^\(MULTILIB_OSDIRNAMES.*\)\(libx32\)#\1lib#g' ${TINFO_FILE}
+  rm -f ${TINFO_FILE}.bak
+done
 
-# increase stack size to prevent test failures
-# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=31827
-if [[ $(uname) == Linux ]]; then
-  ulimit -s 32768
-fi
+mkdir build
+cd build
 
-CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine)
+export HOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
 
-# pushd .build/${CHOST}/build/build-cc-gcc-final
-# make -k check || true
-# popd
+../configure \
+  --prefix="$PREFIX" \
+  --with-slibdir="$PREFIX/lib" \
+  --libdir="$PREFIX/lib" \
+  --build=$HOST \
+  --host=$HOST \
+  --target=$HOST \
+  --enable-default-pie \
+  --enable-languages=c,c++,fortran,objc,obj-c++ \
+  --enable-__cxa_atexit \
+  --disable-libmudflap \
+  --enable-libgomp \
+  --disable-libssp \
+  --enable-libquadmath \
+  --enable-libquadmath-support \
+  --enable-libsanitizer \
+  --enable-lto \
+  --enable-threads=posix \
+  --enable-target-optspace \
+  --enable-plugin \
+  --enable-gold \
+  --disable-nls \
+  --disable-bootstrap \
+  --disable-multilib \
+  --enable-long-long \
+  --enable-default-pie \
+  --with-sysroot=$PREFIX/$HOST/sysroot \
+  --with-build-sysroot=$PREFIX/$HOST/sysroot
 
-# .build/src/gcc-${PKG_VERSION}/contrib/test_summary
+make -j${CPU_COUNT}
 
-chmod -R u+w ${SRC_DIR}/gcc_built
-
-# Next problem: macOS targetting uClibc ends up with broken symlinks in sysroot/usr/lib:
-if [[ $(uname) == Darwin ]]; then
-  pushd ${SRC_DIR}/gcc_built/${CHOST}/sysroot/usr/lib
-    links=$(find . -type l | cut -c 3-)
-    for link in ${links}; do
-      target=$(readlink ${link} | sed 's#^/##' | sed 's#//#/#')
-      rm ${link}
-      ln -s ${target} ${link}
-    done
-  popd
-fi
-
-exit 0
+#exit 1

@@ -1,6 +1,6 @@
 set -e -x
 
-CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine)
+export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
 
 mkdir -p ${PREFIX}/lib
 

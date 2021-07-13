@@ -1,15 +1,25 @@
 set -e -x
 
-CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine)
+export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
+
+if [[ "$target_platform" == "linux-64" || "$target_platform" == "linux-ppc64le" ]]; then
+  mkdir -p $PREFIX/lib
+  if [[ -d $PREFIX/lib64 ]]; then
+    mv $PREFIX/lib64/* $PREFIX/lib
+    rm -rf $PREFIX/lib64
+  fi
+  ln -sf $PREFIX/lib $PREFIX/lib64 || true;
+fi
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
-export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
+#export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
 
-pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
+pushd ${SRC_DIR}/build
 
   make -C ${CHOST}/libgcc prefix=${PREFIX} install-shared
 
+  mkdir -p ${PREFIX}/${CHOST}/sysroot/lib || true
   # TODO :: Also do this for libgfortran (and libstdc++ too probably?)
   sed -i.bak 's/.*cannot install.*/func_warning "Ignoring libtool error about cannot install to a directory not ending in"/' \
              ${CHOST}/libsanitizer/libtool
@@ -36,16 +46,16 @@ popd
 mkdir -p ${PREFIX}/lib
 
 # no static libs
-find ${PREFIX}/${CHOST}/lib -name "*\.a" -exec rm -rf {} \;
+find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;
 # no libtool files
-find ${PREFIX}/${CHOST}/lib -name "*\.la" -exec rm -rf {} \;
+find ${PREFIX}/lib -name "*\.la" -exec rm -rf {} \;
 
 if [[ "${PKG_NAME}" != gcc_impl* ]]; then
-  mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
+  # mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
   # clean up empty folder
   rm -rf ${PREFIX}/lib/gcc
 
   # Install Runtime Library Exception
-  install -Dm644 ${SRC_DIR}/.build/src/gcc-${ctng_gcc}/COPYING.RUNTIME \
+  install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION
 fi
