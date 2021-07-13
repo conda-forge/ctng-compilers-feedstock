@@ -11,27 +11,19 @@ channel_targets:
 conda_glibc_ver:
 - '2.17'
 ctng_binutils:
-- 2.29.1
+- 2.36.1
 ctng_cpu_arch:
 - aarch64
 ctng_gcc:
-- 9.3.0
-ctng_kernel:
-- '3.10'
-ctng_libc:
-- gnu
-ctng_sample:
-- aarch64-unknown-linux-gnu
+- 7.3.0
 ctng_target_platform:
 - linux-aarch64
 ctng_vendor:
 - conda
 docker_image:
 - quay.io/condaforge/linux-anvil-aarch64
-gnu:
-- '2.17'
 libgfortran_soname:
-- '5'
+- '4'
 libgomp_ver:
 - 1.0.0
 old_ctng_vendor:
@@ -40,14 +32,3 @@ openmp_ver:
 - '4.5'
 target_platform:
 - linux-aarch64
-zip_keys:
-- - conda_glibc_ver
-  - old_ctng_vendor
-  - gnu
-  - ctng_kernel
-  - ctng_sample
-  - ctng_cpu_arch
-  - ctng_binutils
-  - ctng_target_platform
-- - ctng_gcc
-  - libgfortran_soname
