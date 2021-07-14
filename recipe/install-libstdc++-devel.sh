@@ -8,9 +8,9 @@ export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
 
 pushd ${SRC_DIR}/build
 
-make -C $CHOST/libstdc++-v3/src prefix=${PREFIX}/${CHOST} install
-make -C $CHOST/libstdc++-v3/include prefix=${PREFIX}/${CHOST} install
-make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX}/${CHOST} install
+make -C $CHOST/libstdc++-v3/src prefix=${PREFIX} install
+make -C $CHOST/libstdc++-v3/include prefix=${PREFIX} install
+make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX} install
 
 rm -rf ${PREFIX}/${CHOST}/lib/libstdc++.so*
 mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}

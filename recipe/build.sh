@@ -63,6 +63,13 @@ cd build
 
 export HOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
 
+# We need to explicitly set the gxx include dir because previously
+# with ct-ng, native build was not considered native because
+# BUILD=HOST=x86_64-build_unknown-linux-gnu and TARGET=x86_64-conda-linux-gnu
+# Depending on native or not, the include dir changes. Setting it explictly
+# goes back to the original way.
+# See https://github.com/gcc-mirror/gcc/blob/16e2427f50c208dfe07d07f18009969502c25dc8/gcc/configure.ac#L218
+
 ../configure \
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
@@ -90,7 +97,8 @@ export HOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
   --enable-long-long \
   --enable-default-pie \
   --with-sysroot=$PREFIX/$HOST/sysroot \
-  --with-build-sysroot=$PREFIX/$HOST/sysroot
+  --with-build-sysroot=$PREFIX/$HOST/sysroot \
+  --with-gxx-include-dir="${PREFIX}/${HOST}/include/c++/${ctng_gcc}"
 
 make -j${CPU_COUNT}
 

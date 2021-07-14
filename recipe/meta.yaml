@@ -302,6 +302,7 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libstdc++.a
         - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libstdc++fs.a
         - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libsupc++.a
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/include/c++/{{ ctng_gcc }}/cstdio
     about:
       summary: The GNU C++ headers and development libraries
       home: https://gcc.gnu.org/
