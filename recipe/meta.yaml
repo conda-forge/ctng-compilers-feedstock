@@ -9,15 +9,8 @@ package:
 
 source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
-    folder: .
-
-  #- url: https://ftp.gnu.org/gnu/binutils/binutils-{{ ctng_binutils }}.tar.bz2
-  #folder: binutils-src
-
-  # Get the patches from crosstool-ng
-  # Using https://github.com/crosstool-ng/crosstool-ng/pull/1268
-  - url: https://github.com/isuruf/crosstool-ng/archive/a04d081901f5cd997b72b0b31646424fa4cb12ff.tar.gz
-    folder: crosstool_ng
+    patches:
+      - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
 
 build:
   number: 0
@@ -86,10 +79,10 @@ outputs:
         - echo {{ old_ctng_vendor }}
         - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/lib/libgomp.so   # [target_platform == ctng_target_platform]
         - test `readlink ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == ctng_target_platform]
-        #- test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-gcc
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-gcc
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
-        #- ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
-        #- ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [ctng_target_platform == target_platform]
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
+        - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [ctng_target_platform == target_platform]
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
@@ -132,11 +125,11 @@ outputs:
       files:
         - tests
       commands:
-        #- test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-g++
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-g++
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu-g++
-        #- CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
-        #- ${CXX} -Wall tests/aligned_alloc.cpp -o cpp_aligned --std=c++17
-        #- ./cpp_aligned
+        - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
+        - ${CXX} -Wall tests/aligned_alloc.cpp -o cpp_aligned --std=c++17
+        - ./cpp_aligned
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
@@ -184,7 +177,7 @@ outputs:
         - cmake >=3.11
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       commands:
-        #- test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-gfortran
+        - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-gfortran
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu-gfortran
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
@@ -242,6 +235,7 @@ outputs:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
+      skip: True   # [target_platform != ctng_target_platform]
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:

@@ -162,6 +162,8 @@ popd
 
 #${PREFIX}/bin/${CHOST}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
+mkdir -p ${PREFIX}/${CHOST}/lib
+
 if [[ "$target_platform" == "$ctng_target_platform" ]]; then
   # making these this way so conda build doesn't muck with them
   pushd ${PREFIX}/${CHOST}/lib
