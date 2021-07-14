@@ -26,6 +26,57 @@ requirements:
     - sysroot_{{ target_platform }}
 
 outputs:
+  - name: libgcc-devel_{{ ctng_target_platform }}
+    script: install-libgcc-devel.sh
+    build:
+      number: {{ build_num }}
+      detect_binary_files_with_prefix: False
+      binary_relocation: False
+      missing_dso_whitelist:
+        - "*"
+      ignore_run_exports:
+        - __glibc
+    requirements:
+      build:
+        - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+      host:
+        - sysroot_{{ target_platform }}
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/crtbegin.o
+        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libgcc_eh.a
+        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libgcc.a
+    about:
+      summary: The GNU C development libraries and object files
+      home: https://gcc.gnu.org/
+      license: GPL-3.0-only WITH GCC-exception-3.1
+
+  - name: libstdcxx-devel_{{ ctng_target_platform }}
+    script: install-libstdc++-devel.sh
+    build:
+      number: {{ build_num }}
+      detect_binary_files_with_prefix: False
+      binary_relocation: False
+      missing_dso_whitelist:
+        - "*"
+      ignore_run_exports:
+        - __glibc
+    requirements:
+      build:
+        - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+      host:
+        - sysroot_{{ target_platform }}
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libstdc++.a
+        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libstdc++fs.a
+        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libsupc++.a
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/include/c++/{{ ctng_gcc }}/cstdio
+    about:
+      summary: The GNU C++ headers and development libraries
+      home: https://gcc.gnu.org/
+      license: GPL-3.0-only WITH GCC-exception-3.1
+
   - name: gcc_impl_{{ ctng_target_platform }}
     script: install-gcc.sh
     build:
@@ -251,61 +302,6 @@ outputs:
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
-      license: GPL-3.0-only WITH GCC-exception-3.1
-
-  - name: libgcc-devel_{{ ctng_target_platform }}
-    script: install-libgcc-devel.sh
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      binary_relocation: False
-      missing_dso_whitelist:
-        - "*"
-      ignore_run_exports:
-        - __glibc
-    requirements:
-      build:
-        - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
-      host:
-        - sysroot_{{ target_platform }}
-        - {{ pin_subpackage("libgcc-ng", exact=True) }}
-      run:
-        - libgcc-ng >={{ ctng_gcc }}
-    test:
-      commands:
-        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/crtbegin.o
-    about:
-      summary: The GNU C development libraries and object files
-      home: https://gcc.gnu.org/
-      license: GPL-3.0-only WITH GCC-exception-3.1
-
-  - name: libstdcxx-devel_{{ ctng_target_platform }}
-    script: install-libstdc++-devel.sh
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      binary_relocation: False
-      missing_dso_whitelist:
-        - "*"
-      ignore_run_exports:
-        - __glibc
-    requirements:
-      build:
-        - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
-      host:
-        - sysroot_{{ target_platform }}
-        - {{ pin_subpackage("libstdcxx-ng", exact=True) }}
-      run:
-        - libstdcxx-ng >={{ ctng_gcc }}
-    test:
-      commands:
-        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libstdc++.a
-        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libstdc++fs.a
-        - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libsupc++.a
-        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/include/c++/{{ ctng_gcc }}/cstdio
-    about:
-      summary: The GNU C++ headers and development libraries
-      home: https://gcc.gnu.org/
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libgomp
