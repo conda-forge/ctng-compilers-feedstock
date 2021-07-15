@@ -184,8 +184,8 @@ outputs:
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu-g++
         - test -f ${PREFIX}/bin/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu-g++
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
-        - ${CXX} -Wall tests/aligned_alloc.cpp -o cpp_aligned --std=c++17
-        - ./cpp_aligned
+        - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17
+        - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [ctng_target_platform == target_platform]
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
