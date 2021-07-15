@@ -11,11 +11,11 @@ conda_glibc_ver:
 ctng_binutils:
 - 2.36.1
 ctng_cpu_arch:
-- powerpc64le
+- aarch64
 ctng_gcc:
-- 8.2.0
+- 9.3.0
 ctng_target_platform:
-- linux-ppc64le
+- linux-aarch64
 ctng_vendor:
 - conda
 docker_image:
@@ -30,3 +30,10 @@ openmp_ver:
 - '4.5'
 target_platform:
 - linux-ppc64le
+zip_keys:
+- - conda_glibc_ver
+  - old_ctng_vendor
+  - ctng_cpu_arch
+  - ctng_target_platform
+- - ctng_gcc
+  - libgfortran_soname
