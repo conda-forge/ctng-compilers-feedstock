@@ -111,7 +111,7 @@ outputs:
         - {{ pin_subpackage("libgcc-ng", exact=True) }}             # [target_platform == ctng_target_platform]
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == ctng_target_platform]
       run:
-        - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
         - {{ pin_subpackage("libgcc-devel_" ~ ctng_target_platform, exact=True) }}
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}    # [target_platform == ctng_target_platform]
