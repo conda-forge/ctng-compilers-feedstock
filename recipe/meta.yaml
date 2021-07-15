@@ -26,6 +26,8 @@ requirements:
   build:
     - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
     - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+    - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+    - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
   host:
     - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
 
@@ -44,6 +46,8 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
     test:
@@ -70,6 +74,8 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
     test:
@@ -107,6 +113,8 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == ctng_target_platform]
@@ -164,6 +172,8 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         # For cpp and crt{i,n}.o
@@ -214,6 +224,8 @@ outputs:
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
       host:
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
         # not needed due to pinning above but marks this build as using the new sysroots
@@ -266,6 +278,8 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         - {{ pin_subpackage("libgcc-ng", exact=True) }}
@@ -284,6 +298,8 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
@@ -322,6 +338,8 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
       run:
@@ -356,6 +374,8 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
         - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
@@ -397,6 +417,8 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
+        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       run_constrained:

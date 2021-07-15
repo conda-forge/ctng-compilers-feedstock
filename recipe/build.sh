@@ -23,8 +23,10 @@ export BUILD="$(get_cpu_arch $build_platform)-${ctng_vendor}-linux-gnu"
 export HOST="$(get_cpu_arch $target_platform)-${ctng_vendor}-linux-gnu"
 export TARGET="$(get_cpu_arch $ctng_target_platform)-${ctng_vendor}-linux-gnu"
 
-ln -sf $(which gcc) $BUILD_PREFIX/bin/$BUILD-gcc
-ln -sf $(which g++) $BUILD_PREFIX/bin/$BUILD-g++
+if [[ ! -f $BUILD_PREFIX/bin/$BUILD-gcc ]]; then
+  ln -sf $(which gcc) $BUILD_PREFIX/bin/$BUILD-gcc
+  ln -sf $(which g++) $BUILD_PREFIX/bin/$BUILD-g++
+fi
 
 export CC_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-gcc
 export CXX_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-g++
