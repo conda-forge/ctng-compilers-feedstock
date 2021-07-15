@@ -13,7 +13,7 @@ ctng_binutils:
 ctng_cpu_arch:
 - s390x
 ctng_gcc:
-- 9.3.0
+- 9.4.0
 ctng_target_platform:
 - linux-s390x
 ctng_vendor:
