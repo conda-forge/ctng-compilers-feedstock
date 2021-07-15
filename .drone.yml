@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archaarch64c_hadcc48642a
+name: linux_aarch64_conda_glibc_ver2.12ct_h9da71d3c66
 
 platform:
   os: linux
@@ -10,7 +10,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64
+    CONFIG: linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -31,7 +31,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archaarch64c_h4ed845e96f
+name: linux_aarch64_conda_glibc_ver2.12ct_h4e4300264e
 
 platform:
   os: linux
@@ -41,7 +41,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64
+    CONFIG: linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -62,7 +62,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archaarch64c_he714510f64
+name: linux_aarch64_conda_glibc_ver2.12ct_h267f1afa79
 
 platform:
   os: linux
@@ -72,7 +72,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64
+    CONFIG: linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -93,7 +93,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archpowerpc6_h281b03ca0f
+name: linux_aarch64_conda_glibc_ver2.17ct_hab51868913
 
 platform:
   os: linux
@@ -103,7 +103,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64le
+    CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -124,7 +124,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archpowerpc6_h3bc9e33ce3
+name: linux_aarch64_conda_glibc_ver2.17ct_hf3ef080bc3
 
 platform:
   os: linux
@@ -134,7 +134,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64le
+    CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -155,7 +155,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archpowerpc6_hc01fbf843e
+name: linux_aarch64_conda_glibc_ver2.17ct_h3a5891c414
 
 platform:
   os: linux
@@ -165,7 +165,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64le
+    CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -186,7 +186,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archs390xctn_h31af916d91
+name: linux_aarch64_conda_glibc_ver2.17ct_h6835e1937d
 
 platform:
   os: linux
@@ -196,7 +196,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390x
+    CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64le
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -217,7 +217,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archs390xctn_hc543587e1b
+name: linux_aarch64_conda_glibc_ver2.17ct_h50025ebf7d
 
 platform:
   os: linux
@@ -227,7 +227,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390x
+    CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64le
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -248,7 +248,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archs390xctn_hb3cb7bd566
+name: linux_aarch64_conda_glibc_ver2.17ct_hd68c379e21
 
 platform:
   os: linux
@@ -258,7 +258,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390x
+    CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64le
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -279,7 +279,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archx86_64ct_h2e71fa17fb
+name: linux_aarch64_conda_glibc_ver2.17ct_h6db218143d
 
 platform:
   os: linux
@@ -289,7 +289,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64
+    CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390x
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -310,7 +310,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archx86_64ct_hffe0ae4be7
+name: linux_aarch64_conda_glibc_ver2.17ct_h6ab542fbf3
 
 platform:
   os: linux
@@ -320,7 +320,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64
+    CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390x
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -341,7 +341,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_ctng_cpu_archx86_64ct_hdaea2f63a9
+name: linux_aarch64_conda_glibc_ver2.17ct_hb774c5c5e0
 
 platform:
   os: linux
@@ -351,7 +351,7 @@ steps:
 - name: Install and build
   image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64
+    CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390x
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
