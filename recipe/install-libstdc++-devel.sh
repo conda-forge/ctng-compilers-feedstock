@@ -14,7 +14,12 @@ make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX} install
 
 rm -rf ${PREFIX}/${CHOST}/lib/libstdc++.so*
 mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
-mv $PREFIX/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/
+
+if [[ "$target_platform" == "$ctng_target_platform" ]]; then
+    mv $PREFIX/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/
+else
+    mv $PREFIX/${CHOST}/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/
+fi
 
 popd
 

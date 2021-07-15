@@ -11,19 +11,20 @@ source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
     patches:
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
+      - patches/0022-cross-compile-older-glibc.patch   # [conda_glibc_ver == "2.12" and target_platform != "linux-64"]
 
 build:
   number: 0
+  #skip: True  # [not linux or ((aarch64 or ppc64le) and target_platform != ctng_target_platform)]
   skip: True  # [not linux]
   detect_binary_files_with_prefix: False
 
 requirements:
   build:
     - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+    - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
   host:
-    - sysroot_{{ target_platform }}
-  run:
-    - sysroot_{{ target_platform }}
+    - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
 
 outputs:
   - name: libgcc-devel_{{ ctng_target_platform }}
@@ -39,8 +40,9 @@ outputs:
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
       host:
-        - sysroot_{{ target_platform }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
     test:
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/crtbegin.o
@@ -64,8 +66,9 @@ outputs:
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
       host:
-        - sysroot_{{ target_platform }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
     test:
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ ctng_cpu_arch }}-{{ ctng_vendor }}-linux-gnu/{{ ctng_gcc }}/libstdc++.a
@@ -100,6 +103,7 @@ outputs:
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == ctng_target_platform]
@@ -156,8 +160,9 @@ outputs:
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
       host:
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
       run:
@@ -205,10 +210,11 @@ outputs:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
       host:
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
         # not needed due to pinning above but marks this build as using the new sysroots
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ ctng_target_platform }} >={{ ctng_gcc }}
@@ -256,8 +262,9 @@ outputs:
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
       host:
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         - {{ pin_subpackage("libgcc-ng", exact=True) }}
     test:
       commands:
@@ -273,10 +280,11 @@ outputs:
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
@@ -310,8 +318,9 @@ outputs:
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
       host:
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
     build:
@@ -343,9 +352,10 @@ outputs:
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - libgomp >=7.5.0
@@ -383,8 +393,9 @@ outputs:
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
+        - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
       host:
-        - sysroot_{{ ctng_target_platform }}
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       run_constrained:
         - libgfortran-ng {{ ctng_gcc }}
     test:

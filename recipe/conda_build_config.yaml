@@ -1,35 +1,37 @@
 ctng_cpu_arch:
-  - i686  # [linux32]
-  - x86_64  # [linux64]
-  - powerpc64le  # [ppc64le]
-  - aarch64  # [aarch64]
+  - x86_64
+  - powerpc64le
+  - aarch64
+  - s390x
 ctng_vendor:
   - conda
 ctng_gcc:
-  - 7.3.0  # [linux64 or linux32 or aarch64]
-  - 8.2.0  # [ppc64le]
+  - 7.5.0
+  - 8.4.0
+  - 9.3.0
 libgfortran_soname:
-  - 4   # [linux64 or linux32 or aarch64]
-  - 5   # [ppc64le]
+  - 4
+  - 5
+  - 5
 ctng_binutils:
   - 2.36.1
-old_ctng_vendor:
-  - conda_cos6  # [linux32]
-  - conda_cos6  # [linux64]
-  - conda_cos7  # [ppc64le]
-  - conda_cos7  # [aarch64]
-conda_glibc_ver:
-  - 2.12  # [linux32]
-  - 2.12  # [linux64]
-  - 2.17  # [ppc64le]
-  - 2.17  # [aarch64]
 ctng_target_platform:
-  - linux-32  # [linux32]
-  - linux-64  # [linux64]
-  - linux-ppc64le  # [ppc64le]
-  - linux-aarch64  # [aarch64]
+  - linux-64
+  - linux-ppc64le
+  - linux-aarch64
+  - linux-s390x
+old_ctng_vendor:
+  - conda_cos6
+  - conda_cos7
+  - conda_cos7
+  - conda_cos7
 ctng_gcc_build_number:
-  - 5
+  - 20
+conda_glibc_ver:
+  - 2.12
+  - 2.17
+  - 2.17
+  - 2.17
 # openmp versions
 openmp_ver:
   - 4.5
@@ -37,3 +39,10 @@ libgomp_ver:
   - 1.0.0
 _libgcc_mutex:
   - 0.1 conda_forge
+zip_keys:
+  - - conda_glibc_ver
+    - old_ctng_vendor
+    - ctng_cpu_arch
+    - ctng_target_platform
+  - - ctng_gcc
+    - libgfortran_soname

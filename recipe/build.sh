@@ -2,48 +2,32 @@
 
 set -e
 
-#for file in ./crosstool_ng/packages/gcc/$PKG_VERSION/*.patch; do
-#  patch -p1 < $file;
-#done
-
-export HOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
-
-build_binutils () {
-  ../configure \
-  --prefix="$1" \
-  --target=$HOST \
-  --enable-ld=default \
-  --enable-gold=yes \
-  --enable-plugins \
-  --disable-multilib \
-  --disable-sim \
-  --disable-gdb \
-  --disable-nls \
-  --enable-default-pie \
-  --with-sysroot=$PREFIX/$HOST/sysroot \
-  --with-build-sysroot=$PREFIX/$HOST/sysroot
-
-  make -j${CPU_COUNT}
+get_cpu_arch() {
+  local CPU_ARCH
+  if [[ "$1" == "linux-64" ]]; then
+    CPU_ARCH="x86_64"
+  elif [[ "$1" == "linux-ppc64le" ]]; then
+    CPU_ARCH="powerpc64le"
+  elif [[ "$1" == "linux-aarch64" ]]; then
+    CPU_ARCH="aarch64"
+  elif [[ "$1" == "linux-s390x" ]]; then
+    CPU_ARCH="s390x"
+  else
+    echo "Unknown architecture"
+    exit 1
+  fi
+  echo $CPU_ARCH
 }
 
+export BUILD="$(get_cpu_arch $build_platform)-${ctng_vendor}-linux-gnu"
+export HOST="$(get_cpu_arch $target_platform)-${ctng_vendor}-linux-gnu"
+export TARGET="$(get_cpu_arch $ctng_target_platform)-${ctng_vendor}-linux-gnu"
 
-#pushd binutils-src
-#  for file in ../crosstool_ng/packages/binutils/${ctng_binutils}/*.patch; do
-#    patch -p1 < $file;
-#  done
-#  mkdir -p  build
-#  pushd build
-#    build_binutils $BUILD_PREFIX
-#    make install
-#    build_binutils $PREFIX
-#  popd
-#popd
+ln -sf $(which gcc) $BUILD_PREFIX/bin/$BUILD-gcc
+ln -sf $(which g++) $BUILD_PREFIX/bin/$BUILD-g++
 
-for f in addr2line ar as c++filt dwp elfedit gprof ld ld.bfd ld.gold nm objcopy objdump ranlib readelf size strings strip; do
-    ln -s $BUILD_PREFIX/bin/${ctng_cpu_arch}-conda-linux-gnu-$f $BUILD_PREFIX/bin/$f
-    #ln -s $BUILD_PREFIX/bin/${ctng_cpu_arch}-conda_cos6-linux-gnu-$f $BUILD_PREFIX/bin/$f
-    #ln -s $BUILD_PREFIX/bin/${ctng_cpu_arch}-conda_cos6-linux-gnu-$f $BUILD_PREFIX/bin/$HOST-$f
-done
+export CC_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-gcc
+export CXX_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-g++
 
 ./contrib/download_prerequisites
 
@@ -61,8 +45,6 @@ done
 mkdir build
 cd build
 
-export HOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
-
 # We need to explicitly set the gxx include dir because previously
 # with ct-ng, native build was not considered native because
 # BUILD=HOST=x86_64-build_unknown-linux-gnu and TARGET=x86_64-conda-linux-gnu
@@ -74,9 +56,9 @@ export HOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
   --libdir="$PREFIX/lib" \
-  --build=$HOST \
+  --build=$BUILD \
   --host=$HOST \
-  --target=$HOST \
+  --target=$TARGET \
   --enable-default-pie \
   --enable-languages=c,c++,fortran,objc,obj-c++ \
   --enable-__cxa_atexit \
@@ -96,8 +78,8 @@ export HOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
   --disable-multilib \
   --enable-long-long \
   --enable-default-pie \
-  --with-sysroot=$PREFIX/$HOST/sysroot \
-  --with-build-sysroot=$PREFIX/$HOST/sysroot \
+  --with-sysroot=$PREFIX/$TARGET/sysroot \
+  --with-build-sysroot=$PREFIX/$TARGET/sysroot \
   --with-gxx-include-dir="${PREFIX}/${HOST}/include/c++/${ctng_gcc}"
 
 make -j${CPU_COUNT}
