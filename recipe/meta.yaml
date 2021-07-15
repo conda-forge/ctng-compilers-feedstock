@@ -9,6 +9,9 @@ package:
 
 source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
+    sha256: 5258a9b6afe9463c2e56b9e8355b1a4bee125ca828b8078f910303bc2ef91fa6   # [ctng_gcc == "9.3.0"]
+    sha256: 41e8b145832fc0b2b34c798ed25fb54a881b0cee4cd581b77c7dc92722c116a8   # [ctng_gcc == "8.4.0"]
+    sha256: 4f518f18cfb694ad7975064e99e200fe98af13603b47e67e801ba9580e50a07f   # [ctng_gcc == "7.5.0"]
     patches:
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       - patches/0022-cross-compile-older-glibc.patch   # [conda_glibc_ver == "2.12" and target_platform != "linux-64"]
