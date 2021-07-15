@@ -400,7 +400,7 @@ outputs:
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       run_constrained:
-        - libgfortran-ng {{ ctng_gcc }} *_{{ build_num | default(0) }}
+        - libgfortran-ng {{ ctng_gcc }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
