@@ -6,12 +6,12 @@ ctng_cpu_arch:
 ctng_vendor:
   - conda
 ctng_gcc:
-  - 7.5.0
-  - 8.4.0
+#  - 7.5.0
+#  - 8.4.0
   - 9.3.0
 libgfortran_soname:
-  - 4
-  - 5
+#  - 4
+#  - 5
   - 5
 ctng_binutils:
   - 2.36.1
