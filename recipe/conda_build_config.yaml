@@ -39,6 +39,8 @@ libgomp_ver:
   - 1.0.0
 _libgcc_mutex:
   - 0.1 conda_forge
+channel_targets:
+  - conda-forge gcc_dev
 zip_keys:
   - - conda_glibc_ver
     - old_ctng_vendor
