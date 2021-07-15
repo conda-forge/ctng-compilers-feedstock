@@ -13,21 +13,7 @@ Current build status
 ====================
 
 
-<table><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://travis-ci.com/conda-forge/ctng-compilers-feedstock">
-        <img alt="macOS" src="https://img.shields.io/travis/com/conda-forge/ctng-compilers-feedstock/master.svg?label=macOS">
-      </a>
-    </td>
-  </tr><tr>
-    <td>Drone</td>
-    <td>
-      <a href="https://cloud.drone.io/conda-forge/ctng-compilers-feedstock">
-        <img alt="linux" src="https://img.shields.io/drone/build/conda-forge/ctng-compilers-feedstock/master.svg?label=Linux">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
@@ -41,255 +27,31 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64</td>
+              <td>linux_64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_target_platformlinux-64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_target_platformlinux-64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64</td>
+              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_target_platformlinux-aarch64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_target_platformlinux-aarch64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64</td>
+              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_target_platformlinux-ppc64le</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_target_platformlinux-ppc64le" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64</td>
+              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archs390xctng_target_platformlinux-s390x</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64le</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64le" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64le</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64le" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64le</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64le" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390x</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390x" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390x</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390x" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390x</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390x" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64le</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64le" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64le</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64le" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64le</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64le" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390x</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390x" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390x</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390x" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390x</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390x" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64le</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64le" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64le</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64le" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64le</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64le" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390x</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390x" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390x</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390x" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390x</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390x" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_64_conda_glibc_ver2.17ctng_cpu_archs390xctng_target_platformlinux-s390x" alt="variant">
                 </a>
               </td>
             </tr>
@@ -324,7 +86,6 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--devel_linux--s390x-green.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-s390x) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-devel_linux-s390x.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-s390x) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-devel_linux-s390x.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-s390x) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-devel_linux-s390x.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-s390x) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--ng-green.svg)](https://anaconda.org/conda-forge/libgcc-ng) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-ng.svg)](https://anaconda.org/conda-forge/libgcc-ng) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-ng.svg)](https://anaconda.org/conda-forge/libgcc-ng) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-ng.svg)](https://anaconda.org/conda-forge/libgcc-ng) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgfortran--ng-green.svg)](https://anaconda.org/conda-forge/libgfortran-ng) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgfortran-ng.svg)](https://anaconda.org/conda-forge/libgfortran-ng) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgfortran-ng.svg)](https://anaconda.org/conda-forge/libgfortran-ng) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgfortran-ng.svg)](https://anaconda.org/conda-forge/libgfortran-ng) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libgfortran4-green.svg)](https://anaconda.org/conda-forge/libgfortran4) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgfortran4.svg)](https://anaconda.org/conda-forge/libgfortran4) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgfortran4.svg)](https://anaconda.org/conda-forge/libgfortran4) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgfortran4.svg)](https://anaconda.org/conda-forge/libgfortran4) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgfortran5-green.svg)](https://anaconda.org/conda-forge/libgfortran5) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgfortran5.svg)](https://anaconda.org/conda-forge/libgfortran5) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgfortran5.svg)](https://anaconda.org/conda-forge/libgfortran5) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgfortran5.svg)](https://anaconda.org/conda-forge/libgfortran5) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgomp-green.svg)](https://anaconda.org/conda-forge/libgomp) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgomp.svg)](https://anaconda.org/conda-forge/libgomp) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgomp.svg)](https://anaconda.org/conda-forge/libgomp) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgomp.svg)](https://anaconda.org/conda-forge/libgomp) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libstdcxx--devel_linux--64-green.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libstdcxx-devel_linux-64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libstdcxx-devel_linux-64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libstdcxx-devel_linux-64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-64) |
@@ -343,10 +104,10 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `_openmp_mutex, gcc_impl_linux-64, gcc_impl_linux-aarch64, gcc_impl_linux-ppc64le, gcc_impl_linux-s390x, gfortran_impl_linux-64, gfortran_impl_linux-aarch64, gfortran_impl_linux-ppc64le, gfortran_impl_linux-s390x, gxx_impl_linux-64, gxx_impl_linux-aarch64, gxx_impl_linux-ppc64le, gxx_impl_linux-s390x, libgcc-devel_linux-64, libgcc-devel_linux-aarch64, libgcc-devel_linux-ppc64le, libgcc-devel_linux-s390x, libgcc-ng, libgfortran-ng, libgfortran4, libgfortran5, libgomp, libstdcxx-devel_linux-64, libstdcxx-devel_linux-aarch64, libstdcxx-devel_linux-ppc64le, libstdcxx-devel_linux-s390x, libstdcxx-ng` can be installed with:
+Once the `conda-forge` channel has been enabled, `_openmp_mutex, gcc_impl_linux-64, gcc_impl_linux-aarch64, gcc_impl_linux-ppc64le, gcc_impl_linux-s390x, gfortran_impl_linux-64, gfortran_impl_linux-aarch64, gfortran_impl_linux-ppc64le, gfortran_impl_linux-s390x, gxx_impl_linux-64, gxx_impl_linux-aarch64, gxx_impl_linux-ppc64le, gxx_impl_linux-s390x, libgcc-devel_linux-64, libgcc-devel_linux-aarch64, libgcc-devel_linux-ppc64le, libgcc-devel_linux-s390x, libgcc-ng, libgfortran-ng, libgfortran5, libgomp, libstdcxx-devel_linux-64, libstdcxx-devel_linux-aarch64, libstdcxx-devel_linux-ppc64le, libstdcxx-devel_linux-s390x, libstdcxx-ng` can be installed with:
 
 ```
-conda install _openmp_mutex gcc_impl_linux-64 gcc_impl_linux-aarch64 gcc_impl_linux-ppc64le gcc_impl_linux-s390x gfortran_impl_linux-64 gfortran_impl_linux-aarch64 gfortran_impl_linux-ppc64le gfortran_impl_linux-s390x gxx_impl_linux-64 gxx_impl_linux-aarch64 gxx_impl_linux-ppc64le gxx_impl_linux-s390x libgcc-devel_linux-64 libgcc-devel_linux-aarch64 libgcc-devel_linux-ppc64le libgcc-devel_linux-s390x libgcc-ng libgfortran-ng libgfortran4 libgfortran5 libgomp libstdcxx-devel_linux-64 libstdcxx-devel_linux-aarch64 libstdcxx-devel_linux-ppc64le libstdcxx-devel_linux-s390x libstdcxx-ng
+conda install _openmp_mutex gcc_impl_linux-64 gcc_impl_linux-aarch64 gcc_impl_linux-ppc64le gcc_impl_linux-s390x gfortran_impl_linux-64 gfortran_impl_linux-aarch64 gfortran_impl_linux-ppc64le gfortran_impl_linux-s390x gxx_impl_linux-64 gxx_impl_linux-aarch64 gxx_impl_linux-ppc64le gxx_impl_linux-s390x libgcc-devel_linux-64 libgcc-devel_linux-aarch64 libgcc-devel_linux-ppc64le libgcc-devel_linux-s390x libgcc-ng libgfortran-ng libgfortran5 libgomp libstdcxx-devel_linux-64 libstdcxx-devel_linux-aarch64 libstdcxx-devel_linux-ppc64le libstdcxx-devel_linux-s390x libstdcxx-ng
 ```
 
 It is possible to list all of the versions of `_openmp_mutex` available on your platform with:
