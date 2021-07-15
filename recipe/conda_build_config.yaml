@@ -8,7 +8,7 @@ ctng_vendor:
 ctng_gcc:
 #  - 7.5.0
 #  - 8.4.0
-  - 9.3.0
+  - 9.4.0
 libgfortran_soname:
 #  - 4
 #  - 5
