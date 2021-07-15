@@ -78,9 +78,9 @@ cd build
   --disable-multilib \
   --enable-long-long \
   --enable-default-pie \
-  --with-sysroot=$PREFIX/$TARGET/sysroot \
-  --with-build-sysroot=$PREFIX/$TARGET/sysroot \
-  --with-gxx-include-dir="${PREFIX}/${HOST}/include/c++/${ctng_gcc}"
+  --with-sysroot=${PREFIX}/${TARGET}/sysroot \
+  --with-build-sysroot=${PREFIX}/${TARGET}/sysroot \
+  --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${ctng_gcc}"
 
 make -j${CPU_COUNT}
 
