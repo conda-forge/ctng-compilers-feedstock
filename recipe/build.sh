@@ -28,6 +28,8 @@ if [[ ! -f $BUILD_PREFIX/bin/$BUILD-gcc ]]; then
   ln -sf $(which g++) $BUILD_PREFIX/bin/$BUILD-g++
 fi
 
+ls $BUILD_PREFIX/bin/
+
 export CC_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-gcc
 export CXX_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-g++
 

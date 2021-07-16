@@ -132,7 +132,7 @@ popd
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
 specdir=$PREFIX/lib/gcc/$CHOST/${ctng_gcc}
-$PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+${CHOST}-gcc -dumpspecs > $specdir/specs
 # We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
 #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
 #   package is installed.
@@ -179,6 +179,7 @@ else
   for lib in libgcc_s libcc1; do
     mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/lib/
   done
+  rm -f ${PREFIX}/share/info/*.info
 fi
 
 source ${RECIPE_DIR}/make_tool_links.sh

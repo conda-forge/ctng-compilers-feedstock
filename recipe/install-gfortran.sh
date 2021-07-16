@@ -47,7 +47,7 @@ install -Dm644 $SRC_DIR/COPYING.RUNTIME \
 #   setting LINK_LIBGCC_SPECS on configure
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
-specdir=`dirname $($PREFIX/bin/${CHOST}-gcc -print-libgcc-file-name -no-canonical-prefixes)`
+specdir=${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
 mv $PREFIX/bin/${CHOST}-gfortran $PREFIX/bin/${CHOST}-gfortran.bin
 echo '#!/bin/sh' > $PREFIX/bin/${CHOST}-gfortran
 echo $PREFIX/bin/${CHOST}-gfortran.bin -specs=$specdir/specs '"$@"' >> $PREFIX/bin/${CHOST}-gfortran

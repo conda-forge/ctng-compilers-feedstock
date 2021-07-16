@@ -28,6 +28,9 @@ requirements:
     - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
     - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
     - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+    - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+    - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+    - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
   host:
     - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
 
@@ -46,8 +49,11 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
-        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ target_platform }}             # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}             # [build_platform != target_platform]
+        - gcc_impl_{{ ctng_target_platform }}        # [build_platform != target_platform]
+        - gxx_impl_{{ ctng_target_platform }}        # [build_platform != target_platform]
+        - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
     test:
@@ -76,6 +82,9 @@ outputs:
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
         - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
     test:
@@ -115,6 +124,9 @@ outputs:
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
         - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == ctng_target_platform]
@@ -174,6 +186,9 @@ outputs:
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
         - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         # For cpp and crt{i,n}.o
@@ -220,13 +235,15 @@ outputs:
         - __glibc
     requirements:
       build:
-        # For cpp and crt{i,n}.o
-        - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
         - binutils_impl_{{ target_platform }}  {{ ctng_binutils }}
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
         - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
       host:
+        # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
         # not needed due to pinning above but marks this build as using the new sysroots
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
@@ -280,6 +297,9 @@ outputs:
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
         - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         - {{ pin_subpackage("libgcc-ng", exact=True) }}
@@ -300,6 +320,9 @@ outputs:
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
         - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
@@ -340,6 +363,9 @@ outputs:
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
         - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
       run:
@@ -376,6 +402,9 @@ outputs:
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
         - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
         - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
@@ -419,6 +448,9 @@ outputs:
         - binutils_impl_{{ ctng_target_platform }}  {{ ctng_binutils }}
         - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       run_constrained:
