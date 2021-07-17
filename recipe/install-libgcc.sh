@@ -21,11 +21,13 @@ pushd ${SRC_DIR}/build
     make -C ${CHOST}/libgcc prefix=${PREFIX} install-shared
   else
     pushd ${CHOST}/libgcc
+      mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
       install -c -m 644 libgcc_eh.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/libgcc_eh.a
       chmod 644 ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/libgcc_eh.a
       ${CHOST}-ranlib ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/libgcc_eh.a
 
-      install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${CHOST}/lib
+      mkdir -p ${PREFIX}/${CHOST}/lib
+      install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${CHOST}/lib/libgcc_s.so.1
       ln -s libgcc_s.so.1 ${PREFIX}/${CHOST}/lib/libgcc_s.so
     popd
   fi
