@@ -23,11 +23,11 @@ export BUILD="$(get_cpu_arch $build_platform)-${ctng_vendor}-linux-gnu"
 export HOST="$(get_cpu_arch $target_platform)-${ctng_vendor}-linux-gnu"
 export TARGET="$(get_cpu_arch $ctng_target_platform)-${ctng_vendor}-linux-gnu"
 
-if [[ ! -f $BUILD_PREFIX/bin/$BUILD-gcc ]]; then
-  for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf size strings strip; do
+for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf size strings strip; do
+  if [[ ! -f $BUILD_PREFIX/bin/$BUILD-$tool ]]; then
     ln -s $(which $tool) $BUILD_PREFIX/bin/$BUILD-$tool
-  done
-fi
+  fi
+done
 
 ls $BUILD_PREFIX/bin/
 
