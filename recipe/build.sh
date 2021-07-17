@@ -43,6 +43,10 @@ if [[ $build_platform != $target_platform ]]; then
   export FC=$GFORTRAN_FOR_TARGET
 fi
 
+# workaround a bug in gcc build files when using external binutils
+# and build != host == target
+export gcc_cv_objdump=$OBJDUMP_FOR_TARGET
+
 ls $BUILD_PREFIX/bin/
 
 ./contrib/download_prerequisites
