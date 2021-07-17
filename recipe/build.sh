@@ -27,16 +27,18 @@ for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf
   if [[ ! -f $BUILD_PREFIX/bin/$BUILD-$tool ]]; then
     ln -s $(which $tool) $BUILD_PREFIX/bin/$BUILD-$tool
   fi
-  tool_upper=$(echo $tool | tr a-z A-Z)
+  tool_upper=$(echo $tool | tr a-z A-Z | sed "s/+/X/g")
+  if [[ "$tool" == gcc ]]; then
+     tool_upper=CC
+  elif [[ "$tool" == g++ ]]; then
+     tool_upper=CXX
+  fi
   declare "${tool_upper}_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-$tool"
   declare "${tool_upper}_FOR_TARGET=$BUILD_PREFIX/bin/$TARGET-$tool"
   declare "${tool_upper}=$BUILD_PREFIX/bin/$HOST-$tool"
 done
 
 ls $BUILD_PREFIX/bin/
-
-export CC_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-gcc
-export CXX_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-g++
 
 ./contrib/download_prerequisites
 
