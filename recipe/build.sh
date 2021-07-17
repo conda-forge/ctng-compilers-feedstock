@@ -27,6 +27,10 @@ for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf
   if [[ ! -f $BUILD_PREFIX/bin/$BUILD-$tool ]]; then
     ln -s $(which $tool) $BUILD_PREFIX/bin/$BUILD-$tool
   fi
+  tool_upper=$(echo $tool | tr a-z A-Z)
+  declare "${tool_upper}_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-$tool"
+  declare "${tool_upper}_FOR_TARGET=$BUILD_PREFIX/bin/$TARGET-$tool"
+  declare "${tool_upper}=$BUILD_PREFIX/bin/$HOST-$tool"
 done
 
 ls $BUILD_PREFIX/bin/
