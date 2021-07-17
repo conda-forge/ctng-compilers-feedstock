@@ -177,7 +177,7 @@ if [[ "$target_platform" == "$ctng_target_platform" ]]; then
 else
   source ${RECIPE_DIR}/install-libgcc.sh
   for lib in libgcc_s libcc1; do
-    mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/lib/
+    mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/lib/ || true
   done
   rm -f ${PREFIX}/share/info/*.info
 fi

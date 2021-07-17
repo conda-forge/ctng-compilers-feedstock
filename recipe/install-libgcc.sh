@@ -17,7 +17,18 @@ fi
 
 pushd ${SRC_DIR}/build
 
-  make -C ${CHOST}/libgcc prefix=${PREFIX} install-shared
+  if [[ "${PKG_NAME}" == libgcc-ng ]]; then
+    make -C ${CHOST}/libgcc prefix=${PREFIX} install-shared
+  else
+    pushd ${CHOST}/libgcc
+      install -c -m 644 libgcc_eh.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/libgcc_eh.a
+      chmod 644 ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/libgcc_eh.a
+      ${CHOST}-ranlib ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/libgcc_eh.a
+
+      install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${CHOST}/lib
+      ln -s libgcc_s.so.1 ${PREFIX}/${CHOST}/lib/libgcc_s.so
+    popd
+  fi
 
   # TODO :: Also do this for libgfortran (and libstdc++ too probably?)
   sed -i.bak 's/.*cannot install.*/func_warning "Ignoring libtool error about cannot install to a directory not ending in"/' \
