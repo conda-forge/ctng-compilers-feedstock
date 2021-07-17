@@ -38,6 +38,11 @@ for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf
   declare "${tool_upper}=$BUILD_PREFIX/bin/$HOST-$tool"
 done
 
+if [[ $build_platform != $target_platform ]]; then
+  export GFORTRAN_FOR_TARGET="$BUILD_PREFIX/bin/$TARGET-gfortran"
+  export FC=$GFORTRAN_FOR_TARGET
+fi
+
 ls $BUILD_PREFIX/bin/
 
 ./contrib/download_prerequisites
@@ -53,7 +58,7 @@ for TINFO_FILE in ${TINFO_FILES}; do
   rm -f ${TINFO_FILE}.bak
 done
 
-mkdir build
+mkdir -p build
 cd build
 
 # We need to explicitly set the gxx include dir because previously
