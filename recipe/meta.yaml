@@ -31,6 +31,7 @@ requirements:
     - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
     - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
     - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+    - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
   host:
     - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
 
@@ -54,6 +55,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}        # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}        # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
     test:
@@ -85,6 +87,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
     test:
@@ -127,6 +130,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == ctng_target_platform]
@@ -191,6 +195,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         # For cpp and crt{i,n}.o
@@ -244,6 +249,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ ctng_target_platform, exact=True) }}
@@ -302,6 +308,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
         - {{ pin_subpackage("libgcc-ng", exact=True) }}
@@ -325,6 +332,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
@@ -368,6 +376,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
       run:
@@ -407,6 +416,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
         - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
@@ -453,6 +463,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       run_constrained:
