@@ -107,6 +107,6 @@ cd build
   --with-build-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${ctng_gcc}"
 
-make -j${CPU_COUNT}
+make -j${CPU_COUNT} || (cat ${TARGET}/libbacktrace/config.log; false)
 
 #exit 1
