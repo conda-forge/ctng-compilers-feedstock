@@ -71,4 +71,10 @@ pushd ${PREFIX}
   done
 popd
 
+if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
+  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/${CHOST}/lib/libgomp.spec
+fi
+
 source ${RECIPE_DIR}/make_tool_links.sh
+
+exit 1

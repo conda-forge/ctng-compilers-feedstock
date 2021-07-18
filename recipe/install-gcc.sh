@@ -182,4 +182,8 @@ else
   rm -f ${PREFIX}/share/info/*.info
 fi
 
+if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
+  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/${CHOST}/lib/libgomp.spec
+fi
+
 source ${RECIPE_DIR}/make_tool_links.sh
