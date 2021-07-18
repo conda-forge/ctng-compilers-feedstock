@@ -38,6 +38,11 @@ for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf
   declare "${tool_upper}=$BUILD_PREFIX/bin/$HOST-$tool"
 done
 
+# TODO: remove once the bootstrapping process is done.
+if [[ ! -f ${PREFIX}/${TARGET}/lib/libgcc_s.so && -f ${PREFIX}/${TARGET}/sysroot/lib/libgcc_s.so ]]; then
+  ln -s ${PREFIX}/${TARGET}/sysroot/lib/libgcc_s.so* ${PREFIX}/${TARGET}/lib/
+fi
+
 if [[ $build_platform != $target_platform ]]; then
   export GFORTRAN_FOR_TARGET="$BUILD_PREFIX/bin/$TARGET-gfortran"
   export FC=$GFORTRAN_FOR_TARGET
