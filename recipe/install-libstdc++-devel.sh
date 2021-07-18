@@ -13,6 +13,7 @@ make -C $CHOST/libstdc++-v3/include prefix=${PREFIX} install
 make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX} install
 
 rm -rf ${PREFIX}/${CHOST}/lib/libstdc++.so*
+rm -rf ${PREFIX}/lib/libstdc++.so*
 mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
 
 if [[ "$target_platform" == "$ctng_target_platform" ]]; then
