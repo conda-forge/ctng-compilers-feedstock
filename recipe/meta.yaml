@@ -214,6 +214,8 @@ outputs:
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17
         - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [ctng_target_platform == target_platform]
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu/lib/libgcc_s.so
+        - test -f ${PREFIX}/{{ ctng_cpu_arch }}-{{ old_ctng_vendor }}-linux-gnu/lib/libgomp.spec
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
