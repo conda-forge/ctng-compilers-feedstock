@@ -12,62 +12,50 @@ jobs:
         CONFIG: linux_64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_target_platformlinux-64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_64_conda_glibc_ver2.12ctng_cp_hb568b26133
       linux_64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_target_platformlinux-aarch64:
         CONFIG: linux_64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_target_platformlinux-aarch64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_64_conda_glibc_ver2.17ctng_cp_hbdacd5dbf6
       linux_64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_target_platformlinux-ppc64le:
         CONFIG: linux_64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_target_platformlinux-ppc64le
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_64_conda_glibc_ver2.17ctng_cp_h5b81fc9dfe
       linux_64_conda_glibc_ver2.17ctng_cpu_archs390xctng_target_platformlinux-s390x:
         CONFIG: linux_64_conda_glibc_ver2.17ctng_cpu_archs390xctng_target_platformlinux-s390x
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_64_conda_glibc_ver2.17ctng_cp_he0be49045f
       linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_target_platformlinux-64:
         CONFIG: linux_aarch64_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_target_platformlinux-64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_aarch64_conda_glibc_ver2.12ct_h969699f23a
       linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_target_platformlinux-aarch64:
         CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_target_platformlinux-aarch64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_aarch64_conda_glibc_ver2.17ct_hf39d6e28ba
       linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_target_platformlinux-ppc64le:
         CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_target_platformlinux-ppc64le
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_aarch64_conda_glibc_ver2.17ct_hdcfb60c815
       linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_target_platformlinux-s390x:
         CONFIG: linux_aarch64_conda_glibc_ver2.17ctng_cpu_archs390xctng_target_platformlinux-s390x
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_aarch64_conda_glibc_ver2.17ct_h1b06667982
       linux_ppc64le_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_target_platformlinux-64:
         CONFIG: linux_ppc64le_conda_glibc_ver2.12ctng_cpu_archx86_64ctng_target_platformlinux-64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_ppc64le_conda_glibc_ver2.12ct_h9151d3b558
       linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_target_platformlinux-aarch64:
         CONFIG: linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archaarch64ctng_target_platformlinux-aarch64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_ppc64le_conda_glibc_ver2.17ct_hb3dfd2a4bf
       linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_target_platformlinux-ppc64le:
         CONFIG: linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archpowerpc64lectng_target_platformlinux-ppc64le
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_ppc64le_conda_glibc_ver2.17ct_ha8befb26f1
       linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archs390xctng_target_platformlinux-s390x:
         CONFIG: linux_ppc64le_conda_glibc_ver2.17ctng_cpu_archs390xctng_target_platformlinux-s390x
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-        SHORT_CONFIG_NAME: linux_ppc64le_conda_glibc_ver2.17ct_h360a5f82fa
   timeoutInMinutes: 360
 
   steps:
@@ -94,15 +82,3 @@ jobs:
       BINSTAR_TOKEN: $(BINSTAR_TOKEN)
       FEEDSTOCK_TOKEN: $(FEEDSTOCK_TOKEN)
       STAGING_BINSTAR_TOKEN: $(STAGING_BINSTAR_TOKEN)
-  - script: |
-        artifact_name="conda_artifacts_$(build.BuildId)_$(SHORT_CONFIG_NAME)"
-        echo "##vso[task.setVariable variable=ARTIFACT_NAME]$artifact_name"
-        if [ -d build_artifacts ]; then
-          echo "##vso[task.setVariable variable=CONDA_BLD_DIR_EXISTS]true"
-        fi
-    displayName: Check for conda build artifacts
-    condition: succeededOrFailed()
-
-  - publish: build_artifacts/
-    artifact: $(ARTIFACT_NAME)
-    condition: eq(variables.CONDA_BLD_DIR_EXISTS, 'true')
