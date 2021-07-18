@@ -13,7 +13,7 @@ ctng_binutils:
 ctng_cpu_arch:
 - x86_64
 ctng_gcc:
-- 9.4.0
+- 9.3.0
 ctng_target_platform:
 - linux-64
 ctng_vendor:
