@@ -20,6 +20,8 @@ pushd ${SRC_DIR}/build
   if [[ "${PKG_NAME}" == libgcc-ng ]]; then
     make -C ${CHOST}/libgcc prefix=${PREFIX} install-shared
   else
+    # when building a cross compiler, above make line will clobber $PREFIX/lib/libgcc_s.so.1
+    # and fail after some point for some architectures. To avoid that, we copy manually
     pushd ${CHOST}/libgcc
       mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
       install -c -m 644 libgcc_eh.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/libgcc_eh.a
