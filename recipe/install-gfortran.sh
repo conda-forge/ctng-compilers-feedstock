@@ -76,5 +76,3 @@ if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
 fi
 
 source ${RECIPE_DIR}/make_tool_links.sh
-
-exit 1
