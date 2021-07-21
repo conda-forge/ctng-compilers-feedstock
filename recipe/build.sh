@@ -94,6 +94,7 @@ cd build
   --enable-plugin \
   --enable-gold \
   --disable-nls \
+  --disable-bootstrap \
   --disable-multilib \
   --enable-long-long \
   --enable-default-pie \
