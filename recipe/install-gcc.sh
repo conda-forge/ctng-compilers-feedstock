@@ -132,7 +132,12 @@ popd
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
 specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
-${CHOST}-gcc -dumpspecs > $specdir/specs
+if [[ "$build_platform" == "$target_platform" ]]; then
+    $PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+else
+    $BUILD_PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+fi
+
 # We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
 #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
 #   package is installed.
