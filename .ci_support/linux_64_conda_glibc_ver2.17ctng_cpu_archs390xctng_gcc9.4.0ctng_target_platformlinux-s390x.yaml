@@ -1,11 +1,9 @@
-BUILD:
-- aarch64-conda_cos7-linux-gnu
-cdt_arch:
-- aarch64
+_libgcc_mutex:
+- 0.1 conda_forge
 cdt_name:
-- cos7
+- cos6
 channel_sources:
-- conda-forge
+- conda-forge,defaults
 channel_targets:
 - conda-forge gcc_dev
 conda_glibc_ver:
@@ -13,11 +11,11 @@ conda_glibc_ver:
 ctng_binutils:
 - 2.36.1
 ctng_cpu_arch:
-- powerpc64le
+- s390x
 ctng_gcc:
-- 9.3.0
+- 9.4.0
 ctng_target_platform:
-- linux-ppc64le
+- linux-s390x
 ctng_vendor:
 - conda
 docker_image:
@@ -31,10 +29,12 @@ old_ctng_vendor:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-aarch64
+- linux-64
 use_system_gcc:
 - 'False'
 zip_keys:
+- - cdt_name
+  - docker_image
 - - conda_glibc_ver
   - old_ctng_vendor
   - ctng_cpu_arch

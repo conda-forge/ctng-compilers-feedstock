@@ -18,7 +18,6 @@ source:
 
 build:
   number: 0
-  #skip: True  # [not linux or ((aarch64 or ppc64le) and target_platform != ctng_target_platform)]
   skip: True  # [not linux]
   detect_binary_files_with_prefix: False
 

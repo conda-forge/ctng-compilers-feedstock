@@ -1,9 +1,11 @@
-_libgcc_mutex:
-- 0.1 conda_forge
+BUILD:
+- aarch64-conda_cos7-linux-gnu
+cdt_arch:
+- aarch64
 cdt_name:
 - cos7
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge gcc_dev
 conda_glibc_ver:
@@ -13,7 +15,7 @@ ctng_binutils:
 ctng_cpu_arch:
 - powerpc64le
 ctng_gcc:
-- 9.3.0
+- 9.4.0
 ctng_target_platform:
 - linux-ppc64le
 ctng_vendor:
@@ -29,7 +31,7 @@ old_ctng_vendor:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-ppc64le
+- linux-aarch64
 use_system_gcc:
 - 'False'
 zip_keys:
