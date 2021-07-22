@@ -1,11 +1,11 @@
-ctng_cpu_arch:
+gcc_machine:
   - x86_64
   - powerpc64le
   - aarch64
   - s390x
-ctng_vendor:
+gcc_vendor:
   - conda
-ctng_gcc:
+gcc_version:
   - 9.4.0
   - 10.3.0
   - 11.1.0
@@ -13,21 +13,21 @@ libgfortran_soname:
   - 5
   - 5
   - 5
-ctng_binutils:
+binutils_version:
   - 2.36.1
-ctng_target_platform:
+cross_target_platform:
   - linux-64
   - linux-ppc64le
   - linux-aarch64
   - linux-s390x
-old_ctng_vendor:
+old_gcc_vendor:
   - conda_cos6
   - conda_cos7
   - conda_cos7
   - conda_cos7
-ctng_gcc_build_number:
-  - 20
-conda_glibc_ver:
+gcc_build_number:
+  - 0
+glibc_version:
   - 2.12
   - 2.17
   - 2.17
@@ -39,15 +39,13 @@ libgomp_ver:
   - 1.0.0
 _libgcc_mutex:
   - 0.1 conda_forge
-channel_targets:
-  - conda-forge gcc_dev
 use_system_gcc:
   - True         # [not (linux64 or aarch64 or ppc64le or s390x)]
   - False        # [linux64 or aarch64 or ppc64le or s390x]
 zip_keys:
-  - - conda_glibc_ver
-    - old_ctng_vendor
-    - ctng_cpu_arch
-    - ctng_target_platform
-  - - ctng_gcc
+  - - glibc_version
+    - old_gcc_vendor
+    - gcc_machine
+    - cross_target_platform
+  - - gcc_version
     - libgfortran_soname

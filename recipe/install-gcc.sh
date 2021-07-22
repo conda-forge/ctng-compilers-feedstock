@@ -1,6 +1,6 @@
 set -e -x
 
-export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 _libdir=libexec/gcc/${CHOST}/${PKG_VERSION}
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
@@ -45,7 +45,7 @@ pushd ${SRC_DIR}/build
   #   cp ${SRC_DIR}/gcc_built/$CHOST/sysroot/lib/libquadmath.so* $PREFIX/$CHOST/sysroot/lib
   # fi
 
-  make prefix=${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc} install-libcc1
+  make prefix=${PREFIX}/lib/gcc/${CHOST}/${gcc_version} install-libcc1
   install -d ${PREFIX}/share/gdb/auto-load/usr/lib
 
   make prefix=${PREFIX} install-fixincludes
@@ -77,7 +77,7 @@ pushd ${SRC_DIR}/build
 
   make -C libiberty prefix=${PREFIX} install
   # install PIC version of libiberty
-  install -m644 libiberty/pic/libiberty.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
+  install -m644 libiberty/pic/libiberty.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
 
   make -C gcc prefix=${PREFIX} install-man install-info
 
@@ -131,7 +131,7 @@ popd
 #   setting LINK_LIBGCC_SPECS on configure
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
-specdir=$PREFIX/lib/gcc/$CHOST/${ctng_gcc}
+specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
 ${CHOST}-gcc -dumpspecs > $specdir/specs
 # We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
 #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
@@ -164,7 +164,7 @@ popd
 
 mkdir -p ${PREFIX}/${CHOST}/lib
 
-if [[ "$target_platform" == "$ctng_target_platform" ]]; then
+if [[ "$target_platform" == "$cross_target_platform" ]]; then
   # making these this way so conda build doesn't muck with them
   pushd ${PREFIX}/${CHOST}/lib
     ln -sf ../../lib/libgomp.so libgomp.so

@@ -1,6 +1,6 @@
 set -e -x
 
-export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 
 # we have to remove existing links/files so that the libgcc install works
 rm -rf ${PREFIX}/lib/*

@@ -1,4 +1,4 @@
-export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 # stash what we need and rm -rf the rest
 tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
 cp -r ${PREFIX}/${CHOST}/sysroot ${tmp_dir}/sysroot

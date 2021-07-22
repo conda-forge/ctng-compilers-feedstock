@@ -1,6 +1,6 @@
 set -e -x
 
-export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 
 if [[ "$target_platform" == "linux-64" || "$target_platform" == "linux-ppc64le" ]]; then
   mkdir -p $PREFIX/lib
@@ -23,10 +23,10 @@ pushd ${SRC_DIR}/build
     # when building a cross compiler, above make line will clobber $PREFIX/lib/libgcc_s.so.1
     # and fail after some point for some architectures. To avoid that, we copy manually
     pushd ${CHOST}/libgcc
-      mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
-      install -c -m 644 libgcc_eh.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/libgcc_eh.a
-      chmod 644 ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/libgcc_eh.a
-      ${CHOST}-ranlib ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/libgcc_eh.a
+      mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
+      install -c -m 644 libgcc_eh.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/libgcc_eh.a
+      chmod 644 ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/libgcc_eh.a
+      ${CHOST}-ranlib ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/libgcc_eh.a
 
       mkdir -p ${PREFIX}/${CHOST}/lib
       install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${CHOST}/lib/libgcc_s.so.1

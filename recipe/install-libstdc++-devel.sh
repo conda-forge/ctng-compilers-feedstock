@@ -1,6 +1,6 @@
 set -e -x
 
-export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
@@ -14,12 +14,12 @@ make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX} install
 
 rm -rf ${PREFIX}/${CHOST}/lib/libstdc++.so*
 rm -rf ${PREFIX}/lib/libstdc++.so*
-mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
+mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
 
-if [[ "$target_platform" == "$ctng_target_platform" ]]; then
-    mv $PREFIX/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/
+if [[ "$target_platform" == "$cross_target_platform" ]]; then
+    mv $PREFIX/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
 else
-    mv $PREFIX/${CHOST}/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/
+    mv $PREFIX/${CHOST}/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
 fi
 
 popd

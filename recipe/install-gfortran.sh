@@ -1,6 +1,6 @@
 set -e -x
 
-export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 _libdir=libexec/gcc/${CHOST}/${PKG_VERSION}
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
@@ -31,8 +31,8 @@ pushd ${PREFIX}/bin
 popd
 
 make install DESTDIR=$SRC_DIR/build-finclude
-mkdir -p $PREFIX/lib/gcc/${CHOST}/${ctng_gcc}/finclude
-install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${ctng_gcc}/finclude/* $PREFIX/lib/gcc/${CHOST}/${ctng_gcc}/finclude/
+mkdir -p $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude
+install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/* $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/
 
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
@@ -47,7 +47,7 @@ install -Dm644 $SRC_DIR/COPYING.RUNTIME \
 #   setting LINK_LIBGCC_SPECS on configure
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
-specdir=${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
+specdir=${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
 mv $PREFIX/bin/${CHOST}-gfortran $PREFIX/bin/${CHOST}-gfortran.bin
 echo '#!/bin/sh' > $PREFIX/bin/${CHOST}-gfortran
 echo $PREFIX/bin/${CHOST}-gfortran.bin -specs=$specdir/specs '"$@"' >> $PREFIX/bin/${CHOST}-gfortran

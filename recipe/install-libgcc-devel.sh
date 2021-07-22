@@ -1,6 +1,6 @@
 set -e -x
 
-export CHOST="${ctng_cpu_arch}-${ctng_vendor}-linux-gnu"
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
@@ -14,7 +14,7 @@ make -C ${CHOST}/libgcc prefix=${PREFIX} install
 rm -rf ${PREFIX}/${CHOST}/lib
 rm -rf ${PREFIX}/lib/libgcc_s.so*
 # This is in gcc_impl as it is gcc specific and clang has the same header
-rm -rf ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}/include/unwind.h
+rm -rf ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/include/unwind.h
 
 popd
 

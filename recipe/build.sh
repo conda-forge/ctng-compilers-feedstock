@@ -19,9 +19,9 @@ get_cpu_arch() {
   echo $CPU_ARCH
 }
 
-export BUILD="$(get_cpu_arch $build_platform)-${ctng_vendor}-linux-gnu"
-export HOST="$(get_cpu_arch $target_platform)-${ctng_vendor}-linux-gnu"
-export TARGET="$(get_cpu_arch $ctng_target_platform)-${ctng_vendor}-linux-gnu"
+export BUILD="$(get_cpu_arch $build_platform)-${gcc_vendor}-linux-gnu"
+export HOST="$(get_cpu_arch $target_platform)-${gcc_vendor}-linux-gnu"
+export TARGET="$(get_cpu_arch $cross_target_platform)-${gcc_vendor}-linux-gnu"
 
 for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf size strings strip; do
   if [[ ! -f $BUILD_PREFIX/bin/$BUILD-$tool ]]; then
@@ -100,7 +100,7 @@ cd build
   --enable-default-pie \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
-  --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${ctng_gcc}"
+  --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}"
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libbacktrace/config.log; false)
 
