@@ -32,6 +32,7 @@ requirements:
     - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
     - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
     - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
+    - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
   host:
     - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
 
@@ -56,6 +57,7 @@ outputs:
         - gxx_impl_{{ ctng_target_platform }}        # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
+        - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
     test:
@@ -87,6 +89,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
@@ -130,6 +133,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
@@ -145,9 +149,9 @@ outputs:
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}       # [target_platform == ctng_target_platform]
         - {{ pin_subpackage("libgomp", max_pin=None) }}         # [target_platform == ctng_target_platform]
         - sysroot_{{ ctng_target_platform }}
-        # Any version newer than the devtoolset works. This can be removed when bootstrapping.
-        - libstdcxx-ng >=4.9
-        - libgcc-ng >=4.9
+        # Any version newer than the devtoolset works.
+        - libstdcxx-ng >=4.9   # [use_system_gcc]
+        - libgcc-ng >=4.9      # [use_system_gcc]
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
@@ -195,6 +199,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
@@ -249,6 +254,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         # For cpp and crt{i,n}.o
@@ -308,6 +314,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
@@ -332,6 +339,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
@@ -376,6 +384,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
@@ -417,6 +426,7 @@ outputs:
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
+        - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
         - sysroot_{{ ctng_target_platform }}  {{ conda_glibc_ver }}
@@ -463,6 +473,7 @@ outputs:
         - gcc_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gxx_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
         - gfortran_impl_{{ ctng_target_platform }}   # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ ctng_gcc }}  # [not use_system_gcc and build_platform == target_platform]
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}
       host:
         - sysroot_{{ ctng_target_platform }} {{ conda_glibc_ver }}

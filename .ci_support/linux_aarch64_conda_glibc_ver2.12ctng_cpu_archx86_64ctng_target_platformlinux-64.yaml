@@ -32,6 +32,8 @@ openmp_ver:
 - '4.5'
 target_platform:
 - linux-aarch64
+use_system_gcc:
+- 'False'
 zip_keys:
 - - conda_glibc_ver
   - old_ctng_vendor
