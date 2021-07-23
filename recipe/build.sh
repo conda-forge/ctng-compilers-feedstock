@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 get_cpu_arch() {
   local CPU_ARCH
