@@ -33,9 +33,9 @@ for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf
   elif [[ "$tool" == g++ ]]; then
      tool_upper=CXX
   fi
-  declare "${tool_upper}_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-$tool"
-  declare "${tool_upper}_FOR_TARGET=$BUILD_PREFIX/bin/$TARGET-$tool"
-  declare "${tool_upper}=$BUILD_PREFIX/bin/$HOST-$tool"
+  eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
+  eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
+  eval "export ${tool_upper}=\$BUILD_PREFIX/bin/\$HOST-\$tool"
 done
 
 if [[ $build_platform != $target_platform ]]; then
