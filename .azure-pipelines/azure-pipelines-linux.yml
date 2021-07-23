@@ -5,55 +5,151 @@
 jobs:
 - job: linux
   pool:
-    vmImage: ubuntu-16.04
+    vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7:
-        CONFIG: linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc7.5.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7
+      linux_64_cross_target_platformlinux-64gcc_machinex86_64gcc_version10.3.0glibc_version2.12:
+        CONFIG: linux_64_cross_target_platformlinux-64gcc_machinex86_64gcc_version10.3.0glibc_version2.12
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7:
-        CONFIG: linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc8.4.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7
+      linux_64_cross_target_platformlinux-64gcc_machinex86_64gcc_version11.1.0glibc_version2.12:
+        CONFIG: linux_64_cross_target_platformlinux-64gcc_machinex86_64gcc_version11.1.0glibc_version2.12
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7:
-        CONFIG: linux_64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_gcc9.3.0ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7
+      linux_64_cross_target_platformlinux-64gcc_machinex86_64gcc_version9.4.0glibc_version2.12:
+        CONFIG: linux_64_cross_target_platformlinux-64gcc_machinex86_64gcc_version9.4.0glibc_version2.12
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
-      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc7.5.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
+      linux_64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version10.3.0glibc_version2.17:
+        CONFIG: linux_64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version10.3.0glibc_version2.17
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
-      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc8.4.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
+      linux_64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version11.1.0glibc_version2.17:
+        CONFIG: linux_64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version11.1.0glibc_version2.17
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      ? linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
-      : CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_gcc9.3.0ctng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
+      linux_64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version9.4.0glibc_version2.17:
+        CONFIG: linux_64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version9.4.0glibc_version2.17
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6:
-        CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc7.5.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6
+      linux_64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version10.3.0glibc_version2.17:
+        CONFIG: linux_64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version10.3.0glibc_version2.17
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6:
-        CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc8.4.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6
+      linux_64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version11.1.0glibc_version2.17:
+        CONFIG: linux_64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version11.1.0glibc_version2.17
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6:
-        CONFIG: linux_64_ctng_binutils2.31.1ctng_cpu_archx86_64ctng_gcc9.3.0ctng_target_platformlinux-64old_ctng_vendorconda_cos6
+      linux_64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version9.4.0glibc_version2.17:
+        CONFIG: linux_64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version9.4.0glibc_version2.17
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7:
-        CONFIG: linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc7.5.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7
+      linux_64_cross_target_platformlinux-s390xgcc_machines390xgcc_version10.3.0glibc_version2.17:
+        CONFIG: linux_64_cross_target_platformlinux-s390xgcc_machines390xgcc_version10.3.0glibc_version2.17
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7:
-        CONFIG: linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc8.4.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7
+      linux_64_cross_target_platformlinux-s390xgcc_machines390xgcc_version11.1.0glibc_version2.17:
+        CONFIG: linux_64_cross_target_platformlinux-s390xgcc_machines390xgcc_version11.1.0glibc_version2.17
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
-      linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7:
-        CONFIG: linux_64_ctng_binutils2.33.1ctng_cpu_archs390xctng_gcc9.3.0ctng_target_platformlinux-s390xold_ctng_vendorconda_cos7
+      linux_64_cross_target_platformlinux-s390xgcc_machines390xgcc_version9.4.0glibc_version2.17:
+        CONFIG: linux_64_cross_target_platformlinux-s390xgcc_machines390xgcc_version9.4.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_version10.3.0glibc_version2.12:
+        CONFIG: linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_version10.3.0glibc_version2.12
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_version11.1.0glibc_version2.12:
+        CONFIG: linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_version11.1.0glibc_version2.12
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_version9.4.0glibc_version2.12:
+        CONFIG: linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_version9.4.0glibc_version2.12
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version10.3.0glibc_version2.17:
+        CONFIG: linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version10.3.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version11.1.0glibc_version2.17:
+        CONFIG: linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version11.1.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version9.4.0glibc_version2.17:
+        CONFIG: linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version9.4.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version10.3.0glibc_version2.17:
+        CONFIG: linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version10.3.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version11.1.0glibc_version2.17:
+        CONFIG: linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version11.1.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version9.4.0glibc_version2.17:
+        CONFIG: linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version9.4.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_version10.3.0glibc_version2.17:
+        CONFIG: linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_version10.3.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_version11.1.0glibc_version2.17:
+        CONFIG: linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_version11.1.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_version9.4.0glibc_version2.17:
+        CONFIG: linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_version9.4.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_version10.3.0glibc_version2.12:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_version10.3.0glibc_version2.12
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_version11.1.0glibc_version2.12:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_version11.1.0glibc_version2.12
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_version9.4.0glibc_version2.12:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_version9.4.0glibc_version2.12
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version10.3.0glibc_version2.17:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version10.3.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version11.1.0glibc_version2.17:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version11.1.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version9.4.0glibc_version2.17:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version9.4.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version10.3.0glibc_version2.17:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version10.3.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version11.1.0glibc_version2.17:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version11.1.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version9.4.0glibc_version2.17:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version9.4.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_version10.3.0glibc_version2.17:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_version10.3.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_version11.1.0glibc_version2.17:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_version11.1.0glibc_version2.17
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_version9.4.0glibc_version2.17:
+        CONFIG: linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_version9.4.0glibc_version2.17
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
   timeoutInMinutes: 360

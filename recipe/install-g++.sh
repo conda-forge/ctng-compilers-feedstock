@@ -1,13 +1,13 @@
 set -e -x
 
-CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine)
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 _libdir=libexec/gcc/${CHOST}/${PKG_VERSION}
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
-export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
+#export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
 
-pushd ${SRC_DIR}/.build/$CHOST/build/build-cc-gcc-final/
+pushd ${SRC_DIR}/build
 
 make -C gcc prefix=${PREFIX} c++.install-common
 
@@ -45,7 +45,7 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-        ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}" || :
+       ${BUILD_PREFIX}/bin/${CHOST}-strip --strip-all -v "${_file}" || :
       ;;
     esac
   done

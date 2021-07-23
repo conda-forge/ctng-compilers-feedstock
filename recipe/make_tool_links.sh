@@ -1,4 +1,4 @@
-if [[ "${ctng_cpu_arch}" == "x86_64" ]]; then
+if [[ "${gcc_machine}" == "x86_64" ]]; then
   old_vendor="-conda_cos6-linux-gnu-"
 else
   old_vendor="-conda_cos7-linux-gnu-"

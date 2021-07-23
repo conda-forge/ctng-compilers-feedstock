@@ -1,5 +1,4 @@
-CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine)
-
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 # stash what we need and rm -rf the rest
 tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
 cp -r ${PREFIX}/${CHOST}/sysroot ${tmp_dir}/sysroot
@@ -20,7 +19,7 @@ cp ${tmp_dir}/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so.${libgomp_ver}
 ln -s ${PREFIX}/lib/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so
 
 # Install Runtime Library Exception
-install -Dm644 ${SRC_DIR}/.build/src/gcc-${ctng_gcc}/COPYING.RUNTIME \
+install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION.gomp_copy
 
 rm -rf ${tmp_dir}

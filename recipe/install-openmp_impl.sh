@@ -1,6 +1,6 @@
 set -e -x
 
-CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine)
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 
 mkdir -p ${PREFIX}/lib
 

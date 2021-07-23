@@ -1,13 +1,13 @@
 set -e -x
 
-CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine)
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 _libdir=libexec/gcc/${CHOST}/${PKG_VERSION}
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
-export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
+#export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
 
-pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
+pushd ${SRC_DIR}/build
   # We may not have built with plugin support so failure here is not fatal:
   make prefix=${PREFIX} install-lto-plugin || true
   make -C gcc prefix=${PREFIX} install-driver install-cpp install-gcc-ar install-headers install-plugin install-lto-wrapper install-collect2
@@ -45,7 +45,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
   #   cp ${SRC_DIR}/gcc_built/$CHOST/sysroot/lib/libquadmath.so* $PREFIX/$CHOST/sysroot/lib
   # fi
 
-  make prefix=${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc} install-libcc1
+  make prefix=${PREFIX}/lib/gcc/${CHOST}/${gcc_version} install-libcc1
   install -d ${PREFIX}/share/gdb/auto-load/usr/lib
 
   make prefix=${PREFIX} install-fixincludes
@@ -77,7 +77,7 @@ pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
 
   make -C libiberty prefix=${PREFIX} install
   # install PIC version of libiberty
-  install -m644 libiberty/pic/libiberty.a ${PREFIX}/lib/gcc/${CHOST}/${ctng_gcc}
+  install -m644 libiberty/pic/libiberty.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
 
   make -C gcc prefix=${PREFIX} install-man install-info
 
@@ -122,52 +122,6 @@ EOF
 
 popd
 
-# Install kernel headers
-kernel_arch=${ctng_cpu_arch}
-if [[ ${kernel_arch} == aarch64 ]]; then
-  kernel_arch=arm64
-elif [[ ${kernel_arch} == i686 ]]; then
-  kernel_arch=x86
-elif [[ ${kernel_arch} == s390x ]]; then
-  kernel_arch=s390
-fi
-
-
-if [[ ${ctng_libc} == gnu ]]; then
-  # using the cos CDTs
-  # Install libc libraries
-  # make -C ${SRC_DIR}/.build/src/linux-* \
-  #   CROSS_COMPILE=${CHOST}- O=${SRC_DIR}/.build/${CHOST}/build/build-kernel-headers \
-  #   ARCH=${kernel_arch} \
-  #   INSTALL_HDR_PATH=${PREFIX}/${CHOST}/sysroot/usr ${VERBOSE_AT} headers_install
-  #
-  # pushd ${SRC_DIR}/.build/${CHOST}/build/build-libc-final/multilib
-  #   make -l BUILD_CFLAGS="-O2 -g -I${SRC_DIR}/.build/${CHOST}/buildtools/include" \
-  #           BUILD_LDFLAGS="-L${SRC_DIR}/.build/${CHOST}/buildtools/lib"           \
-  #           install_root=${PREFIX}/${CHOST}/sysroot install
-  # popd
-  :
-else
-  # Install uClibc headers
-  make -C ${SRC_DIR}/.build/src/linux-* \
-    CROSS_COMPILE=${CHOST}- O=${SRC_DIR}/.build/${CHOST}/build/build-kernel-headers \
-    ARCH=${kernel_arch} \
-    INSTALL_HDR_PATH=${PREFIX}/${CHOST}/sysroot/usr ${VERBOSE_AT} headers_install
-
-  pushd ${SRC_DIR}/.build/${CHOST}/build/build-libc-startfiles/multilib
-    make CROSS_COMPILE=${CHOST}- PREFIX=${PREFIX}/${CHOST}/sysroot MULTILIB_DIR=lib \
-	     LOCALE_DATA_FILENAME=uClibc-locale-030818.tgz STRIPTOOL=true V=2 UCLIBC_EXTRA_CFLAGS=-pipe headers
-  popd
-
-  # Install uClibc libraries
-  pushd ${SRC_DIR}/.build/${CHOST}/build/build-libc-final/multilib
-    PATH=${SRC_DIR}/.build/${CHOST}/buildtools/${CHOST}/bin:$PATH \
-      make CROSS_COMPILE=${CHOST}- PREFIX=${PREFIX}/${CHOST}/sysroot MULTILIB_DIR=lib                 \
-	       LOCALE_DATA_FILENAME=uClibc-locale-030818.tgz STRIPTOOL=true V=2 UCLIBC_EXTRA_CFLAGS=-pipe \
-		   install install_utils
-  popd
-fi
-
 # generate specfile so that we can patch loader link path
 # link_libgcc should have the gcc's own libraries by default (-R)
 # so that LD_LIBRARY_PATH isn't required for basic libraries.
@@ -177,31 +131,21 @@ fi
 #   setting LINK_LIBGCC_SPECS on configure
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
-specdir=$PREFIX/lib/gcc/$CHOST/${ctng_gcc}
-$PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
+if [[ "$build_platform" == "$target_platform" ]]; then
+    $PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+else
+    $BUILD_PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+fi
+
 # We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
 #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
 #   package is installed.
 sed -i -e "/\*link_libgcc:/,+1 s+%.*+& -rpath ${PREFIX}/lib+" $specdir/specs
 
 # Install Runtime Library Exception
-install -Dm644 $SRC_DIR/.build/src/gcc-${PKG_VERSION}/COPYING.RUNTIME \
-        ${PREFIX}/share/licenses/gcc/$CHOST/RUNTIME.LIBRARY.EXCEPTION
-
-# Next problem: macOS targetting uClibc ends up with broken symlinks in sysroot/usr/lib:
-if [[ $(uname) == Darwin ]]; then
-  pushd ${PREFIX}/${CHOST}/sysroot/usr/lib
-  links=$(find . -type l | cut -c 3-)
-  for link in ${links}; do
-    target=$(readlink ${link} | sed 's#^/##' | sed 's#//#/#')
-    rm ${link}
-    ln -s ${target} ${link}
-  done
-  popd
-fi
-
-# Install the crosstool-ng config program to help with reproducibility:
-cp ${SRC_DIR}/gcc_built/bin/${CHOST}-ct-ng.config ${PREFIX}/bin
+install -Dm644 $SRC_DIR/COPYING.RUNTIME \
+        ${PREFIX}/share/licenses/gcc/RUNTIME.LIBRARY.EXCEPTION
 
 set +x
 # Strip executables, we may want to install to a different prefix
@@ -215,7 +159,7 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-        ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}" || :
+        ${BUILD_PREFIX}/bin/${CHOST}-strip --strip-all -v "${_file}" || :
       ;;
     esac
   done
@@ -223,18 +167,28 @@ popd
 
 #${PREFIX}/bin/${CHOST}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
-if [[ "$target_platform" == "$ctng_target_platform" ]]; then
+mkdir -p ${PREFIX}/${CHOST}/lib
+
+if [[ "$target_platform" == "$cross_target_platform" ]]; then
   # making these this way so conda build doesn't muck with them
-  pushd ${PREFIX}/${CHOST}/sysroot/lib
-    ln -sf ../../../lib/libgomp.so libgomp.so
+  pushd ${PREFIX}/${CHOST}/lib
+    ln -sf ../../lib/libgomp.so libgomp.so
   popd
 
   # make links to libs in the sysroot
   for lib in libgcc_s libstdc++ libgfortran libatomic libquadmath libitm lib{a,l,ub,t}san; do
-    ln -s ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/sysroot/lib/
+    ln -s ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/lib/
   done
 else
   source ${RECIPE_DIR}/install-libgcc.sh
+  for lib in libgcc_s libcc1; do
+    mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/lib/ || true
+  done
+  rm -f ${PREFIX}/share/info/*.info
+fi
+
+if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
+  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/${CHOST}/lib/libgomp.spec
 fi
 
 source ${RECIPE_DIR}/make_tool_links.sh

@@ -1,13 +1,13 @@
 set -e -x
 
-CHOST=$(${SRC_DIR}/.build/*-*-*-*/build/build-cc-gcc-final/gcc/xgcc -dumpmachine)
+export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 _libdir=libexec/gcc/${CHOST}/${PKG_VERSION}
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
-export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
+#export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
 
-pushd ${SRC_DIR}/.build/${CHOST}/build/build-cc-gcc-final/
+pushd ${SRC_DIR}/build
 
 # adapted from Arch install script from https://github.com/archlinuxarm/PKGBUILDs/blob/master/core/gcc/PKGBUILD
 # We cannot make install since .la files are not relocatable so libtool deliberately prevents it:
@@ -23,19 +23,19 @@ for file in f951; do
   fi
 done
 
-cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/sysroot/lib
+mkdir -p ${PREFIX}/${CHOST}/lib
+cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/lib
 
 pushd ${PREFIX}/bin
-  ln -s ${CHOST}-gfortran ${CHOST}-f95
+  ln -sf ${CHOST}-gfortran ${CHOST}-f95
 popd
 
-popd
-
-mkdir -p $PREFIX/lib/gcc/${CHOST}/${ctng_gcc}/finclude
-rsync -av ${SRC_DIR}/gcc_built/lib/gcc/${CHOST}/${ctng_gcc}/finclude/ $PREFIX/lib/gcc/${CHOST}/${ctng_gcc}/finclude
+make install DESTDIR=$SRC_DIR/build-finclude
+mkdir -p $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude
+install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/* $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/
 
 # Install Runtime Library Exception
-install -Dm644 $SRC_DIR/.build/src/gcc-${PKG_VERSION}/COPYING.RUNTIME \
+install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-fortran/RUNTIME.LIBRARY.EXCEPTION
 
 # generate specfile so that we can patch loader link path
@@ -47,7 +47,7 @@ install -Dm644 $SRC_DIR/.build/src/gcc-${PKG_VERSION}/COPYING.RUNTIME \
 #   setting LINK_LIBGCC_SPECS on configure
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
-specdir=`dirname $($PREFIX/bin/${CHOST}-gcc -print-libgcc-file-name -no-canonical-prefixes)`
+specdir=${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
 mv $PREFIX/bin/${CHOST}-gfortran $PREFIX/bin/${CHOST}-gfortran.bin
 echo '#!/bin/sh' > $PREFIX/bin/${CHOST}-gfortran
 echo $PREFIX/bin/${CHOST}-gfortran.bin -specs=$specdir/specs '"$@"' >> $PREFIX/bin/${CHOST}-gfortran
@@ -65,10 +65,14 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-        ${SRC_DIR}/gcc_built/bin/${CHOST}-strip --strip-all -v "${_file}" || :
+        ${BUILD_PREFIX}/bin/${CHOST}-strip --strip-all -v "${_file}" || :
       ;;
     esac
   done
 popd
+
+if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
+  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/${CHOST}/lib/libgomp.spec
+fi
 
 source ${RECIPE_DIR}/make_tool_links.sh

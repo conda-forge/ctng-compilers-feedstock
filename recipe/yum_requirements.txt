@@ -9,6 +9,3 @@ sed
 findutils
 make
 file
-bison
-automake
-autoconf
