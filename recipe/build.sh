@@ -40,12 +40,15 @@ done
 
 if [[ $build_platform != $target_platform ]]; then
   export GFORTRAN_FOR_TARGET="$BUILD_PREFIX/bin/$TARGET-gfortran"
+  export GXX_FOR_TARGET="$BUILD_PREFIX/bin/$TARGET-g++"
   export FC=$GFORTRAN_FOR_TARGET
 fi
 
 # workaround a bug in gcc build files when using external binutils
 # and build != host == target
 export gcc_cv_objdump=$OBJDUMP_FOR_TARGET
+
+env
 
 ls $BUILD_PREFIX/bin/
 
