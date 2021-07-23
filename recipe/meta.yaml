@@ -1,7 +1,7 @@
 {% set name = "gcc_impl" %}
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = gcc_build_number %}
+{% set build_num = 1 %}
 
 package:
   name: gcc_compilers
@@ -263,7 +263,7 @@ outputs:
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ cross_target_platform }} >={{ gcc_version }}
-        - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libgfortran" ~ libgfortran_soname, max_pin=None) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}           # [target_platform == cross_target_platform]
         - sysroot_{{ cross_target_platform }}
         # Any version newer than the devtoolset works. This can be removed when bootstrapping.
