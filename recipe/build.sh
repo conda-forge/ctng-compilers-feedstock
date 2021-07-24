@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 get_cpu_arch() {
   local CPU_ARCH
@@ -33,19 +33,26 @@ for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf
   elif [[ "$tool" == g++ ]]; then
      tool_upper=CXX
   fi
-  declare "${tool_upper}_FOR_BUILD=$BUILD_PREFIX/bin/$BUILD-$tool"
-  declare "${tool_upper}_FOR_TARGET=$BUILD_PREFIX/bin/$TARGET-$tool"
-  declare "${tool_upper}=$BUILD_PREFIX/bin/$HOST-$tool"
+  eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
+  eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
+  eval "export ${tool_upper}=\$BUILD_PREFIX/bin/\$HOST-\$tool"
 done
 
 if [[ $build_platform != $target_platform ]]; then
   export GFORTRAN_FOR_TARGET="$BUILD_PREFIX/bin/$TARGET-gfortran"
+  export GXX_FOR_TARGET="$BUILD_PREFIX/bin/$TARGET-g++"
   export FC=$GFORTRAN_FOR_TARGET
 fi
 
 # workaround a bug in gcc build files when using external binutils
 # and build != host == target
 export gcc_cv_objdump=$OBJDUMP_FOR_TARGET
+
+# Workaround a problem in our gcc_bootstrap package
+if [[ -d $BUILD_PREFIX/$BUILD/sysroot/usr/lib64 && ! -d $BUILD_PREFIX/$BUILD/sysroot/usr/lib ]]; then
+  mkdir -p $BUILD_PREFIX/$BUILD/sysroot/usr
+  ln -sf $BUILD_PREFIX/$BUILD/sysroot/usr/lib64 $BUILD_PREFIX/$BUILD/sysroot/usr/lib
+fi
 
 ls $BUILD_PREFIX/bin/
 
@@ -71,6 +78,11 @@ cd build
 # Depending on native or not, the include dir changes. Setting it explictly
 # goes back to the original way.
 # See https://github.com/gcc-mirror/gcc/blob/16e2427f50c208dfe07d07f18009969502c25dc8/gcc/configure.ac#L218
+
+if [[ "$gcc_version" == "11.1.0" && "$build_platform" != "$target_platform" ]]; then
+  # see https://gcc.gnu.org/bugzilla//show_bug.cgi?id=80196
+  GCC_CONFIGURE_OPTIONS="--disable-libstdcxx-pch"
+fi
 
 ../configure \
   --prefix="$PREFIX" \
@@ -100,8 +112,7 @@ cd build
   --enable-default-pie \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
-  --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}"
+  --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}" \
+  $GCC_CONFIGURE_OPTIONS
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libbacktrace/config.log; false)
-
-#exit 1

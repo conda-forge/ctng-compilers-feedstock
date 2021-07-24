@@ -1,7 +1,7 @@
 {% set name = "gcc_impl" %}
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = gcc_build_number %}
+{% set build_num = 1 %}
 
 package:
   name: gcc_compilers
@@ -25,13 +25,13 @@ requirements:
   build:
     - binutils_impl_{{ target_platform }}  {{ binutils_version }}
     - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-    - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-    - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
-    - gcc_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-    - gxx_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-    - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
+    - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+    - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+    - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+    - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+    - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
     - sysroot_{{ cross_target_platform }} {{ glibc_version }}
-    - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+    - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
   host:
     - sysroot_{{ cross_target_platform }} {{ glibc_version }}
 
@@ -46,17 +46,20 @@ outputs:
         - "*"
       ignore_run_exports:
         - __glibc
+      ignore_run_exports_from:
+        - gcc_impl_{{ build_platform }}  {{ gcc_version }}                # [build_platform != target_platform]
+        - gxx_impl_{{ build_platform }}  {{ gcc_version }}                # [build_platform != target_platform]
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}             # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}             # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}        # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}        # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
     test:
@@ -83,12 +86,12 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
@@ -127,12 +130,12 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
@@ -193,12 +196,12 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
@@ -248,12 +251,12 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         # For cpp and crt{i,n}.o
@@ -263,7 +266,7 @@ outputs:
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ cross_target_platform }} >={{ gcc_version }}
-        - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libgfortran" ~ libgfortran_soname, max_pin=None) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}           # [target_platform == cross_target_platform]
         - sysroot_{{ cross_target_platform }}
         # Any version newer than the devtoolset works. This can be removed when bootstrapping.
@@ -308,12 +311,12 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
@@ -333,12 +336,12 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
@@ -378,12 +381,12 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         - sysroot_{{ cross_target_platform }}  {{ glibc_version }}
@@ -419,13 +422,13 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
         - sysroot_{{ cross_target_platform }}  {{ glibc_version }}
@@ -467,12 +470,12 @@ outputs:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}   # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}   # [build_platform != target_platform]
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}  # [not use_system_gcc and build_platform == target_platform]
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}

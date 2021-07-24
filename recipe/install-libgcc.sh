@@ -30,7 +30,7 @@ pushd ${SRC_DIR}/build
 
       mkdir -p ${PREFIX}/${CHOST}/lib
       install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${CHOST}/lib/libgcc_s.so.1
-      ln -s libgcc_s.so.1 ${PREFIX}/${CHOST}/lib/libgcc_s.so
+      cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/${CHOST}/lib/libgcc_s.so
     popd
   fi
 
