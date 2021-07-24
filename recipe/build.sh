@@ -54,8 +54,6 @@ if [[ -d $BUILD_PREFIX/$BUILD/sysroot/usr/lib64 && ! -d $BUILD_PREFIX/$BUILD/sys
   ln -sf $BUILD_PREFIX/$BUILD/sysroot/usr/lib64 $BUILD_PREFIX/$BUILD/sysroot/usr/lib
 fi
 
-env
-
 ls $BUILD_PREFIX/bin/
 
 ./contrib/download_prerequisites
@@ -80,6 +78,11 @@ cd build
 # Depending on native or not, the include dir changes. Setting it explictly
 # goes back to the original way.
 # See https://github.com/gcc-mirror/gcc/blob/16e2427f50c208dfe07d07f18009969502c25dc8/gcc/configure.ac#L218
+
+if [[ "$gcc_version" == "11.1.0" && "$build_platform" != "$target_platform" ]]; then
+  # see https://gcc.gnu.org/bugzilla//show_bug.cgi?id=80196
+  GCC_CONFIGURE_OPTIONS="--disable-libstdcxx-pch"
+fi
 
 ../configure \
   --prefix="$PREFIX" \
