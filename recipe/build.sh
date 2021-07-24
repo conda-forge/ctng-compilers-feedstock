@@ -69,6 +69,11 @@ for TINFO_FILE in ${TINFO_FILES}; do
   rm -f ${TINFO_FILE}.bak
 done
 
+# workaround for https://gcc.gnu.org/bugzilla//show_bug.cgi?id=80196
+if [[ "$gcc_version" == "11.1.0" && "$build_platform" != "$target_platform" ]]; then
+  sed -i.bak 's@-I$glibcxx_srcdir/libsupc++@-I$glibcxx_srcdir/libsupc++ -nostdinc++@g' libstdc++-v3/configure
+fi
+
 mkdir -p build
 cd build
 
@@ -78,11 +83,6 @@ cd build
 # Depending on native or not, the include dir changes. Setting it explictly
 # goes back to the original way.
 # See https://github.com/gcc-mirror/gcc/blob/16e2427f50c208dfe07d07f18009969502c25dc8/gcc/configure.ac#L218
-
-if [[ "$gcc_version" == "11.1.0" && "$build_platform" != "$target_platform" ]]; then
-  # see https://gcc.gnu.org/bugzilla//show_bug.cgi?id=80196
-  GCC_CONFIGURE_OPTIONS="--disable-libstdcxx-pch"
-fi
 
 ../configure \
   --prefix="$PREFIX" \
