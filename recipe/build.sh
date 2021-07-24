@@ -112,6 +112,7 @@ fi
   --enable-default-pie \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
-  --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}"
+  --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}" \
+  $GCC_CONFIGURE_OPTIONS
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libbacktrace/config.log; false)
