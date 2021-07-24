@@ -48,6 +48,12 @@ fi
 # and build != host == target
 export gcc_cv_objdump=$OBJDUMP_FOR_TARGET
 
+# Workaround a problem in our gcc_bootstrap package
+if [[ -d $BUILD_PREFIX/$BUILD/sysroot/usr/lib64 && ! -d $BUILD_PREFIX/$BUILD/sysroot/usr/lib ]]; then
+  mkdir -p $BUILD_PREFIX/$BUILD/sysroot/usr
+  ln -sf $BUILD_PREFIX/$BUILD/sysroot/usr/lib64 $BUILD_PREFIX/$BUILD/sysroot/usr/lib
+fi
+
 env
 
 ls $BUILD_PREFIX/bin/
@@ -106,5 +112,3 @@ cd build
   --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}"
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libbacktrace/config.log; false)
-
-#exit 1
