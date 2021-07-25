@@ -278,6 +278,90 @@ Current build status
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_version9.4.0glibc_version2.17" alt="variant">
                 </a>
               </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_version10.3.0glibc_version2.12</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_version10.3.0glibc_version2.12" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_version11.1.0glibc_version2.12</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_version11.1.0glibc_version2.12" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_version9.4.0glibc_version2.12</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_version9.4.0glibc_version2.12" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version10.3.0glibc_version2.17</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version10.3.0glibc_version2.17" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version11.1.0glibc_version2.17</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version11.1.0glibc_version2.17" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version9.4.0glibc_version2.17</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_version9.4.0glibc_version2.17" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version10.3.0glibc_version2.17</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version10.3.0glibc_version2.17" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version11.1.0glibc_version2.17</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version11.1.0glibc_version2.17" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version9.4.0glibc_version2.17</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_version9.4.0glibc_version2.17" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_version10.3.0glibc_version2.17</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_version10.3.0glibc_version2.17" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_version11.1.0glibc_version2.17</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_version11.1.0glibc_version2.17" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_version9.4.0glibc_version2.17</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=master&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_version9.4.0glibc_version2.17" alt="variant">
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
