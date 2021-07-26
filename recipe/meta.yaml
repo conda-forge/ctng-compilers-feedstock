@@ -302,7 +302,7 @@ outputs:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
-      skip: True   # [target_platform != cross_target_platform]
+      skip: True   # [target_platform != cross_target_platform and not package_cross_compiled_runtime]
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
@@ -356,7 +356,7 @@ outputs:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
-      skip: True   # [target_platform != cross_target_platform]
+      skip: True   # [target_platform != cross_target_platform and not package_cross_compiled_runtime]
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
@@ -396,7 +396,7 @@ outputs:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
-      skip: True   # [target_platform != cross_target_platform]
+      skip: True   # [target_platform != cross_target_platform and not package_cross_compiled_runtime]
       missing_dso_whitelist:
         - "*"
       run_exports:
@@ -440,7 +440,7 @@ outputs:
         - openmp_impl 9999
     build:
       string: 1_gnu
-      skip: True   # [target_platform != cross_target_platform]
+      skip: True   # [target_platform != cross_target_platform and not package_cross_compiled_runtime]
       run_exports:
         strong:
           - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
@@ -461,7 +461,7 @@ outputs:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
       binary_relocation: False
-      skip: True   # [target_platform != cross_target_platform]
+      skip: True   # [target_platform != cross_target_platform and not package_cross_compiled_runtime]
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
@@ -492,7 +492,7 @@ outputs:
   - name: libgfortran-ng
     target: {{ cross_target_platform }}
     build:
-      skip: True   # [target_platform != cross_target_platform]
+      skip: True   # [target_platform != cross_target_platform and not package_cross_compiled_runtime]
     requirements:
       run:
         - {{ pin_subpackage('libgfortran' ~ libgfortran_soname, exact=True) }}
