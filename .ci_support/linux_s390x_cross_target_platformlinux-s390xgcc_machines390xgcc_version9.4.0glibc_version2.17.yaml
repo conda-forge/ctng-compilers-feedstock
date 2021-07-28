@@ -1,7 +1,9 @@
 binutils_version:
 - 2.36.1
+cdt_name:
+- cos7
 channel_sources:
-- conda-forge,defaults
+- https://conda-web.anaconda.org/conda-forge
 channel_targets:
 - conda-forge main
 cross_target_platform:
