@@ -39,13 +39,26 @@ libgomp_ver:
   - 1.0.0
 _libgcc_mutex:
   - 0.1 conda_forge
+# If you are using a pip installed conda-build to bootstrap a platform
+# this needs to be True
 use_system_gcc:
   - True         # [not (linux64 or aarch64 or ppc64le or s390x)]
   - False        # [linux64 or aarch64 or ppc64le or s390x]
+# If you are using cross compilation to bootstrap a platform this
+# needs to be True for the platform. To avoid packaging the runtime
+# libraries for cross_target_platform built from different target_platforms
+# we need to have selectors.
+package_cross_compiled_runtime:
+  - False
+  - False
+  - False
+  - False  # [not linux64]
+  - True   # [linux64]
 zip_keys:
   - - glibc_version
     - old_gcc_vendor
     - gcc_machine
     - cross_target_platform
+    - package_cross_compiled_runtime
   - - gcc_version
     - libgfortran_soname

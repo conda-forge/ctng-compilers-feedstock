@@ -32,6 +32,8 @@ old_gcc_vendor:
 - conda_cos6
 openmp_ver:
 - '4.5'
+package_cross_compiled_runtime:
+- 'False'
 target_platform:
 - linux-aarch64
 use_system_gcc:
@@ -43,3 +45,4 @@ zip_keys:
   - old_gcc_vendor
   - gcc_machine
   - cross_target_platform
+  - package_cross_compiled_runtime
