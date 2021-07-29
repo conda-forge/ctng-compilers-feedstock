@@ -416,7 +416,7 @@ outputs:
     requirements:
       build:
         - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-         binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
+        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
         - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
         - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
         - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
