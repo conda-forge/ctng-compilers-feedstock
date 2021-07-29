@@ -1,7 +1,7 @@
 {% set name = "gcc_impl" %}
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 2 %}
+{% set build_num = 3 %}
 
 package:
   name: gcc_compilers
@@ -146,6 +146,7 @@ outputs:
       run:
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
         - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
+        - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform]
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}    # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}       # [target_platform == cross_target_platform]
@@ -329,6 +330,86 @@ outputs:
       home: https://gcc.gnu.org/
       license: GPL-3.0-only WITH GCC-exception-3.1
 
+  - name: libsanitizer
+    target: {{ cross_target_platform }}
+    script: install-libsanitizer.sh
+    requirements:
+      build:
+        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
+        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
+        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+      host:
+        - sysroot_{{ cross_target_platform }}  {{ glibc_version }}
+      run:
+        - libgcc-ng {{ gcc_version }}
+    build:
+      number: {{ build_num }}
+      detect_binary_files_with_prefix: False
+      binary_relocation: False
+      skip: True   # [target_platform != cross_target_platform]
+      missing_dso_whitelist:
+        - "*"
+      ignore_run_exports:
+        - __glibc
+      run_exports:
+        - libsanitizer {{ gcc_version }}
+    test:
+      requires:
+        - sysroot_{{ cross_target_platform }}
+      commands:
+        - test -f ${PREFIX}/lib/libasan.so
+    about:
+      summary: The GCC runtime libraries for sanitizers
+      home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+      license: GPL-3.0-only WITH GCC-exception-3.1
+
+  - name: libgomp
+    target: {{ cross_target_platform }}
+    script: install-libgomp.sh
+    requirements:
+      build:
+        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
+        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
+        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
+        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
+        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
+        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
+        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+      host:
+        - sysroot_{{ cross_target_platform }}  {{ glibc_version }}
+      run:
+        - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
+    build:
+      number: {{ build_num }}
+      detect_binary_files_with_prefix: False
+      binary_relocation: False
+      skip: True   # [target_platform != cross_target_platform]
+      missing_dso_whitelist:
+        - "*"
+      run_exports:
+        strong:
+          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
+      ignore_run_exports:
+        - __glibc
+    test:
+      requires:
+        - sysroot_{{ cross_target_platform }}
+      commands:
+        - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
+        - test ! -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
+    about:
+      summary: The GCC OpenMP implementation.
+      home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+      license: GPL-3.0-only WITH GCC-exception-3.1
+
   - name: libgcc-ng
     target: {{ cross_target_platform }}
     script: install-libgcc-no-gomp.sh
@@ -371,47 +452,6 @@ outputs:
         - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"
     about:
       summary: The GCC low-level runtime library
-      home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
-      license: GPL-3.0-only WITH GCC-exception-3.1
-
-  - name: libgomp
-    target: {{ cross_target_platform }}
-    script: install-libgomp.sh
-    requirements:
-      build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - gcc_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
-        - gxx_impl_{{ target_platform }}  {{ gcc_version }}               # [build_platform != target_platform]
-        - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
-        - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
-        - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
-        - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
-      host:
-        - sysroot_{{ cross_target_platform }}  {{ glibc_version }}
-      run:
-        - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      binary_relocation: False
-      skip: True   # [target_platform != cross_target_platform]
-      missing_dso_whitelist:
-        - "*"
-      run_exports:
-        strong:
-          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
-      ignore_run_exports:
-        - __glibc
-    test:
-      requires:
-        - sysroot_{{ cross_target_platform }}
-      commands:
-        - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
-        - test ! -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-    about:
-      summary: The GCC OpenMP implementation.
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
       license: GPL-3.0-only WITH GCC-exception-3.1
 

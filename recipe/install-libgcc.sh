@@ -68,6 +68,7 @@ if [[ "${PKG_NAME}" != gcc_impl* ]]; then
   # mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
   # clean up empty folder
   rm -rf ${PREFIX}/lib/gcc
+  rm -rf ${PREFIX}/lib/lib{a,l,ub,t}san.so*
 
   # Install Runtime Library Exception
   install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \
