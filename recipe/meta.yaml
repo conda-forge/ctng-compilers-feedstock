@@ -1,7 +1,7 @@
 {% set name = "gcc_impl" %}
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 3 %}
+{% set build_num = 4 %}
 
 package:
   name: gcc_compilers
@@ -347,7 +347,7 @@ outputs:
       host:
         - sysroot_{{ cross_target_platform }}  {{ glibc_version }}
       run:
-        - libgcc-ng {{ gcc_version }}
+        - libgcc-ng >={{ gcc_version }}
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
