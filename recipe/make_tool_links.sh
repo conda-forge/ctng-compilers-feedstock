@@ -13,7 +13,7 @@ done
 # Make a symlink from new gcc vendor to the old one
 for exe in `ls ${PREFIX}/bin/*-${gcc_vendor}-linux-gnu-*`; do
   nm=`basename ${exe}`
-  new_nm=${nm/"-conda-linux-gnu-"/${old_gcc_vendor}}
+  new_nm=${nm/"-${gcc_vendor}-"/"-${old_gcc_vendor}-"}
   if [ ! -f ${PREFIX}/bin/${new_nm} ]; then
     ln -s ${exe} ${PREFIX}/bin/${new_nm}
   fi
