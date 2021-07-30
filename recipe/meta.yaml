@@ -17,7 +17,7 @@ source:
       - patches/0022-cross-compile-older-glibc.patch   # [glibc_version == "2.12" and target_platform != "linux-64"]
 
 build:
-  number: 0
+  number: {{ build_num }}
   skip: True  # [not linux]
   detect_binary_files_with_prefix: False
 
@@ -533,6 +533,7 @@ outputs:
     target: {{ cross_target_platform }}
     build:
       skip: True   # [target_platform != cross_target_platform]
+      number: {{ build_num }}
     requirements:
       run:
         - {{ pin_subpackage('libgfortran' ~ libgfortran_soname, exact=True) }}
