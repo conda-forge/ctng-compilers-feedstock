@@ -27,7 +27,7 @@ libgfortran_soname:
 libgomp_ver:
 - 1.0.0
 old_gcc_vendor:
-- conda_cos7
+- conda
 openmp_ver:
 - '4.5'
 target_platform:
