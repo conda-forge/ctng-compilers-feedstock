@@ -1,7 +1,7 @@
 {% set name = "gcc_impl" %}
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 4 %}
+{% set build_num = 5 %}
 
 package:
   name: gcc_compilers
@@ -169,6 +169,11 @@ outputs:
         - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgomp.so   # [target_platform == cross_target_platform]
         - test `readlink ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == cross_target_platform]
         - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ old_gcc_vendor }}-linux-gnu-gcc
+        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ old_gcc_vendor }}-linux-gnu-cpp
+        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-gcc
+        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-cpp
+        - test ! -f ${PREFIX}/bin/gcc
+        - test ! -f ${PREFIX}/bin/cpp
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
         - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform]

@@ -24,7 +24,7 @@ old_gcc_vendor:
   - conda_cos6
   - conda_cos7
   - conda_cos7
-  - conda_cos7
+  - conda
 gcc_build_number:
   - 0
 glibc_version:
