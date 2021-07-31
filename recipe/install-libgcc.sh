@@ -2,15 +2,6 @@ set -e -x
 
 export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 
-if [[ "$target_platform" == "linux-64" || "$target_platform" == "linux-ppc64le" ]]; then
-  mkdir -p $PREFIX/lib
-  if [[ -d $PREFIX/lib64 ]]; then
-    mv $PREFIX/lib64/* $PREFIX/lib
-    rm -rf $PREFIX/lib64
-  fi
-  ln -sf $PREFIX/lib $PREFIX/lib64 || true;
-fi
-
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
 #export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
