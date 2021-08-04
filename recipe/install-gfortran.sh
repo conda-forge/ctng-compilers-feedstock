@@ -38,21 +38,6 @@ install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/f
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-fortran/RUNTIME.LIBRARY.EXCEPTION
 
-# generate specfile so that we can patch loader link path
-# link_libgcc should have the gcc's own libraries by default (-R)
-# so that LD_LIBRARY_PATH isn't required for basic libraries.
-#
-# GF method here to create specs file and edit it.  The other methods
-# tried had no effect on the result.  including:
-#   setting LINK_LIBGCC_SPECS on configure
-#   setting LINK_LIBGCC_SPECS on make
-#   setting LINK_LIBGCC_SPECS in gcc/Makefile
-specdir=${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
-mv $PREFIX/bin/${CHOST}-gfortran $PREFIX/bin/${CHOST}-gfortran.bin
-echo '#!/bin/sh' > $PREFIX/bin/${CHOST}-gfortran
-echo $PREFIX/bin/${CHOST}-gfortran.bin -specs=$specdir/specs '"$@"' >> $PREFIX/bin/${CHOST}-gfortran
-chmod +x $PREFIX/bin/${CHOST}-gfortran
-
 set +x
 # Strip executables, we may want to install to a different prefix
 # and strip in there so that we do not change files that are not
