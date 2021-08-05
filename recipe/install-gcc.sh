@@ -178,8 +178,11 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
         ln -s ../../lib/$(basename $f) ${PREFIX}/${CHOST}/lib/$(basename $f)
       done
     done
-  popd
 
+    for f in ${PREFIX}/lib/*.spec ${PREFIX}/lib/*.a ${PREFIX}/lib/*.o; do
+      mv $f ${PREFIX}/${CHOST}/lib/$(basename $f)
+    done
+  popd
 else
   source ${RECIPE_DIR}/install-libgcc.sh
   for lib in libgcc_s libcc1; do

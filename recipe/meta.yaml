@@ -1,7 +1,7 @@
 {% set name = "gcc_impl" %}
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 7 %}
+{% set build_num = 8 %}
 
 package:
   name: gcc_compilers
@@ -143,6 +143,7 @@ outputs:
         - {{ pin_subpackage("libstdcxx-ng", exact=True) }}          # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", exact=True) }}             # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform]
       run:
         - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
         - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
@@ -175,10 +176,13 @@ outputs:
         - test ! -f ${PREFIX}/bin/gcc
         - test ! -f ${PREFIX}/bin/cpp
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
         - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform]
         - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgcc_s.so
         - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgomp.spec
+        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libsanitizer.spec
+        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libasan_preinit.o
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
