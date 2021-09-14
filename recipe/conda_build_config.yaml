@@ -6,10 +6,12 @@ gcc_machine:
 gcc_vendor:
   - conda
 gcc_version:
+  - 8.5.0
   - 9.4.0
   - 10.3.0
   - 11.1.0
 libgfortran_soname:
+  - 4
   - 5
   - 5
   - 5
