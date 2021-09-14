@@ -1,42 +1,42 @@
-_libgcc_mutex:
-- 0.1 conda_forge
+BUILD:
+- aarch64-conda_cos7-linux-gnu
 binutils_version:
 - 2.36.1
+cdt_arch:
+- aarch64
 cdt_name:
-- cos6
+- cos7
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-s390x
+- linux-aarch64
 docker_image:
 - quay.io/condaforge/linux-anvil-comp7
 gcc_machine:
-- s390x
+- aarch64
 gcc_vendor:
 - conda
 gcc_version:
-- 11.1.0
+- 8.5.0
 glib:
 - '2'
 glibc_version:
 - '2.17'
 libgfortran_soname:
-- '5'
+- '4'
 libgomp_ver:
 - 1.0.0
 old_gcc_vendor:
-- conda
+- conda_cos7
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-64
+- linux-aarch64
 use_system_gcc:
 - 'False'
 zip_keys:
-- - cdt_name
-  - docker_image
 - - gcc_version
   - libgfortran_soname
 - - glibc_version

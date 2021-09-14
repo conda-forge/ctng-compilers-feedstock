@@ -3,40 +3,38 @@ _libgcc_mutex:
 binutils_version:
 - 2.36.1
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-64
+- linux-ppc64le
 docker_image:
 - quay.io/condaforge/linux-anvil-comp7
 gcc_machine:
-- x86_64
+- powerpc64le
 gcc_vendor:
 - conda
 gcc_version:
-- 11.1.0
+- 11.2.0
 glib:
 - '2'
 glibc_version:
-- '2.12'
+- '2.17'
 libgfortran_soname:
 - '5'
 libgomp_ver:
 - 1.0.0
 old_gcc_vendor:
-- conda_cos6
+- conda_cos7
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-64
+- linux-ppc64le
 use_system_gcc:
 - 'False'
 zip_keys:
-- - cdt_name
-  - docker_image
 - - gcc_version
   - libgfortran_soname
 - - glibc_version

@@ -1,9 +1,11 @@
+_libgcc_mutex:
+- 0.1 conda_forge
 binutils_version:
 - 2.36.1
 cdt_name:
 - cos7
 channel_sources:
-- https://conda-web.anaconda.org/conda-forge
+- conda-forge,defaults
 channel_targets:
 - conda-forge main
 cross_target_platform:
@@ -15,7 +17,7 @@ gcc_machine:
 gcc_vendor:
 - conda
 gcc_version:
-- 11.1.0
+- 11.2.0
 glib:
 - '2'
 glibc_version:
@@ -29,7 +31,7 @@ old_gcc_vendor:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-s390x
+- linux-ppc64le
 use_system_gcc:
 - 'False'
 zip_keys:

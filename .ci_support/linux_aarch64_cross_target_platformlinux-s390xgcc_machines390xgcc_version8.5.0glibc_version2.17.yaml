@@ -11,25 +11,25 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-ppc64le
+- linux-s390x
 docker_image:
 - quay.io/condaforge/linux-anvil-comp7
 gcc_machine:
-- powerpc64le
+- s390x
 gcc_vendor:
 - conda
 gcc_version:
-- 11.1.0
+- 8.5.0
 glib:
 - '2'
 glibc_version:
 - '2.17'
 libgfortran_soname:
-- '5'
+- '4'
 libgomp_ver:
 - 1.0.0
 old_gcc_vendor:
-- conda_cos7
+- conda
 openmp_ver:
 - '4.5'
 target_platform:
