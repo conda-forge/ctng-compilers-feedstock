@@ -9,8 +9,10 @@ package:
 
 source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
+    sha256: f0837f1bf8244a5cc23bd96ff6366712a791cfae01df8e25b137698aca26efc1   # [gcc_version == "11.2.0"]
+    sha256: 8fcf994811ad4e5c7ac908e8cf62af2c1982319e5551f62ae72016064dacdf16   # [gcc_version == "10.3.0"]
     sha256: 07ea650894cde75ab0f7cfbee0e69832c8a789b01efa2de3bfba7569338e24cb   # [gcc_version == "9.4.0"]
-    sha256: 41e8b145832fc0b2b34c798ed25fb54a881b0cee4cd581b77c7dc92722c116a8   # [gcc_version == "8.4.0"]
+    sha256: 6e6e0628573d2185727a2dd83211d04a2b2748e4a262099099b9c8064634c9ee   # [gcc_version == "8.5.0"]
     sha256: 4f518f18cfb694ad7975064e99e200fe98af13603b47e67e801ba9580e50a07f   # [gcc_version == "7.5.0"]
     patches:
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
