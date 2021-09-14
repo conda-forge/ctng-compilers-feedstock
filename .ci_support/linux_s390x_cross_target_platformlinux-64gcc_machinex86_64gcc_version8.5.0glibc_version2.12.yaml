@@ -21,7 +21,7 @@ glib:
 glibc_version:
 - '2.12'
 libgfortran_soname:
-- '4'
+- '5'
 libgomp_ver:
 - 1.0.0
 old_gcc_vendor:
