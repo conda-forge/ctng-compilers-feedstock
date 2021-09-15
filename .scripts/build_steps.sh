@@ -12,6 +12,8 @@ source ${FEEDSTOCK_ROOT}/.scripts/logging_utils.sh
 
 ( endgroup "Start Docker" ) 2> /dev/null
 
+sed -i.bak "s/if pairs/if 0/g" /opt/conda/lib/python3.8/site-packages/conda_build/metadata.py
+
 ( startgroup "Configuring conda" ) 2> /dev/null
 
 export PYTHONUNBUFFERED=1
@@ -45,7 +47,6 @@ source run_conda_forge_build_setup
 # make the build number clobber
 make_build_number "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
 
-sed -i.bak "s/if pairs/if 0/g" /opt/conda/lib/python3.8/site-packages/conda_build/metadata.py
 
 ( endgroup "Configuring conda" ) 2> /dev/null
 

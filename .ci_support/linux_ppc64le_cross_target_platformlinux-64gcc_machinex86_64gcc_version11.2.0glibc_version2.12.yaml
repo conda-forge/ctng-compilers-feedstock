@@ -3,7 +3,7 @@ _libgcc_mutex:
 binutils_version:
 - 2.36.1
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -17,7 +17,7 @@ gcc_machine:
 gcc_vendor:
 - conda
 gcc_version:
-- 11.1.0
+- 11.2.0
 glib:
 - '2'
 glibc_version:
@@ -31,12 +31,10 @@ old_gcc_vendor:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-64
+- linux-ppc64le
 use_system_gcc:
 - 'False'
 zip_keys:
-- - cdt_name
-  - docker_image
 - - gcc_version
   - libgfortran_soname
 - - glibc_version
