@@ -70,7 +70,7 @@ for TINFO_FILE in ${TINFO_FILES}; do
 done
 
 # workaround for https://gcc.gnu.org/bugzilla//show_bug.cgi?id=80196
-if [[ "$gcc_version" == "11.1.0" && "$build_platform" != "$target_platform" ]]; then
+if [[ "$gcc_version" == "11."* && "$build_platform" != "$target_platform" ]]; then
   sed -i.bak 's@-I$glibcxx_srcdir/libsupc++@-I$glibcxx_srcdir/libsupc++ -nostdinc++@g' libstdc++-v3/configure
 fi
 
