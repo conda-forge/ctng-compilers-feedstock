@@ -181,7 +181,7 @@ outputs:
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
         - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform]
-        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && ${READELF} -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform]
+        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ gcc_machine }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform]
         - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgcc_s.so
         - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgomp.spec
         - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libsanitizer.spec
