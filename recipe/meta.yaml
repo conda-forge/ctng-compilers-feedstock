@@ -1,7 +1,7 @@
 {% set name = "gcc_impl" %}
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 9 %}
+{% set build_num = 10 %}
 
 package:
   name: gcc_compilers
@@ -43,7 +43,6 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      binary_relocation: False
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
@@ -79,7 +78,6 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      binary_relocation: False
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
@@ -113,15 +111,6 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      binary_relocation:
-        - 'bin/*'
-        - 'lib/*.so*'
-        - 'libexec/**/*.so*'
-        - 'libexec/**/cc1*'
-        - 'libexec/**/collect2'
-        - 'libexec/**/gcc'
-        - 'libexec/**/lto*'
-        - 'libexec/**/plugin/gengtype'
       missing_dso_whitelist:
         - '*'
       runpath_whitelist:
@@ -196,11 +185,6 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      binary_relocation:
-        - 'bin/*'
-        - 'lib/*.so'
-        - 'libexec/**/*.so*'
-        - 'libexec/**/cc1*'
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
@@ -251,11 +235,6 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      binary_relocation:
-        - 'bin/*'
-        - 'lib/*.so'
-        - 'libexec/**/*.so*'
-        - 'libexec/**/f951'
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
@@ -314,7 +293,6 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      binary_relocation: False
       skip: True   # [target_platform != cross_target_platform]
       missing_dso_whitelist:
         - "*"
@@ -363,7 +341,6 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      binary_relocation: False
       skip: True   # [target_platform != cross_target_platform]
       missing_dso_whitelist:
         - "*"
@@ -402,7 +379,6 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      binary_relocation: False
       skip: True   # [target_platform != cross_target_platform]
       missing_dso_whitelist:
         - "*"
@@ -448,7 +424,6 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      binary_relocation: False
       skip: True   # [target_platform != cross_target_platform]
       missing_dso_whitelist:
         - "*"
@@ -512,7 +487,6 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      binary_relocation: False
       skip: True   # [target_platform != cross_target_platform]
       missing_dso_whitelist:
         - "*"
