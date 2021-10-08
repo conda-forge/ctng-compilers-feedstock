@@ -11,8 +11,6 @@ rm -f ${PREFIX}/lib/libgfortran* || true
 
 cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/
 
-patchelf --set-rpath '$ORIGIN' ${PREFIX}/lib/libgfortran*.so*
-
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/libgfortran/RUNTIME.LIBRARY.EXCEPTION
