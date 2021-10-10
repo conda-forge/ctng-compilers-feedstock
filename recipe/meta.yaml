@@ -351,8 +351,10 @@ outputs:
     test:
       requires:
         - sysroot_{{ cross_target_platform }}
+        - gcc_impl_{{ cross_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libasan.so
+        - echo 'void main(){}' | {{ chost }}gcc -fsanitize=address -x c -
     about:
       summary: The GCC runtime libraries for sanitizers
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
