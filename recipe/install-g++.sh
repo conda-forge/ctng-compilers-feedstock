@@ -33,6 +33,8 @@ make -C libcpp prefix=${PREFIX} install
 
 popd
 
+ln -sf ${PREFIX}/lib/libstdc++.so ${_libdir}/libstdc++.so
+
 set +x
 # Strip executables, we may want to install to a different prefix
 # and strip in there so that we do not change files that are not
