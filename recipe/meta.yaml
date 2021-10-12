@@ -277,6 +277,8 @@ outputs:
         - cmake >=3.11  # [x86_64 or aarch64 or ppc64le]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       commands:
+        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgfortran.so
+        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgfortran.a
         - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ old_gcc_vendor }}-linux-gnu-gfortran
         - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-gfortran
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'

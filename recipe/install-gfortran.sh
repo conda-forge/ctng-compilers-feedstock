@@ -38,6 +38,11 @@ install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/f
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-fortran/RUNTIME.LIBRARY.EXCEPTION
 
+if [[ "${target_platform}" != "${cross_target_platform}" ]]; then
+  cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/${CHOST}/lib/
+fi
+cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.a ${PREFIX}/${CHOST}/lib/
+
 set +x
 # Strip executables, we may want to install to a different prefix
 # and strip in there so that we do not change files that are not
