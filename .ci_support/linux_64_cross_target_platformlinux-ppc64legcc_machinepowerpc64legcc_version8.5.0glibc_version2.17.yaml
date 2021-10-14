@@ -5,7 +5,7 @@ binutils_version:
 cdt_name:
 - cos6
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cross_target_platform:
