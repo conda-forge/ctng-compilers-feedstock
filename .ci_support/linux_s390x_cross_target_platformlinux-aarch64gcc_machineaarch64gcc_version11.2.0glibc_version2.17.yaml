@@ -9,7 +9,7 @@ channel_targets:
 cross_target_platform:
 - linux-aarch64
 docker_image:
-- quay.io/condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 gcc_machine:
 - aarch64
 gcc_vendor:
