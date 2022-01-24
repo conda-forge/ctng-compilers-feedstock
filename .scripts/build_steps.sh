@@ -12,7 +12,7 @@ source ${FEEDSTOCK_ROOT}/.scripts/logging_utils.sh
 
 ( endgroup "Start Docker" ) 2> /dev/null
 
-sed -i.bak "s/if pairs/if 0/g" /opt/conda/lib/python3.8/site-packages/conda_build/metadata.py
+sed -i.bak "s/if pairs/if 0/g" /opt/conda/lib/python3.9/site-packages/conda_build/metadata.py
 
 ( startgroup "Configuring conda" ) 2> /dev/null
 
