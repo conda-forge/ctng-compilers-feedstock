@@ -5,13 +5,13 @@ binutils_version:
 cdt_name:
 - cos7
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cross_target_platform:
 - linux-ppc64le
 docker_image:
-- quay.io/condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 gcc_machine:
 - powerpc64le
 gcc_vendor:

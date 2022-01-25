@@ -5,13 +5,13 @@ binutils_version:
 cdt_name:
 - cos6
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cross_target_platform:
 - linux-aarch64
 docker_image:
-- quay.io/condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 gcc_machine:
 - aarch64
 gcc_vendor:
@@ -35,8 +35,6 @@ target_platform:
 use_system_gcc:
 - 'False'
 zip_keys:
-- - cdt_name
-  - docker_image
 - - gcc_version
   - libgfortran_soname
 - - glibc_version
