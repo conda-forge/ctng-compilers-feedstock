@@ -4,6 +4,7 @@ set -x
 
 sed -i -e "s;mirrors=.*\$;mirrors='https://libisl.sourceforge.io';g" $BUILD_PREFIX/share/crosstool-ng/packages/isl/package.desc
 sed -i -e "s/isl.gforge.inria.fr/libisl.sourceforge.io/g" $BUILD_PREFIX/share/crosstool-ng/config/versions/isl.in
+cp pr83204.diff $BUILD_PREFIX/share/crosstool-ng/packages/gcc/7.5.0/pr83204.patch
 
 if [[ "${ctng_cpu_arch}" == "aarch64" ]]; then
     rm -f $BUILD_PREFIX/share/crosstool-ng/packages/glibc/2.17/*-glibc-*.patch

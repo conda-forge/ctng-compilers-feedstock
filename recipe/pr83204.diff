@@ -1,0 +1,59 @@
+# DP: Fix PR c++/83204, taken from the trunk
+
+gcc/cp/
+
+2018-02-08  Paolo Carlini  <paolo.carlini@oracle.com>
+
+	PR c++/83204
+	* pt.c (tsubst_copy_and_build): Use force_paren_expr for INDIRECT_REF.
+ 
+gcc/testsuite/
+
+2018-02-08  Paolo Carlini  <paolo.carlini@oracle.com>
+
+	PR c++/83204
+	* g++.dg/cpp0x/lambda/lambda-ice25.C: New.
+
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/lambda/lambda-ice25.C
+@@ -0,0 +1,27 @@
++// PR c++/83204
++// { dg-do compile { target c++11 } }
++
++int rand();
++
++template<typename T>
++struct s
++{
++    int count() { return rand(); }
++};
++
++template<typename v>
++void f(s<v> a)
++{
++    int const x = a.count();
++    int r = 0;
++    auto l = [&](int& r)
++    {
++        for(int y = 0, yend = (x); y < yend; ++y)
++        {
++            r += y;
++        }
++    };
++    l(r);
++}
++
++template void f(s<float>);
+--- a/gcc/cp/pt.c
++++ b/gcc/cp/pt.c
+@@ -16842,8 +16842,8 @@ tsubst_copy_and_build (tree t,
+ 	  r = build_x_indirect_ref (input_location, r, RO_UNARY_STAR,
+ 				    complain|decltype_flag);
+ 
+-	if (TREE_CODE (r) == INDIRECT_REF)
+-	  REF_PARENTHESIZED_P (r) = REF_PARENTHESIZED_P (t);
++	if (REF_PARENTHESIZED_P (t))
++	  r = force_paren_expr (r);
+ 
+ 	RETURN (r);
+       }
