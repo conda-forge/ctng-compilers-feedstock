@@ -27,11 +27,11 @@ jobs:
       linux_aarch64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7:
         CONFIG: linux_aarch64_ctng_binutils2.29.1ctng_cpu_archaarch64ctng_target_platformlinux-aarch64old_ctng_vendorconda_cos7
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
       linux_ppc64le_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7:
         CONFIG: linux_ppc64le_ctng_binutils2.31.1ctng_cpu_archpowerpc64lectng_target_platformlinux-ppc64leold_ctng_vendorconda_cos7
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
   timeoutInMinutes: 360
 
   steps:
