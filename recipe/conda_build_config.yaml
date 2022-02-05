@@ -13,14 +13,8 @@ ctng_cpu_arch:
 #  - 7.12.1    # [not ppc64le]
 ctng_gcc:
   - 7.5.0
-  - 8.4.0
-  - 9.3.0
-  - 9.3.0
 libgfortran_soname:
   - 4
-  - 5
-  - 5
-  - 5
 ctng_binutils:
   - 2.31.1
   - 2.31.1
@@ -41,7 +35,7 @@ ctng_vendor:
 #ctng_duma:
 #  - 2.5.15
 ctng_gcc_build_number:
-  - 19
+  - 20
 ctng_gmp:
   - 6.1.2
 ctng_isl:

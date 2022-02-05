@@ -165,6 +165,7 @@ outputs:
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17
         - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [ctng_target_platform == target_platform]
+        - ${CXX} -Wall tests/ice-gh-6.cpp -c -o ice-gh-6.o --std=c++17
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
