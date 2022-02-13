@@ -461,5 +461,6 @@ about:
 
 extra:
   recipe-maintainers:
+    - xhochy
     - isuruf
     - beckermr
