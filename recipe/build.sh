@@ -21,7 +21,7 @@ get_cpu_arch() {
 
 if [[ "$channel_targets" == *conda-forge* && "${build_platform}" == "${target_platform}" ]]; then
   # Use new compilers instead of relying on ones from the docker image
-  conda create -p $SRC_DIR/cf-compilers gcc=8 gfortran=8 gxx-8 binutils -c conda-forge --yes --quiet
+  conda create -p $SRC_DIR/cf-compilers gcc=8 gfortran=8 gxx=8 binutils -c conda-forge --yes --quiet
   export PATH=$SRC_DIR/cf-compilers/bin:$PATH
 fi
 
