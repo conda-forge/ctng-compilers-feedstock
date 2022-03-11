@@ -3,3 +3,6 @@ build_platform:
   linux_aarch64: linux_64
   linux_s390x: linux_64
 conda_forge_output_validation: true
+github:
+  branch_name: main
+  tooling_branch_name: main
