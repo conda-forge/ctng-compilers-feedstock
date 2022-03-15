@@ -1,7 +1,7 @@
 {% set name = "gcc_impl" %}
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 13 %}
+{% set build_num = 14 %}
 
 package:
   name: gcc_compilers
@@ -18,6 +18,9 @@ source:
       - patches/0023-aarch64-incomplete-extern-c-block.patch                   # [gcc_version == "9.4.0" and target_platform == 'linux-aarch64']
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       - patches/0022-cross-compile-older-glibc.patch   # [glibc_version == "2.12" and target_platform != "linux-64"]
+      # This patch can be removed in 10.4.0 but helps with compatibility for nccl
+      # https://github.com/NVIDIA/nccl/issues/494#issuecomment-881074063
+      - patches/PR100102-2.a1b3484a8e6c53c8084723e3f1738d402374198e.patch      # [gcc_version == "10.3.0"]
 
 build:
   number: {{ build_num }}
