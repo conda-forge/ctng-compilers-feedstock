@@ -143,7 +143,7 @@ fi
 cp $specdir/specs $specdir/builtin.specs
 
 
-if [[ "$build_platform" == "$target_platform" ]]; then
+if [[ "$cross_target_platform" == "$target_platform" ]]; then
     # Add specs when we're not cross compiling so that the toolchain works more like a system
     # toolchain (i.e. conda installed libs can be #include <>'d and linked without adding any
     # cmdline args or FLAGS and likewise the assumptions we have about rpath are built in)
