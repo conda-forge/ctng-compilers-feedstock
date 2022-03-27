@@ -94,6 +94,7 @@ cd build
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
   --libdir="$PREFIX/lib" \
+  --mandir="$PREFIX/man" \
   --build=$BUILD \
   --host=$HOST \
   --target=$TARGET \
@@ -115,10 +116,10 @@ cd build
   --disable-bootstrap \
   --disable-multilib \
   --enable-long-long \
-  --enable-default-pie \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
   --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}" \
-  $GCC_CONFIGURE_OPTIONS
+  --with-pkgversion="conda-forge ${gcc_version}-${PKG_BUILDNUM}" \
+  --with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose"
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libbacktrace/config.log; false)

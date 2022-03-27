@@ -138,10 +138,36 @@ else
     $BUILD_PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
 fi
 
-# We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
-#   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
-#   package is installed.
-sed -i -e "/\*link_command:/,+1 s+%.*+& -rpath ${PREFIX}/lib+" $specdir/specs
+# make a copy of the specs without our additions so that people can choose not to use them
+# by passing -specs=builtin.specs
+cp $specdir/specs $specdir/builtin.specs
+
+
+if [[ "$build_platform" == "$target_platform" ]]; then
+    # Add specs when we're not cross compiling so that the toolchain works more like a system
+    # toolchain (i.e. conda installed libs can be #include <>'d and linked without adding any
+    # cmdline args or FLAGS and likewise the assumptions we have about rpath are built in)
+    #
+    # THIS IS INTENDED as a safety net for casual users who just want the native toolchain to work.
+    # It is not to be relied on by conda-forge package recipes and best practice is still to set the
+    # appropriate FLAGS vars (either via compiler activation scripts or explicitly in the recipe)
+    #
+    # We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
+    #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
+    #   package is installed.
+    sed -i -e "/\*link_command:/,+1 s+%.*+& %{!static:-rpath ${PREFIX}/lib -rpath-link ${PREFIX}/lib -disable-new-dtags} -L ${PREFIX}/lib+" $specdir/specs
+    # use -idirafter to put the conda "system" includes where /usr/local/include would typically go
+    # in a system-packaged non-cross compiler
+    sed -i -e "/\*cpp_options:/,+1 s+%.*+& -idirafter ${PREFIX}/include+" $specdir/specs
+    # cc1_options also get used for cc1plus... at least in 11.2.0
+    sed -i -e "/\*cc1_options:/,+1 s+%.*+& -idirafter ${PREFIX}/include+" $specdir/specs
+
+else
+    # does it even make sense to do anything here?  Could do something with %:getenv(BUILD_PREFIX  /include) 
+    # but in the case that we aren't inside conda-build, it will cause gcc to fatal
+    # because it won't be set
+    true
+fi
 
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
