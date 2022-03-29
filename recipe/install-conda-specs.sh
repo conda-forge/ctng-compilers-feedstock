@@ -12,10 +12,11 @@ export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
 specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
-
-# get specs from the build directory rather than dumping them from gcc so
-# that we don't have to depend on the gcc_impl package
-install -Dm644 ./build/gcc/specs $specdir/specs
+if [[ "$build_platform" == "$target_platform" ]]; then
+    $PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+else
+    $BUILD_PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+fi
 
 # make a copy of the specs without our additions so that people can choose not to use them
 # by passing -specs=builtin.specs
