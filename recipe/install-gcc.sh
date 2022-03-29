@@ -122,36 +122,6 @@ EOF
 
 popd
 
-# generate specfile so that we can patch loader link path
-# link_libgcc should have the gcc's own libraries by default (-R)
-# so that LD_LIBRARY_PATH isn't required for basic libraries.
-#
-# GF method here to create specs file and edit it.  The other methods
-# tried had no effect on the result.  including:
-#   setting LINK_LIBGCC_SPECS on configure
-#   setting LINK_LIBGCC_SPECS on make
-#   setting LINK_LIBGCC_SPECS in gcc/Makefile
-specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
-if [[ "$build_platform" == "$target_platform" ]]; then
-    $PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
-else
-    $BUILD_PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
-fi
-
-# make a copy of the specs without our additions so that people can choose not to use them
-# by passing -specs=builtin.specs
-cp $specdir/specs $specdir/builtin.specs
-
-# modify the default specs to only have %include_noerr that includes an optional conda.specs
-# package installable via the conda-gcc-specs package where conda.specs (for $cross_target_platform
-# == $target_platform) will add the minimal set of flags for the 'native' toolchains to be useable
-# without anything additional set in the enviornment or extra cmdline args.
-echo -e "\n%include_noerr(conda.specs)" >> $specdir/specs
-
-# We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
-#   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
-#   package is installed.
-sed -i -e "/\*link_command:/,+1 s+%.*+& %{!static:-rpath ${PREFIX}/lib -disable-new-dtags}+" $specdir/specs
 
 
 # Install Runtime Library Exception
