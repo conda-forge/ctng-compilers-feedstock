@@ -187,22 +187,23 @@ outputs:
       home: https://gcc.gnu.org/
       license: GPL-3.0-only WITH GCC-exception-3.1
 
-  {%  for type in ['minimal', 'extended']  %}
+
+  # EXTENDED specs
   - name: gcc-specs-mutex_{{ cross_target_platform }}
     script: install-conda-specs.sh
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      string: {{ build_num }}_{{ type }}
-      skip: True  # [ type == 'extended' and cross_target_platform != target_platform ]
+      string: {{ build_num }}_extended
+      skip: True  # [ cross_target_platform != target_platform ]
       track_features:
-        - non_default_gcc_specfile  # [ type != 'minimal']
+        - non_default_gcc_specfile
     requirements:
       build:
-        - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, max_pin='x.x.x.x') }}
       run:
-        - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, max_pin='x.x.x.x') }}
     test:
+      requires:
+        - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, max_pin='x.x.x.x') }}
       files:
         - tests
       commands:
@@ -213,10 +214,10 @@ outputs:
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
         - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"
         # extended specs enable including and linking from PREFIX without options or FLAGS
-        - cp tests/libhowdy.h $prefix/include/                                # [ type == 'extended' ]
-        - ${CC} -shared -fpic -o $prefix/lib/libhowdy.so tests/libhowdy.c     # [ type == 'extended' ]
-        - ${CC} -o howdy-dso tests/howdy-dso.c -lhowdy                        # [ type == 'extended' ]
-        - ./howdy-dso                                                         # [ type == 'extended' ]
+        - cp tests/libhowdy.h $prefix/include/
+        - ${CC} -shared -fpic -o $prefix/lib/libhowdy.so tests/libhowdy.c
+        - ${CC} -o howdy-dso tests/howdy-dso.c -lhowdy
+        - ./howdy-dso
     about:
       summary: conda-specific specfile for GNU C/C++ Compiler
       description: |
@@ -239,7 +240,51 @@ outputs:
       license: GPL-3.0-only WITH GCC-exception-3.1
       doc_url: https://gcc.gnu.org/onlinedocs/gcc/Spec-Files.html
 
-{% endfor %}
+  # MINIMAL specs
+  - name: gcc-specs-mutex_{{ cross_target_platform }}
+    script: install-conda-specs.sh
+    build:
+      number: {{ build_num }}
+      detect_binary_files_with_prefix: False
+      string: {{ build_num }}_minimal
+      skip: True
+    requirements:
+      build:
+      run:
+    test:
+      requires:
+        - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, max_pin='x.x.x.x') }}
+      files:
+        - tests
+      commands:
+        - specdir=$PREFIX/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}/{{ gcc_version }}
+        - test -f $specdir/specs
+        - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
+        - echo | ${CC} -E -v -x c - | grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print ${1}:}' | grep "^${specdir}/specs:\$"
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
+        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"
+        # extended specs enable including and linking from PREFIX without options or FLAGS
+    about:
+      summary: conda-specific specfile for GNU C/C++ Compiler
+      description: |
+          This package comes in two mutually-exclusive versions
+            * 'minimal' - by default installed with gcc only adds -rpath $PREFIX/lib
+              to the linking commandline
+            * 'extended'-  When installed, this optional package provides 
+              a specfile that directs gcc (and g++ or gfortran) to automatically:
+                 * search for includes in $PREFIX/include
+                 * link libraries in $PREFIX/lib
+                 * add RPATH to $PREFIX/lib
+                 * use RPATH instead of the newer RUNPATH
+          The 'extended' specfile package is intended to aid usability of the compiler
+          toolchain as a replacement for system-installed compilers.
+          It should not be used in recipes.  Use the 'compiler(<lang>)'
+          jinja function as described on
+          https://conda-forge.org/docs/maintainer/knowledge_base.html#dep-compilers
+          To use the 'extended' specfile `conda install gcc-specs-mutex_{{ cross_target_platform }}=*=*_extended`
+      home: https://gcc.gnu.org/
+      license: GPL-3.0-only WITH GCC-exception-3.1
+      doc_url: https://gcc.gnu.org/onlinedocs/gcc/Spec-Files.html
 
   - name: gxx_impl_{{ cross_target_platform }}
     script: install-g++.sh
