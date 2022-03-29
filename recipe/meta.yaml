@@ -21,6 +21,9 @@ source:
       # This patch can be removed in 10.4.0 but helps with compatibility for nccl
       # https://github.com/NVIDIA/nccl/issues/494#issuecomment-881074063
       - patches/PR100102-2.a1b3484a8e6c53c8084723e3f1738d402374198e.patch      # [gcc_version == "10.3.0"]
+      - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_version != "12.0.0"]
+        # FIXME this will need to be extended for >= 12.0.0 but not sure how to do with selectors
+      - patches/new-allow-commands-in-main-specfile.patch                      # [gcc_version == "12.0.0"]
 
 build:
   number: {{ build_num }}
