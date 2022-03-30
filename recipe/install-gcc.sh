@@ -146,7 +146,7 @@ cp $specdir/specs $specdir/builtin.specs
 # package installable via the conda-gcc-specs package where conda.specs (for $cross_target_platform
 # == $target_platform) will add the minimal set of flags for the 'native' toolchains to be useable
 # without anything additional set in the enviornment or extra cmdline args.
-echo -e "\n%include_noerr(conda.specs)" >> $specdir/specs
+echo -e "\n%include_noerr <conda.specs>" >> $specdir/specs
 
 # We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
 #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
