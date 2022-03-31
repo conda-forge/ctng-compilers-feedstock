@@ -138,6 +138,10 @@ else
     $BUILD_PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
 fi
 
+# validate assumption that specs in build/gcc/specs are exactly the
+# same as dumped specs so that I don't need to depend on gcc_impl in conda-gcc-specs subpackage
+diff -s ${SRC_DIR}/build/gcc/specs $specdir/specs
+
 # make a copy of the specs without our additions so that people can choose not to use them
 # by passing -specs=builtin.specs
 cp $specdir/specs $specdir/builtin.specs

@@ -2,7 +2,7 @@ set -ex
 export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
 specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
 if [[ "$cross_target_platform" == "$target_platform" ]]; then
-    cp $specdir/builtin.specs $specdir/conda.specs
+    install -Dm644 -T ${SRC_DIR}/build/gcc/specs $specdir/conda.specs
 
     # Add specs when we're not cross compiling so that the toolchain works more like a system
     # toolchain (i.e. conda installed libs can be #include <>'d and linked without adding any
@@ -27,5 +27,5 @@ else
     # but in the case that we aren't inside conda-build, it will cause gcc to fatal
     # because it won't be set.  Just explicitly making this fail for now so that the meta.yaml
     # is consitent with when it creates the conda-gcc-specs package
-    true
+    false
 fi
