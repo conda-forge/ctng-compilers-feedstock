@@ -215,6 +215,8 @@ outputs:
         - ./howdy-dso-runpath
         -   grep RPATH   <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso-runpath)
         - ! grep RUNPATH <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso-runpath)
+        - echo | ${CC} -E -Wp,-v -x -c - |& awk '/^include <\.\.\.> search starts/, /^End of search/ {print}' | tail -n2 | head -n1 | grep "$PREFIX/include"
+        - echo | ${CC} -isystem "$PREFIX/include" -E -Wp,-v -x -c - |& awk '/^include <\.\.\.> search starts/, /^End of search/ {print}' | head -n2 | tail -n1 | grep "$PREFIX/include"
 
     about:
       summary: conda-specific specfile for GNU C/C++ Compiler
