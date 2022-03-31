@@ -204,7 +204,7 @@ outputs:
         - specdir=$PREFIX/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}   # [cross_target_platform == target_platform]
         - test -f $specdir/conda.specs                                                             # [cross_target_platform == target_platform]
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc                                               # [cross_target_platform == target_platform]
-        - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print "$1":}' | grep "${specdir}/specs:${specdir}/conda.specs:"  # [cross_target_platform == target_platform]
+        - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print $1":"}' | grep "${specdir}/specs:${specdir}/conda.specs:"  # [cross_target_platform == target_platform]
         - cp tests/libhowdy.h $PREFIX/include/                                                     # [cross_target_platform == target_platform]
         - ${CC} -shared -fpic -o $PREFIX/lib/libhowdy.so tests/libhowdy.c                          # [cross_target_platform == target_platform]
         - ${CC} -o howdy-dso tests/howdy-dso.c -lhowdy                                             # [cross_target_platform == target_platform]

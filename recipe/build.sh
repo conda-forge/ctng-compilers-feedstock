@@ -3,7 +3,7 @@
 set -ex
 
 # ensure patch is applied
-grep 'conda-forge:: allow' gcc/gcc.{c,cc}
+grep 'conda-forge:: allow' gcc/gcc.c*
 
 get_cpu_arch() {
   local CPU_ARCH
