@@ -1,4 +1,3 @@
-{% set name = "gcc_impl" %}
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
 {% set build_num = 15 %}
@@ -6,7 +5,6 @@
 package:
   name: gcc_compilers
   version: {{ version }}
-
 source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
     sha256: f0837f1bf8244a5cc23bd96ff6366712a791cfae01df8e25b137698aca26efc1   # [gcc_version == "11.2.0"]
@@ -21,9 +19,8 @@ source:
       # This patch can be removed in 10.4.0 but helps with compatibility for nccl
       # https://github.com/NVIDIA/nccl/issues/494#issuecomment-881074063
       - patches/PR100102-2.a1b3484a8e6c53c8084723e3f1738d402374198e.patch      # [gcc_version == "10.3.0"]
-      - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_version != "12.0.0"]
-        # FIXME this will need to be extended for >= 12.0.0 but not sure how to do with selectors
-      - patches/new-allow-commands-in-main-specfile.patch                      # [gcc_version == "12.0.0"]
+      - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver < 12]
+      - patches/new-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver >= 12]
 
 build:
   number: {{ build_num }}
@@ -207,7 +204,7 @@ outputs:
         - specdir=$PREFIX/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}   # [cross_target_platform == target_platform]
         - test -f $specdir/conda.specs                                                             # [cross_target_platform == target_platform]
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc                                               # [cross_target_platform == target_platform]
-        - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print ${1}:}' | grep "${specdir}/specs:${specdir}/conda.specs:"  # [cross_target_platform == target_platform]
+        - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print "$1":}' | grep "${specdir}/specs:${specdir}/conda.specs:"  # [cross_target_platform == target_platform]
         - cp tests/libhowdy.h $PREFIX/include/                                                     # [cross_target_platform == target_platform]
         - ${CC} -shared -fpic -o $PREFIX/lib/libhowdy.so tests/libhowdy.c                          # [cross_target_platform == target_platform]
         - ${CC} -o howdy-dso tests/howdy-dso.c -lhowdy                                             # [cross_target_platform == target_platform]
