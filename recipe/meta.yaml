@@ -205,9 +205,9 @@ outputs:
         - test -f $specdir/conda.specs
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print $1":"}' | grep "${specdir}/specs:${specdir}/conda.specs:"
-        - cp $RECIPE_DIR/tests/libhowdy.h $PREFIX/include/
+        - cp tests/libhowdy.h $PREFIX/include/
         - ${CC} -shared -fpic -o $PREFIX/lib/libhowdy.so tests/libhowdy.c
-        - ${CC} -o howdy-dso $RECIPE_DIR/tests/howdy-dso.c -lhowdy
+        - ${CC} -o howdy-dso tests/howdy-dso.c -lhowdy
         - ./howdy-dso
         -   grep RPATH   <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso)
         - ! grep RUNPATH <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso)
