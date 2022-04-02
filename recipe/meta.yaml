@@ -209,14 +209,14 @@ outputs:
         - ${CC} -shared -fpic -o $PREFIX/lib/libhowdy.so tests/libhowdy.c
         - ${CC} -o howdy-dso tests/howdy-dso.c -lhowdy
         - ./howdy-dso
-        -   grep RPATH   <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso)
-        - ! grep RUNPATH <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso)
+        -    grep RPATH   <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso)
+        - "! grep RUNPATH <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso)"
         - ${CC} -Wl,-enable-new-dtags -o howdy-dso-runpath tests/howdy-dso.c -lhowdy
         - ./howdy-dso-runpath
-        -   grep RPATH   <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso-runpath)
-        - ! grep RUNPATH <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso-runpath)
-        - echo | ${CC} -E -Wp,-v -x -c - |& awk '/^include <\.\.\.> search starts/, /^End of search/ {print}' | tail -n2 | head -n1 | grep "$PREFIX/include"
-        - echo | ${CC} -isystem "$PREFIX/include" -E -Wp,-v -x -c - |& awk '/^include <\.\.\.> search starts/, /^End of search/ {print}' | head -n2 | tail -n1 | grep "$PREFIX/include"
+        - "! grep RPATH   <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso-runpath)"
+        -    grep RUNPATH <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso-runpath)
+        - echo | ${CC} -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/,/^End of search/ {print}' | tail -n2 | head -n1 | grep "$PREFIX/include"
+        - echo | ${CC} -isystem "$PREFIX/include" -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/, /^End of search/ {print}' | head -n2 | tail -n1 | grep "$PREFIX/include"
 
     about:
       summary: conda-specific specfile for GNU C/C++ Compiler
