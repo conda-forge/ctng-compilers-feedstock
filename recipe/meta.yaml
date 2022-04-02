@@ -5,6 +5,7 @@
 package:
   name: gcc_compilers
   version: {{ version }}
+
 source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
     sha256: f0837f1bf8244a5cc23bd96ff6366712a791cfae01df8e25b137698aca26efc1   # [gcc_version == "11.2.0"]
