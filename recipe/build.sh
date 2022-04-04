@@ -28,6 +28,13 @@ if [[ "$channel_targets" == *conda-forge* && "${build_platform}" == "${target_pl
   export PATH=$SRC_DIR/cf-compilers/bin:$PATH
 fi
 
+GCC_CONFIGURE_OPTIONS=()
+
+if [[ "$channel_targets" == *conda-forge* ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--with-pkgversion="conda-forge ${gcc_version}-${PKG_BUILDNUM}")
+  GCC_CONFIGURE_OPTIONS+=(--with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose")
+fi
+
 export BUILD="$(get_cpu_arch $build_platform)-${gcc_vendor}-linux-gnu"
 export HOST="$(get_cpu_arch $target_platform)-${gcc_vendor}-linux-gnu"
 export TARGET="$(get_cpu_arch $cross_target_platform)-${gcc_vendor}-linux-gnu"
@@ -122,7 +129,6 @@ cd build
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
   --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}" \
-  --with-pkgversion="conda-forge ${gcc_version}-${PKG_BUILDNUM}" \
-  --with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose"
+  "${GCC_CONFIGURE_OPTIONS[@]}"
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libbacktrace/config.log; false)
