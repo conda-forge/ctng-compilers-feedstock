@@ -555,6 +555,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - timsnyder
     - xhochy
     - isuruf
     - beckermr
