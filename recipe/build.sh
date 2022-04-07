@@ -2,6 +2,9 @@
 
 set -ex
 
+# ensure patch is applied
+grep 'conda-forge:: allow' gcc/gcc.c*
+
 get_cpu_arch() {
   local CPU_ARCH
   if [[ "$1" == "linux-64" ]]; then
@@ -23,6 +26,13 @@ if [[ "$channel_targets" == *conda-forge* && "${build_platform}" == "${target_pl
   # Use new compilers instead of relying on ones from the docker image
   conda create -p $SRC_DIR/cf-compilers gcc gfortran gxx binutils -c conda-forge --yes --quiet
   export PATH=$SRC_DIR/cf-compilers/bin:$PATH
+fi
+
+GCC_CONFIGURE_OPTIONS=()
+
+if [[ "$channel_targets" == *conda-forge* ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--with-pkgversion="conda-forge ${gcc_version}-${PKG_BUILDNUM}")
+  GCC_CONFIGURE_OPTIONS+=(--with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose")
 fi
 
 export BUILD="$(get_cpu_arch $build_platform)-${gcc_vendor}-linux-gnu"
@@ -94,6 +104,7 @@ cd build
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
   --libdir="$PREFIX/lib" \
+  --mandir="$PREFIX/man" \
   --build=$BUILD \
   --host=$HOST \
   --target=$TARGET \
@@ -115,10 +126,9 @@ cd build
   --disable-bootstrap \
   --disable-multilib \
   --enable-long-long \
-  --enable-default-pie \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
   --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}" \
-  $GCC_CONFIGURE_OPTIONS
+  "${GCC_CONFIGURE_OPTIONS[@]}"
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libbacktrace/config.log; false)
