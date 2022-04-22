@@ -527,7 +527,7 @@ outputs:
         # conflict with previous name
         - openmp_impl 9999
     build:
-      string: 1_gnu
+      string: 2_gnu
       skip: True   # [target_platform != cross_target_platform]
       run_exports:
         strong:
