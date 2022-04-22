@@ -1,6 +1,6 @@
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 15 %}
+{% set build_num = 16 %}
 
 package:
   name: gcc_compilers
@@ -527,7 +527,7 @@ outputs:
         # conflict with previous name
         - openmp_impl 9999
     build:
-      string: 1_gnu
+      string: 2_gnu
       skip: True   # [target_platform != cross_target_platform]
       run_exports:
         strong:

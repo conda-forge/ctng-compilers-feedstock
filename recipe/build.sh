@@ -31,7 +31,7 @@ fi
 GCC_CONFIGURE_OPTIONS=()
 
 if [[ "$channel_targets" == *conda-forge* ]]; then
-  GCC_CONFIGURE_OPTIONS+=(--with-pkgversion="conda-forge ${gcc_version}-${PKG_BUILDNUM}")
+  GCC_CONFIGURE_OPTIONS+=(--with-pkgversion="conda-forge gcc ${gcc_version}-${PKG_BUILDNUM}")
   GCC_CONFIGURE_OPTIONS+=(--with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose")
 fi
 
