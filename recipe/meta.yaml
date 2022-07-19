@@ -9,18 +9,14 @@ package:
 source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
     sha256: e88a004a14697bbbaba311f38a938c716d9a652fd151aaaa4cf1b5b99b90e2de   # [gcc_version == "12.1.0"]
-    sha256: f0837f1bf8244a5cc23bd96ff6366712a791cfae01df8e25b137698aca26efc1   # [gcc_version == "11.2.0"]
-    sha256: 8fcf994811ad4e5c7ac908e8cf62af2c1982319e5551f62ae72016064dacdf16   # [gcc_version == "10.3.0"]
-    sha256: 07ea650894cde75ab0f7cfbee0e69832c8a789b01efa2de3bfba7569338e24cb   # [gcc_version == "9.4.0"]
+    sha256: 98438e6cc7294298b474cf0da7655d9a8c8b796421bb0210531c294a950374ed   # [gcc_version == "11.3.0"]
+    sha256: ab1974017834430de27fd803ade4389602a7d6ca1362496c57bef384b2a4cb07   # [gcc_version == "10.4.0"]
+    sha256: 15b34072105272a3eb37f6927409f7ce9aa0dd1498efebc35f851d6e6f029a4d   # [gcc_version == "9.5.0"]
     sha256: 6e6e0628573d2185727a2dd83211d04a2b2748e4a262099099b9c8064634c9ee   # [gcc_version == "8.5.0"]
     sha256: 4f518f18cfb694ad7975064e99e200fe98af13603b47e67e801ba9580e50a07f   # [gcc_version == "7.5.0"]
     patches:
-      - patches/0023-aarch64-incomplete-extern-c-block.patch                   # [gcc_version == "9.4.0" and target_platform == 'linux-aarch64']
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       - patches/0022-cross-compile-older-glibc.patch   # [glibc_version == "2.12" and target_platform != "linux-64"]
-      # This patch can be removed in 10.4.0 but helps with compatibility for nccl
-      # https://github.com/NVIDIA/nccl/issues/494#issuecomment-881074063
-      - patches/PR100102-2.a1b3484a8e6c53c8084723e3f1738d402374198e.patch      # [gcc_version == "10.3.0"]
       - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver < 12]
       - patches/new-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver >= 12]
 
