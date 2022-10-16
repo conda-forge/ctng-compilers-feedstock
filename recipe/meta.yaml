@@ -1,6 +1,6 @@
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 16 %}
+{% set build_num = 17 %}
 
 package:
   name: gcc_compilers
@@ -141,7 +141,7 @@ outputs:
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform]
       run:
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
+        - binutils_impl_{{ cross_target_platform }} >={{ binutils_version }}
         - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
         - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform]
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
