@@ -15,7 +15,7 @@ docker_image:
 gcc_machine:
 - s390x
 gcc_maj_ver:
-- '12'
+- '9'
 gcc_vendor:
 - conda
 gcc_version:

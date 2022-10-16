@@ -11,13 +11,13 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-ppc64le
+- linux-aarch64
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 gcc_machine:
-- powerpc64le
+- aarch64
 gcc_maj_ver:
-- '9'
+- '12'
 gcc_vendor:
 - conda
 gcc_version:
