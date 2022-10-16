@@ -41,10 +41,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version12.1.0glibc_version2.12</td>
+              <td>linux_64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version12.2.0glibc_version2.12</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version12.1.0glibc_version2.12" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version12.2.0glibc_version2.12" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -76,10 +76,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -111,10 +111,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -146,10 +146,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -181,10 +181,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version12.1.0glibc_version2.12</td>
+              <td>linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version9.5.0glibc_version2.12</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version12.1.0glibc_version2.12" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version9.5.0glibc_version2.12" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -195,10 +195,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version9.5.0glibc_version2.12</td>
+              <td>linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version12.2.0glibc_version2.12</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version9.5.0glibc_version2.12" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version12.2.0glibc_version2.12" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -216,10 +216,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version9.5.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version9.5.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -230,10 +230,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version9.5.0glibc_version2.17</td>
+              <td>linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version9.5.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -251,10 +251,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version9.5.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version9.5.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -265,10 +265,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version9.5.0glibc_version2.17</td>
+              <td>linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version9.5.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -286,10 +286,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version9.5.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version9.5.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -300,10 +300,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version9.5.0glibc_version2.17</td>
+              <td>linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version9.5.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_aarch64_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -321,10 +321,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version12.1.0glibc_version2.12</td>
+              <td>linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version9.5.0glibc_version2.12</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version12.1.0glibc_version2.12" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version9.5.0glibc_version2.12" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -335,10 +335,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version9.5.0glibc_version2.12</td>
+              <td>linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version12.2.0glibc_version2.12</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version9.5.0glibc_version2.12" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version12.2.0glibc_version2.12" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -356,10 +356,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version9.5.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version9.5.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -370,10 +370,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version9.5.0glibc_version2.17</td>
+              <td>linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version9.5.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -391,10 +391,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version9.5.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version9.5.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -405,10 +405,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version9.5.0glibc_version2.17</td>
+              <td>linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version9.5.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -426,10 +426,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version9.5.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version9.5.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -440,10 +440,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version9.5.0glibc_version2.17</td>
+              <td>linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version9.5.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_ppc64le_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -461,10 +461,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version12.1.0glibc_version2.12</td>
+              <td>linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version9.5.0glibc_version2.12</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version12.1.0glibc_version2.12" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver12gcc_version9.5.0glibc_version2.12" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -475,10 +475,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version9.5.0glibc_version2.12</td>
+              <td>linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version12.2.0glibc_version2.12</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version9.5.0glibc_version2.12" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-64gcc_machinex86_64gcc_maj_ver9gcc_version12.2.0glibc_version2.12" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -496,10 +496,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version9.5.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver12gcc_version9.5.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -510,10 +510,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version9.5.0glibc_version2.17</td>
+              <td>linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version9.5.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-aarch64gcc_machineaarch64gcc_maj_ver9gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -531,10 +531,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version9.5.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver12gcc_version9.5.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -545,10 +545,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version9.5.0glibc_version2.17</td>
+              <td>linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version9.5.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-ppc64legcc_machinepowerpc64legcc_maj_ver9gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -566,10 +566,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version12.1.0glibc_version2.17</td>
+              <td>linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version9.5.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version12.1.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver12gcc_version9.5.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -580,10 +580,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version9.5.0glibc_version2.17</td>
+              <td>linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version12.2.0glibc_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version9.5.0glibc_version2.17" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux_s390x_cross_target_platformlinux-s390xgcc_machines390xgcc_maj_ver9gcc_version12.2.0glibc_version2.17" alt="variant">
                 </a>
               </td>
             </tr>

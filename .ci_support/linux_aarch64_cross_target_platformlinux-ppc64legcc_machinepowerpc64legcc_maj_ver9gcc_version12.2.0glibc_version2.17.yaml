@@ -1,7 +1,7 @@
 BUILD:
 - aarch64-conda_cos7-linux-gnu
 binutils_version:
-- 2.36.1
+- '2.39'
 cdt_arch:
 - aarch64
 cdt_name:
@@ -21,7 +21,7 @@ gcc_maj_ver:
 gcc_vendor:
 - conda
 gcc_version:
-- 9.5.0
+- 12.2.0
 glib:
 - '2'
 glibc_version:

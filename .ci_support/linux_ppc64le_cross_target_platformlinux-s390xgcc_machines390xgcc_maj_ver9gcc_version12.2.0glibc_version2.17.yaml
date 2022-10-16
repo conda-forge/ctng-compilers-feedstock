@@ -1,9 +1,9 @@
 _libgcc_mutex:
 - 0.1 conda_forge
 binutils_version:
-- 2.36.1
+- '2.39'
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
@@ -15,11 +15,11 @@ docker_image:
 gcc_machine:
 - s390x
 gcc_maj_ver:
-- '12'
+- '9'
 gcc_vendor:
 - conda
 gcc_version:
-- 12.1.0
+- 12.2.0
 glib:
 - '2'
 glibc_version:
@@ -33,7 +33,7 @@ old_gcc_vendor:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-64
+- linux-ppc64le
 use_system_gcc:
 - 'False'
 zip_keys:

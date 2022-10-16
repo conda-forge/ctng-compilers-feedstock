@@ -1,5 +1,5 @@
 binutils_version:
-- 2.36.1
+- '2.39'
 cdt_name:
 - cos7
 channel_sources:
@@ -17,7 +17,7 @@ gcc_maj_ver:
 gcc_vendor:
 - conda
 gcc_version:
-- 9.5.0
+- 12.2.0
 glib:
 - '2'
 glibc_version:

@@ -1,6 +1,6 @@
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 17 %}
+{% set build_num = 18 %}
 
 package:
   name: gcc_compilers
@@ -8,7 +8,7 @@ package:
 
 source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
-    sha256: e88a004a14697bbbaba311f38a938c716d9a652fd151aaaa4cf1b5b99b90e2de   # [gcc_version == "12.1.0"]
+    sha256: ac6b317eb4d25444d87cf29c0d141dedc1323a1833ec9995211b13e1a851261c   # [gcc_version == "12.2.0"]
     sha256: 98438e6cc7294298b474cf0da7655d9a8c8b796421bb0210531c294a950374ed   # [gcc_version == "11.3.0"]
     sha256: ab1974017834430de27fd803ade4389602a7d6ca1362496c57bef384b2a4cb07   # [gcc_version == "10.4.0"]
     sha256: 15b34072105272a3eb37f6927409f7ce9aa0dd1498efebc35f851d6e6f029a4d   # [gcc_version == "9.5.0"]

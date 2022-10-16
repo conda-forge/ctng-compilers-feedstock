@@ -1,7 +1,7 @@
 BUILD:
 - aarch64-conda_cos7-linux-gnu
 binutils_version:
-- 2.36.1
+- '2.39'
 cdt_arch:
 - aarch64
 cdt_name:
@@ -11,13 +11,13 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-64
+- linux-ppc64le
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 gcc_machine:
-- x86_64
+- powerpc64le
 gcc_maj_ver:
-- '9'
+- '12'
 gcc_vendor:
 - conda
 gcc_version:
@@ -25,13 +25,13 @@ gcc_version:
 glib:
 - '2'
 glibc_version:
-- '2.12'
+- '2.17'
 libgfortran_soname:
 - '5'
 libgomp_ver:
 - 1.0.0
 old_gcc_vendor:
-- conda_cos6
+- conda_cos7
 openmp_ver:
 - '4.5'
 target_platform:

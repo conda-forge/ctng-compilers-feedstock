@@ -1,7 +1,7 @@
 BUILD:
 - aarch64-conda_cos7-linux-gnu
 binutils_version:
-- 2.36.1
+- '2.39'
 cdt_arch:
 - aarch64
 cdt_name:

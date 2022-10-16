@@ -1,9 +1,11 @@
-_libgcc_mutex:
-- 0.1 conda_forge
+BUILD:
+- aarch64-conda_cos7-linux-gnu
 binutils_version:
-- 2.36.1
+- '2.39'
+cdt_arch:
+- aarch64
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
@@ -15,11 +17,11 @@ docker_image:
 gcc_machine:
 - aarch64
 gcc_maj_ver:
-- '12'
+- '9'
 gcc_vendor:
 - conda
 gcc_version:
-- 12.1.0
+- 12.2.0
 glib:
 - '2'
 glibc_version:
@@ -33,7 +35,7 @@ old_gcc_vendor:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-64
+- linux-aarch64
 use_system_gcc:
 - 'False'
 zip_keys:

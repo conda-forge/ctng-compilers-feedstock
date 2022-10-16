@@ -1,9 +1,7 @@
-BUILD:
-- aarch64-conda_cos7-linux-gnu
+_libgcc_mutex:
+- 0.1 conda_forge
 binutils_version:
-- 2.36.1
-cdt_arch:
-- aarch64
+- '2.39'
 cdt_name:
 - cos7
 channel_sources:
@@ -17,7 +15,7 @@ docker_image:
 gcc_machine:
 - aarch64
 gcc_maj_ver:
-- '9'
+- '12'
 gcc_vendor:
 - conda
 gcc_version:
@@ -35,7 +33,7 @@ old_gcc_vendor:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-aarch64
+- linux-ppc64le
 use_system_gcc:
 - 'False'
 zip_keys:
