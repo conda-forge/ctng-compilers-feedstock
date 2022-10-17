@@ -10,7 +10,7 @@ gcc_version:
   - 9.5.0
   - 10.4.0
   - 11.3.0
-  - 12.1.0
+  - 12.2.0
 gcc_maj_ver:
   - 8
   - 9
@@ -24,7 +24,7 @@ libgfortran_soname:
   - 5
   - 5
 binutils_version:
-  - 2.36.1
+  - 2.39
 cross_target_platform:
   - linux-64
   - linux-ppc64le
@@ -35,8 +35,6 @@ old_gcc_vendor:
   - conda_cos7
   - conda_cos7
   - conda
-gcc_build_number:
-  - 0
 glibc_version:
   - 2.12
   - 2.17
