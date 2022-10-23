@@ -1,6 +1,6 @@
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 18 %}
+{% set build_num = 19 %}
 
 package:
   name: gcc_compilers
@@ -19,6 +19,7 @@ source:
       - patches/0022-cross-compile-older-glibc.patch   # [glibc_version == "2.12" and target_platform != "linux-64"]
       - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver < 12]
       - patches/new-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver >= 12]
+      - patches/fix-inconsistent-noexcept-spec.patch                           # [gcc_version == "10.4.0"]
 
 build:
   number: {{ build_num }}
