@@ -11,16 +11,11 @@ source:
     sha256: bacd4c614d8bd5983404585e53478d467a254249e0f1bb747c8bc6d787bd4fa2   # [gcc_version == "13.1.0"]
     sha256: 11275aa7bb34cd8ab101d01b341015499f8d9466342a2574ece93f954d92273b   # [gcc_version == "12.3.0"]
     sha256: af828619dd1970734dda3cfb792ea3f2cba61b5a00170ba8bce4910749d73c07   # [gcc_version == "11.4.0"]
-    sha256: ab1974017834430de27fd803ade4389602a7d6ca1362496c57bef384b2a4cb07   # [gcc_version == "10.4.0"]
-    sha256: 15b34072105272a3eb37f6927409f7ce9aa0dd1498efebc35f851d6e6f029a4d   # [gcc_version == "9.5.0"]
-    sha256: 6e6e0628573d2185727a2dd83211d04a2b2748e4a262099099b9c8064634c9ee   # [gcc_version == "8.5.0"]
-    sha256: 4f518f18cfb694ad7975064e99e200fe98af13603b47e67e801ba9580e50a07f   # [gcc_version == "7.5.0"]
     patches:
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       - patches/0022-cross-compile-older-glibc.patch   # [glibc_version == "2.12" and target_platform != "linux-64"]
       - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver < 12]
       - patches/new-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver >= 12]
-      - patches/fix-inconsistent-noexcept-spec.patch                           # [gcc_version == "10.4.0"]
 
 build:
   number: {{ build_num }}
