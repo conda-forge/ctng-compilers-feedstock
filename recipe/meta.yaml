@@ -1,6 +1,6 @@
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 20 %}
+{% set build_num = 0 %}
 
 package:
   name: gcc_compilers
