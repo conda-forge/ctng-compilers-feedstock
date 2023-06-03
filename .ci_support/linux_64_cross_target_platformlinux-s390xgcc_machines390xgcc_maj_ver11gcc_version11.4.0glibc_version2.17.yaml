@@ -19,7 +19,7 @@ gcc_maj_ver:
 gcc_vendor:
 - conda
 gcc_version:
-- 12.3.0
+- 11.4.0
 glib:
 - '2'
 glibc_version:

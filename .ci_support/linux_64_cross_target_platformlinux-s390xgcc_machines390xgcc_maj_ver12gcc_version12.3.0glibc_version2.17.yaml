@@ -15,11 +15,11 @@ docker_image:
 gcc_machine:
 - s390x
 gcc_maj_ver:
-- '13'
+- '12'
 gcc_vendor:
 - conda
 gcc_version:
-- 11.4.0
+- 12.3.0
 glib:
 - '2'
 glibc_version:

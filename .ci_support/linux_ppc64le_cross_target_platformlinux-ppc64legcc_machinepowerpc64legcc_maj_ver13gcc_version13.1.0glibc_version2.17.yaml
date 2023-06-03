@@ -15,11 +15,11 @@ docker_image:
 gcc_machine:
 - powerpc64le
 gcc_maj_ver:
-- '11'
+- '13'
 gcc_vendor:
 - conda
 gcc_version:
-- 12.3.0
+- 13.1.0
 glib:
 - '2'
 glibc_version:
