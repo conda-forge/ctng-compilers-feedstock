@@ -1,6 +1,6 @@
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 2 %}
+{% set build_num = 3 %}
 
 package:
   name: gcc_compilers
@@ -68,6 +68,7 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/crtbegin.o
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libgcc_eh.a
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libgcc.a
+        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgcc_s.so
     about:
       summary: The GNU C development libraries and object files
       home: https://gcc.gnu.org/
