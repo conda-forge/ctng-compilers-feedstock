@@ -8,7 +8,7 @@ gcc_vendor:
 gcc_version:
   - 11.4.0
   - 12.3.0
-  - 13.1.0
+  - 13.2.0
 gcc_maj_ver:
   - 11
   - 12
