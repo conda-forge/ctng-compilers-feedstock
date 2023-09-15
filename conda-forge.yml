@@ -8,3 +8,5 @@ github:
   tooling_branch_name: main
 conda_build:
   pkg_format: '2'
+azure:
+  store_build_artifacts: True
