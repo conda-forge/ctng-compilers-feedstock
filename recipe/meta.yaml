@@ -14,7 +14,6 @@ source:
     patches:
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       - patches/0022-cross-compile-older-glibc.patch   # [glibc_version == "2.12" and target_platform != "linux-64"]
-      - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver < 12]
       - patches/libgomp-support-environ-null.patch                             # [gcc_maj_ver >= 13]
 
 build:
