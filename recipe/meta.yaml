@@ -1,6 +1,6 @@
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 package:
   name: gcc_compilers
@@ -560,6 +560,8 @@ outputs:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+      run:
+        - libgcc-ng >={{ gcc_version }}
       run_constrained:
         - libgfortran-ng {{ gcc_version }}
     test:
