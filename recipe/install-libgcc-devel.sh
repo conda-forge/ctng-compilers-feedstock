@@ -10,10 +10,11 @@ pushd ${SRC_DIR}/build
 
 make -C ${CHOST}/libgcc prefix=${PREFIX} install
 
-# These go into libgcc output
-rm -rf ${PREFIX}/lib/libgcc_s.so*
-# These go into gcc_impl
-find ${PREFIX}/${CHOST}/lib/ ! -name 'libgcc_s.so*' -type l -or -type f -exec rm -f {} +
+# ${PREFIX}/lib/libgcc_s.so* goes into libgcc-ng output, but
+# avoid that the equivalents in ${PREFIX}/${CHOST}/lib end up
+# in gcc_impl_{{ cross_target_platform }}, c.f. install-gcc.sh
+mkdir -p ${PREFIX}/${CHOST}/lib
+mv ${PREFIX}/lib/libgcc_s.so* ${PREFIX}/${CHOST}/lib
 # This is in gcc_impl as it is gcc specific and clang has the same header
 rm -rf ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/include/unwind.h
 

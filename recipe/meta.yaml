@@ -134,6 +134,7 @@ outputs:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
         - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libstdcxx-ng", exact=True) }}          # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", exact=True) }}             # [target_platform == cross_target_platform]
