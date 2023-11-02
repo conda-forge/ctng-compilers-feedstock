@@ -63,6 +63,9 @@ outputs:
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ pin_subpackage("libgcc-ng", exact=True) }}     # [target_platform == cross_target_platform]
+      run:
+        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}   # [target_platform == cross_target_platform]
     test:
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/crtbegin.o
