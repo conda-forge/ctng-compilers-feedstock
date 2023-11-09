@@ -3,6 +3,7 @@ About gcc_compilers-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ctng-compilers-feedstock/blob/main/LICENSE.txt)
 
+
 About gcc_compilers
 -------------------
 
@@ -11,6 +12,7 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU Compiler Collection
+
 About libgcc-devel_linux-64
 ---------------------------
 
@@ -19,14 +21,7 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GNU C development libraries and object files
-About libgfortran5
-------------------
 
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU Fortran Runtime Library
 About libgomp
 -------------
 
@@ -35,6 +30,7 @@ Home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GCC OpenMP implementation.
+
 About libstdcxx-devel_linux-64
 ------------------------------
 
@@ -43,6 +39,7 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GNU C++ headers and development libraries
+
 About _openmp_mutex
 -------------------
 
@@ -51,14 +48,7 @@ Home: https://github.com/conda-forge/ctng-compilers-feedstock
 Package license: BSD-3-Clause
 
 Summary: OpenMP Implementation Mutex
-About libgfortran-ng
---------------------
 
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU Fortran Runtime Library
 About libgcc-ng
 ---------------
 
@@ -67,6 +57,16 @@ Home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GCC low-level runtime library
+
+About libgfortran5
+------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU Fortran Runtime Library
+
 About libsanitizer
 ------------------
 
@@ -75,6 +75,7 @@ Home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GCC runtime libraries for sanitizers
+
 About libstdcxx-ng
 ------------------
 
@@ -83,6 +84,7 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GNU C++ Runtime Library
+
 About gcc_impl_linux-64
 -----------------------
 
@@ -91,6 +93,16 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU C Compiler
+
+About libgfortran-ng
+--------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU Fortran Runtime Library
+
 About conda-gcc-specs
 ---------------------
 
@@ -114,6 +126,7 @@ It should not be used in recipes.  Use the 'compiler(<lang>)'
 jinja function as described on
 https://conda-forge.org/docs/maintainer/knowledge_base.html#dep-compilers
 
+
 About gfortran_impl_linux-64
 ----------------------------
 
@@ -122,6 +135,7 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU Fortran Compiler
+
 About gxx_impl_linux-64
 -----------------------
 
@@ -130,86 +144,7 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU C++ Compiler
-About libgcc-devel_linux-s390x
-------------------------------
 
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU C development libraries and object files
-About libstdcxx-devel_linux-s390x
----------------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU C++ headers and development libraries
-About gcc_impl_linux-s390x
---------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU C Compiler
-About gxx_impl_linux-s390x
---------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU C++ Compiler
-About gfortran_impl_linux-s390x
--------------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU Fortran Compiler
-About libgcc-devel_linux-ppc64le
---------------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU C development libraries and object files
-About libstdcxx-devel_linux-ppc64le
------------------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU C++ headers and development libraries
-About gcc_impl_linux-ppc64le
-----------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU C Compiler
-About gxx_impl_linux-ppc64le
-----------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU C++ Compiler
-About gfortran_impl_linux-ppc64le
----------------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU Fortran Compiler
 About libgcc-devel_linux-aarch64
 --------------------------------
 
@@ -218,6 +153,7 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GNU C development libraries and object files
+
 About libstdcxx-devel_linux-aarch64
 -----------------------------------
 
@@ -226,6 +162,7 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GNU C++ headers and development libraries
+
 About gcc_impl_linux-aarch64
 ----------------------------
 
@@ -234,6 +171,7 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU C Compiler
+
 About gxx_impl_linux-aarch64
 ----------------------------
 
@@ -242,7 +180,98 @@ Home: https://gcc.gnu.org/
 Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU C++ Compiler
+
 About gfortran_impl_linux-aarch64
+---------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU Fortran Compiler
+
+About libgcc-devel_linux-s390x
+------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU C development libraries and object files
+
+About libstdcxx-devel_linux-s390x
+---------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU C++ headers and development libraries
+
+About gcc_impl_linux-s390x
+--------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU C Compiler
+
+About gxx_impl_linux-s390x
+--------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU C++ Compiler
+
+About gfortran_impl_linux-s390x
+-------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU Fortran Compiler
+
+About libgcc-devel_linux-ppc64le
+--------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU C development libraries and object files
+
+About libstdcxx-devel_linux-ppc64le
+-----------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU C++ headers and development libraries
+
+About gcc_impl_linux-ppc64le
+----------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU C Compiler
+
+About gxx_impl_linux-ppc64le
+----------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU C++ Compiler
+
+About gfortran_impl_linux-ppc64le
 ---------------------------------
 
 Home: https://gcc.gnu.org/
@@ -764,7 +793,4 @@ Feedstock Maintainers
 * [@isuruf](https://github.com/isuruf/)
 * [@timsnyder](https://github.com/timsnyder/)
 * [@xhochy](https://github.com/xhochy/)
-
-
-<!-- dummy commit to enable rerendering -->
 
