@@ -108,8 +108,6 @@ outputs:
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
     test:
-      requires:
-        - gxx_impl_{{ cross_target_platform }} {{ gcc_version }}
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libstdc++.a
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libstdc++.so
