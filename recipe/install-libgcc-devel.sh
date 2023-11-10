@@ -14,13 +14,7 @@ make -C ${CHOST}/libgcc prefix=${PREFIX} install
 # avoid that the equivalents in ${PREFIX}/${CHOST}/lib end up
 # in gcc_impl_{{ cross_target_platform }}, c.f. install-gcc.sh
 mkdir -p ${PREFIX}/${CHOST}/lib
-if [[ "$target_platform" == "$cross_target_platform" ]]; then
-    for f in ${PREFIX}/lib/libgcc_s.so*; do
-        ln -s ${PREFIX}/lib/$(basename $f) ${PREFIX}/${CHOST}/lib/$(basename $f)
-    done
-else
-    mv ${PREFIX}/lib/libgcc_s.so* ${PREFIX}/${CHOST}/lib
-fi
+mv ${PREFIX}/lib/libgcc_s.so* ${PREFIX}/${CHOST}/lib
 # This is in gcc_impl as it is gcc specific and clang has the same header
 rm -rf ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/include/unwind.h
 

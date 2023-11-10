@@ -2,6 +2,15 @@
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
 {% set build_num = 3 %}
 
+# libgcc-devel is a noarch: generic package that is built for
+# cross-compilers as well. Instead of skipping for cross-compilers,
+# let's prioritize the native compilers package
+{% if target_platform == cross_target_platform %}
+{% set libgcc_devel_build_num = build_num + 100 %}
+{% else %}
+{% set libgcc_devel_build_num = build_num %}
+{% endif %}
+
 package:
   name: gcc_compilers
   version: {{ version }}
@@ -41,7 +50,8 @@ outputs:
   - name: libgcc-devel_{{ cross_target_platform }}
     script: install-libgcc-devel.sh
     build:
-      number: {{ build_num }}
+      noarch: generic
+      number: {{ libgcc_devel_build_num }}
       detect_binary_files_with_prefix: False
       missing_dso_whitelist:
         - "*"
@@ -63,9 +73,6 @@ outputs:
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
-        - {{ pin_subpackage("libgcc-ng", exact=True) }}     # [target_platform == cross_target_platform]
-      run:
-        - {{ pin_subpackage("libgcc-ng", max_pin=None) }}   # [target_platform == cross_target_platform]
     test:
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/crtbegin.o
@@ -80,7 +87,8 @@ outputs:
   - name: libstdcxx-devel_{{ cross_target_platform }}
     script: install-libstdc++-devel.sh
     build:
-      number: {{ build_num }}
+      noarch: generic
+      number: {{ libgcc_devel_build_num }}
       detect_binary_files_with_prefix: False
       missing_dso_whitelist:
         - "*"
@@ -137,7 +145,7 @@ outputs:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
-        - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
+        - libgcc-devel_{{ cross_target_platform }}  {{ gcc_version }} *_{{ libgcc_devel_build_num }}
         - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libstdcxx-ng", exact=True) }}          # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", exact=True) }}             # [target_platform == cross_target_platform]
@@ -145,7 +153,7 @@ outputs:
         - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform]
       run:
         - binutils_impl_{{ cross_target_platform }} >={{ binutils_version }}
-        - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
+        - libgcc-devel_{{ cross_target_platform }}  {{ gcc_version }} *_{{ libgcc_devel_build_num }}
         - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform]
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}    # [target_platform == cross_target_platform]
@@ -266,7 +274,7 @@ outputs:
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         # not needed due to pinning above but marks this build as using the new sysroots
         - sysroot_{{ cross_target_platform }}
-        - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}
+        - libstdcxx-devel_{{ cross_target_platform }}  {{ gcc_version }} *_{{ build_num }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:

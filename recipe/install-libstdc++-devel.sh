@@ -12,10 +12,6 @@ make -C $CHOST/libstdc++-v3/src prefix=${PREFIX} install
 make -C $CHOST/libstdc++-v3/include prefix=${PREFIX} install
 make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX} install
 
-
-if [[ "$target_platform" == "$cross_target_platform" ]]; then
-    rm -rf ${PREFIX}/${CHOST}/lib/libstdc++.so*
-fi
 rm -rf ${PREFIX}/lib/libstdc++.so*
 mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
 
