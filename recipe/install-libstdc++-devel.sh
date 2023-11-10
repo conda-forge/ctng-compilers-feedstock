@@ -20,6 +20,7 @@ else
     mv $PREFIX/${CHOST}/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
 fi
 
+mkdir -p ${PREFIX}/${CHOST}/lib
 mv ${PREFIX}/lib/libstdc++.so* ${PREFIX}/${CHOST}/lib
 ln -sf ${PREFIX}/${CHOST}/lib/libstdc++.so ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/libstdc++.so
 
