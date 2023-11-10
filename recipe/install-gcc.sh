@@ -190,7 +190,7 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
   # making these this way so conda build doesn't muck with them
   pushd ${PREFIX}/${CHOST}/lib
     ln -sf ../../lib/libgomp.so libgomp.so
-    for lib in libstdc++ libgfortran libatomic libquadmath libitm lib{a,l,ub,t}san; do
+    for lib in libgfortran libatomic libquadmath libitm lib{a,l,ub,t}san; do
       for f in ${PREFIX}/lib/${lib}.so*; do
         ln -s ../../lib/$(basename $f) ${PREFIX}/${CHOST}/lib/$(basename $f)
       done
