@@ -34,9 +34,6 @@ make -C libcpp prefix=${PREFIX} install
 popd
 
 mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${PKG_VERSION}
-if [[ "${target_platform}" == "${cross_target_platform}" ]]; then
-  ln -sf ${PREFIX}/lib/libstdc++.so ${PREFIX}/${CHOST}/lib/libstdc++.so
-fi
 
 set +x
 # Strip executables, we may want to install to a different prefix
