@@ -419,6 +419,7 @@ outputs:
         - gcc_impl_{{ cross_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libasan.so
+        - file ${PREFIX}/bin/{{ chost }}gcc
         - echo 'void main(){}' | {{ chost }}gcc -fsanitize=address -x c -
     about:
       summary: The GCC runtime libraries for sanitizers
