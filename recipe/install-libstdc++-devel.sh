@@ -13,15 +13,15 @@ make -C $CHOST/libstdc++-v3/include prefix=${PREFIX} install
 make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX} install
 
 mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
+mkdir -p ${PREFIX}/${CHOST}/lib
 
 if [[ "$target_platform" == "$cross_target_platform" ]]; then
     mv $PREFIX/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
+    mv ${PREFIX}/lib/libstdc++.so* ${PREFIX}/${CHOST}/lib
 else
     mv $PREFIX/${CHOST}/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
 fi
 
-mkdir -p ${PREFIX}/${CHOST}/lib
-mv ${PREFIX}/lib/libstdc++.so* ${PREFIX}/${CHOST}/lib
 ln -sf ${PREFIX}/${CHOST}/lib/libstdc++.so ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/libstdc++.so
 
 popd
