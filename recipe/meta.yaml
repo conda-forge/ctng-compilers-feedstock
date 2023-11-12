@@ -1,6 +1,15 @@
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 2 %}
+{% set build_num = 3 %}
+
+# libgcc-devel is a noarch: generic package that is built for
+# cross-compilers as well. Instead of skipping for cross-compilers,
+# let's prioritize the native compilers package
+{% if target_platform == cross_target_platform %}
+{% set libgcc_devel_build_num = build_num + 100 %}
+{% else %}
+{% set libgcc_devel_build_num = build_num %}
+{% endif %}
 
 package:
   name: gcc_compilers
@@ -41,7 +50,8 @@ outputs:
   - name: libgcc-devel_{{ cross_target_platform }}
     script: install-libgcc-devel.sh
     build:
-      number: {{ build_num }}
+      noarch: generic
+      number: {{ libgcc_devel_build_num }}
       detect_binary_files_with_prefix: False
       missing_dso_whitelist:
         - "*"
@@ -68,6 +78,7 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/crtbegin.o
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libgcc_eh.a
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libgcc.a
+        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgcc_s.so
     about:
       summary: The GNU C development libraries and object files
       home: https://gcc.gnu.org/
@@ -76,7 +87,8 @@ outputs:
   - name: libstdcxx-devel_{{ cross_target_platform }}
     script: install-libstdc++-devel.sh
     build:
-      number: {{ build_num }}
+      noarch: generic
+      number: {{ libgcc_devel_build_num }}
       detect_binary_files_with_prefix: False
       missing_dso_whitelist:
         - "*"
@@ -96,14 +108,13 @@ outputs:
       host:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
     test:
-      requires:
-        - gxx_impl_{{ cross_target_platform }} {{ gcc_version }}
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libstdc++.a
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libstdc++.so
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libstdc++fs.a
         - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libsupc++.a
         - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/include/c++/{{ gcc_version }}/cstdio
+        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libstdc++.so
     about:
       summary: The GNU C++ headers and development libraries
       home: https://gcc.gnu.org/
@@ -408,6 +419,7 @@ outputs:
         - gcc_impl_{{ cross_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libasan.so
+        - file ${PREFIX}/bin/{{ chost }}gcc
         - echo 'void main(){}' | {{ chost }}gcc -fsanitize=address -x c -
     about:
       summary: The GCC runtime libraries for sanitizers
