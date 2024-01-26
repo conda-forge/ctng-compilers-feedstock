@@ -34,7 +34,7 @@ make install DESTDIR=$SRC_DIR/build-finclude
 mkdir -p $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude
 mkdir -p $PREFIX/lib/gcc/${CHOST}/${gcc_version}/include
 install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/* $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/
-install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/include/* $PREFIX/lib/gcc/${CHOST}/${gcc_version}/include/
+install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/include/*.h $PREFIX/lib/gcc/${CHOST}/${gcc_version}/include/
 
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
