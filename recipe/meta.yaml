@@ -1,6 +1,6 @@
 {% set version = gcc_version %}
 {% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
-{% set build_num = 3 %}
+{% set build_num = 4 %}
 
 # libgcc-devel is a noarch: generic package that is built for
 # cross-compilers as well. Instead of skipping for cross-compilers,
@@ -343,6 +343,7 @@ outputs:
         - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-gfortran
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
+        - find $PREFIX/lib -iname ISO_Fortran_binding.h | grep '.'
         - pushd tests/fortomp
         - sh test_fort.sh   # [target_platform == cross_target_platform and (x86_64 or aarch64 or ppc64le)]
       files:
