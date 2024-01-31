@@ -15,7 +15,7 @@ if [[ "$cross_target_platform" == "$target_platform" ]]; then
     # We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
     #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
     #   package is installed.
-    sed -i -e "/\*link_command:/,+1 s+%.*+& %{\!static:-rpath ${PREFIX}/lib -rpath-link ${PREFIX}/lib} -L ${PREFIX}/lib+" $specdir/conda.specs
+    sed -i -e "/\*link_command:/,+1 s+%.*+& %{\!static:-rpath ${PREFIX}/lib -rpath-link ${PREFIX}/lib} -L ${PREFIX}/lib/stubs -L ${PREFIX}/lib+" $specdir/conda.specs
     # put -disable-new-dtags at the front of the cmdline so that user provided -enable-new-dtags (in %l) can  override it
     sed -i -e "/\*link_command:/,+1 s+%(linker)+& -disable-new-dtags +" $specdir/conda.specs
     # use -idirafter to put the conda "system" includes where /usr/local/include would typically go
