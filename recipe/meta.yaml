@@ -1,5 +1,4 @@
 {% set version = gcc_version %}
-{% set chost = gcc_machine ~ "-" ~ gcc_vendor ~ "-linux-gnu-" %}
 {% set build_num = 5 %}
 
 # libgcc-devel is a noarch: generic package that is built for
@@ -75,10 +74,10 @@ outputs:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
     test:
       commands:
-        - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/crtbegin.o
-        - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libgcc_eh.a
-        - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libgcc.a
-        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgcc_s.so
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/crtbegin.o
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_eh.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc.a
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so
     about:
       summary: The GNU C development libraries and object files
       home: https://gcc.gnu.org/
@@ -109,12 +108,12 @@ outputs:
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
     test:
       commands:
-        - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libstdc++.a
-        - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libstdc++.so
-        - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libstdc++fs.a
-        - test -f ${PREFIX}/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}/libsupc++.a
-        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/include/c++/{{ gcc_version }}/cstdio
-        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libstdc++.so
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.so
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++fs.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libsupc++.a
+        - test -f ${PREFIX}/{{ triplet }}/include/c++/{{ gcc_version }}/cstdio
+        - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.so
     about:
       summary: The GNU C++ headers and development libraries
       home: https://gcc.gnu.org/
@@ -128,7 +127,7 @@ outputs:
       missing_dso_whitelist:
         - '*'
       runpath_whitelist:
-        - "x86_64-{{ gcc_vendor }}-linux-gnu/sysroot/lib/libpthread-2.12.2.so"
+        - "{{ triplet }}/sysroot/lib/libpthread-2.12.2.so"
       ignore_run_exports:
         - __glibc
     requirements:
@@ -171,24 +170,24 @@ outputs:
       files:
         - tests
       commands:
-        - echo {{ old_gcc_vendor }}
-        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgomp.so   # [target_platform == cross_target_platform]
-        - test `readlink ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == cross_target_platform]
-        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ old_gcc_vendor }}-linux-gnu-gcc
-        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ old_gcc_vendor }}-linux-gnu-cpp
-        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-gcc
-        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-cpp
+        - echo {{ old_triplet }}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.so   # [target_platform == cross_target_platform]
+        - test `readlink ${PREFIX}/{{ triplet }}/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == cross_target_platform]
+        - test -f ${PREFIX}/bin/{{ old_triplet }}-gcc
+        - test -f ${PREFIX}/bin/{{ old_triplet }}-cpp
+        - test -f ${PREFIX}/bin/{{ triplet }}-gcc
+        - test -f ${PREFIX}/bin/{{ triplet }}-cpp
         - test ! -f ${PREFIX}/bin/gcc
         - test ! -f ${PREFIX}/bin/cpp
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
         - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform]
-        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform]
-        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgcc_s.so
-        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgomp.spec
-        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libsanitizer.spec
-        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libasan_preinit.o
+        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform]
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.spec
+        - test -f ${PREFIX}/{{ triplet }}/lib/libsanitizer.spec
+        - test -f ${PREFIX}/{{ triplet }}/lib/libasan_preinit.o
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
@@ -208,7 +207,7 @@ outputs:
       files:
         - tests
       commands:
-        - specdir=$PREFIX/lib/gcc/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/{{ gcc_version }}
+        - specdir=$PREFIX/lib/gcc/{{ triplet }}/{{ gcc_version }}
         - test -f $specdir/conda.specs
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print $1":"}' | grep "${specdir}/specs:${specdir}/conda.specs:"
@@ -216,12 +215,12 @@ outputs:
         - ${CC} -shared -fpic -o $PREFIX/lib/libhowdy.so tests/libhowdy.c
         - ${CC} -o howdy-dso tests/howdy-dso.c -lhowdy
         - ./howdy-dso
-        -    grep RPATH   <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso)
-        - "! grep RUNPATH <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso)"
+        -    grep RPATH   <({{ triplet }}-readelf -d howdy-dso)
+        - "! grep RUNPATH <({{ triplet }}-readelf -d howdy-dso)"
         - ${CC} -Wl,-enable-new-dtags -o howdy-dso-runpath tests/howdy-dso.c -lhowdy
         - ./howdy-dso-runpath
-        - "! grep RPATH   <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso-runpath)"
-        -    grep RUNPATH <({{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-readelf -d howdy-dso-runpath)
+        - "! grep RPATH   <({{ triplet }}-readelf -d howdy-dso-runpath)"
+        -    grep RUNPATH <({{ triplet }}-readelf -d howdy-dso-runpath)
         - echo | ${CC} -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/,/^End of search/ {print}' | tail -n2 | head -n1 | grep "$PREFIX/include"
         - echo | ${CC} -isystem "$PREFIX/include" -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/, /^End of search/ {print}' | head -n2 | tail -n1 | grep "$PREFIX/include"
 
@@ -283,8 +282,8 @@ outputs:
       files:
         - tests
       commands:
-        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ old_gcc_vendor }}-linux-gnu-g++
-        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-g++
+        - test -f ${PREFIX}/bin/{{ old_triplet }}-g++
+        - test -f ${PREFIX}/bin/{{ triplet }}-g++
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17
         - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [cross_target_platform == target_platform]
@@ -337,10 +336,10 @@ outputs:
         - cmake >=3.11  # [x86_64 or aarch64 or ppc64le]
         - sysroot_{{ cross_target_platform }} {{ glibc_version }}
       commands:
-        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgfortran.so
-        - test -f ${PREFIX}/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu/lib/libgfortran.a
-        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ old_gcc_vendor }}-linux-gnu-gfortran
-        - test -f ${PREFIX}/bin/{{ gcc_machine }}-{{ gcc_vendor }}-linux-gnu-gfortran
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.so
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.a
+        - test -f ${PREFIX}/bin/{{ old_triplet }}-gfortran
+        - test -f ${PREFIX}/bin/{{ triplet }}-gfortran
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
         - find $PREFIX/lib -iname ISO_Fortran_binding.h | grep '.'
@@ -420,8 +419,8 @@ outputs:
         - gcc_impl_{{ cross_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libasan.so
-        - file ${PREFIX}/bin/{{ chost }}gcc
-        - echo 'void main(){}' | {{ chost }}gcc -fsanitize=address -x c -
+        - file ${PREFIX}/bin/{{ triplet }}gcc
+        - echo 'void main(){}' | {{ triplet }}gcc -fsanitize=address -x c -
     about:
       summary: The GCC runtime libraries for sanitizers
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html

@@ -7,19 +7,34 @@ grep 'conda-forge:: allow' gcc/gcc.c*
 
 get_cpu_arch() {
   local CPU_ARCH
-  if [[ "$1" == "linux-64" ]]; then
+  if [[ "$1" == *"-64" ]]; then
     CPU_ARCH="x86_64"
-  elif [[ "$1" == "linux-ppc64le" ]]; then
+  elif [[ "$1" == *"-ppc64le" ]]; then
     CPU_ARCH="powerpc64le"
-  elif [[ "$1" == "linux-aarch64" ]]; then
+  elif [[ "$1" == *"-aarch64" ]]; then
     CPU_ARCH="aarch64"
-  elif [[ "$1" == "linux-s390x" ]]; then
+  elif [[ "$1" == *"-s390x" ]]; then
     CPU_ARCH="s390x"
   else
     echo "Unknown architecture"
     exit 1
   fi
   echo $CPU_ARCH
+}
+
+get_triplet() {
+  if [[ "$1" == linux-* ]]; then
+    echo "$(get_cpu_arch $1)-conda-linux-gnu"
+  elif [[ "$1" == osx-64 ]]; then
+    echo "x86_64-apple-darwin13.4.0"
+  elif [[ "$1" == osx-arm64 ]]; then
+    echo "arm64-apple-darwin20.0.0"
+  elif [[ "$1" == win-64 ]]; then
+    echo "x86_64-w64-mingw32"
+  else
+    echo "unknown platform"
+    exit 1
+  fi
 }
 
 if [[ "$channel_targets" == *conda-forge* && "${build_platform}" == "${target_platform}" ]]; then
@@ -35,9 +50,9 @@ if [[ "$channel_targets" == *conda-forge* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose")
 fi
 
-export BUILD="$(get_cpu_arch $build_platform)-${gcc_vendor}-linux-gnu"
-export HOST="$(get_cpu_arch $target_platform)-${gcc_vendor}-linux-gnu"
-export TARGET="$(get_cpu_arch $cross_target_platform)-${gcc_vendor}-linux-gnu"
+export BUILD="$(get_triplet $build_platform)"
+export HOST="$(get_triplet $target_platform)"
+export TARGET="$(get_triplet $cross_target_platform)"
 
 for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf size strings strip; do
   if [[ ! -f $BUILD_PREFIX/bin/$BUILD-$tool ]]; then
