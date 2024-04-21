@@ -42,6 +42,8 @@ _libgcc_mutex:
 use_system_gcc:
   - True         # [not (linux64 or aarch64 or ppc64le or s390x)]
   - False        # [linux64 or aarch64 or ppc64le or s390x]
+channel_sources:
+  - conda-forge/label/sysroot-with-crypt,conda-forge
 zip_keys:
   - - glibc_version
     - triplet
