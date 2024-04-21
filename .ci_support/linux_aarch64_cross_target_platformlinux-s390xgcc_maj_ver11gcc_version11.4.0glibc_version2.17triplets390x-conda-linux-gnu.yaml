@@ -11,11 +11,11 @@ cdt_arch:
 cdt_name:
 - cos7
 channel_sources:
-- conda-forge
+- conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-ppc64le
+- linux-s390x
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 gcc_maj_ver:
@@ -31,13 +31,13 @@ libgfortran_soname:
 libgomp_ver:
 - 1.0.0
 old_triplet:
-- powerpc64le-conda_cos7-linux-gnu
+- s390x-conda-linux-gnu
 openmp_ver:
 - '4.5'
 target_platform:
 - linux-aarch64
 triplet:
-- powerpc64le-conda-linux-gnu
+- s390x-conda-linux-gnu
 use_system_gcc:
 - 'False'
 zip_keys:
