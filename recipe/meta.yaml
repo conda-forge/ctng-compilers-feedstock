@@ -42,10 +42,8 @@ requirements:
     - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
     - sysroot_{{ cross_target_platform }} {{ glibc_version }}
     - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-    - libxcrypt
   host:
     - sysroot_{{ cross_target_platform }} {{ glibc_version }}
-    - libxcrypt
 
 outputs:
   - name: libgcc-devel_{{ cross_target_platform }}
