@@ -198,9 +198,6 @@ outputs:
     build:
       skip: true  # [target_platform != cross_target_platform]
       skip: true  # [not linux]
-      run_exports:
-        strong:
-          - libgcc-ng >={{ min_runtime_version }}
     requirements:
       - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
     test:
@@ -317,11 +314,6 @@ outputs:
     build:
       skip: true  # [target_platform != cross_target_platform]
       skip: true  # [not linux]
-      run_exports:
-        strong:
-          - libstdcxx-ng >={{ min_runtime_version }}
-          # Because transitive run_exports do not work:
-          - libgcc-ng >={{ min_runtime_version }}
     requirements:
       - gxx_impl_{{ target_platform }} {{ gcc_version }}.*
       - gcc {{ gcc_version }}.*
@@ -400,13 +392,6 @@ outputs:
     build:
       skip: true  # [target_platform != cross_target_platform]
       skip: true  # [not linux]
-      run_exports:
-        strong:
-          # Because transitive run_exports do not work:
-          - libgfortran{{ libgfortran_soname }} >={{ gcc_version }}
-          - libgfortran-ng
-          # Because transitive run_exports do not work:
-          - libgcc-ng >={{ min_runtime_version }}
     requirements:
       - gfortran_impl_{{ target_platform }} {{ gcc_version }}.*
       - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
