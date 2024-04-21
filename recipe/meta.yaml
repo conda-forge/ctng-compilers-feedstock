@@ -21,7 +21,7 @@ source:
     sha256: af828619dd1970734dda3cfb792ea3f2cba61b5a00170ba8bce4910749d73c07   # [gcc_version == "11.4.0"]
     patches:
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
-      - patches/0022-cross-compile-older-glibc.patch   # [glibc_version == "2.12" and target_platform != "linux-64"]
+      - patches/0022-cross-compile-older-glibc.patch   # [sysroot_version == "2.12" and target_platform != "linux-64"]
       - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver < 12]
       - patches/new-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver >= 12]
       - patches/libgomp-support-environ-null.patch                             # [gcc_maj_ver == 13]
@@ -40,10 +40,10 @@ requirements:
     - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
     - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
     - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
-    - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+    - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
     - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
   host:
-    - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+    - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
 
 outputs:
   - name: libgcc-devel_{{ cross_target_platform }}
@@ -68,10 +68,10 @@ outputs:
         - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
       host:
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
     test:
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/crtbegin.o
@@ -103,9 +103,9 @@ outputs:
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
     test:
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.a
@@ -140,9 +140,9 @@ outputs:
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
         - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libstdcxx-ng", exact=True) }}          # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", exact=True) }}             # [target_platform == cross_target_platform]
@@ -156,7 +156,7 @@ outputs:
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}    # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}       # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgomp", max_pin=None) }}         # [target_platform == cross_target_platform]
-        - sysroot_{{ cross_target_platform }}
+        - {{ sysroot_name }}_{{ cross_target_platform }}
         # Any version newer than the devtoolset works.
         - libstdcxx-ng >=4.9   # [use_system_gcc]
         - libgcc-ng >=4.9      # [use_system_gcc]
@@ -166,7 +166,7 @@ outputs:
         - libgcc-ng >={{ gcc_version }}
     test:
       requires:
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       files:
         - tests
       commands:
@@ -261,16 +261,16 @@ outputs:
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
       run:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         # not needed due to pinning above but marks this build as using the new sysroots
-        - sysroot_{{ cross_target_platform }}
+        - {{ sysroot_name }}_{{ cross_target_platform }}
         - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}
     run_exports:
       # impose this requirement across the build/host boundary
@@ -278,7 +278,7 @@ outputs:
         - libstdcxx-ng >={{ gcc_version }}
     test:
       requires:
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       files:
         - tests
       commands:
@@ -311,18 +311,18 @@ outputs:
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         # not needed due to pinning above but marks this build as using the new sysroots
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ cross_target_platform }} >={{ gcc_version }}
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname, max_pin=None) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}           # [target_platform == cross_target_platform]
-        - sysroot_{{ cross_target_platform }}
+        - {{ sysroot_name }}_{{ cross_target_platform }}
         # Any version newer than the devtoolset works. This can be removed when bootstrapping.
         - libgcc-ng >=4.9
         - libstdcxx-ng >=4.9
@@ -334,7 +334,7 @@ outputs:
     test:
       requires:
         - cmake >=3.11  # [x86_64 or aarch64 or ppc64le]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       commands:
         - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.so
         - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.a
@@ -373,9 +373,9 @@ outputs:
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
         - {{ pin_subpackage("libgcc-ng", exact=True) }}
     test:
       commands:
@@ -398,9 +398,9 @@ outputs:
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
-        - sysroot_{{ cross_target_platform }}  {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }}  {{ sysroot_version }}
       run:
         - libgcc-ng >={{ gcc_version }}
     build:
@@ -415,7 +415,7 @@ outputs:
         - libsanitizer {{ gcc_version }}
     test:
       requires:
-        - sysroot_{{ cross_target_platform }}
+        - {{ sysroot_name }}_{{ cross_target_platform }}
         - gcc_impl_{{ cross_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libasan.so
@@ -439,9 +439,9 @@ outputs:
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
-        - sysroot_{{ cross_target_platform }}  {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }}  {{ sysroot_version }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
     build:
@@ -457,7 +457,7 @@ outputs:
         - __glibc
     test:
       requires:
-        - sysroot_{{ cross_target_platform }}
+        - {{ sysroot_name }}_{{ cross_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
         - test ! -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
@@ -479,11 +479,11 @@ outputs:
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
-        - sysroot_{{ cross_target_platform }}  {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }}  {{ sysroot_version }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
@@ -500,7 +500,7 @@ outputs:
       rpaths_patcher: patchelf
     test:
       requires:
-        - sysroot_{{ cross_target_platform }}
+        - {{ sysroot_name }}_{{ cross_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
@@ -522,11 +522,11 @@ outputs:
         - gcc_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
-        - sysroot_{{ cross_target_platform }}  {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }}  {{ sysroot_version }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - libgomp >=7.5.0
@@ -570,9 +570,9 @@ outputs:
         - gxx_impl_{{ cross_target_platform }}  {{ gcc_version }}         # [build_platform != target_platform]
         - gfortran_impl_{{ cross_target_platform }}  {{ gcc_version }}    # [build_platform != target_platform]
         - gcc_bootstrap_{{ build_platform }} <={{ gcc_version }}          # [(not use_system_gcc and build_platform == target_platform) or (build_platform != target_platform and build_platform != cross_target_platform)]
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
-        - sysroot_{{ cross_target_platform }} {{ glibc_version }}
+        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       run:
         - libgcc-ng >={{ gcc_version }}
       run_constrained:
