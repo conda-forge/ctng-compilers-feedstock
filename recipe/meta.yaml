@@ -193,6 +193,26 @@ outputs:
       home: https://gcc.gnu.org/
       license: GPL-3.0-only WITH GCC-exception-3.1
 
+  - name: gcc
+    script: install-symlinks.sh
+    build:
+      skip: true  # [target_platform != cross_target_platform]
+      skip: true  # [not linux]
+      run_exports:
+        strong:
+          - libgcc-ng >={{ min_runtime_version }}
+    requirements:
+      - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
+    test:
+      commands:
+        - ${PREFIX}/bin/gcc -v
+        - ${PREFIX}/bin/gcov -v
+    about:
+      summary: GNU C native compiler (symlinks)
+      home: https://github.com/conda-forge/ctng-compilers-feedstock
+      license: BSD-3-Clause
+      license_file: LICENSE
+
   - name: conda-gcc-specs
     script: install-conda-specs.sh
     build:
@@ -292,6 +312,29 @@ outputs:
       home: https://gcc.gnu.org/
       license: GPL-3.0-only WITH GCC-exception-3.1
 
+  - name: gxx
+    script: install-symlinks.sh
+    build:
+      skip: true  # [target_platform != cross_target_platform]
+      skip: true  # [not linux]
+      run_exports:
+        strong:
+          - libstdcxx-ng >={{ min_runtime_version }}
+          # Because transitive run_exports do not work:
+          - libgcc-ng >={{ min_runtime_version }}
+    requirements:
+      - gxx_impl_{{ target_platform }} {{ gcc_version }}.*
+      - gcc {{ gcc_version }}.*
+    test:
+      commands:
+        - ${PREFIX}/bin/g++ -v
+        - ${PREFIX}/bin/gcc -v
+    about:
+      summary: GNU C++ native compiler (symlinks)
+      home: https://github.com/conda-forge/ctng-compilers-feedstock
+      license: BSD-3-Clause
+      license_file: LICENSE
+
   - name: gfortran_impl_{{ cross_target_platform }}
     script: install-gfortran.sh
     build:
@@ -351,6 +394,32 @@ outputs:
       summary: GNU Fortran Compiler
       home: https://gcc.gnu.org/
       license: GPL-3.0-only WITH GCC-exception-3.1
+
+  - name: gfortran
+    script: install-symlinks.sh
+    build:
+      skip: true  # [target_platform != cross_target_platform]
+      skip: true  # [not linux]
+      run_exports:
+        strong:
+          # Because transitive run_exports do not work:
+          - libgfortran{{ libgfortran_soname }} >={{ gcc_version }}
+          - libgfortran-ng
+          # Because transitive run_exports do not work:
+          - libgcc-ng >={{ min_runtime_version }}
+    requirements:
+      - gfortran_impl_{{ target_platform }} {{ gcc_version }}.*
+      - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
+      - gcc {{ gcc_version }}.*
+    test:
+      commands:
+        - ${PREFIX}/bin/gfortran -v
+        - ${PREFIX}/bin/gcc -v
+    about:
+      summary: GNU Fortran native compiler (symlinks)
+      home: https://github.com/conda-forge/ctng-compilers-feedstock
+      license: BSD-3-Clause
+      license_file: LICENSE
 
   - name: libstdcxx-ng
     target: {{ cross_target_platform }}
