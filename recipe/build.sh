@@ -5,23 +5,6 @@ set -ex
 # ensure patch is applied
 grep 'conda-forge:: allow' gcc/gcc.c*
 
-get_cpu_arch() {
-  local CPU_ARCH
-  if [[ "$1" == "linux-64" ]]; then
-    CPU_ARCH="x86_64"
-  elif [[ "$1" == "linux-ppc64le" ]]; then
-    CPU_ARCH="powerpc64le"
-  elif [[ "$1" == "linux-aarch64" ]]; then
-    CPU_ARCH="aarch64"
-  elif [[ "$1" == "linux-s390x" ]]; then
-    CPU_ARCH="s390x"
-  else
-    echo "Unknown architecture"
-    exit 1
-  fi
-  echo $CPU_ARCH
-}
-
 if [[ "$channel_targets" == *conda-forge* && "${build_platform}" == "${target_platform}" ]]; then
   # Use new compilers instead of relying on ones from the docker image
   conda create -p $SRC_DIR/cf-compilers gcc gfortran gxx binutils -c conda-forge --yes --quiet
@@ -35,9 +18,7 @@ if [[ "$channel_targets" == *conda-forge* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose")
 fi
 
-export BUILD="$(get_cpu_arch $build_platform)-${gcc_vendor}-linux-gnu"
-export HOST="$(get_cpu_arch $target_platform)-${gcc_vendor}-linux-gnu"
-export TARGET="$(get_cpu_arch $cross_target_platform)-${gcc_vendor}-linux-gnu"
+source $RECIPE_DIR/get_cpu_arch.sh
 
 for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf size strings strip; do
   if [[ ! -f $BUILD_PREFIX/bin/$BUILD-$tool ]]; then

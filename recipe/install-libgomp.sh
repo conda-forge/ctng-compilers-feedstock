@@ -1,4 +1,4 @@
-export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
+export CHOST="${triplet}"
 # stash what we need and rm -rf the rest
 tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
 cp -r ${PREFIX}/${CHOST}/sysroot ${tmp_dir}/sysroot

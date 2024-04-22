@@ -1,5 +1,5 @@
 set -ex
-export CHOST="${gcc_machine}-${gcc_vendor}-linux-gnu"
+export CHOST="${triplet}"
 specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
 if [[ "$cross_target_platform" == "$target_platform" ]]; then
     install -Dm644 -T ${SRC_DIR}/build/gcc/specs $specdir/conda.specs
