@@ -1,3 +1,6 @@
+#!/bin/bash
+
+source ${RECIPE_DIR}/setup_compiler.sh
 export CHOST="${triplet}"
 # stash what we need and rm -rf the rest
 tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)

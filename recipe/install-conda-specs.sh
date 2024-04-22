@@ -1,3 +1,7 @@
+#!/bin/bash
+
+source ${RECIPE_DIR}/setup_compiler.sh
+
 set -ex
 export CHOST="${triplet}"
 specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}

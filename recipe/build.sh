@@ -2,14 +2,10 @@
 
 set -ex
 
+source ${RECIPE_DIR}/setup_compiler.sh
+
 # ensure patch is applied
 grep 'conda-forge:: allow' gcc/gcc.c*
-
-if [[ "$channel_targets" == *conda-forge* && "${build_platform}" == "${target_platform}" ]]; then
-  # Use new compilers instead of relying on ones from the docker image
-  conda create -p $SRC_DIR/cf-compilers gcc gfortran gxx binutils -c conda-forge --yes --quiet
-  export PATH=$SRC_DIR/cf-compilers/bin:$PATH
-fi
 
 GCC_CONFIGURE_OPTIONS=()
 

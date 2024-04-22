@@ -1,3 +1,6 @@
+#!/bin/bash
+
+source ${RECIPE_DIR}/setup_compiler.sh
 set -e -x
 
 export CHOST="${triplet}"
