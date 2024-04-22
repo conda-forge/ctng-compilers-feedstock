@@ -14,7 +14,8 @@ if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
       "binutils_impl_${cross_target_platform}=${binutils_version}.*" \
       "gcc_impl_${cross_target_platform}=${gcc_version}.*" \
       "gxx_impl_${cross_target_platform}=${gcc_version}.*" \
-      "gfortran_impl_${cross_target_platform}=${gcc_version}.*"
+      "gfortran_impl_${cross_target_platform}=${gcc_version}.*" \
+      "${sysroot_name}_${cross_target_platform}=${sysroot_version}.*"
   fi
 fi
 
