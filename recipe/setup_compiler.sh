@@ -8,11 +8,13 @@ if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
 
   if [[ "${build_platform}" != "${target_platform}" ]]; then
     conda create -p $SRC_DIR/cf-compilers -c conda-forge \
-      "gcc_impl_${target_platform}=${binutils_version}.*" \
-      "gxx_impl_${target_platform}=${binutils_version}.*" \
-      "gcc_impl_${cross_target_platform}=${binutils_version}.*" \
-      "gxx_impl_${cross_target_platform}=${binutils_version}.*" \
-      "gfortran_impl_${cross_target_platform}=${binutils_version}.*"
+      "binutils_impl_${target_platform}=${binutils_version}.*" \
+      "gcc_impl_${target_platform}=${gcc_version}.*" \
+      "gxx_impl_${target_platform}=${gcc_version}.*" \
+      "binutils_impl_${cross_target_platform}=${binutils_version}.*" \
+      "gcc_impl_${cross_target_platform}=${gcc_version}.*" \
+      "gxx_impl_${cross_target_platform}=${gcc_version}.*" \
+      "gfortran_impl_${cross_target_platform}=${gcc_version}.*"
   fi
 fi
 
