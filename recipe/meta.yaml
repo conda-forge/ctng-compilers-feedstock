@@ -148,6 +148,8 @@ outputs:
         - {{ pin_subpackage("libgcc-ng", exact=True) }}             # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
+        - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}
       run:
         - binutils_impl_{{ cross_target_platform }} >={{ binutils_version }}
         - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
@@ -667,6 +669,7 @@ about:
     - COPYING3.LIB
 
 extra:
+  feedstock-name: ctng-compilers-feedstock
   recipe-maintainers:
     - timsnyder
     - xhochy
