@@ -33,9 +33,6 @@ build:
 
 requirements:
   build:
-    - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-    - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-    - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
   host:
     - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
 
@@ -55,9 +52,6 @@ outputs:
         - gxx_impl_{{ build_platform }}  {{ gcc_version }}                # [build_platform != target_platform]
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
     test:
@@ -83,9 +77,6 @@ outputs:
         - __glibc
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
     test:
@@ -114,9 +105,6 @@ outputs:
         - __glibc
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
         - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == cross_target_platform]
@@ -149,6 +137,7 @@ outputs:
         - tests
       commands:
         - echo {{ old_triplet }}
+        - echo {{ c_stdlib_version }}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.so   # [target_platform == cross_target_platform]
         - test `readlink ${PREFIX}/{{ triplet }}/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == cross_target_platform]
         - test -f ${PREFIX}/bin/{{ old_triplet }}-gcc
@@ -248,9 +237,6 @@ outputs:
         - __glibc
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
         # For cpp and crt{i,n}.o
@@ -310,9 +296,6 @@ outputs:
         - __glibc
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
@@ -385,9 +368,6 @@ outputs:
         - __glibc
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
         - {{ pin_subpackage("libgcc-ng", exact=True) }}
@@ -404,9 +384,6 @@ outputs:
     script: install-libsanitizer.sh
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ sysroot_name }}_{{ cross_target_platform }}  {{ sysroot_version }}
       run:
@@ -439,9 +416,6 @@ outputs:
     script: install-libgomp.sh
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ sysroot_name }}_{{ cross_target_platform }}  {{ sysroot_version }}
       run:
@@ -473,9 +447,6 @@ outputs:
     script: install-libgcc-no-gomp.sh
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
@@ -511,9 +482,6 @@ outputs:
     version: {{ openmp_ver }}
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
         - {{ sysroot_name }}_{{ cross_target_platform }}  {{ sysroot_version }}
@@ -552,9 +520,6 @@ outputs:
         - __glibc
     requirements:
       build:
-        - binutils_impl_{{ target_platform }}  {{ binutils_version }}
-        - binutils_impl_{{ cross_target_platform }}  {{ binutils_version }}
-        - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       host:
         - {{ sysroot_name }}_{{ cross_target_platform }} {{ sysroot_version }}
       run:
