@@ -30,6 +30,13 @@ for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy obj
   eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
 done
 
+if [[ "$cross_target_platform" == "win-64" ]]; then
+  # not sure why this is needed only for win-64
+  export CPPFLAGS_FOR_TARGET="-isystem ${PREFIX}/${TARGET}/sysroot/usr/include"
+  export CFLAGS_FOR_TARGET="-isystem ${PREFIX}/${TARGET}/sysroot/usr/include"
+fi
+
+
 # workaround a bug in gcc build files when using external binutils
 # and build != host == target
 export gcc_cv_objdump=$OBJDUMP_FOR_TARGET
