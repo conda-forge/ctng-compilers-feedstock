@@ -10,7 +10,7 @@ if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
       "gcc_impl_${target_platform}" \
       "gxx_impl_${target_platform}" \
       "gfortran_impl_${target_platform}" \
-      "sysroot_${target_platform}=${c_stdlib_version}"
+      "${c_stdlib}_${target_platform}=${c_stdlib_version}"
 fi
 
 export PATH=$SRC_DIR/cf-compilers/bin:$PATH

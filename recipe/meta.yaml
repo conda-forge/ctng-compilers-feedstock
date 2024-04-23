@@ -134,6 +134,7 @@ outputs:
         - tests
       commands:
         - echo {{ old_triplet }}
+        - echo {{ c_stdlib }}
         - echo {{ c_stdlib_version }}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.so   # [target_platform == cross_target_platform]
         - test `readlink ${PREFIX}/{{ triplet }}/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == cross_target_platform]
