@@ -49,9 +49,6 @@ outputs:
         - "*"
       ignore_run_exports:
         - __glibc
-      ignore_run_exports_from:
-        - gcc_impl_{{ build_platform }}  {{ gcc_version }}                # [build_platform != target_platform]
-        - gxx_impl_{{ build_platform }}  {{ gcc_version }}                # [build_platform != target_platform]
     requirements:
       build:
       host:
