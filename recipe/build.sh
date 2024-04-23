@@ -25,11 +25,6 @@ for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy obj
   elif [[ "$tool" == "c++" ]]; then
      tool=g++
   fi
-  if [[ ! -f $BUILD_PREFIX/bin/$TARGET-$tool ]]; then
-     # we are lying here, but we do not package libraries built
-     # with target_platform != cross_target_platform
-     ln -sf $BUILD_PREFIX/bin/$HOST-$tool $BUILD_PREFIX/bin/$TARGET-$tool
-  fi
   eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
   eval "export ${tool_upper}=\$BUILD_PREFIX/bin/\$HOST-\$tool"
   eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
@@ -96,7 +91,8 @@ cd build
   --disable-multilib \
   --enable-long-long \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
+  --with-build-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 
-make -j${CPU_COUNT} || (cat ${TARGET}/libbacktrace/config.log; false)
+make -j${CPU_COUNT} || (cat ${TARGET}/libgcc/config.log; false)
