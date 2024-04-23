@@ -33,6 +33,8 @@ build:
 
 requirements:
   build:
+    # Build dependencies are installed in setup_compilers.sh due to
+    # conda-build bugs
   host:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
 
