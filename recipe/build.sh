@@ -34,6 +34,7 @@ if [[ "$cross_target_platform" == "win-64" ]]; then
   # not sure why this is needed only for win-64
   export CPPFLAGS_FOR_TARGET="-isystem ${PREFIX}/${TARGET}/sysroot/usr/include"
   export CFLAGS_FOR_TARGET="-isystem ${PREFIX}/${TARGET}/sysroot/usr/include"
+  export LDFLAGS_FOR_TARGET="-L ${PREFIX}/${TARGET}/sysroot/usr/lib"
 fi
 
 
