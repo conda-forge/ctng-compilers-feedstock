@@ -92,6 +92,7 @@ cd build
   --enable-long-long \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-build-sysroot=${PREFIX}/${TARGET}/sysroot \
+  --with-native-system-header-dir=/usr/include \
   --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 
