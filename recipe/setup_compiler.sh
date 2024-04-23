@@ -14,3 +14,4 @@ if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
 fi
 
 export PATH=$SRC_DIR/cf-compilers/bin:$PATH
+export BUILD_PREFIX=$SRC_DIR/cf-compilers
