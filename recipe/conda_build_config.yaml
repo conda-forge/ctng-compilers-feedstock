@@ -44,9 +44,6 @@ libgomp_ver:
   - 1.0.0
 _libgcc_mutex:
   - 0.1 conda_forge
-use_system_gcc:
-  - True         # [not (linux64 or aarch64 or ppc64le or s390x)]
-  - False        # [linux64 or aarch64 or ppc64le or s390x]
 channel_sources:
   - conda-forge/label/sysroot-with-crypt,conda-forge
 zip_keys:

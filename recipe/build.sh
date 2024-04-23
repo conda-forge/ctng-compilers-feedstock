@@ -16,36 +16,23 @@ fi
 
 source $RECIPE_DIR/get_cpu_arch.sh
 
-for tool in addr2line ar as c++filt gcc g++ ld nm objcopy objdump ranlib readelf size strings strip; do
-  if [[ ! -f $BUILD_PREFIX/bin/$BUILD-$tool ]]; then
-    ln -s $(which $tool) $BUILD_PREFIX/bin/$BUILD-$tool
-  fi
+for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy objdump ranlib readelf size strings strip; do
   tool_upper=$(echo $tool | tr a-z A-Z | sed "s/+/X/g")
-  if [[ "$tool" == gcc ]]; then
-     tool_upper=CC
-  elif [[ "$tool" == g++ ]]; then
-     tool_upper=CXX
+  if [[ "$tool" == "cc" ]]; then
+     tool=gcc
+  elif [[ "$tool" == "fc" ]]; then
+     tool=gfortran
+  elif [[ "$tool" == "c++" ]]; then
+     tool_upper=g++
   fi
   eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
   eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
   eval "export ${tool_upper}=\$BUILD_PREFIX/bin/\$HOST-\$tool"
 done
 
-if [[ $build_platform != $target_platform ]]; then
-  export GFORTRAN_FOR_TARGET="$BUILD_PREFIX/bin/$TARGET-gfortran"
-  export GXX_FOR_TARGET="$BUILD_PREFIX/bin/$TARGET-g++"
-  export FC=$GFORTRAN_FOR_TARGET
-fi
-
 # workaround a bug in gcc build files when using external binutils
 # and build != host == target
 export gcc_cv_objdump=$OBJDUMP_FOR_TARGET
-
-# Workaround a problem in our gcc_bootstrap package
-if [[ -d $BUILD_PREFIX/$BUILD/sysroot/usr/lib64 && ! -d $BUILD_PREFIX/$BUILD/sysroot/usr/lib ]]; then
-  mkdir -p $BUILD_PREFIX/$BUILD/sysroot/usr
-  ln -sf $BUILD_PREFIX/$BUILD/sysroot/usr/lib64 $BUILD_PREFIX/$BUILD/sysroot/usr/lib
-fi
 
 ls $BUILD_PREFIX/bin/
 
@@ -104,7 +91,6 @@ cd build
   --disable-multilib \
   --enable-long-long \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
-  --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
   --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 

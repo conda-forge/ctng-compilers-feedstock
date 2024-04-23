@@ -123,9 +123,6 @@ outputs:
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}       # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgomp", max_pin=None) }}         # [target_platform == cross_target_platform]
         - {{ sysroot_name }}_{{ cross_target_platform }}
-        # Any version newer than the devtoolset works.
-        - libstdcxx-ng >=4.9   # [use_system_gcc]
-        - libgcc-ng >=4.9      # [use_system_gcc]
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
