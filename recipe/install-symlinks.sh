@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ${RECIPE_DIR}/setup_compiler.sh
+
 if [[ "${PKG_NAME}" == "gcc" ]]; then
   for tool in cc cpp gcc gcc-ar gcc-nm gcc-ranlib gcov gcov-dump gcov-tool; do
     ln -sf ${PREFIX}/bin/${triplet}-${tool} ${PREFIX}/bin/${tool}
