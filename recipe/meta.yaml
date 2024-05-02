@@ -10,6 +10,10 @@
 {% set libgcc_devel_build_num = build_num %}
 {% endif %}
 
+{% if cross_target_platform is not defined %}
+{% set cross_target_platform = "linux-64" %}
+{% endif %}
+
 package:
   name: gcc_compilers
   version: {{ version }}
@@ -20,7 +24,9 @@ source:
     sha256: 11275aa7bb34cd8ab101d01b341015499f8d9466342a2574ece93f954d92273b   # [gcc_version == "12.3.0"]
     sha256: af828619dd1970734dda3cfb792ea3f2cba61b5a00170ba8bce4910749d73c07   # [gcc_version == "11.4.0"]
     patches:
+      {% if cross_target_platform.startswith("linux-") %}
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
+      {% endif %}
       - patches/0022-cross-compile-older-glibc.patch   # [cross_target_stdlib_version == "2.12" and target_platform != "linux-64"]
       - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver < 12]
       - patches/new-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver >= 12]

@@ -207,6 +207,7 @@ else
   source ${RECIPE_DIR}/install-libgcc.sh
   for lib in libcc1; do
     mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/lib/ || true
+    mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/lib/ || true
   done
   rm -f ${PREFIX}/share/info/*.info
 fi

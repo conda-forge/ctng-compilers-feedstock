@@ -35,6 +35,7 @@ if [[ "$cross_target_platform" == "win-64" ]]; then
   export CPPFLAGS_FOR_TARGET="-isystem ${PREFIX}/${TARGET}/sysroot/usr/include"
   export CFLAGS_FOR_TARGET="-isystem ${PREFIX}/${TARGET}/sysroot/usr/include -L${PREFIX}/${TARGET}/sysroot/usr/lib -L/usr/lib"
   export LDFLAGS_FOR_TARGET="-L${PREFIX}/${TARGET}/sysroot/usr/lib"
+  ln -sf ${PREFIX}/${TARGET}/sysroot/usr ${PREFIX}/${TARGET}/sysroot/mingw
 fi
 
 
@@ -72,6 +73,12 @@ cd build
 # goes back to the original way.
 # See https://github.com/gcc-mirror/gcc/blob/16e2427f50c208dfe07d07f18009969502c25dc8/gcc/configure.ac#L218
 
+if [[ "$TARGET" == *linux* ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--enable-libsanitizer)
+  GCC_CONFIGURE_OPTIONS+=(--enable-default-pie)
+  GCC_CONFIGURE_OPTIONS+=(--enable-threads=posix)
+fi
+
 ../configure \
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
@@ -80,7 +87,6 @@ cd build
   --build=$BUILD \
   --host=$HOST \
   --target=$TARGET \
-  --enable-default-pie \
   --enable-languages=c,c++,fortran,objc,obj-c++ \
   --enable-__cxa_atexit \
   --disable-libmudflap \
@@ -88,9 +94,7 @@ cd build
   --disable-libssp \
   --enable-libquadmath \
   --enable-libquadmath-support \
-  --enable-libsanitizer \
   --enable-lto \
-  --enable-threads=posix \
   --enable-target-optspace \
   --enable-plugin \
   --enable-gold \
