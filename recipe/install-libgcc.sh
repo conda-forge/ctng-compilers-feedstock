@@ -23,8 +23,13 @@ pushd ${SRC_DIR}/build
       ${CHOST}-ranlib ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/libgcc_eh.a
 
       mkdir -p ${PREFIX}/${CHOST}/lib
-      install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${CHOST}/lib/libgcc_s.so.1
-      cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/${CHOST}/lib/libgcc_s.so
+      if [[ "${triplet}" == *linux* ]]; then
+        install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${CHOST}/lib/libgcc_s.so.1
+        cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/${CHOST}/lib/libgcc_s.so
+      else
+        # import library, not static library
+        install -c -m 644 ./libgcc_s.a ${PREFIX}/${CHOST}/lib/libgcc_s.a
+      fi
     popd
   fi
 
