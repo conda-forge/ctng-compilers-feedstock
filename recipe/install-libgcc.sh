@@ -28,14 +28,16 @@ pushd ${SRC_DIR}/build
         cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/${CHOST}/lib/libgcc_s.so
       else
         # import library, not static library
-        install -c -m 644 ./libgcc_s.a ${PREFIX}/${CHOST}/lib/libgcc_s.a
+        install -c -m 644 ./shlib/libgcc_s.a ${PREFIX}/${CHOST}/lib/libgcc_s.a
       fi
     popd
   fi
 
   # TODO :: Also do this for libgfortran (and libstdc++ too probably?)
-  sed -i.bak 's/.*cannot install.*/func_warning "Ignoring libtool error about cannot install to a directory not ending in"/' \
+  if [[ -f ${CHOST}/libsanitizer/libtool ]]; then
+    sed -i.bak 's/.*cannot install.*/func_warning "Ignoring libtool error about cannot install to a directory not ending in"/' \
              ${CHOST}/libsanitizer/libtool
+  fi
   for lib in libatomic libgomp libquadmath libitm libvtv libsanitizer/{a,l,ub,t}san; do
     # TODO :: Also do this for libgfortran (and libstdc++ too probably?)
     if [[ -f ${CHOST}/${lib}/libtool ]]; then
