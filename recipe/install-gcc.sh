@@ -137,6 +137,12 @@ popd
 specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
 if [[ "$build_platform" == "$target_platform" ]]; then
     $PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+elif [[ "$target_platform" == "$cross_target_platform" ]]; then
+    # For support of of native specs, we need this
+    # This is the only place where we need QEMU.
+    # Remove this elif condition for local experimentation if you
+    # do not have QEMU setup
+    $PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
 else
     $BUILD_PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
 fi

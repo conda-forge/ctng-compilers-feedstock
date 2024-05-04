@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 6 %}
+{% set build_num = 7 %}
 
 # libgcc-devel is a noarch: generic package that is built for
 # cross-compilers as well. Instead of skipping for cross-compilers,
