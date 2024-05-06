@@ -137,13 +137,21 @@ popd
 specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
 if [[ "$build_platform" == "$target_platform" ]]; then
     $PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+    # validate assumption that specs in build/gcc/specs are exactly the
+    # same as dumped specs so that I don't need to depend on gcc_impl in conda-gcc-specs subpackage
+    diff -s ${SRC_DIR}/build/gcc/specs $specdir/specs
+elif [[ "$target_platform" == "$cross_target_platform" ]]; then
+    # For support of of native specs, we need this
+    # This is the only place where we need QEMU.
+    # Remove this elif condition for local experimentation if you
+    # do not have QEMU setup
+    $PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
 else
     $BUILD_PREFIX/bin/${CHOST}-gcc -dumpspecs > $specdir/specs
+    # validate assumption that specs in build/gcc/specs are exactly the
+    # same as dumped specs so that I don't need to depend on gcc_impl in conda-gcc-specs subpackage
+    diff -s ${SRC_DIR}/build/gcc/specs $specdir/specs
 fi
-
-# validate assumption that specs in build/gcc/specs are exactly the
-# same as dumped specs so that I don't need to depend on gcc_impl in conda-gcc-specs subpackage
-diff -s ${SRC_DIR}/build/gcc/specs $specdir/specs
 
 # make a copy of the specs without our additions so that people can choose not to use them
 # by passing -specs=builtin.specs
