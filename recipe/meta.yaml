@@ -142,8 +142,8 @@ outputs:
         - test ! -f ${PREFIX}/bin/gcc
         - test ! -f ${PREFIX}/bin/cpp
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
-        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address -march=native  # [target_platform == cross_target_platform and x86_64]
-        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address -mcpu=native   # [target_platform == cross_target_platform and not x86_64]
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -Wl,-v -march=native  # [target_platform == cross_target_platform and x86_64]
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -Wl,-v -mcpu=native   # [target_platform == cross_target_platform and not x86_64]
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
         - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform]
