@@ -64,7 +64,11 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/crtbegin.o
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_eh.a
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc.a
+        {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so
+        {% else %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.a
+        {% endif %}
     about:
       summary: The GNU C development libraries and object files
       home: https://gcc.gnu.org/
@@ -91,7 +95,11 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++fs.a
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libsupc++.a
         - test -f ${PREFIX}/{{ triplet }}/include/c++/{{ gcc_version }}/cstdio
+        {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.so
+        {% else %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.dll.a
+        {% endif %}
     about:
       summary: The GNU C++ headers and development libraries
       home: https://gcc.gnu.org/
@@ -321,7 +329,11 @@ outputs:
         - cmake >=3.11  # [x86_64 or aarch64 or ppc64le]
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
       commands:
+        {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.so
+        {% else %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.dll.a
+        {% endif %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.a
         - test -f ${PREFIX}/bin/{{ old_triplet }}-gfortran
         - test -f ${PREFIX}/bin/{{ triplet }}-gfortran
