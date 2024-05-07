@@ -1,0 +1,23 @@
+From 6916bfa87b8dd0d49510ae9554090b5605ebab85 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Fri, 15 Sep 2023 17:22:36 +0200
+Subject: [PATCH 4/4] Support case in which environ is NULL
+
+Fix for https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111413
+Backport https://gcc.gnu.org/git/gitweb.cgi?p=gcc.git;h=15345980633c502f0486a2e40e96224f49134130
+---
+ libgomp/env.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/libgomp/env.c b/libgomp/env.c
+index e7a035b59..d77685bbf 100644
+--- a/libgomp/env.c
++++ b/libgomp/env.c
+@@ -2059,6 +2059,7 @@ initialize_env (void)
+   none = gomp_get_initial_icv_item (GOMP_DEVICE_NUM_FOR_NO_SUFFIX);
+   initialize_icvs (&none->icvs);
+ 
++  if (environ)
+   for (env = environ; *env != 0; env++)
+     {
+       if (!startswith (*env, "OMP_"))

@@ -1,0 +1,22 @@
+From 6d0adb25cc0376b89bada6e89783f20d2f82aeed Mon Sep 17 00:00:00 2001
+From: Isuru Fernando <isuruf@gmail.com>
+Date: Thu, 15 Jul 2021 07:58:14 +0000
+Subject: [PATCH 2/4] cross-compile older glibc
+
+---
+ libgomp/secure_getenv.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libgomp/secure_getenv.h b/libgomp/secure_getenv.h
+index 2be338831..db411d3bb 100644
+--- a/libgomp/secure_getenv.h
++++ b/libgomp/secure_getenv.h
+@@ -25,7 +25,7 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+ #define _SECURE_GETENV_H 1
+ 
+ /* Secure getenv() which returns NULL if running as SUID/SGID.  */
+-#ifndef HAVE_SECURE_GETENV
++#if __x86_64__
+ #if defined (HAVE_UNISTD_H) && defined (HAVE_GETUID) \
+   && defined (HAVE_GETEUID) && defined (HAVE_GETGID) \
+   && defined (HAVE_GETEGID)
