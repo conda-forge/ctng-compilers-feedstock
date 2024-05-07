@@ -11,13 +11,13 @@ old_triplet:
   - s390x-conda-linux-gnu
   - x86_64-w64-mingw32
 gcc_version:
-  - 11.4.0
   - 12.3.0
   - 13.2.0
+  - 14.1.0
 gcc_maj_ver:
-  - 11
   - 12
   - 13
+  - 14
 libgfortran_soname:
   - 5
   - 5
