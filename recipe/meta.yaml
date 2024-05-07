@@ -98,7 +98,7 @@ outputs:
         - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.so
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.so
         {% else %}
-        - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.dll.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.dll.a
         {% endif %}
     about:
       summary: The GNU C++ headers and development libraries
