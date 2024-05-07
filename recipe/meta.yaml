@@ -91,12 +91,12 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.a
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.so
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++fs.a
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libsupc++.a
         - test -f ${PREFIX}/{{ triplet }}/include/c++/{{ gcc_version }}/cstdio
         {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.so
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.so
         {% else %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.dll.a
         {% endif %}
