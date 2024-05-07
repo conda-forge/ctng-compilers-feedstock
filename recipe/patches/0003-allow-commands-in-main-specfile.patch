@@ -1,17 +1,17 @@
-From 9919cf9b250584965d567e002d1c15f1649b2fd5 Mon Sep 17 00:00:00 2001
+From e63de7d363c14624c50b8c84148540fca96db9e5 Mon Sep 17 00:00:00 2001
 From: Tim Snyder <snyder.tim@gmail.com>
 Date: Tue, 29 Mar 2022 22:33:27 +0000
-Subject: [PATCH 3/4] allow % commands in main specfile
+Subject: [PATCH 3/3] allow % commands in main specfile
 
 ---
  gcc/gcc.cc | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/gcc/gcc.cc b/gcc/gcc.cc
-index 16bb07f2c..623120232 100644
+index 728332b81..c04b23d56 100644
 --- a/gcc/gcc.cc
 +++ b/gcc/gcc.cc
-@@ -2368,7 +2368,8 @@ read_specs (const char *filename, bool main_p, bool user_p)
+@@ -2388,7 +2388,8 @@ read_specs (const char *filename, bool main_p, bool user_p)
        /* Is this a special command that starts with '%'? */
        /* Don't allow this for the main specs file, since it would
  	 encourage people to overwrite it.  */
