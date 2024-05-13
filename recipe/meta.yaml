@@ -117,7 +117,6 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/include/c++/cstdio
         {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.so
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.so
         {% else %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.dll.a
         {% endif %}
@@ -186,11 +185,14 @@ outputs:
         - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
         - ${CC} -Wall tests/hello_world.c -c -o hello_world.o -v
         - ${CC} -Wall hello_world.o -o hello_world -v
-        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so         # [cross_target_platform != "win-64"]
-        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.a          # [cross_target_platform == "win-64"]
+        {% if cross_target_platform.startswith("linux-") %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so
+        - test -f ${PREFIX}/{{ triplet }}/lib/libsanitizer.spec
+        - test -f ${PREFIX}/{{ triplet }}/lib/libasan_preinit.o
+        {% else %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.a
+        {% endif %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.spec
-        - test -f ${PREFIX}/{{ triplet }}/lib/libsanitizer.spec   # [cross_target_platform != "win-64"]
-        - test -f ${PREFIX}/{{ triplet }}/lib/libasan_preinit.o   # [cross_target_platform != "win-64"]
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
