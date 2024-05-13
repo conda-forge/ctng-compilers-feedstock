@@ -177,10 +177,12 @@ outputs:
         - test ! -f ${PREFIX}/bin/gcc
         - test ! -f ${PREFIX}/bin/cpp
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
-        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address
-        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
-        - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform]
-        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform]
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address  # [cross_target_platform != "win-64"]
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v                     # [cross_target_platform != "win-64"]
+        - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
+        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
+        - ${CC} -Wall tests/hello_world.c -c -o hello_world.o -v
+        - ${CC} -Wall hello_world.o -o hello_world -v
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.spec
         - test -f ${PREFIX}/{{ triplet }}/lib/libsanitizer.spec
@@ -290,8 +292,10 @@ outputs:
         - test -f ${PREFIX}/bin/{{ old_triplet }}-g++
         - test -f ${PREFIX}/bin/{{ triplet }}-g++
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
-        - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17
-        - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [cross_target_platform == target_platform]
+        - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17    # [cross_target_platform != "win-64"]
+        - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
+        - ${CXX} -Wall tests/hello_world.cpp -c -o hello_world.o --std=c++17
+        - ${CXX} -Wall hello_world.o -o hello_world --std=c++17
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
