@@ -31,11 +31,17 @@ for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy obj
 done
 
 if [[ "$cross_target_platform" == "win-64" ]]; then
+  # do not expect ${prefix}/mingw symlink - this should be superceded by
+  # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
+  sed -i 's#${prefix}/mingw/#${prefix}/#g' configure
   # not sure why this is needed only for win-64
-  export CPPFLAGS_FOR_TARGET="-isystem ${PREFIX}/${TARGET}/sysroot/usr/include"
-  export CFLAGS_FOR_TARGET="-isystem ${PREFIX}/${TARGET}/sysroot/usr/include -L${PREFIX}/${TARGET}/sysroot/usr/lib -L/usr/lib"
-  export LDFLAGS_FOR_TARGET="-L${PREFIX}/${TARGET}/sysroot/usr/lib"
-  ln -sf ${PREFIX}/${TARGET}/sysroot/usr ${PREFIX}/${TARGET}/sysroot/mingw
+  #export CPPFLAGS_FOR_TARGET="-isystem ${PREFIX}/${TARGET}/sysroot/usr/include"
+  #export CFLAGS_FOR_TARGET="-isystem ${PREFIX}/${TARGET}/sysroot/usr/include -L${PREFIX}/${TARGET}/sysroot/usr/lib -L/usr/lib"
+  #export LDFLAGS_FOR_TARGET="-L${PREFIX}/${TARGET}/sysroot/usr/lib"
+  ln -sf ${PREFIX}/${TARGET}/sysroot/usr ${PREFIX}/${TARGET}/sysroot/ucrt64
+  export NATIVE_SYSTEM_HEADER_DIR=/ucrt64/include
+else
+  export NATIVE_SYSTEM_HEADER_DIR=/usr/include
 fi
 
 
@@ -104,8 +110,8 @@ fi
   --enable-long-long \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-build-sysroot=${PREFIX}/${TARGET}/sysroot \
-  --with-native-system-header-dir=/usr/include \
-  --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}" \
+  --with-native-system-header-dir=${NATIVE_SYSTEM_HEADER_DIR} \
+  --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libgcc/config.log; false)
