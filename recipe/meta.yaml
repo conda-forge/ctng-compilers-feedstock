@@ -10,6 +10,10 @@
 {% set libgcc_devel_build_num = build_num %}
 {% endif %}
 
+{% if cross_target_platform is not defined %}
+{% set cross_target_platform = "linux-64" %}
+{% endif %}
+
 package:
   name: gcc_compilers
   version: {{ version }}
@@ -20,15 +24,38 @@ source:
     sha256: 11275aa7bb34cd8ab101d01b341015499f8d9466342a2574ece93f954d92273b   # [gcc_version == "12.3.0"]
     sha256: af828619dd1970734dda3cfb792ea3f2cba61b5a00170ba8bce4910749d73c07   # [gcc_version == "11.4.0"]
     patches:
+      {% if cross_target_platform.startswith("linux-") %}
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
+      {% endif %}
       - patches/0022-cross-compile-older-glibc.patch   # [cross_target_stdlib_version == "2.12" and target_platform != "linux-64"]
       - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver < 12]
       - patches/new-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver >= 12]
       - patches/libgomp-support-environ-null.patch                             # [gcc_maj_ver == 13]
+      {% if cross_target_platform.startswith("win-") %}
+      - patches/mingw/0002-Relocate-libintl.patch
+      - patches/mingw/0003-Windows-Follow-Posix-dir-exists-semantics-more-close.patch
+      - patches/mingw/0005-Windows-Don-t-ignore-native-system-header-dir.patch
+      - patches/mingw/0006-Windows-New-feature-to-allow-overriding.patch
+      - patches/mingw/0007-Build-EXTRA_GNATTOOLS-for-Ada.patch
+      - patches/mingw/0008-Prettify-linking-no-undefined.patch
+      - patches/mingw/0011-Enable-shared-gnat-implib.patch
+      - patches/mingw/0012-Handle-spaces-in-path-for-default-manifest.patch
+      - patches/mingw/0014-gcc-9-branch-clone_function_name_1-Retain-any-stdcall-suffix.patch
+      - patches/mingw/0020-libgomp-Don-t-hard-code-MS-printf-attributes.patch
+      - patches/mingw/0021-PR14940-Allow-a-PCH-to-be-mapped-to-a-different-addr.patch
+      - patches/mingw/0140-gcc-diagnostic-color.patch
+      - patches/mingw/0200-add-m-no-align-vector-insn-option-for-i386.patch
+      - patches/mingw/0300-override-builtin-printf-format.patch
+      - patches/mingw/2000-enable-rust.patch
+      - patches/mingw/2001-fix-building-rust-on-mingw-w64.patch
+      - patches/mingw/2f7e7bfa3c6327793cdcdcb5c770b93cecd49bd0.patch
+      - patches/mingw/3eeb4801d6f45f6250fc77a6d3ab4e0115f8cfdd.patch
+      - patches/mingw/777aa930b106fea2dd6ed9fe22b42a2717f1472d.patch
+      {% endif %}
 
 build:
   number: {{ build_num }}
-  skip: True  # [not linux]
+  skip: True  # [not linux or (gcc_maj_ver < 13 and cross_target_platform == "win-64")]
   detect_binary_files_with_prefix: False
 
 requirements:
@@ -58,7 +85,11 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/crtbegin.o
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_eh.a
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc.a
+        {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so
+        {% else %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.a
+        {% endif %}
     about:
       summary: The GNU C development libraries and object files
       home: https://gcc.gnu.org/
@@ -81,11 +112,14 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.a
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.so
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++fs.a
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libsupc++.a
-        - test -f ${PREFIX}/{{ triplet }}/include/c++/{{ gcc_version }}/cstdio
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/include/c++/cstdio
+        {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.so
+        {% else %}
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.dll.a
+        {% endif %}
     about:
       summary: The GNU C++ headers and development libraries
       home: https://gcc.gnu.org/
@@ -145,14 +179,20 @@ outputs:
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -Wl,-v -march=native  # [target_platform == cross_target_platform and (x86_64 or s390x)]
         # This test does not work well with QEMU
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -Wl,-v -mcpu=native   # [target_platform == cross_target_platform and (not x86_64 and not s390x and not ppc64le)]
-        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address
-        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v
-        - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform]
-        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform]
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address  # [cross_target_platform != "win-64"]
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v                     # [cross_target_platform != "win-64"]
+        - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
+        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
+        - ${CC} -Wall tests/hello_world.c -c -o hello_world.o -v
+        - ${CC} -Wall hello_world.o -o hello_world -v
+        {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so
-        - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.spec
         - test -f ${PREFIX}/{{ triplet }}/lib/libsanitizer.spec
         - test -f ${PREFIX}/{{ triplet }}/lib/libasan_preinit.o
+        {% else %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.a
+        {% endif %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.spec
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
@@ -258,8 +298,10 @@ outputs:
         - test -f ${PREFIX}/bin/{{ old_triplet }}-g++
         - test -f ${PREFIX}/bin/{{ triplet }}-g++
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
-        - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17
-        - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [cross_target_platform == target_platform]
+        - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17    # [cross_target_platform != "win-64"]
+        - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
+        - ${CXX} -Wall tests/hello_world.cpp -c -o hello_world.o --std=c++17
+        - ${CXX} -Wall hello_world.o -o hello_world --std=c++17
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
@@ -318,7 +360,11 @@ outputs:
         - cmake >=3.11  # [x86_64 or aarch64 or ppc64le]
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
       commands:
+        {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.so
+        {% else %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.dll.a
+        {% endif %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.a
         - test -f ${PREFIX}/bin/{{ old_triplet }}-gfortran
         - test -f ${PREFIX}/bin/{{ triplet }}-gfortran

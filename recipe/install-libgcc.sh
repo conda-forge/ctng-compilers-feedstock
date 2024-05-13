@@ -13,7 +13,7 @@ pushd ${SRC_DIR}/build
 
   if [[ "${PKG_NAME}" == libgcc-ng ]]; then
     make -C ${CHOST}/libgcc prefix=${PREFIX} install-shared
-  else
+  elif [[ "${PKG_NAME}" != "gcc_impl"* ]]; then
     # when building a cross compiler, above make line will clobber $PREFIX/lib/libgcc_s.so.1
     # and fail after some point for some architectures. To avoid that, we copy manually
     pushd ${CHOST}/libgcc
@@ -23,14 +23,21 @@ pushd ${SRC_DIR}/build
       ${CHOST}-ranlib ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/libgcc_eh.a
 
       mkdir -p ${PREFIX}/${CHOST}/lib
-      install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${CHOST}/lib/libgcc_s.so.1
-      cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/${CHOST}/lib/libgcc_s.so
+      if [[ "${triplet}" == *linux* ]]; then
+        install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${CHOST}/lib/libgcc_s.so.1
+        cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/${CHOST}/lib/libgcc_s.so
+      else
+        # import library, not static library
+        install -c -m 644 ./shlib/libgcc_s.a ${PREFIX}/${CHOST}/lib/libgcc_s.a
+      fi
     popd
   fi
 
   # TODO :: Also do this for libgfortran (and libstdc++ too probably?)
-  sed -i.bak 's/.*cannot install.*/func_warning "Ignoring libtool error about cannot install to a directory not ending in"/' \
+  if [[ -f ${CHOST}/libsanitizer/libtool ]]; then
+    sed -i.bak 's/.*cannot install.*/func_warning "Ignoring libtool error about cannot install to a directory not ending in"/' \
              ${CHOST}/libsanitizer/libtool
+  fi
   for lib in libatomic libgomp libquadmath libitm libvtv libsanitizer/{a,l,ub,t}san; do
     # TODO :: Also do this for libgfortran (and libstdc++ too probably?)
     if [[ -f ${CHOST}/${lib}/libtool ]]; then

@@ -25,7 +25,5 @@ else
     mv $PREFIX/${CHOST}/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
 fi
 
-ln -sf ${PREFIX}/${CHOST}/lib/libstdc++.so ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/libstdc++.so
-
 popd
 

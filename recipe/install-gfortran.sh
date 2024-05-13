@@ -44,7 +44,11 @@ install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-fortran/RUNTIME.LIBRARY.EXCEPTION
 
 if [[ "${target_platform}" != "${cross_target_platform}" ]]; then
-  cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/${CHOST}/lib/
+  if [[ ${triplet} == *linux* ]]; then
+    cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/${CHOST}/lib/
+  else
+    cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.dll.a ${PREFIX}/${CHOST}/lib/
+  fi
 fi
 cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.a ${PREFIX}/${CHOST}/lib/
 
@@ -53,7 +57,7 @@ set +x
 # and strip in there so that we do not change files that are not
 # part of this package.
 pushd ${PREFIX}
-  _files=$(find . -type f)
+  _files=$(find bin libexec -type f)
   for _file in ${_files}; do
     _type="$( file "${_file}" | cut -d ' ' -f 2- )"
     case "${_type}" in

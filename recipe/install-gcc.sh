@@ -178,7 +178,7 @@ set +x
 # and strip in there so that we do not change files that are not
 # part of this package.
 pushd ${PREFIX}
-  _files=$(find . -type f)
+  _files=$(find bin libexec -type f)
   for _file in ${_files}; do
     _type="$( file "${_file}" | cut -d ' ' -f 2- )"
     case "${_type}" in
@@ -214,6 +214,7 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
 else
   source ${RECIPE_DIR}/install-libgcc.sh
   for lib in libcc1; do
+    mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/lib/ || true
     mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${CHOST}/lib/ || true
   done
   rm -f ${PREFIX}/share/info/*.info

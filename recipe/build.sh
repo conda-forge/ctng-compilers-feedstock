@@ -30,6 +30,17 @@ for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy obj
   eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
 done
 
+if [[ "$cross_target_platform" == "win-64" ]]; then
+  # do not expect ${prefix}/mingw symlink - this should be superceded by
+  # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
+  sed -i 's#${prefix}/mingw/#${prefix}/ucrt64/#g' configure
+  sed -i "s#/mingw/#/ucrt64/#g" gcc/config/i386/mingw32.h
+  export NATIVE_SYSTEM_HEADER_DIR=/ucrt64/include
+else
+  export NATIVE_SYSTEM_HEADER_DIR=/usr/include
+fi
+
+
 # workaround a bug in gcc build files when using external binutils
 # and build != host == target
 export gcc_cv_objdump=$OBJDUMP_FOR_TARGET
@@ -64,6 +75,12 @@ cd build
 # goes back to the original way.
 # See https://github.com/gcc-mirror/gcc/blob/16e2427f50c208dfe07d07f18009969502c25dc8/gcc/configure.ac#L218
 
+if [[ "$TARGET" == *linux* ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--enable-libsanitizer)
+  GCC_CONFIGURE_OPTIONS+=(--enable-default-pie)
+  GCC_CONFIGURE_OPTIONS+=(--enable-threads=posix)
+fi
+
 ../configure \
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
@@ -72,7 +89,6 @@ cd build
   --build=$BUILD \
   --host=$HOST \
   --target=$TARGET \
-  --enable-default-pie \
   --enable-languages=c,c++,fortran,objc,obj-c++ \
   --enable-__cxa_atexit \
   --disable-libmudflap \
@@ -80,9 +96,7 @@ cd build
   --disable-libssp \
   --enable-libquadmath \
   --enable-libquadmath-support \
-  --enable-libsanitizer \
   --enable-lto \
-  --enable-threads=posix \
   --enable-target-optspace \
   --enable-plugin \
   --enable-gold \
@@ -92,7 +106,8 @@ cd build
   --enable-long-long \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-build-sysroot=${PREFIX}/${TARGET}/sysroot \
-  --with-gxx-include-dir="${PREFIX}/${TARGET}/include/c++/${gcc_version}" \
+  --with-native-system-header-dir=${NATIVE_SYSTEM_HEADER_DIR} \
+  --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libgcc/config.log; false)
