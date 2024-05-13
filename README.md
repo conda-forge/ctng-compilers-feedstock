@@ -58,6 +58,96 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU Fortran Compiler
 
+About libgcc-devel_win-64
+-------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU C development libraries and object files
+
+About libstdcxx-devel_win-64
+----------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU C++ headers and development libraries
+
+About gcc_impl_win-64
+---------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU C Compiler
+
+About gxx_impl_win-64
+---------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU C++ Compiler
+
+About gfortran_impl_win-64
+--------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU Fortran Compiler
+
+About libgcc-devel_linux-s390x
+------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU C development libraries and object files
+
+About libstdcxx-devel_linux-s390x
+---------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU C++ headers and development libraries
+
+About gcc_impl_linux-s390x
+--------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU C Compiler
+
+About gxx_impl_linux-s390x
+--------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU C++ Compiler
+
+About gfortran_impl_linux-s390x
+-------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU Fortran Compiler
+
 About libgcc-devel_linux-64
 ---------------------------
 
@@ -217,51 +307,6 @@ Package license: BSD-3-Clause
 
 Summary: GNU C++ native compiler (symlinks)
 
-About libgcc-devel_win-64
--------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU C development libraries and object files
-
-About libstdcxx-devel_win-64
-----------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU C++ headers and development libraries
-
-About gcc_impl_win-64
----------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU C Compiler
-
-About gxx_impl_win-64
----------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU C++ Compiler
-
-About gfortran_impl_win-64
---------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU Fortran Compiler
-
 About libgcc-devel_linux-aarch64
 --------------------------------
 
@@ -300,51 +345,6 @@ Summary: GNU C++ Compiler
 
 About gfortran_impl_linux-aarch64
 ---------------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU Fortran Compiler
-
-About libgcc-devel_linux-s390x
-------------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU C development libraries and object files
-
-About libstdcxx-devel_linux-s390x
----------------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU C++ headers and development libraries
-
-About gcc_impl_linux-s390x
---------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU C Compiler
-
-About gxx_impl_linux-s390x
---------------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: GNU C++ Compiler
-
-About gfortran_impl_linux-s390x
--------------------------------
 
 Home: https://gcc.gnu.org/
 
