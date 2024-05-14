@@ -55,7 +55,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: True  # [not linux or (gcc_maj_ver < 13 and cross_target_platform == "win-64")]
+  skip: True  # [not (linux or win) or (gcc_maj_ver < 13 and cross_target_platform == "win-64")]
   detect_binary_files_with_prefix: False
 
 requirements:
@@ -144,11 +144,11 @@ outputs:
         - {{ pin_subpackage("libstdcxx-ng", exact=True) }}          # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", exact=True) }}             # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform or win]
       run:
         - binutils_impl_{{ cross_target_platform }} >={{ binutils_version }}
         - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
-        - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform or win]
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx-ng", max_pin=None) }}    # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc-ng", max_pin=None) }}       # [target_platform == cross_target_platform]
@@ -435,7 +435,7 @@ outputs:
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform]
+      skip: True   # [target_platform != cross_target_platform or win]
       missing_dso_whitelist:
         - "*"
       ignore_run_exports:
