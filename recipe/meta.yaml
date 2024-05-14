@@ -55,7 +55,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: True  # [not (linux or win) or (gcc_maj_ver < 13 and cross_target_platform == "win-64")]
+  skip: True  # [not (linux or win) or (gcc_maj_ver < 13 and cross_target_platform == "win-64") or (win and cross_target_platform != "win-64")]
   detect_binary_files_with_prefix: False
 
 requirements:
