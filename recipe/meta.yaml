@@ -32,25 +32,26 @@ source:
       # got backported to gcc-13 in https://github.com/gcc-mirror/gcc/commit/c128ad8e830e90a429eaeccc3fb000a73fd6779c?w=1
       - patches/0004-Support-case-in-which-environ-is-NULL.patch               # [gcc_version == "13.2.0"]
       {% if cross_target_platform.startswith("win-") %}
-      - patches/mingw/0002-Relocate-libintl.patch
-      - patches/mingw/0003-Windows-Follow-Posix-dir-exists-semantics-more-close.patch
-      - patches/mingw/0005-Windows-Don-t-ignore-native-system-header-dir.patch
-      - patches/mingw/0006-Windows-New-feature-to-allow-overriding.patch
-      - patches/mingw/0007-Build-EXTRA_GNATTOOLS-for-Ada.patch
-      - patches/mingw/0008-Prettify-linking-no-undefined.patch
-      - patches/mingw/0011-Enable-shared-gnat-implib.patch
-      - patches/mingw/0012-Handle-spaces-in-path-for-default-manifest.patch
-      - patches/mingw/0014-gcc-9-branch-clone_function_name_1-Retain-any-stdcall-suffix.patch
-      - patches/mingw/0020-libgomp-Don-t-hard-code-MS-printf-attributes.patch
-      - patches/mingw/0021-PR14940-Allow-a-PCH-to-be-mapped-to-a-different-addr.patch
-      - patches/mingw/0140-gcc-diagnostic-color.patch
-      - patches/mingw/0200-add-m-no-align-vector-insn-option-for-i386.patch
-      - patches/mingw/0300-override-builtin-printf-format.patch
-      - patches/mingw/2000-enable-rust.patch
-      - patches/mingw/2001-fix-building-rust-on-mingw-w64.patch
-      - patches/mingw/2f7e7bfa3c6327793cdcdcb5c770b93cecd49bd0.patch
-      - patches/mingw/3eeb4801d6f45f6250fc77a6d3ab4e0115f8cfdd.patch
-      - patches/mingw/777aa930b106fea2dd6ed9fe22b42a2717f1472d.patch
+      # from https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
+      - patches/mingw/{{ gcc_maj_ver }}/0002-Relocate-libintl.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0003-Windows-Follow-Posix-dir-exists-semantics-more-close.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0005-Windows-Don-t-ignore-native-system-header-dir.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0006-Windows-New-feature-to-allow-overriding.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0007-Build-EXTRA_GNATTOOLS-for-Ada.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0008-Prettify-linking-no-undefined.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0011-Enable-shared-gnat-implib.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0012-Handle-spaces-in-path-for-default-manifest.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0014-gcc-9-branch-clone_function_name_1-Retain-any-stdcall-suffix.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0020-libgomp-Don-t-hard-code-MS-printf-attributes.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0021-PR14940-Allow-a-PCH-to-be-mapped-to-a-different-addr.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0140-gcc-diagnostic-color.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0200-add-m-no-align-vector-insn-option-for-i386.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0300-override-builtin-printf-format.patch
+      - patches/mingw/{{ gcc_maj_ver }}/2000-enable-rust.patch
+      - patches/mingw/{{ gcc_maj_ver }}/2001-fix-building-rust-on-mingw-w64.patch
+      - patches/mingw/{{ gcc_maj_ver }}/2f7e7bfa3c6327793cdcdcb5c770b93cecd49bd0.patch
+      - patches/mingw/{{ gcc_maj_ver }}/3eeb4801d6f45f6250fc77a6d3ab4e0115f8cfdd.patch
+      - patches/mingw/{{ gcc_maj_ver }}/777aa930b106fea2dd6ed9fe22b42a2717f1472d.patch
       {% endif %}
 
 build:
