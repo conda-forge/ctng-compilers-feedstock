@@ -51,6 +51,10 @@ _libgcc_mutex:
   - 0.1 conda_forge
 channel_sources:
   - conda-forge/label/m2w64-experimental,conda-forge/label/sysroot-with-crypt,conda-forge
+c_stdlib:          # [win]
+  - m2w64-sysroot  # [win]
+c_stdlib_version:  # [win]
+  - 9              # [win]
 zip_keys:
   - - cross_target_stdlib_version
     - cross_target_stdlib
