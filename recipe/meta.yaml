@@ -32,7 +32,8 @@ source:
       # got backported to gcc-13 in https://github.com/gcc-mirror/gcc/commit/c128ad8e830e90a429eaeccc3fb000a73fd6779c?w=1
       - patches/0004-Support-case-in-which-environ-is-NULL.patch               # [gcc_version == "13.2.0"]
       {% if cross_target_platform.startswith("win-") %}
-      # from https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
+      # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
+      # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
       - patches/mingw/{{ gcc_maj_ver }}/0002-Relocate-libintl.patch
       - patches/mingw/{{ gcc_maj_ver }}/0003-Windows-Follow-Posix-dir-exists-semantics-more-close.patch
       - patches/mingw/{{ gcc_maj_ver }}/0005-Windows-Don-t-ignore-native-system-header-dir.patch
