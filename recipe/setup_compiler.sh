@@ -33,3 +33,9 @@ fi
 
 export PATH=$SRC_DIR/cf-compilers/bin:$PATH
 export BUILD_PREFIX=$SRC_DIR/cf-compilers
+
+if [[ "$target_platform" == "win-"* ]]; then
+    export PREFIX=$PREFIX/Library
+fi
+
+source $RECIPE_DIR/get_cpu_arch.sh

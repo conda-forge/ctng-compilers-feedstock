@@ -35,11 +35,16 @@ if [[ "$cross_target_platform" == "win-64" ]]; then
   # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
   sed -i 's#${prefix}/mingw/#${prefix}/ucrt64/#g' configure
   sed -i "s#/mingw/#/ucrt64/#g" gcc/config/i386/mingw32.h
-  export NATIVE_SYSTEM_HEADER_DIR=/ucrt64/include
+  NATIVE_SYSTEM_HEADER_DIR=/ucrt64/include
 else
-  export NATIVE_SYSTEM_HEADER_DIR=/usr/include
+  NATIVE_SYSTEM_HEADER_DIR=/usr/include
 fi
 
+if [[ "$target_platform" == "win-64" ]]; then
+  SYSROOT_DIR=${PREFIX}
+else
+  SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
+fi
 
 # workaround a bug in gcc build files when using external binutils
 # and build != host == target
@@ -104,8 +109,8 @@ fi
   --disable-bootstrap \
   --disable-multilib \
   --enable-long-long \
-  --with-sysroot=${PREFIX}/${TARGET}/sysroot \
-  --with-build-sysroot=${PREFIX}/${TARGET}/sysroot \
+  --with-sysroot=${SYSROOT_DIR} \
+  --with-build-sysroot=${SYSROOT_DIR} \
   --with-native-system-header-dir=${NATIVE_SYSTEM_HEADER_DIR} \
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
   "${GCC_CONFIGURE_OPTIONS[@]}"

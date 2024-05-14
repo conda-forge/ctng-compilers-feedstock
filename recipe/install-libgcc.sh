@@ -9,9 +9,15 @@ export CHOST="${triplet}"
 # .. do we need this scoped over the whole file though?
 #export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
 
+if [[ "${HOST}" == *mingw* ]]; then
+  LIBGCC_NAME="libgcc"
+else
+  LIBGCC_NAME="libgcc-ng"
+fi
+
 pushd ${SRC_DIR}/build
 
-  if [[ "${PKG_NAME}" == libgcc-ng ]]; then
+  if [[ "${PKG_NAME}" == "${LIBGCC_NAME}" ]]; then
     make -C ${CHOST}/libgcc prefix=${PREFIX} install-shared
   elif [[ "${PKG_NAME}" != "gcc_impl"* ]]; then
     # when building a cross compiler, above make line will clobber $PREFIX/lib/libgcc_s.so.1
