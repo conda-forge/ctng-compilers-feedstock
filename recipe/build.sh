@@ -110,7 +110,7 @@ fi
   --disable-multilib \
   --enable-long-long \
   --with-sysroot=${SYSROOT_DIR} \
-  --with-build-sysroot=${SYSROOT_DIR} \
+  --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
   --with-native-system-header-dir=${NATIVE_SYSTEM_HEADER_DIR} \
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
