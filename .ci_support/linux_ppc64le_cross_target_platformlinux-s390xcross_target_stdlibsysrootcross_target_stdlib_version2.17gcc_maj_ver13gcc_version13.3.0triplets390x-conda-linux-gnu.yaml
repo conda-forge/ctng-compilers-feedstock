@@ -1,3 +1,5 @@
+_libgcc_mutex:
+- 0.1 conda_forge
 binutils_version:
 - '2.40'
 c_stdlib:
@@ -11,7 +13,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-ppc64le
+- linux-s390x
 cross_target_stdlib:
 - sysroot
 cross_target_stdlib_version:
@@ -21,19 +23,19 @@ docker_image:
 gcc_maj_ver:
 - '13'
 gcc_version:
-- 13.2.0
+- 13.3.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
 - 1.0.0
 old_triplet:
-- powerpc64le-conda_cos7-linux-gnu
+- s390x-conda-linux-gnu
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-s390x
+- linux-ppc64le
 triplet:
-- powerpc64le-conda-linux-gnu
+- s390x-conda-linux-gnu
 zip_keys:
 - - c_stdlib_version
   - cdt_name

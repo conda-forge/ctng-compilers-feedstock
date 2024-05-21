@@ -1,13 +1,11 @@
-BUILD:
-- aarch64-conda_cos7-linux-gnu
+_libgcc_mutex:
+- 0.1 conda_forge
 binutils_version:
 - '2.40'
 c_stdlib:
 - sysroot
 c_stdlib_version:
 - '2.17'
-cdt_arch:
-- aarch64
 cdt_name:
 - cos7
 channel_sources:
@@ -25,7 +23,7 @@ docker_image:
 gcc_maj_ver:
 - '13'
 gcc_version:
-- 13.2.0
+- 13.3.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
@@ -35,7 +33,7 @@ old_triplet:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-aarch64
+- linux-ppc64le
 triplet:
 - x86_64-conda-linux-gnu
 zip_keys:

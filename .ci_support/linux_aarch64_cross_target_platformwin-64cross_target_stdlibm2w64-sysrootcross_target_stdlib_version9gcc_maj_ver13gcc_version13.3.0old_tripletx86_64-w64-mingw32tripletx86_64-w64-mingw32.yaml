@@ -25,7 +25,7 @@ docker_image:
 gcc_maj_ver:
 - '13'
 gcc_version:
-- 13.2.0
+- 13.3.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
