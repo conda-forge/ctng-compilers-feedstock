@@ -289,6 +289,8 @@ outputs:
         # not needed due to pinning above but marks this build as using the new sysroots
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
         - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}
+        # for C++20 chrono support
+        - tzdata
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
