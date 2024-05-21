@@ -12,7 +12,7 @@ old_triplet:
   - x86_64-w64-mingw32
 gcc_version:
   - 12.3.0
-  - 13.2.0
+  - 13.3.0
   - 14.1.0
 gcc_maj_ver:
   - 12
