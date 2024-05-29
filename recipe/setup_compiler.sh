@@ -1,5 +1,4 @@
 #!/bin/bash
-
 if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
     extra_pkgs=()
     if [[ "$build_platform" != "$target_platform" ]]; then
@@ -34,8 +33,16 @@ fi
 export PATH=$SRC_DIR/cf-compilers/bin:$PATH
 export BUILD_PREFIX=$SRC_DIR/cf-compilers
 
-if [[ "$target_platform" == "win-"* ]]; then
-    export PREFIX=$PREFIX/Library
+if [[ "$target_platform" == "win-"* && "${PREFIX}" != *Library ]]; then
+    export PREFIX=${PREFIX}/Library
 fi
 
 source $RECIPE_DIR/get_cpu_arch.sh
+
+if [[ "$target_platform" == "win-64" ]]; then
+  SYSROOT_DIR=${PREFIX}
+  EXEEXT=".exe"
+else
+  SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
+  EXEEXT=""
+fi

@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 7 %}
+{% set build_num = 8 %}
 
 # libgcc-devel is a noarch: generic package that is built for
 # cross-compilers as well. Instead of skipping for cross-compilers,
@@ -35,9 +35,9 @@ source:
       - patches/0021-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       {% endif %}
       - patches/0022-cross-compile-older-glibc.patch   # [cross_target_stdlib_version == "2.12" and target_platform != "linux-64"]
-      - patches/old-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver < 12]
-      - patches/new-allow-commands-in-main-specfile.patch                      # [gcc_maj_ver >= 12]
-      - patches/libgomp-support-environ-null.patch                             # [gcc_maj_ver == 13]
+      - patches/old-allow-commands-in-main-specfile.patch                      # [int(gcc_maj_ver) < 12]
+      - patches/new-allow-commands-in-main-specfile.patch                      # [int(gcc_maj_ver) >= 12]
+      - patches/libgomp-support-environ-null.patch                             # [int(gcc_maj_ver) == 13]
       {% if cross_target_platform.startswith("win-") %}
       - patches/mingw/0002-Relocate-libintl.patch
       - patches/mingw/0003-Windows-Follow-Posix-dir-exists-semantics-more-close.patch
@@ -62,7 +62,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: True  # [not (linux or win) or (gcc_maj_ver < 13 and cross_target_platform == "win-64") or (win and cross_target_platform != "win-64")]
+  skip: True  # [not (linux or win) or (int(gcc_maj_ver) < 13 and cross_target_platform == "win-64") or (win and cross_target_platform != "win-64")]
   skip: True  # [not win]
   detect_binary_files_with_prefix: False
 
@@ -88,6 +88,9 @@ outputs:
       build:
       host:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
+      run:
+        - __unix   # [unix]
+        - __win    # [win]
     test:
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/crtbegin.o
@@ -117,6 +120,9 @@ outputs:
       build:
       host:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
+      run:
+        - __unix   # [unix]
+        - __win    # [win]
     test:
       commands:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.a
@@ -152,11 +158,11 @@ outputs:
         - {{ pin_subpackage("libstdcxx" ~ runtime_suffix, exact=True) }}          # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc" ~ runtime_suffix, exact=True) }}             # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform or win]
+        - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform and not win]
       run:
         - binutils_impl_{{ cross_target_platform }} >={{ binutils_version }}
         - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
-        - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform or win]
+        - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform and not win]
         # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx" ~ runtime_suffix, max_pin=None) }}    # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc" ~ runtime_suffix, max_pin=None) }}       # [target_platform == cross_target_platform]
@@ -209,8 +215,7 @@ outputs:
   - name: gcc
     script: install-symlinks.sh
     build:
-      skip: true  # [target_platform != cross_target_platform]
-      skip: true  # [not linux]
+      skip: true  # [target_platform != cross_target_platform or win]
     requirements:
       - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
     test:
@@ -318,8 +323,7 @@ outputs:
   - name: gxx
     script: install-symlinks.sh
     build:
-      skip: true  # [target_platform != cross_target_platform]
-      skip: true  # [not linux]
+      skip: true  # [target_platform != cross_target_platform or win]
     requirements:
       - gxx_impl_{{ target_platform }} {{ gcc_version }}.*
       - gcc {{ gcc_version }}.*
@@ -379,6 +383,7 @@ outputs:
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
         - find $PREFIX/lib -iname ISO_Fortran_binding.h | grep '.'
+        - echo {{ gcc_maj_ver }}
         - pushd tests/fortomp
         - sh test_fort.sh   # [target_platform == cross_target_platform and (x86_64 or aarch64 or ppc64le)]
       files:
@@ -391,8 +396,7 @@ outputs:
   - name: gfortran
     script: install-symlinks.sh
     build:
-      skip: true  # [target_platform != cross_target_platform]
-      skip: true  # [not linux]
+      skip: true  # [target_platform != cross_target_platform or win]
     requirements:
       - gfortran_impl_{{ target_platform }} {{ gcc_version }}.*
       - gcc_impl_{{ target_platform }} {{ gcc_version }}.*

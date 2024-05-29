@@ -31,8 +31,8 @@ Package license: BSD-3-Clause
 
 Summary: OpenMP Implementation Mutex
 
-About libgcc-ng
----------------
+About libgcc
+------------
 
 Home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
 
@@ -49,8 +49,8 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GNU Fortran Runtime Library
 
-About libstdcxx-ng
-------------------
+About libstdcxx
+---------------
 
 Home: https://gcc.gnu.org/
 
@@ -67,8 +67,8 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU C Compiler
 
-About libgfortran-ng
---------------------
+About libgfortran
+-----------------
 
 Home: https://gcc.gnu.org/
 
@@ -136,10 +136,10 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version9gcc_maj_ver13gcc_version13.2.0tripletx86_64-w64-mingw32</td>
+              <td>win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version11gcc_version13.2.0tripletx86_64-w64-mingw32</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version9gcc_maj_ver13gcc_version13.2.0tripletx86_64-w64-mingw32" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version11gcc_version13.2.0tripletx86_64-w64-mingw32" alt="variant">
                 </a>
               </td>
             </tr>
@@ -160,11 +160,11 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gcc_impl_win--64-green.svg)](https://anaconda.org/conda-forge/gcc_impl_win-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc_impl_win-64.svg)](https://anaconda.org/conda-forge/gcc_impl_win-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc_impl_win-64.svg)](https://anaconda.org/conda-forge/gcc_impl_win-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc_impl_win-64.svg)](https://anaconda.org/conda-forge/gcc_impl_win-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran_impl_win--64-green.svg)](https://anaconda.org/conda-forge/gfortran_impl_win-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran_impl_win-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_win-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran_impl_win-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_win-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran_impl_win-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_win-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gxx_impl_win--64-green.svg)](https://anaconda.org/conda-forge/gxx_impl_win-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_win-64.svg)](https://anaconda.org/conda-forge/gxx_impl_win-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_win-64.svg)](https://anaconda.org/conda-forge/gxx_impl_win-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_win-64.svg)](https://anaconda.org/conda-forge/gxx_impl_win-64) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--ng-green.svg)](https://anaconda.org/conda-forge/libgcc-ng) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-ng.svg)](https://anaconda.org/conda-forge/libgcc-ng) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-ng.svg)](https://anaconda.org/conda-forge/libgcc-ng) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-ng.svg)](https://anaconda.org/conda-forge/libgcc-ng) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libgfortran--ng-green.svg)](https://anaconda.org/conda-forge/libgfortran-ng) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgfortran-ng.svg)](https://anaconda.org/conda-forge/libgfortran-ng) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgfortran-ng.svg)](https://anaconda.org/conda-forge/libgfortran-ng) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgfortran-ng.svg)](https://anaconda.org/conda-forge/libgfortran-ng) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc-green.svg)](https://anaconda.org/conda-forge/libgcc) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc.svg)](https://anaconda.org/conda-forge/libgcc) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc.svg)](https://anaconda.org/conda-forge/libgcc) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc.svg)](https://anaconda.org/conda-forge/libgcc) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgfortran-green.svg)](https://anaconda.org/conda-forge/libgfortran) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgfortran.svg)](https://anaconda.org/conda-forge/libgfortran) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgfortran.svg)](https://anaconda.org/conda-forge/libgfortran) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgfortran.svg)](https://anaconda.org/conda-forge/libgfortran) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgfortran5-green.svg)](https://anaconda.org/conda-forge/libgfortran5) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgfortran5.svg)](https://anaconda.org/conda-forge/libgfortran5) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgfortran5.svg)](https://anaconda.org/conda-forge/libgfortran5) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgfortran5.svg)](https://anaconda.org/conda-forge/libgfortran5) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgomp-green.svg)](https://anaconda.org/conda-forge/libgomp) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgomp.svg)](https://anaconda.org/conda-forge/libgomp) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgomp.svg)](https://anaconda.org/conda-forge/libgomp) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgomp.svg)](https://anaconda.org/conda-forge/libgomp) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libstdcxx--ng-green.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libstdcxx-ng.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libstdcxx-ng.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libstdcxx-ng.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libstdcxx-green.svg)](https://anaconda.org/conda-forge/libstdcxx) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libstdcxx.svg)](https://anaconda.org/conda-forge/libstdcxx) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libstdcxx.svg)](https://anaconda.org/conda-forge/libstdcxx) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libstdcxx.svg)](https://anaconda.org/conda-forge/libstdcxx) |
 
 Installing ctng-compilers-feedstock
 ===================================
@@ -176,16 +176,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `_openmp_mutex, conda-gcc-specs, gcc_impl_win-64, gfortran_impl_win-64, gxx_impl_win-64, libgcc-ng, libgfortran-ng, libgfortran5, libgomp, libstdcxx-ng` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `_openmp_mutex, conda-gcc-specs, gcc_impl_win-64, gfortran_impl_win-64, gxx_impl_win-64, libgcc, libgfortran, libgfortran5, libgomp, libstdcxx` can be installed with `conda`:
 
 ```
-conda install _openmp_mutex conda-gcc-specs gcc_impl_win-64 gfortran_impl_win-64 gxx_impl_win-64 libgcc-ng libgfortran-ng libgfortran5 libgomp libstdcxx-ng
+conda install _openmp_mutex conda-gcc-specs gcc_impl_win-64 gfortran_impl_win-64 gxx_impl_win-64 libgcc libgfortran libgfortran5 libgomp libstdcxx
 ```
 
 or with `mamba`:
 
 ```
-mamba install _openmp_mutex conda-gcc-specs gcc_impl_win-64 gfortran_impl_win-64 gxx_impl_win-64 libgcc-ng libgfortran-ng libgfortran5 libgomp libstdcxx-ng
+mamba install _openmp_mutex conda-gcc-specs gcc_impl_win-64 gfortran_impl_win-64 gxx_impl_win-64 libgcc libgfortran libgfortran5 libgomp libstdcxx
 ```
 
 It is possible to list all of the versions of `_openmp_mutex` available on your platform with `conda`:

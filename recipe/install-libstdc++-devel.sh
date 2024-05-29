@@ -20,7 +20,11 @@ mkdir -p ${PREFIX}/${CHOST}/lib
 
 if [[ "$target_platform" == "$cross_target_platform" ]]; then
     mv $PREFIX/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
-    mv ${PREFIX}/lib/libstdc++.so* ${PREFIX}/${CHOST}/lib
+    if [[ "$target_platform" == linux-* ]]; then
+        mv ${PREFIX}/lib/libstdc++.so* ${PREFIX}/${CHOST}/lib
+    else
+        rm ${PREFIX}/bin/libstdc++*.dll
+    fi
 else
     mv $PREFIX/${CHOST}/lib/lib*.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
 fi

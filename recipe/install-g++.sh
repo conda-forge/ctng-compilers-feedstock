@@ -17,8 +17,8 @@ make -C gcc prefix=${PREFIX} c++.install-common
 # How it used to be:
 # install -m755 -t ${PREFIX}/bin/ gcc/{cc1plus,lto1}
 for file in cc1plus; do
-  if [[ -f gcc/${file} ]]; then
-    install -c gcc/${file} ${PREFIX}/${_libdir}/${file}
+  if [[ -f gcc/${file}${EXEEXT} ]]; then
+    install -c gcc/${file}${EXEEXT} ${PREFIX}/${_libdir}/${file}${EXEEXT}
   fi
 done
 

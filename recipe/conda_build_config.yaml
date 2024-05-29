@@ -35,7 +35,7 @@ cross_target_stdlib_version:
   - 2.17
   - 2.17
   - 2.17
-  - 9
+  - 11
 cross_target_stdlib:
   - sysroot
   - sysroot
@@ -54,7 +54,7 @@ channel_sources:
 c_stdlib:          # [win]
   - m2w64-sysroot  # [win]
 c_stdlib_version:  # [win]
-  - 9              # [win]
+  - 11             # [win]
 zip_keys:
   - - cross_target_stdlib_version
     - cross_target_stdlib
