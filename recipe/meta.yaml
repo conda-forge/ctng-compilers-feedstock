@@ -1,6 +1,10 @@
 {% set version = gcc_version %}
 {% set build_num = 8 %}
 
+{% if gcc_maj_ver is not defined %}
+{% set gcc_maj_ver = 14 %}
+{% endif %}
+
 # libgcc-devel is a noarch: generic package that is built for
 # cross-compilers as well. Instead of skipping for cross-compilers,
 # let's prioritize the native compilers package
@@ -306,6 +310,20 @@ outputs:
         - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
         - ${CXX} -Wall tests/hello_world.cpp -c -o hello_world.o --std=c++17
         - ${CXX} -Wall hello_world.o -o hello_world --std=c++17
+
+        # test tzdb integration
+        {% if gcc_maj_ver|int >= 14 %}
+        # we only look in $PREFIX if $CONDA_BUILD is set
+        - export CONDA_BUILD="1"
+        - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb.cpp -c -o tzdb.o
+        - ${CXX} tzdb.o -o tzdb         # [target_platform == cross_target_platform]
+        - ./tzdb                        # [target_platform == cross_target_platform]
+        - export CONDA_PREFIX="$PREFIX"
+        - unset PREFIX
+        - unset CONDA_BUILD
+        # by default, we look in $CONDA_PREFIX (if it exists & CONDA_BUILD is not set)
+        - ./tzdb                        # [target_platform == cross_target_platform]
+        {% endif %}
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
