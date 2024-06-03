@@ -106,7 +106,6 @@ fi
   --enable-long-long \
   --with-sysroot=${PREFIX}/${TARGET}/sysroot \
   --with-build-sysroot=${PREFIX}/${TARGET}/sysroot \
-  --with-libstdcxx-zoneinfo=${PREFIX}/share/zoneinfo \
   --with-native-system-header-dir=${NATIVE_SYSTEM_HEADER_DIR} \
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
