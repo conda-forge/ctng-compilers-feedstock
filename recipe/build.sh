@@ -40,11 +40,7 @@ else
   NATIVE_SYSTEM_HEADER_DIR=/usr/include
 fi
 
-if [[ "$target_platform" == "win-64" ]]; then
-  SYSROOT_DIR=${PREFIX}
-else
-  SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
-fi
+SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
 
 # workaround a bug in gcc build files when using external binutils
 # and build != host == target

@@ -3,9 +3,9 @@ binutils_version:
 c_stdlib:
 - m2w64-sysroot
 c_stdlib_version:
-- '11'
+- '12'
 channel_sources:
-- conda-forge/label/m2w64-experimental,conda-forge/label/sysroot-with-crypt,conda-forge
+- conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
 - conda-forge main
 cross_target_platform:
