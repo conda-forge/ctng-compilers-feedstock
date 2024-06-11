@@ -33,7 +33,7 @@ done
 if [[ "$cross_target_platform" == "win-64" ]]; then
   # do not expect ${prefix}/mingw symlink - this should be superceded by
   # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
-  sed -i 's#${prefix}/mingw/#${prefix}/usr/#g' configure
+  sed -i 's#${prefix}/mingw/#${prefix}/${target}/sysroot/usr/#g' configure
   sed -i "s#/mingw/#/usr/#g" gcc/config/i386/mingw32.h
 fi
 
@@ -109,4 +109,4 @@ fi
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 
-make -j${CPU_COUNT} || (cat ${TARGET}/libgcc/config.log; false)
+make -j${CPU_COUNT} || (cat ${TARGET}/libgomp/config.log; false)
