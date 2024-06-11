@@ -217,7 +217,10 @@ outputs:
     build:
       skip: true  # [target_platform != cross_target_platform or win]
     requirements:
-      - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
+      host:
+        - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
+      run:
+        - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
     test:
       commands:
         - ${PREFIX}/bin/gcc -v
@@ -325,8 +328,12 @@ outputs:
     build:
       skip: true  # [target_platform != cross_target_platform or win]
     requirements:
-      - gxx_impl_{{ target_platform }} {{ gcc_version }}.*
-      - gcc {{ gcc_version }}.*
+      host:
+        - gxx_impl_{{ target_platform }} {{ gcc_version }}.*
+        - gcc {{ gcc_version }}.*
+      run:
+        - gxx_impl_{{ target_platform }} {{ gcc_version }}.*
+        - gcc {{ gcc_version }}.*
     test:
       commands:
         - ${PREFIX}/bin/g++ -v
@@ -398,9 +405,14 @@ outputs:
     build:
       skip: true  # [target_platform != cross_target_platform or win]
     requirements:
-      - gfortran_impl_{{ target_platform }} {{ gcc_version }}.*
-      - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
-      - gcc {{ gcc_version }}.*
+      host:
+        - gfortran_impl_{{ target_platform }} {{ gcc_version }}.*
+        - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
+        - gcc {{ gcc_version }}.*
+      run:
+        - gfortran_impl_{{ target_platform }} {{ gcc_version }}.*
+        - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
+        - gcc {{ gcc_version }}.*
     test:
       commands:
         - ${PREFIX}/bin/gfortran -v
