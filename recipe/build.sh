@@ -33,13 +33,11 @@ done
 if [[ "$cross_target_platform" == "win-64" ]]; then
   # do not expect ${prefix}/mingw symlink - this should be superceded by
   # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
-  sed -i 's#${prefix}/mingw/#${prefix}/ucrt64/#g' configure
-  sed -i "s#/mingw/#/ucrt64/#g" gcc/config/i386/mingw32.h
-  NATIVE_SYSTEM_HEADER_DIR=/ucrt64/include
-else
-  NATIVE_SYSTEM_HEADER_DIR=/usr/include
+  sed -i 's#${prefix}/mingw/#${prefix}/usr/#g' configure
+  sed -i "s#/mingw/#/usr/#g" gcc/config/i386/mingw32.h
 fi
 
+NATIVE_SYSTEM_HEADER_DIR=/usr/include
 SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
 
 # workaround a bug in gcc build files when using external binutils
