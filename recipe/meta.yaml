@@ -64,6 +64,8 @@ build:
   number: {{ build_num }}
   skip: True  # [not (linux or win) or (int(gcc_maj_ver) < 13 and cross_target_platform == "win-64") or (win and cross_target_platform != "win-64")]
   detect_binary_files_with_prefix: False
+  ignore_run_exports_from:
+    - {{ cross_target_stdlib }}_{{ cross_target_platform }}
 
 requirements:
   build:
