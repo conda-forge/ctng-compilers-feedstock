@@ -8,8 +8,8 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      ? win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version11gcc_version13.2.0tripletx86_64-w64-mingw32
-      : CONFIG: win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version11gcc_version13.2.0tripletx86_64-w64-mingw32
+      ? win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_version13.2.0tripletx86_64-w64-mingw32
+      : CONFIG: win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_version13.2.0tripletx86_64-w64-mingw32
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
   timeoutInMinutes: 360

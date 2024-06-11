@@ -35,7 +35,7 @@ cross_target_stdlib_version:
   - 2.17
   - 2.17
   - 2.17
-  - 11
+  - 12
 cross_target_stdlib:
   - sysroot
   - sysroot

@@ -136,10 +136,10 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version11gcc_version13.2.0tripletx86_64-w64-mingw32</td>
+              <td>win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_version13.2.0tripletx86_64-w64-mingw32</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version11gcc_version13.2.0tripletx86_64-w64-mingw32" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_version13.2.0tripletx86_64-w64-mingw32" alt="variant">
                 </a>
               </td>
             </tr>
