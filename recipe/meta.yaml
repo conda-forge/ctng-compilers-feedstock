@@ -81,8 +81,8 @@ outputs:
       detect_binary_files_with_prefix: False
       missing_dso_whitelist:
         - "*"
-      ignore_run_exports:
-        - __glibc
+      ignore_run_exports_from:
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
     requirements:
       build:
       host:
@@ -113,8 +113,8 @@ outputs:
       detect_binary_files_with_prefix: False
       missing_dso_whitelist:
         - "*"
-      ignore_run_exports:
-        - __glibc
+      ignore_run_exports_from:
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
     requirements:
       build:
       host:
@@ -145,10 +145,8 @@ outputs:
       detect_binary_files_with_prefix: False
       missing_dso_whitelist:
         - '*'
-      runpath_whitelist:
-        - "{{ triplet }}/sysroot/lib/libpthread-2.12.2.so"
-      ignore_run_exports:
-        - __glibc
+      ignore_run_exports_from:
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
     requirements:
       build:
       host:
@@ -286,8 +284,8 @@ outputs:
       detect_binary_files_with_prefix: False
       missing_dso_whitelist:
         - "*"
-      ignore_run_exports:
-        - __glibc
+      ignore_run_exports_from:
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
     requirements:
       build:
       host:
@@ -350,8 +348,8 @@ outputs:
       detect_binary_files_with_prefix: False
       missing_dso_whitelist:
         - "*"
-      ignore_run_exports:
-        - __glibc
+      ignore_run_exports_from:
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
     requirements:
       build:
       host:
@@ -431,8 +429,6 @@ outputs:
       skip: True   # [target_platform != cross_target_platform]
       missing_dso_whitelist:
         - "*"
-      ignore_run_exports:
-        - __glibc
     requirements:
       build:
       host:
@@ -463,8 +459,6 @@ outputs:
       skip: True   # [target_platform != cross_target_platform or win]
       missing_dso_whitelist:
         - "*"
-      ignore_run_exports:
-        - __glibc
       run_exports:
         - libsanitizer {{ gcc_version }}
     test:
@@ -500,8 +494,6 @@ outputs:
       run_exports:
         strong:
           - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
-      ignore_run_exports:
-        - __glibc
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
@@ -534,8 +526,6 @@ outputs:
       skip: True   # [target_platform != cross_target_platform]
       missing_dso_whitelist:
         - "*"
-      ignore_run_exports:
-        - __glibc
       rpaths_patcher: patchelf
     test:
       requires:
@@ -589,8 +579,6 @@ outputs:
       skip: True   # [target_platform != cross_target_platform]
       missing_dso_whitelist:
         - "*"
-      ignore_run_exports:
-        - __glibc
     requirements:
       build:
       host:
