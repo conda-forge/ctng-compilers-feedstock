@@ -427,6 +427,8 @@ outputs:
       host:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
         - {{ pin_subpackage("libgcc" ~ runtime_suffix, exact=True) }}
+      run:
+        - {{ pin_subpackage("libgcc" ~ runtime_suffix, exact=True) }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libstdc++.so
@@ -476,6 +478,8 @@ outputs:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
       run:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
+      run_constrained:
+        - msys2-conda-epoch <0.0a0    # [win]
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -512,6 +516,7 @@ outputs:
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
+        - msys2-conda-epoch <0.0a0    # [win]
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -547,6 +552,7 @@ outputs:
       run_constrained:
         # conflict with previous name
         - openmp_impl 9999
+        - msys2-conda-epoch <0.0a0    # [win]
     build:
       string: 2_gnu
       skip: True   # [target_platform != cross_target_platform]
