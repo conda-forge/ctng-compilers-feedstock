@@ -1,11 +1,13 @@
+_libgcc_mutex:
+- 0.1 conda_forge
 binutils_version:
 - '2.40'
 c_stdlib:
 - sysroot
 c_stdlib_version:
-- '2.17'
+- '2.12'
 cdt_name:
-- cos7
+- cos6
 channel_sources:
 - conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
@@ -31,7 +33,7 @@ old_triplet:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-s390x
+- linux-64
 triplet:
 - powerpc64le-conda-linux-gnu
 zip_keys:

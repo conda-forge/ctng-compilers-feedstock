@@ -22,6 +22,7 @@ if [[ "${triplet}" == *linux* ]]; then
 else
   # import library, not static library
   mv ${PREFIX}/lib/libgcc_s.a ${PREFIX}/${CHOST}/lib
+  rm ${PREFIX}/lib/libgcc_s*.dll || true
 fi
 # This is in gcc_impl as it is gcc specific and clang has the same header
 rm -rf ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/include/unwind.h

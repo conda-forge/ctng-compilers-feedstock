@@ -1,17 +1,19 @@
+_libgcc_mutex:
+- 0.1 conda_forge
 binutils_version:
 - '2.40'
 c_stdlib:
 - sysroot
 c_stdlib_version:
-- '2.17'
+- '2.12'
 cdt_name:
-- cos7
+- cos6
 channel_sources:
 - conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-ppc64le
+- linux-aarch64
 cross_target_stdlib:
 - sysroot
 cross_target_stdlib_version:
@@ -27,13 +29,13 @@ libgfortran_soname:
 libgomp_ver:
 - 1.0.0
 old_triplet:
-- powerpc64le-conda_cos7-linux-gnu
+- aarch64-conda_cos7-linux-gnu
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-s390x
+- linux-64
 triplet:
-- powerpc64le-conda-linux-gnu
+- aarch64-conda-linux-gnu
 zip_keys:
 - - c_stdlib_version
   - cdt_name

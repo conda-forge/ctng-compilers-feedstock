@@ -14,16 +14,16 @@ if [[ "$channel_targets" == *conda-forge* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose")
 fi
 
-source $RECIPE_DIR/get_cpu_arch.sh
-
 for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy objdump ranlib readelf size strings strip; do
-  tool_upper=$(echo $tool | tr a-z A-Z | sed "s/+/X/g")
+  tool_upper=$(echo $tool | tr a-z-+ A-Z_X)
   if [[ "$tool" == "cc" ]]; then
      tool=gcc
   elif [[ "$tool" == "fc" ]]; then
      tool=gfortran
   elif [[ "$tool" == "c++" ]]; then
      tool=g++
+  elif [[ "$target_platform" != "$build_platform" && "$tool" =~ ^(ar|nm|ranlib)$ ]]; then
+     tool="gcc-${tool}"
   fi
   eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
   eval "export ${tool_upper}=\$BUILD_PREFIX/bin/\$HOST-\$tool"
@@ -33,13 +33,12 @@ done
 if [[ "$cross_target_platform" == "win-64" ]]; then
   # do not expect ${prefix}/mingw symlink - this should be superceded by
   # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
-  sed -i 's#${prefix}/mingw/#${prefix}/ucrt64/#g' configure
-  sed -i "s#/mingw/#/ucrt64/#g" gcc/config/i386/mingw32.h
-  export NATIVE_SYSTEM_HEADER_DIR=/ucrt64/include
-else
-  export NATIVE_SYSTEM_HEADER_DIR=/usr/include
+  sed -i 's#${prefix}/mingw/#${prefix}/${target}/sysroot/usr/#g' configure
+  sed -i "s#/mingw/#/usr/#g" gcc/config/i386/mingw32.h
 fi
 
+NATIVE_SYSTEM_HEADER_DIR=/usr/include
+SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
 
 # workaround a bug in gcc build files when using external binutils
 # and build != host == target
@@ -104,10 +103,10 @@ fi
   --disable-bootstrap \
   --disable-multilib \
   --enable-long-long \
-  --with-sysroot=${PREFIX}/${TARGET}/sysroot \
-  --with-build-sysroot=${PREFIX}/${TARGET}/sysroot \
+  --with-sysroot=${SYSROOT_DIR} \
+  --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
   --with-native-system-header-dir=${NATIVE_SYSTEM_HEADER_DIR} \
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 
-make -j${CPU_COUNT} || (cat ${TARGET}/libgcc/config.log; false)
+make -j${CPU_COUNT} || (cat ${TARGET}/libgomp/config.log; false)

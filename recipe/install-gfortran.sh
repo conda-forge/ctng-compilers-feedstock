@@ -21,8 +21,8 @@ make -C gcc prefix=${PREFIX} fortran.install-{common,man,info}
 # How it used to be:
 # install -Dm755 gcc/f951 ${PREFIX}/${_libdir}/f951
 for file in f951; do
-  if [[ -f gcc/${file} ]]; then
-    install -c gcc/${file} ${PREFIX}/${_libdir}/${file}
+  if [[ -f gcc/${file}${EXEEXT} ]]; then
+    install -c gcc/${file}${EXEEXT} ${PREFIX}/${_libdir}/${file}${EXEEXT}
   fi
 done
 
@@ -30,7 +30,9 @@ mkdir -p ${PREFIX}/${CHOST}/lib
 cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/lib
 
 pushd ${PREFIX}/bin
-  ln -sf ${CHOST}-gfortran ${CHOST}-f95
+  if [[ "${target_platform}" != "win-64" ]]; then
+    ln -sf ${CHOST}-gfortran${EXEEXT} ${CHOST}-f95${EXEEXT}
+  fi
 popd
 
 make install DESTDIR=$SRC_DIR/build-finclude

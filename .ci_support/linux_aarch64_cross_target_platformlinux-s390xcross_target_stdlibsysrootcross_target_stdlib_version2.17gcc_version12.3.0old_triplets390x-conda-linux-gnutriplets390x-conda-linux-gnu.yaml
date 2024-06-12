@@ -1,9 +1,13 @@
+BUILD:
+- aarch64-conda_cos7-linux-gnu
 binutils_version:
 - '2.40'
 c_stdlib:
 - sysroot
 c_stdlib_version:
 - '2.17'
+cdt_arch:
+- aarch64
 cdt_name:
 - cos7
 channel_sources:
@@ -11,7 +15,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-ppc64le
+- linux-s390x
 cross_target_stdlib:
 - sysroot
 cross_target_stdlib_version:
@@ -27,13 +31,13 @@ libgfortran_soname:
 libgomp_ver:
 - 1.0.0
 old_triplet:
-- powerpc64le-conda_cos7-linux-gnu
+- s390x-conda-linux-gnu
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-s390x
+- linux-aarch64
 triplet:
-- powerpc64le-conda-linux-gnu
+- s390x-conda-linux-gnu
 zip_keys:
 - - c_stdlib_version
   - cdt_name

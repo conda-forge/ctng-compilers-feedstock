@@ -11,7 +11,7 @@ cdt_arch:
 cdt_name:
 - cos7
 channel_sources:
-- conda-forge/label/m2w64-experimental,conda-forge/label/sysroot-with-crypt,conda-forge
+- conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
 - conda-forge main
 cross_target_platform:
@@ -19,7 +19,7 @@ cross_target_platform:
 cross_target_stdlib:
 - m2w64-sysroot
 cross_target_stdlib_version:
-- '9'
+- '12'
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 gcc_maj_ver:
