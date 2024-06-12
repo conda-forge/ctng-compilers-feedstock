@@ -25,5 +25,7 @@ rm -f ${PREFIX}/${CHOST}/lib/libgomp.so.${libgomp_ver}
 # note that this code is remaking more links than the ones we want in this
 # package but that is ok
 pushd ${PREFIX}/lib
-ln -s libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver:0:1}
+  if [[ "${TARGET}" != *mingw* ]]; then
+    ln -s libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver:0:1}
+  fi
 popd

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
     extra_pkgs=()
     if [[ "$build_platform" != "$target_platform" ]]; then
@@ -16,7 +15,7 @@ if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
       )
     fi
     # Remove conda-forge/label/sysroot-with-crypt when GCC < 14 is dropped
-    conda create -p $SRC_DIR/cf-compilers -c conda-forge/label/m2w64-experimental -c conda-forge/label/sysroot-with-crypt -c conda-forge --yes --quiet \
+    conda create -p $SRC_DIR/cf-compilers -c conda-forge/label/sysroot-with-crypt -c conda-forge --yes --quiet \
       "binutils_impl_${build_platform}" \
       "gcc_impl_${build_platform}" \
       "gxx_impl_${build_platform}" \
@@ -33,3 +32,16 @@ fi
 
 export PATH=$SRC_DIR/cf-compilers/bin:$PATH
 export BUILD_PREFIX=$SRC_DIR/cf-compilers
+
+if [[ "$target_platform" == "win-"* && "${PREFIX}" != *Library ]]; then
+    export PREFIX=${PREFIX}/Library
+fi
+
+source $RECIPE_DIR/get_cpu_arch.sh
+
+if [[ "$target_platform" == "win-64" ]]; then
+  EXEEXT=".exe"
+else
+  EXEEXT=""
+fi
+SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
