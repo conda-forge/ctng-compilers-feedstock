@@ -364,10 +364,8 @@ outputs:
         - gcc_impl_{{ cross_target_platform }} >={{ gcc_version }}
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname, max_pin=None) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc" ~ runtime_suffix, max_pin=None) }}           # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libstdcxx" ~ runtime_suffix, max_pin=None) }}        # [target_platform == cross_target_platform]
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
-        # Any version newer than the devtoolset works. This can be removed when bootstrapping.
-        - libgcc{{ runtime_suffix }} >=4.9
-        - libstdcxx{{ runtime_suffix }} >=4.9
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
