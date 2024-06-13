@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 8 %}
+{% set build_num = 9 %}
 
 # libgcc-devel is a noarch: generic package that is built for
 # cross-compilers as well. Instead of skipping for cross-compilers,
@@ -214,7 +214,7 @@ outputs:
   - name: gcc
     script: install-symlinks.sh
     build:
-      skip: true  # [target_platform != cross_target_platform or win]
+      skip: true  # [target_platform != cross_target_platform]
     requirements:
       host:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
@@ -325,7 +325,7 @@ outputs:
   - name: gxx
     script: install-symlinks.sh
     build:
-      skip: true  # [target_platform != cross_target_platform or win]
+      skip: true  # [target_platform != cross_target_platform]
     requirements:
       host:
         - gxx_impl_{{ target_platform }} {{ gcc_version }}.*
@@ -400,7 +400,7 @@ outputs:
   - name: gfortran
     script: install-symlinks.sh
     build:
-      skip: true  # [target_platform != cross_target_platform or win]
+      skip: true  # [target_platform != cross_target_platform]
     requirements:
       host:
         - gfortran_impl_{{ target_platform }} {{ gcc_version }}.*

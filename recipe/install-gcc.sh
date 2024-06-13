@@ -84,11 +84,13 @@ pushd ${SRC_DIR}/build
 
   # many packages expect this symlink
   [[ -f ${PREFIX}/bin/${TARGET}-cc${EXEEXT} ]] && rm ${PREFIX}/bin/${TARGET}-cc${EXEEXT}
-  if [[ "${TARGET}" != *mingw* ]]; then
-    pushd ${PREFIX}/bin
+  pushd ${PREFIX}/bin
+    if [[ "${TARGET}" != *mingw* ]]; then
       ln -s ${TARGET}-gcc${EXEEXT} ${TARGET}-cc${EXEEXT}
-    popd
-  fi
+    else
+      cp ${TARGET}-gcc${EXEEXT} ${TARGET}-cc${EXEEXT}
+    fi
+  popd
 
   # POSIX conformance launcher scripts for c89 and c99
   cat > ${PREFIX}/bin/${TARGET}-c89${EXEEXT} <<"EOF"
