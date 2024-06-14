@@ -82,3 +82,5 @@ if [[ "${PKG_NAME}" != gcc_impl* ]]; then
   install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION
 fi
+
+rm -f ${PREFIX}/share/info/dir

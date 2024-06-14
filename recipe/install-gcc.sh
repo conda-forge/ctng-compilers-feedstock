@@ -84,11 +84,13 @@ pushd ${SRC_DIR}/build
 
   # many packages expect this symlink
   [[ -f ${PREFIX}/bin/${TARGET}-cc${EXEEXT} ]] && rm ${PREFIX}/bin/${TARGET}-cc${EXEEXT}
-  if [[ "${TARGET}" != *mingw* ]]; then
-    pushd ${PREFIX}/bin
+  pushd ${PREFIX}/bin
+    if [[ "${HOST}" != *mingw* ]]; then
       ln -s ${TARGET}-gcc${EXEEXT} ${TARGET}-cc${EXEEXT}
-    popd
-  fi
+    else
+      cp ${TARGET}-gcc${EXEEXT} ${TARGET}-cc${EXEEXT}
+    fi
+  popd
 
   # POSIX conformance launcher scripts for c89 and c99
   cat > ${PREFIX}/bin/${TARGET}-c89${EXEEXT} <<"EOF"
@@ -176,7 +178,7 @@ set +x
 # and strip in there so that we do not change files that are not
 # part of this package.
 pushd ${PREFIX}
-  _files=$(find bin libexec -type f)
+  _files=$(find bin libexec -type f -not -name '*.dll')
   for _file in ${_files}; do
     _type="$( file "${_file}" | cut -d ' ' -f 2- )"
     case "${_type}" in
@@ -228,5 +230,7 @@ fi
 if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
   mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/${TARGET}/lib/libgomp.spec
 fi
+
+rm -f ${PREFIX}/share/info/dir
 
 source ${RECIPE_DIR}/make_tool_links.sh
