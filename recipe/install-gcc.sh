@@ -47,27 +47,27 @@ pushd ${SRC_DIR}/build
   make -C gcc prefix=${PREFIX} install-mkheaders
 
   if [[ -d ${TARGET}/libgomp ]]; then
-    make -C ${TARGET}/libgomp prefix=${PREFIX} install-nodist_{libsubinclude,toolexeclib}HEADERS
+    make -C ${TARGET}/libgomp prefix=${PREFIX} install-nodist_{libsubinclude,toolexeclib}{HEADERS,LIBRARIES}
   fi
 
   if [[ -d ${TARGET}/libitm ]]; then
-    make -C ${TARGET}/libitm prefix=${PREFIX} install-nodist_toolexeclibHEADERS
+    make -C ${TARGET}/libitm prefix=${PREFIX} install-nodist_toolexeclib{HEADERS,LIBRARIES}
   fi
 
   if [[ -d ${TARGET}/libquadmath ]]; then
-    make -C ${TARGET}/libquadmath prefix=${PREFIX} install-nodist_libsubincludeHEADERS
+    make -C ${TARGET}/libquadmath prefix=${PREFIX} install-nodist_libsubinclude{HEADERS,LIBRARIES}
   fi
 
   if [[ -d ${TARGET}/libsanitizer ]]; then
-    make -C ${TARGET}/libsanitizer prefix=${PREFIX} install-nodist_{saninclude,toolexeclib}HEADERS
+    make -C ${TARGET}/libsanitizer prefix=${PREFIX} install-nodist_{saninclude,toolexeclib}{HEADERS,LIBRARIES}
   fi
 
   if [[ -d ${TARGET}/libsanitizer/asan ]]; then
-    make -C ${TARGET}/libsanitizer/asan prefix=${PREFIX} install-nodist_toolexeclibHEADERS
+    make -C ${TARGET}/libsanitizer/asan prefix=${PREFIX} install-nodist_toolexeclib{HEADERS,LIBRARIES}
   fi
 
   if [[ -d ${TARGET}/libsanitizer/tsan ]]; then
-    make -C ${TARGET}/libsanitizer/tsan prefix=${PREFIX} install-nodist_toolexeclibHEADERS
+    make -C ${TARGET}/libsanitizer/tsan prefix=${PREFIX} install-nodist_toolexeclib{HEADERS,LIBRARIES}
   fi
 
   make -C libiberty prefix=${PREFIX} install
