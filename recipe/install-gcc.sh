@@ -85,7 +85,7 @@ pushd ${SRC_DIR}/build
   # many packages expect this symlink
   [[ -f ${PREFIX}/bin/${TARGET}-cc${EXEEXT} ]] && rm ${PREFIX}/bin/${TARGET}-cc${EXEEXT}
   pushd ${PREFIX}/bin
-    if [[ "${TARGET}" != *mingw* ]]; then
+    if [[ "${HOST}" != *mingw* ]]; then
       ln -s ${TARGET}-gcc${EXEEXT} ${TARGET}-cc${EXEEXT}
     else
       cp ${TARGET}-gcc${EXEEXT} ${TARGET}-cc${EXEEXT}
