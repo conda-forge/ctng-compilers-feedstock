@@ -2,13 +2,19 @@
 
 source ${RECIPE_DIR}/setup_compiler.sh
 
+if [[ "$target_platform" == "win-"* ]]; then
+  symlink_or_copy="cp"
+else
+  symlink_or_copy="ln -sf"
+fi
+
 if [[ "${PKG_NAME}" == "gcc" ]]; then
   for tool in cc cpp gcc gcc-ar gcc-nm gcc-ranlib gcov gcov-dump gcov-tool; do
-    ln -sf ${PREFIX}/bin/${triplet}-${tool} ${PREFIX}/bin/${tool}
+    $symlink_or_copy ${PREFIX}/bin/${triplet}-${tool}${EXEEXT} ${PREFIX}/bin/${tool}${EXEEXT}
   done
 elif [[ "${PKG_NAME}" == "gxx" ]]; then
-  ln -sf ${PREFIX}/bin/${triplet}-g++ ${PREFIX}/bin/g++
-  ln -sf ${PREFIX}/bin/${triplet}-c++ ${PREFIX}/bin/c++
+  $symlink_or_copy ${PREFIX}/bin/${triplet}-g++${EXEEXT} ${PREFIX}/bin/g++${EXEEXT}
+  $symlink_or_copy ${PREFIX}/bin/${triplet}-c++${EXEEXT} ${PREFIX}/bin/c++${EXEEXT}
 elif [[ "${PKG_NAME}" == "gfortran" ]]; then
-  ln -sf ${PREFIX}/bin/${triplet}-gfortran ${PREFIX}/bin/gfortran
+  $symlink_or_copy ${PREFIX}/bin/${triplet}-gfortran${EXEEXT} ${PREFIX}/bin/gfortran${EXEEXT}
 fi

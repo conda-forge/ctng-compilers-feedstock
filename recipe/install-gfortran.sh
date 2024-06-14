@@ -59,7 +59,7 @@ set +x
 # and strip in there so that we do not change files that are not
 # part of this package.
 pushd ${PREFIX}
-  _files=$(find bin libexec -type f)
+  _files=$(find bin libexec -type f -not -name '*.dll')
   for _file in ${_files}; do
     _type="$( file "${_file}" | cut -d ' ' -f 2- )"
     case "${_type}" in
@@ -75,5 +75,7 @@ popd
 if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
   mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/${CHOST}/lib/libgomp.spec
 fi
+
+rm -f ${PREFIX}/share/info/dir
 
 source ${RECIPE_DIR}/make_tool_links.sh
