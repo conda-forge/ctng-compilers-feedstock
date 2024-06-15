@@ -220,7 +220,7 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
     fi
   popd
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
-    if [[ -f "${PREFIX}/lib/lib${lib}.a" ]];
+    if [[ -f "${PREFIX}/lib/lib${lib}.a" ]]; then
      mv ${PREFIX}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
   done
@@ -232,7 +232,7 @@ else
   done
   rm -f ${PREFIX}/share/info/*.info
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
-    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.a" ]];
+    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.a" ]]; then
      mv ${PREFIX}/${TARGET}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
   done
