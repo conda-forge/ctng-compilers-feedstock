@@ -338,6 +338,10 @@ outputs:
         - unset CONDA_BUILD
         # by default, we look in $CONDA_PREFIX (if it exists & CONDA_BUILD is not set)
         - ./tzdb                        # [target_platform == cross_target_platform]
+        - unset CONDA_PREFIX
+        # if no environment variables are set, libstdcxx falls back
+        # to /usr/share/zoneinfo (not present on windows)
+        - ./tzdb                        # [target_platform == cross_target_platform and not win]
         {% endif %}
     about:
       summary: GNU C++ Compiler
