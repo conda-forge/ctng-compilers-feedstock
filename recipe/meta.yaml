@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 9 %}
+{% set build_num = 10 %}
 
 # libgcc-devel is a noarch: generic package that is built for
 # cross-compilers as well. Instead of skipping for cross-compilers,
@@ -204,6 +204,8 @@ outputs:
         - test -f ${PREFIX}/{{ triplet }}/lib/libasan_preinit.o
         {% else %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libquadmath.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.a
         {% endif %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.spec
     about:

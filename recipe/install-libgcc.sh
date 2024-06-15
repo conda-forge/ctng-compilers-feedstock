@@ -67,8 +67,10 @@ popd
 
 mkdir -p ${PREFIX}/lib
 
-# no static libs
-find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;
+if [[ "${PKG_NAME}" != "gcc_impl"* ]]; then
+  # no static libs
+  find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;
+fi
 # no libtool files
 find ${PREFIX}/lib -name "*\.la" -exec rm -rf {} \;
 
