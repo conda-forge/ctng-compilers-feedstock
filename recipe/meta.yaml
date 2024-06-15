@@ -204,6 +204,8 @@ outputs:
         - test -f ${PREFIX}/{{ triplet }}/lib/libasan_preinit.o
         {% else %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libquadmath.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.a
         {% endif %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.spec
     about:
