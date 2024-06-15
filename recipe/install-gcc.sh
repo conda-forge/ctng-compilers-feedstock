@@ -196,6 +196,7 @@ set -x
 #${PREFIX}/bin/${TARGET}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
 mkdir -p ${PREFIX}/${TARGET}/lib
+mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 
 if [[ "$target_platform" == "$cross_target_platform" ]]; then
   # making these this way so conda build doesn't muck with them
@@ -218,6 +219,11 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
       done
     fi
   popd
+  for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
+    if [[ -f "${PREFIX}/lib/lib${lib}.a" ]];
+     mv ${PREFIX}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
+  done
 else
   source ${RECIPE_DIR}/install-libgcc.sh
   for lib in libcc1; do
@@ -225,6 +231,11 @@ else
     mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${TARGET}/lib/ || true
   done
   rm -f ${PREFIX}/share/info/*.info
+  for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
+    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.a" ]];
+     mv ${PREFIX}/${TARGET}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
+  done
 fi
 
 if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
