@@ -223,6 +223,12 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
     if [[ -f "${PREFIX}/lib/lib${lib}.a" ]]; then
      mv ${PREFIX}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
+    if [[ -f "${PREFIX}/lib/lib${lib}.so" ]]; then
+     # install a shared library here since the directory ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
+     # has the highest preference and we want shared libraries to have the highest preference
+     rm ${PREFIX}/lib/lib${lib}.so
+     ln -sf ${PREFIX}/lib/lib${lib}.so ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
   done
 else
   source ${RECIPE_DIR}/install-libgcc.sh
@@ -234,6 +240,10 @@ else
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
     if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.a" ]]; then
      mv ${PREFIX}/${TARGET}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
+    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.so" ]]; then
+     rm ${PREFIX}/${TARGET}/lib/lib${lib}.so
+     ln -sf ${PREFIX}/${TARGET}/lib/lib${lib}.so ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
   done
 fi
