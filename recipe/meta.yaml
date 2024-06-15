@@ -329,13 +329,17 @@ outputs:
         # test tzdb integration
         {% if gcc_maj_ver|int >= 14 %}
         # we only look in $PREFIX if $CONDA_BUILD is set
-        - export CONDA_BUILD="1"
+        - export CONDA_BUILD="1"        # [unix]
+        - set "CONDA_BUILD=1"           # [win]
         - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb.cpp -c -o tzdb.o
         - ${CXX} tzdb.o -o tzdb         # [target_platform == cross_target_platform]
         - ./tzdb                        # [target_platform == cross_target_platform]
-        - export CONDA_PREFIX="$PREFIX"
-        - unset PREFIX
-        - unset CONDA_BUILD
+        - export CONDA_PREFIX=$PREFIX   # [unix]
+        - set "CONDA_PREFIX=%PREFIX%"   # [win]
+        - unset PREFIX                  # [unix]
+        - unset CONDA_BUILD             # [unix]
+        - set "PREFIX="                 # [win]
+        - set "CONDA_BUILD="            # [win]
         # by default, we look in $CONDA_PREFIX (if it exists & CONDA_BUILD is not set)
         - ./tzdb                        # [target_platform == cross_target_platform]
         - unset CONDA_PREFIX
