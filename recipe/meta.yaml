@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 10 %}
+{% set build_num = 11 %}
 
 # libgcc-devel is a noarch: generic package that is built for
 # cross-compilers as well. Instead of skipping for cross-compilers,
@@ -470,7 +470,7 @@ outputs:
       commands:
         - test -f ${PREFIX}/lib/libasan.so
         - file ${PREFIX}/bin/{{ triplet }}-gcc
-        - echo 'void main(){}' | {{ triplet }}-gcc -fsanitize=address -x c -
+        - echo 'void main(){}' | {{ triplet }}-gcc -fsanitize=address -Wl,--fatal-warnings -x c -
     about:
       summary: The GCC runtime libraries for sanitizers
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
