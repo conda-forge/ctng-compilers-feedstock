@@ -455,6 +455,7 @@ outputs:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
       run:
         - libgcc{{ runtime_suffix }} >={{ gcc_version }}
+        - libstdcxx{{ runtime_suffix }} >={{ gcc_version }}
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
