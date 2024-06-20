@@ -224,12 +224,12 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
      mv ${PREFIX}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
   done
-  for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan stdc++ gcc_s; do
-    if [[ -f "${PREFIX}/lib/lib${lib}.so" ]]; then
+  for lib in libasan.so libatomic.so libgomp.so libhwasan.so libitm.so liblsan.so libquadmath.so libtsan.so libubsan.so libstdc++.so libstdc++so.6 libgcc_s.so; do
+    if [[ -f "${PREFIX}/lib/${lib}" ]]; then
      # install a shared library here since the directory ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
      # has the highest preference and we want shared libraries to have the highest preference
-     rm ${PREFIX}/lib/lib${lib}.so
-     ln -sf ${PREFIX}/lib/lib${lib}.so ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+     rm ${PREFIX}/lib/${lib}
+     ln -sf ${PREFIX}/lib/${lib} ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
   done
 else
