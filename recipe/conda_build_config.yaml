@@ -11,7 +11,7 @@ old_triplet:
   - s390x-conda-linux-gnu
   - x86_64-w64-mingw32
 gcc_version:
-  - 12.3.0
+  - 12.4.0
   - 13.3.0
   - 14.1.0
 gcc_maj_ver:
