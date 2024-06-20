@@ -5,9 +5,9 @@ binutils_version:
 c_stdlib:
 - sysroot
 c_stdlib_version:
-- '2.12'
+- '2.17'
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
@@ -23,7 +23,7 @@ docker_image:
 gcc_maj_ver:
 - '12'
 gcc_version:
-- 12.3.0
+- 12.4.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
@@ -33,7 +33,7 @@ old_triplet:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-64
+- linux-ppc64le
 triplet:
 - x86_64-w64-mingw32
 zip_keys:
