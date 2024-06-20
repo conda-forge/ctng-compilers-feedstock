@@ -47,27 +47,27 @@ pushd ${SRC_DIR}/build
   make -C gcc prefix=${PREFIX} install-mkheaders
 
   if [[ -d ${TARGET}/libgomp ]]; then
-    make -C ${TARGET}/libgomp prefix=${PREFIX} install-nodist_{libsubinclude,toolexeclib}HEADERS
+    make -C ${TARGET}/libgomp prefix=${PREFIX} install
   fi
 
   if [[ -d ${TARGET}/libitm ]]; then
-    make -C ${TARGET}/libitm prefix=${PREFIX} install-nodist_toolexeclibHEADERS
+    make -C ${TARGET}/libitm prefix=${PREFIX} install
   fi
 
   if [[ -d ${TARGET}/libquadmath ]]; then
-    make -C ${TARGET}/libquadmath prefix=${PREFIX} install-nodist_libsubincludeHEADERS
+    make -C ${TARGET}/libquadmath prefix=${PREFIX} install
   fi
 
   if [[ -d ${TARGET}/libsanitizer ]]; then
-    make -C ${TARGET}/libsanitizer prefix=${PREFIX} install-nodist_{saninclude,toolexeclib}HEADERS
+    make -C ${TARGET}/libsanitizer prefix=${PREFIX} install
   fi
 
   if [[ -d ${TARGET}/libsanitizer/asan ]]; then
-    make -C ${TARGET}/libsanitizer/asan prefix=${PREFIX} install-nodist_toolexeclibHEADERS
+    make -C ${TARGET}/libsanitizer/asan prefix=${PREFIX} install
   fi
 
   if [[ -d ${TARGET}/libsanitizer/tsan ]]; then
-    make -C ${TARGET}/libsanitizer/tsan prefix=${PREFIX} install-nodist_toolexeclibHEADERS
+    make -C ${TARGET}/libsanitizer/tsan prefix=${PREFIX} install
   fi
 
   make -C libiberty prefix=${PREFIX} install
@@ -196,6 +196,7 @@ set -x
 #${PREFIX}/bin/${TARGET}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
 mkdir -p ${PREFIX}/${TARGET}/lib
+mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 
 if [[ "$target_platform" == "$cross_target_platform" ]]; then
   # making these this way so conda build doesn't muck with them
@@ -218,6 +219,19 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
       done
     fi
   popd
+  for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
+    if [[ -f "${PREFIX}/lib/lib${lib}.a" ]]; then
+     mv ${PREFIX}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
+  done
+  for lib in libasan.so libatomic.so libgomp.so libhwasan.so libitm.so liblsan.so libquadmath.so libtsan.so libubsan.so libstdc++.so libstdc++.so.6 libgcc_s.so; do
+    if [[ -f "${PREFIX}/lib/${lib}" ]]; then
+     # install a shared library here since the directory ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
+     # has the highest preference and we want shared libraries to have the highest preference
+     rm ${PREFIX}/lib/${lib}
+     ln -sf ${PREFIX}/lib/${lib} ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
+  done
 else
   source ${RECIPE_DIR}/install-libgcc.sh
   for lib in libcc1; do
@@ -225,6 +239,14 @@ else
     mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${TARGET}/lib/ || true
   done
   rm -f ${PREFIX}/share/info/*.info
+  for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
+    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.a" ]]; then
+     mv ${PREFIX}/${TARGET}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
+    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.so" ]]; then
+     ln -sf ${PREFIX}/${TARGET}/lib/lib${lib}.so ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
+  done
 fi
 
 if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then

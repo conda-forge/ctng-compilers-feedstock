@@ -210,6 +210,8 @@ outputs:
         - test -f ${PREFIX}/{{ triplet }}/lib/libasan_preinit.o
         {% else %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libquadmath.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.a
         {% endif %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.spec
     about:
@@ -483,6 +485,7 @@ outputs:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
       run:
         - libgcc{{ runtime_suffix }} >={{ gcc_version }}
+        - libstdcxx{{ runtime_suffix }} >={{ gcc_version }}
     build:
       number: {{ build_num }}
       detect_binary_files_with_prefix: False
@@ -498,7 +501,7 @@ outputs:
       commands:
         - test -f ${PREFIX}/lib/libasan.so
         - file ${PREFIX}/bin/{{ triplet }}-gcc
-        - echo 'void main(){}' | {{ triplet }}-gcc -fsanitize=address -x c -
+        - echo 'void main(){}' | {{ triplet }}-gcc -fsanitize=address -Wl,--fatal-warnings -x c -
     about:
       summary: The GCC runtime libraries for sanitizers
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
