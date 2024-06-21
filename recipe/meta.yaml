@@ -332,24 +332,15 @@ outputs:
 
         # test tzdb integration
         {% if gcc_maj_ver|int >= 14 %}
-        # we only look in $PREFIX if $CONDA_BUILD is set
-        - export CONDA_BUILD="1"        # [unix]
-        - set "CONDA_BUILD=1"           # [win]
         - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb.cpp -c -o tzdb.o
         - ${CXX} tzdb.o -o tzdb         # [target_platform == cross_target_platform]
         - ./tzdb                        # [target_platform == cross_target_platform]
-        - export CONDA_PREFIX=$PREFIX   # [unix]
-        - set "CONDA_PREFIX=%PREFIX%"   # [win]
+        # also test without any environment activation
         - unset PREFIX                  # [unix]
-        - unset CONDA_BUILD             # [unix]
+        - unset CONDA_PREFIX            # [unix]
         - set "PREFIX="                 # [win]
-        - set "CONDA_BUILD="            # [win]
-        # by default, we look in $CONDA_PREFIX (if it exists & CONDA_BUILD is not set)
+        - set "CONDA_PREFIX="           # [win]
         - ./tzdb                        # [target_platform == cross_target_platform]
-        - unset CONDA_PREFIX
-        # if no environment variables are set, libstdcxx falls back
-        # to /usr/share/zoneinfo (not present on windows)
-        - ./tzdb                        # [target_platform == cross_target_platform and not win]
         {% endif %}
     about:
       summary: GNU C++ Compiler
