@@ -78,6 +78,8 @@ if [[ "$TARGET" == *linux* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--enable-libsanitizer)
   GCC_CONFIGURE_OPTIONS+=(--enable-default-pie)
   GCC_CONFIGURE_OPTIONS+=(--enable-threads=posix)
+  # needs to link to libdl for finding tzdb (see patches)
+  export LDFLAGS="$LDFLAGS -ldl"
 fi
 
 ../configure \
