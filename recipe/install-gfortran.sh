@@ -32,6 +32,8 @@ cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/lib
 pushd ${PREFIX}/bin
   if [[ "${target_platform}" != "win-64" ]]; then
     ln -sf ${CHOST}-gfortran${EXEEXT} ${CHOST}-f95${EXEEXT}
+  else
+    cp ${CHOST}-gfortran${EXEEXT} ${CHOST}-f95${EXEEXT}
   fi
 popd
 
