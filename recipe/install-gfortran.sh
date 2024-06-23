@@ -32,6 +32,8 @@ cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/lib
 pushd ${PREFIX}/bin
   if [[ "${target_platform}" != "win-64" ]]; then
     ln -sf ${CHOST}-gfortran${EXEEXT} ${CHOST}-f95${EXEEXT}
+  else
+    cp ${CHOST}-gfortran${EXEEXT} ${CHOST}-f95${EXEEXT}
   fi
 popd
 
@@ -48,11 +50,9 @@ install -Dm644 $SRC_DIR/COPYING.RUNTIME \
 if [[ "${target_platform}" != "${cross_target_platform}" ]]; then
   if [[ ${triplet} == *linux* ]]; then
     cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/${CHOST}/lib/
-  else
-    cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.dll.a ${PREFIX}/${CHOST}/lib/
   fi
 fi
-cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.a ${PREFIX}/${CHOST}/lib/
+cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.*a ${PREFIX}/${CHOST}/lib/
 
 set +x
 # Strip executables, we may want to install to a different prefix
