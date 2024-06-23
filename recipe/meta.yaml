@@ -40,7 +40,6 @@ source:
       {% endif %}
       - patches/0002-cross-compile-older-glibc.patch   # [cross_target_stdlib_version == "2.12" and target_platform != "linux-64"]
       - patches/0003-allow-commands-in-main-specfile.patch
-      - patches/0004-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch                                   # [gcc_maj_ver == 14]
       {% if cross_target_platform.startswith("win-") %}
       # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
@@ -308,8 +307,6 @@ outputs:
         # not needed due to pinning above but marks this build as using the new sysroots
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
         - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}
-        # for C++20 chrono support
-        - tzdata
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
@@ -328,27 +325,6 @@ outputs:
         - ${CXX} -Wall tests/hello_world.cpp -c -o hello_world.o --std=c++17
         - ${CXX} -Wall hello_world.o -o hello_world --std=c++17
 
-        # test tzdb integration
-        {% if gcc_maj_ver|int >= 14 %}
-        # we only look in $PREFIX if $CONDA_BUILD is set
-        - export CONDA_BUILD="1"        # [unix]
-        - set "CONDA_BUILD=1"           # [win]
-        - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb.cpp -c -o tzdb.o
-        - ${CXX} tzdb.o -o tzdb         # [target_platform == cross_target_platform]
-        - ./tzdb                        # [target_platform == cross_target_platform]
-        - export CONDA_PREFIX=$PREFIX   # [unix]
-        - set "CONDA_PREFIX=%PREFIX%"   # [win]
-        - unset PREFIX                  # [unix]
-        - unset CONDA_BUILD             # [unix]
-        - set "PREFIX="                 # [win]
-        - set "CONDA_BUILD="            # [win]
-        # by default, we look in $CONDA_PREFIX (if it exists & CONDA_BUILD is not set)
-        - ./tzdb                        # [target_platform == cross_target_platform]
-        - unset CONDA_PREFIX
-        # if no environment variables are set, libstdcxx falls back
-        # to /usr/share/zoneinfo (not present on windows)
-        - ./tzdb                        # [target_platform == cross_target_platform and not win]
-        {% endif %}
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
