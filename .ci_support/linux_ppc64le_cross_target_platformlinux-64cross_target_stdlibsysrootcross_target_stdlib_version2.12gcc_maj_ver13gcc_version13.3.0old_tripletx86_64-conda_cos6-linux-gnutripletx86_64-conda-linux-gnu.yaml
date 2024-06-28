@@ -1,0 +1,49 @@
+_libgcc_mutex:
+- 0.1 conda_forge
+binutils_version:
+- '2.40'
+c_stdlib:
+- sysroot
+c_stdlib_version:
+- '2.17'
+cdt_name:
+- cos7
+channel_sources:
+- conda-forge/label/sysroot-with-crypt,conda-forge
+channel_targets:
+- conda-forge main
+cross_target_platform:
+- linux-64
+cross_target_stdlib:
+- sysroot
+cross_target_stdlib_version:
+- '2.12'
+docker_image:
+- quay.io/condaforge/linux-anvil-cos7-x86_64
+gcc_maj_ver:
+- '13'
+gcc_version:
+- 13.3.0
+libgfortran_soname:
+- '5'
+libgomp_ver:
+- 1.0.0
+old_triplet:
+- x86_64-conda_cos6-linux-gnu
+openmp_ver:
+- '4.5'
+target_platform:
+- linux-ppc64le
+triplet:
+- x86_64-conda-linux-gnu
+zip_keys:
+- - c_stdlib_version
+  - cdt_name
+- - cross_target_stdlib_version
+  - cross_target_stdlib
+  - triplet
+  - old_triplet
+  - cross_target_platform
+- - gcc_version
+  - gcc_maj_ver
+  - libgfortran_soname
