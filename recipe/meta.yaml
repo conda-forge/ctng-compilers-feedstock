@@ -223,6 +223,7 @@ outputs:
     build:
       skip: true  # [target_platform != cross_target_platform]
     requirements:
+      build:
       host:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
       run:
