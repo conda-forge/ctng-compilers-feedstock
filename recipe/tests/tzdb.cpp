@@ -22,6 +22,10 @@
 
 using namespace std::chrono;
 
+namespace __gnu_cxx {
+    extern const char* zoneinfo_dir_override() __attribute__((weak_import));
+}
+
 void
 test_version()
 {
@@ -88,6 +92,8 @@ test_load_leapseconds()
 
 int main()
 {
+  const char* tz_dir = __gnu_cxx::zoneinfo_dir_override();
+  std::printf("using tzdb-path: %s\n", tz_dir);
   test_version();
   test_current();
   test_locate();
