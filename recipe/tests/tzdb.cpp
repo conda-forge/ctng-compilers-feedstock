@@ -3,6 +3,8 @@
 // https://github.com/gcc-mirror/gcc/blob/releases/gcc-14.1.0/libstdc%2B%2B-v3/testsuite/std/time/tzdb/leap_seconds.cc
 
 #include <chrono>
+#include <string>
+#include <string_view>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -23,7 +25,7 @@
 using namespace std::chrono;
 
 namespace __gnu_cxx {
-    extern const char* zoneinfo_dir_override() __attribute__((weak_import));
+  extern std::string zoneinfo_file(std::string_view filename);
 }
 
 void
@@ -92,8 +94,8 @@ test_load_leapseconds()
 
 int main()
 {
-  const char* tz_dir = __gnu_cxx::zoneinfo_dir_override();
-  std::printf("using tzdb-path: %s\n", tz_dir);
+  std::string tz_dir = __gnu_cxx::zoneinfo_file("dummy");
+  std::printf("using tzdb-path: %s\n", tz_dir.c_str());
   test_version();
   test_current();
   test_locate();
