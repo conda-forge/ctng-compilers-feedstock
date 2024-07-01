@@ -1,7 +1,7 @@
 From 50ad6bc09ecaa3143faac20b6ad571fe6659e548 Mon Sep 17 00:00:00 2001
 From: Isuru Fernando <isuruf@gmail.com>
 Date: Thu, 15 Jul 2021 07:58:14 +0000
-Subject: [PATCH 2/4] cross-compile older glibc
+Subject: [PATCH 2/5] cross-compile older glibc
 
 ---
  libgomp/secure_getenv.h | 2 +-
