@@ -1,7 +1,7 @@
 From ab018339345371fd38209abd15dd39be024f3f60 Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Fri, 21 Jun 2024 12:41:07 +1100
-Subject: [PATCH 4/4] patch zoneinfo_dir_override to point to our tzdata
+Subject: [PATCH 4/5] patch zoneinfo_dir_override to point to our tzdata
 
 ---
  libstdc++-v3/src/c++20/tzdb.cc | 76 ++++++++++++++++++++++++++++------
