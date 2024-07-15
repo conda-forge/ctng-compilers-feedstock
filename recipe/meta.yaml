@@ -42,6 +42,7 @@ source:
       - patches/0003-allow-commands-in-main-specfile.patch
       - patches/0004-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch                                   # [gcc_maj_ver == 14]
       - patches/0005-move-zoneinfo_file-function-into-__gnu_cxx-namespace.patch                                 # [gcc_maj_ver == 14]
+      - patches/0006-add-ldl-to-libstdc___la_LDFLAGS.patch                                                      # [gcc_maj_ver == 14 and not win]
       {% if cross_target_platform.startswith("win-") %}
       # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
@@ -326,17 +327,16 @@ outputs:
         - test -f ${PREFIX}/bin/{{ old_triplet }}-g++
         - test -f ${PREFIX}/bin/{{ triplet }}-g++
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
-        - export LDFLAGS="$LDFLAGS -ldl"                                          # [cross_target_platform != "win-64"]
         - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17    # [cross_target_platform != "win-64"]
-        - ${CXX} -Wall ${LDFLAGS} cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
+        - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
         - ${CXX} -Wall tests/hello_world.cpp -c -o hello_world.o --std=c++17
-        - ${CXX} -Wall ${LDFLAGS} hello_world.o -o hello_world --std=c++17
+        - ${CXX} -Wall hello_world.o -o hello_world --std=c++17
 
         # test tzdb integration
       {% if gcc_maj_ver|int >= 14 %}
         - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb.cpp -c -o tzdb.o
         {% if target_platform == cross_target_platform %}
-        - ${CXX} ${LDFLAGS} tzdb.o -o tzdb && ./tzdb
+        - ${CXX} tzdb.o -o tzdb && ./tzdb
         # also test without any environment activation
         - unset PREFIX
         - unset CONDA_PREFIX

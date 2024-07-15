@@ -1,7 +1,7 @@
 From 604f16b22f754741c8ac7a9b7dc13a97d3e0a15f Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Mon, 1 Jul 2024 09:34:14 +1100
-Subject: [PATCH 5/5] move zoneinfo_file function into __gnu_cxx namespace
+Subject: [PATCH 5/6] move zoneinfo_file function into __gnu_cxx namespace
 
 ---
  libstdc++-v3/config/abi/pre/gnu.ver |  1 +

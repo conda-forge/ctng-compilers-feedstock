@@ -1,0 +1,22 @@
+From b8b0bcd9d97f2dc59c566e0a836d3dc70ddd947b Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Mon, 15 Jul 2024 19:16:05 +1100
+Subject: [PATCH 6/6] add `-ldl` to libstdc___la_LDFLAGS
+
+---
+ libstdc++-v3/src/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libstdc++-v3/src/Makefile.am b/libstdc++-v3/src/Makefile.am
+index 37ba1491d..55622ffe7 100644
+--- a/libstdc++-v3/src/Makefile.am
++++ b/libstdc++-v3/src/Makefile.am
+@@ -161,7 +161,7 @@ libstdc___darwin_rpath += -Wl,-rpath,@loader_path
+ endif
+ 
+ libstdc___la_LDFLAGS = \
+-	-version-info $(libtool_VERSION) ${version_arg} -lm $(libstdc___darwin_rpath)
++	-version-info $(libtool_VERSION) ${version_arg} -lm -ldl $(libstdc___darwin_rpath)
+ 
+ libstdc___la_LINK = $(CXXLINK) $(libstdc___la_LDFLAGS) $(lt_host_flags)
+ 
