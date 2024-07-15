@@ -333,16 +333,16 @@ outputs:
         - ${CXX} -Wall ${LDFLAGS} hello_world.o -o hello_world --std=c++17
 
         # test tzdb integration
-        {% if gcc_maj_ver|int >= 14 %}
+      {% if gcc_maj_ver|int >= 14 %}
         - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb.cpp -c -o tzdb.o
-        - ${CXX} ${LDFLAGS} tzdb.o -o tzdb && ./tzdb    # [target_platform == cross_target_platform]
+        {% if target_platform == cross_target_platform %}
+        - ${CXX} ${LDFLAGS} tzdb.o -o tzdb && ./tzdb
         # also test without any environment activation
-        - unset PREFIX                  # [unix]
-        - unset CONDA_PREFIX            # [unix]
-        - set "PREFIX="                 # [win]
-        - set "CONDA_PREFIX="           # [win]
-        - ./tzdb                        # [target_platform == cross_target_platform]
+        - unset PREFIX
+        - unset CONDA_PREFIX
+        - ./tzdb
         {% endif %}
+      {% endif %}
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/

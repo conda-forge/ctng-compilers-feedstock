@@ -99,7 +99,7 @@ int main()
   if (conda_prefix) {
     std::string expected(conda_prefix);
     // this feedstock only compiles on linux, so this test is linux-only
-    // (since we need build_platform == target_platform to execute it);
+    // (since we need target_platform == cross_target_platform to execute it);
     // on windows this would be "/Library/bin/../../share/zoneinfo"
     expected += "/lib/../share/zoneinfo";
     VERIFY( tz_dir == expected );
