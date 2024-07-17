@@ -16,7 +16,7 @@ index 37ba1491d..55622ffe7 100644
  
  libstdc___la_LDFLAGS = \
 -	-version-info $(libtool_VERSION) ${version_arg} -lm $(libstdc___darwin_rpath)
-+	-version-info $(libtool_VERSION) ${version_arg} -lm -ldl $(libstdc___darwin_rpath)
++	-version-info $(libtool_VERSION) ${version_arg} -lm -Bstatic -ldl -Bdynamic -Wl,--exclude-libs,libdl.a $(libstdc___darwin_rpath)
  
  libstdc___la_LINK = $(CXXLINK) $(libstdc___la_LDFLAGS) $(lt_host_flags)
  
