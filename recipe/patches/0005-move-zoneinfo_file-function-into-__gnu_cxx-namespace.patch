@@ -1,4 +1,4 @@
-From 604f16b22f754741c8ac7a9b7dc13a97d3e0a15f Mon Sep 17 00:00:00 2001
+From 54581c98b4ae49b146d09c28e3e811097341e07a Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Mon, 1 Jul 2024 09:34:14 +1100
 Subject: [PATCH 5/6] move zoneinfo_file function into __gnu_cxx namespace
@@ -21,10 +21,10 @@ index 31449b5b8..3cfa009a8 100644
      # __shared_ptr<directory_iterator::_Dir>::operator bool()
      _ZNKSt12__shared_ptrINSt10filesystem4_DirELN9__gnu_cxx12_Lock_policyE[012]EEcvbEv;
 diff --git a/libstdc++-v3/src/c++20/tzdb.cc b/libstdc++-v3/src/c++20/tzdb.cc
-index 5389a9c12..2dfce6326 100644
+index 1596a77b2..731dca7df 100644
 --- a/libstdc++-v3/src/c++20/tzdb.cc
 +++ b/libstdc++-v3/src/c++20/tzdb.cc
-@@ -133,6 +133,29 @@ namespace __gnu_cxx
+@@ -135,6 +135,29 @@ namespace __gnu_cxx
      return nullptr;
  #endif
    }
@@ -54,7 +54,7 @@ index 5389a9c12..2dfce6326 100644
  }
  
  #if ! defined _GLIBCXX_ZONEINFO_DIR && ! defined _GLIBCXX_STATIC_TZDATA
-@@ -1109,30 +1132,6 @@ namespace std::chrono
+@@ -1111,30 +1134,6 @@ namespace std::chrono
  #ifndef TZDB_DISABLED
    namespace
    {
@@ -85,7 +85,7 @@ index 5389a9c12..2dfce6326 100644
      // N.B. Leading slash as required by zoneinfo_file function.
      const string_view tzdata_file = "/tzdata.zi";
      const string_view leaps_file = "/leapseconds";
-@@ -1166,7 +1165,7 @@ namespace std::chrono
+@@ -1168,7 +1167,7 @@ namespace std::chrono
  
        tzdata_stream() : istream(nullptr)
        {
@@ -94,7 +94,7 @@ index 5389a9c12..2dfce6326 100644
  	{
  	  filebuf fbuf;
  	  if (fbuf.open(path, std::ios::in))
-@@ -1234,7 +1233,7 @@ namespace std::chrono
+@@ -1236,7 +1235,7 @@ namespace std::chrono
  #endif
  
  #ifndef TZDB_DISABLED
@@ -103,7 +103,7 @@ index 5389a9c12..2dfce6326 100644
        {
  	auto exp_year = year_month_day(expires).year();
  	std::string s, w;
-@@ -1298,12 +1297,12 @@ namespace std::chrono
+@@ -1300,12 +1299,12 @@ namespace std::chrono
  	  return version;
  #if 0 // Ignore these files, because we're not using them anyway.
  #if defined __NetBSD__
