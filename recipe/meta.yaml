@@ -35,14 +35,13 @@ source:
     sha256: 3a2b10cab86e32358fdac871546d57e2700e9bdb5875ef33fff5b601265b9e32   # [gcc_version == "13.3.0"]
     sha256: 5a30de2be740062bb3ddd3fd13c9b1bb4584d8f85616d33f23a713439d714148   # [gcc_version == "12.4.0"]
     patches:
+      - patches/0001-cross-compile-older-glibc.patch   # [cross_target_stdlib_version == "2.12" and target_platform != "linux-64"]
+      - patches/0002-allow-commands-in-main-specfile.patch
+      - patches/0003-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver == 14]
       {% if cross_target_platform.startswith("linux-") %}
-      - patches/0001-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
-      {% endif %}
-      - patches/0002-cross-compile-older-glibc.patch   # [cross_target_stdlib_version == "2.12" and target_platform != "linux-64"]
-      - patches/0003-allow-commands-in-main-specfile.patch
-      - patches/0004-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch                                   # [gcc_maj_ver == 14]
-      - patches/0005-add-ldl-to-libstdc___la_LDFLAGS.patch                                                      # [gcc_maj_ver == 14 and not win]
-      {% if cross_target_platform.startswith("win-") %}
+      - patches/0004-add-ldl-to-libstdc___la_LDFLAGS.patch                          # [gcc_maj_ver == 14]
+      - patches/0005-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
+      {% else %}
       # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
       - patches/mingw/{{ gcc_maj_ver }}/0001-missing-__thiscall-attribute-on-builtin-declaration-of-__cxa_thread_atexit.patch   # [gcc_maj_ver == 14]
