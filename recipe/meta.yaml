@@ -41,8 +41,7 @@ source:
       - patches/0002-cross-compile-older-glibc.patch   # [cross_target_stdlib_version == "2.12" and target_platform != "linux-64"]
       - patches/0003-allow-commands-in-main-specfile.patch
       - patches/0004-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch                                   # [gcc_maj_ver == 14]
-      - patches/0005-move-zoneinfo_file-function-into-__gnu_cxx-namespace.patch                                 # [gcc_maj_ver == 14]
-      - patches/0006-add-ldl-to-libstdc___la_LDFLAGS.patch                                                      # [gcc_maj_ver == 14 and not win]
+      - patches/0005-add-ldl-to-libstdc___la_LDFLAGS.patch                                                      # [gcc_maj_ver == 14 and not win]
       {% if cross_target_platform.startswith("win-") %}
       # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc

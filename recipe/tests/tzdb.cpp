@@ -22,10 +22,6 @@
 
 using namespace std::chrono;
 
-namespace __gnu_cxx {
-  extern std::string zoneinfo_file(std::string_view filename);
-}
-
 void
 test_version()
 {
@@ -92,19 +88,6 @@ test_load_leapseconds()
 
 int main()
 {
-  // test implementation of finding tzdb
-  std::string tz_dir = __gnu_cxx::zoneinfo_file("");
-  std::printf("using tzdb-path: %s\n", tz_dir.c_str());
-  const char* conda_prefix = getenv("CONDA_PREFIX");
-  if (conda_prefix) {
-    std::string expected(conda_prefix);
-    // this feedstock only compiles on linux, so this test is linux-only
-    // (since we need target_platform == cross_target_platform to execute it);
-    // on windows this would be "/Library/bin/../../share/zoneinfo"
-    expected += "/lib/../share/zoneinfo";
-    VERIFY( tz_dir == expected );
-  }
-  // test actual tzdb implementation
   test_version();
   test_current();
   test_locate();
