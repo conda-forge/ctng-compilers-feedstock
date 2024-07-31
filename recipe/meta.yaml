@@ -330,8 +330,10 @@ outputs:
 
         # test tzdb integration
       {% if gcc_maj_ver|int >= 14 %}
+        - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb-override.cpp -c -o tzdb-override.o
         - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb.cpp -c -o tzdb.o
         {% if target_platform == cross_target_platform %}
+        - ${CXX} tzdb-override.o -o tzdb-override && ./tzdb-override
         - ${CXX} tzdb.o -o tzdb && ./tzdb
         - strace ./tzdb 2>&1 | grep ${CONDA_PREFIX}/lib/../share/zoneinfo/tzdata.zi
         # also test without any environment activation
