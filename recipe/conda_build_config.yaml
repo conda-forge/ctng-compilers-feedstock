@@ -31,7 +31,7 @@ cross_target_platform:
   - linux-s390x
   - win-64
 cross_target_stdlib_version:
-  - 2.12
+  - 2.17
   - 2.17
   - 2.17
   - 2.17
