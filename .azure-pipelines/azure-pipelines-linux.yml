@@ -68,64 +68,64 @@ jobs:
       : CONFIG: linux_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.1.0tripletx86_64-w64-mingw32
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver12gcc_version12.4.0old_tripletx86_64-conda_cos6-linux-gnutripletx86_64-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver12gcc_version12.4.0old_tripletx86_64-conda_cos6-linux-gnutripletx86_64-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver12gcc_version12.4.0tripletx86_64-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver12gcc_version12.4.0tripletx86_64-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver13gcc_version13.3.0old_tripletx86_64-conda_cos6-linux-gnutripletx86_64-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver13gcc_version13.3.0old_tripletx86_64-conda_cos6-linux-gnutripletx86_64-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver13gcc_version13.3.0tripletx86_64-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver13gcc_version13.3.0tripletx86_64-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver14gcc_version14.1.0old_tripletx86_64-conda_cos6-linux-gnutripletx86_64-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver14gcc_version14.1.0old_tripletx86_64-conda_cos6-linux-gnutripletx86_64-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver14gcc_version14.1.0tripletx86_64-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver14gcc_version14.1.0tripletx86_64-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0old_tripletaarch64-conda_cos7-linux-gnutripletaarch64-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0old_tripletaarch64-conda_cos7-linux-gnutripletaarch64-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0tripletaarch64-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0tripletaarch64-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0old_tripletaarch64-conda_cos7-linux-gnutripletaarch64-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0old_tripletaarch64-conda_cos7-linux-gnutripletaarch64-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0tripletaarch64-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0tripletaarch64-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0old_tripletaarch64-conda_cos7-linux-gnutripletaarch64-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0old_tripletaarch64-conda_cos7-linux-gnutripletaarch64-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0tripletaarch64-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0tripletaarch64-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0old_tripletpowerpc64le-conda_cos7-linux-gnutripletpowerpc64le-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0old_tripletpowerpc64le-conda_cos7-linux-gnutripletpowerpc64le-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0tripletpowerpc64le-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0tripletpowerpc64le-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0old_tripletpowerpc64le-conda_cos7-linux-gnutripletpowerpc64le-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0old_tripletpowerpc64le-conda_cos7-linux-gnutripletpowerpc64le-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0tripletpowerpc64le-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0tripletpowerpc64le-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0old_tripletpowerpc64le-conda_cos7-linux-gnutripletpowerpc64le-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0old_tripletpowerpc64le-conda_cos7-linux-gnutripletpowerpc64le-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0tripletpowerpc64le-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0tripletpowerpc64le-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0old_triplets390x-conda-linux-gnutriplets390x-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0old_triplets390x-conda-linux-gnutriplets390x-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0triplets390x-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver12gcc_version12.4.0triplets390x-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0old_triplets390x-conda-linux-gnutriplets390x-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0old_triplets390x-conda-linux-gnutriplets390x-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0triplets390x-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.3.0triplets390x-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0old_triplets390x-conda-linux-gnutriplets390x-conda-linux-gnu
-      : CONFIG: linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0old_triplets390x-conda-linux-gnutriplets390x-conda-linux-gnu
+      ? linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0triplets390x-conda-linux-gnu
+      : CONFIG: linux_aarch64_cross_target_platformlinux-s390xcross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.1.0triplets390x-conda-linux-gnu
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver12gcc_version12.4.0old_tripletx86_64-w64-mingw32tripletx86_64-w64-mingw32
-      : CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver12gcc_version12.4.0old_tripletx86_64-w64-mingw32tripletx86_64-w64-mingw32
+      ? linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver12gcc_version12.4.0tripletx86_64-w64-mingw32
+      : CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver12gcc_version12.4.0tripletx86_64-w64-mingw32
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.3.0old_tripletx86_64-w64-mingw32tripletx86_64-w64-mingw32
-      : CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.3.0old_tripletx86_64-w64-mingw32tripletx86_64-w64-mingw32
+      ? linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.3.0tripletx86_64-w64-mingw32
+      : CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.3.0tripletx86_64-w64-mingw32
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      ? linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.1.0old_tripletx86_64-w64-mingw32tripletx86_64-w64-mingw32
-      : CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.1.0old_tripletx86_64-w64-mingw32tripletx86_64-w64-mingw32
+      ? linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.1.0tripletx86_64-w64-mingw32
+      : CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.1.0tripletx86_64-w64-mingw32
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       ? linux_ppc64le_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.12gcc_maj_ver12gcc_version12.4.0old_tripletx86_64-conda_cos6-linux-gnutripletx86_64-conda-linux-gnu
