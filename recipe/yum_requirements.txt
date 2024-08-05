@@ -9,3 +9,4 @@ sed
 findutils
 make
 file
+strace
