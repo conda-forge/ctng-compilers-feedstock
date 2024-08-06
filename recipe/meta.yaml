@@ -69,7 +69,7 @@ source:
 build:
   number: {{ build_num }}
   skip: true  # [not (linux or win) or (gcc_maj_ver == 12 and cross_target_platform == "win-64") or (win and cross_target_platform != "win-64")]
-  detect_binary_files_with_prefix: False
+  detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }}
 
@@ -86,7 +86,7 @@ outputs:
     build:
       noarch: generic
       number: {{ libgcc_devel_build_num }}
-      detect_binary_files_with_prefix: False
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
       ignore_run_exports_from:
@@ -118,7 +118,7 @@ outputs:
     build:
       noarch: generic
       number: {{ libgcc_devel_build_num }}
-      detect_binary_files_with_prefix: False
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
       ignore_run_exports_from:
@@ -150,7 +150,7 @@ outputs:
     script: install-gcc.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - '*'
       ignore_run_exports_from:
@@ -242,8 +242,8 @@ outputs:
     script: install-conda-specs.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True  # [cross_target_platform != target_platform]
+      skip: true                # [cross_target_platform != target_platform]
+      detect_binary_files_with_prefix: false
     requirements:
       build:
       run:
@@ -291,7 +291,7 @@ outputs:
     script: install-g++.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
       ignore_run_exports_from:
@@ -372,7 +372,7 @@ outputs:
     script: install-gfortran.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
       ignore_run_exports_from:
@@ -450,8 +450,8 @@ outputs:
     script: install-libstdc++.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform]
+      skip: true                # [target_platform != cross_target_platform]
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
     requirements:
@@ -601,8 +601,8 @@ outputs:
     script: install-libgfortran.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform]
+      skip: true                # [target_platform != cross_target_platform]
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
     requirements:
@@ -624,8 +624,8 @@ outputs:
   - name: libgfortran{{ runtime_suffix }}
     target: {{ cross_target_platform }}
     build:
-      skip: True   # [target_platform != cross_target_platform]
       number: {{ build_num }}
+      skip: true   # [target_platform != cross_target_platform]
     requirements:
       run:
         - {{ pin_subpackage('libgfortran' ~ libgfortran_soname, exact=True) }}
