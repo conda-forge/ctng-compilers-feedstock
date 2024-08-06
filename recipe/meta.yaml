@@ -472,6 +472,14 @@ outputs:
   - name: libsanitizer
     target: {{ cross_target_platform }}
     script: install-libsanitizer.sh
+    build:
+      number: {{ build_num }}
+      skip: true                # [target_platform != cross_target_platform or win]
+      detect_binary_files_with_prefix: false
+      missing_dso_whitelist:
+        - "*"
+      run_exports:
+        - libsanitizer {{ gcc_version }}
     requirements:
       build:
       host:
@@ -479,14 +487,6 @@ outputs:
       run:
         - libgcc{{ runtime_suffix }} >={{ gcc_version }}
         - libstdcxx{{ runtime_suffix }} >={{ gcc_version }}
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform or win]
-      missing_dso_whitelist:
-        - "*"
-      run_exports:
-        - libsanitizer {{ gcc_version }}
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
@@ -503,6 +503,15 @@ outputs:
   - name: libgomp
     target: {{ cross_target_platform }}
     script: install-libgomp.sh
+    build:
+      number: {{ build_num }}
+      skip: true                # [target_platform != cross_target_platform]
+      detect_binary_files_with_prefix: false
+      missing_dso_whitelist:
+        - "*"
+      run_exports:
+        strong:
+          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     requirements:
       build:
       host:
@@ -511,15 +520,6 @@ outputs:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
       run_constrained:
         - msys2-conda-epoch <0.0a0    # [win]
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform]
-      missing_dso_whitelist:
-        - "*"
-      run_exports:
-        strong:
-          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
@@ -534,6 +534,13 @@ outputs:
   - name: libgcc{{ runtime_suffix }}
     target: {{ cross_target_platform }}
     script: install-libgcc-no-gomp.sh
+    build:
+      number: {{ build_num }}
+      skip: true                # [target_platform != cross_target_platform]
+      detect_binary_files_with_prefix: false
+      missing_dso_whitelist:
+        - "*"
+      rpaths_patcher: patchelf
     requirements:
       build:
       host:
@@ -546,13 +553,6 @@ outputs:
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - msys2-conda-epoch <0.0a0    # [win]
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform]
-      missing_dso_whitelist:
-        - "*"
-      rpaths_patcher: patchelf
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
@@ -568,6 +568,12 @@ outputs:
   - name: _openmp_mutex
     script: install-openmp_impl.sh
     version: {{ openmp_ver }}
+    build:
+      string: 2_gnu
+      skip: true    # [target_platform != cross_target_platform]
+      run_exports:
+        strong:
+          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     requirements:
       build:
       host:
@@ -580,12 +586,6 @@ outputs:
         # conflict with previous name
         - openmp_impl 9999
         - msys2-conda-epoch <0.0a0    # [win]
-    build:
-      string: 2_gnu
-      skip: True   # [target_platform != cross_target_platform]
-      run_exports:
-        strong:
-          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
