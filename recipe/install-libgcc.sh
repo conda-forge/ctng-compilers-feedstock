@@ -7,15 +7,9 @@ set -e -x
 # .. do we need this scoped over the whole file though?
 #export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${TARGET}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
 
-if [[ "${TARGET}" == *mingw* ]]; then
-  LIBGCC_NAME="libgcc"
-else
-  LIBGCC_NAME="libgcc-ng"
-fi
-
 pushd ${SRC_DIR}/build
 
-  if [[ "${PKG_NAME}" == "${LIBGCC_NAME}" ]]; then
+  if [[ "${PKG_NAME}" == "libgcc" ]]; then
     make -C ${TARGET}/libgcc prefix=${PREFIX} install-shared
     if [[ "${TARGET}" == *mingw* ]]; then
       mv $PREFIX/lib/libgcc_s*.dll $PREFIX/bin

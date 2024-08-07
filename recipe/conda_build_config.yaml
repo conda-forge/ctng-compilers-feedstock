@@ -55,6 +55,11 @@ c_stdlib:          # [win]
   - m2w64-sysroot  # [win]
 c_stdlib_version:  # [win]
   - 12             # [win]
+# need to manually downgrade global pin until we do #147
+c_stdlib_version:  # [linux64]
+  - 2.12           # [linux64]
+cdt_name:          # [linux64]
+  - cos6           # [linux64]
 zip_keys:
   - - cross_target_stdlib_version
     - cross_target_stdlib
