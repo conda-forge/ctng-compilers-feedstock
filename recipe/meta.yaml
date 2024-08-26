@@ -646,6 +646,9 @@ outputs:
     build:
       number: {{ build_num }}
       skip: true    # [target_platform != cross_target_platform]
+      run_exports:
+        strong:
+          - libgcc
     requirements:
       host:
         - {{ pin_subpackage("libgcc", exact=True) }}
