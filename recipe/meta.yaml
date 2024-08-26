@@ -668,6 +668,9 @@ outputs:
     build:
       number: {{ build_num }}
       skip: true   # [target_platform != cross_target_platform]
+      run_exports:
+        strong:
+          - libstdcxx
     requirements:
       host:
         - {{ pin_subpackage("libstdcxx", exact=True) }}
@@ -686,6 +689,9 @@ outputs:
     build:
       number: {{ build_num }}
       skip: true   # [target_platform != cross_target_platform]
+      run_exports:
+        strong:
+          - libgfortran
     requirements:
       host:
         - {{ pin_subpackage('libgfortran', exact=True) }}
