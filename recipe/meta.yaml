@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 0 %}
+{% set build_num = 1 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 14 %}
@@ -17,13 +17,6 @@
 {% if cross_target_platform is not defined %}
 {% set cross_target_platform = "linux-64" %}
 {% endif %}
-
-{% if cross_target_platform.startswith("win-") %}
-{% set runtime_suffix = "" %}
-{% else %}
-{% set runtime_suffix = "-ng" %}
-{% endif %}
-
 
 package:
   name: gcc_compilers
@@ -69,7 +62,7 @@ source:
 build:
   number: {{ build_num }}
   skip: true  # [not (linux or win) or (gcc_maj_ver == 12 and cross_target_platform == "win-64") or (win and cross_target_platform != "win-64")]
-  detect_binary_files_with_prefix: False
+  detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }}
 
@@ -86,7 +79,7 @@ outputs:
     build:
       noarch: generic
       number: {{ libgcc_devel_build_num }}
-      detect_binary_files_with_prefix: False
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
       ignore_run_exports_from:
@@ -118,7 +111,7 @@ outputs:
     build:
       noarch: generic
       number: {{ libgcc_devel_build_num }}
-      detect_binary_files_with_prefix: False
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
       ignore_run_exports_from:
@@ -150,7 +143,7 @@ outputs:
     script: install-gcc.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - '*'
       ignore_run_exports_from:
@@ -160,23 +153,23 @@ outputs:
       host:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
         - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libstdcxx" ~ runtime_suffix, exact=True) }}          # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libgcc" ~ runtime_suffix, exact=True) }}             # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libstdcxx", exact=True) }}             # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libgcc", exact=True) }}                # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform and not win]
       run:
         - binutils_impl_{{ cross_target_platform }} >={{ binutils_version }}
         - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
         - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform and not win]
-        # libstdcxx-ng is a runtime dep of gcc because LTO requires it.
-        - {{ pin_subpackage("libstdcxx" ~ runtime_suffix, max_pin=None) }}    # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libgcc" ~ runtime_suffix, max_pin=None) }}       # [target_platform == cross_target_platform]
+        # libstdcxx is a runtime dep of gcc because LTO requires it.
+        - {{ pin_subpackage("libstdcxx", max_pin=None) }}       # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libgcc", max_pin=None) }}          # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgomp", max_pin=None) }}         # [target_platform == cross_target_platform]
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
-        - libgcc{{ runtime_suffix }} >={{ gcc_version }}
+        - libgcc >={{ gcc_version }}
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
@@ -242,8 +235,8 @@ outputs:
     script: install-conda-specs.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True  # [cross_target_platform != target_platform]
+      skip: true                # [cross_target_platform != target_platform]
+      detect_binary_files_with_prefix: false
     requirements:
       build:
       run:
@@ -291,7 +284,7 @@ outputs:
     script: install-g++.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
       ignore_run_exports_from:
@@ -313,7 +306,7 @@ outputs:
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
-        - libstdcxx{{ runtime_suffix }} >={{ gcc_version }}
+        - libstdcxx >={{ gcc_version }}
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
@@ -372,7 +365,7 @@ outputs:
     script: install-gfortran.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
       ignore_run_exports_from:
@@ -388,14 +381,14 @@ outputs:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ cross_target_platform }} >={{ gcc_version }}
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname, max_pin=None) }}  # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libgcc" ~ runtime_suffix, max_pin=None) }}           # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libstdcxx" ~ runtime_suffix, max_pin=None) }}        # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libgcc", max_pin=None) }}                            # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libstdcxx", max_pin=None) }}                         # [target_platform == cross_target_platform]
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
         - libgfortran{{ libgfortran_soname }} {{ gcc_version }}.*
-        - libgcc{{ runtime_suffix }} >={{ gcc_version }}
+        - libgcc >={{ gcc_version }}
     test:
       requires:
         - cmake >=3.11  # [x86_64 or aarch64 or ppc64le]
@@ -445,22 +438,25 @@ outputs:
       license: BSD-3-Clause
       license_file: LICENSE
 
-  - name: libstdcxx{{ runtime_suffix }}
+  - name: libstdcxx
     target: {{ cross_target_platform }}
     script: install-libstdc++.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform]
+      skip: true                # [target_platform != cross_target_platform]
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
     requirements:
       build:
       host:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
-        - {{ pin_subpackage("libgcc" ~ runtime_suffix, exact=True) }}
+        - {{ pin_subpackage("libgcc", exact=True) }}
       run:
-        - {{ pin_subpackage("libgcc" ~ runtime_suffix, exact=True) }}
+        - {{ pin_subpackage("libgcc", exact=True) }}
+      run_contrained:
+        # avoid installing incompatible version of old name for this output
+        - libstdcxx-ng =={{ version }}=*_{{ build_num }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libstdc++.so
@@ -472,21 +468,21 @@ outputs:
   - name: libsanitizer
     target: {{ cross_target_platform }}
     script: install-libsanitizer.sh
+    build:
+      number: {{ build_num }}
+      skip: true                # [target_platform != cross_target_platform or win]
+      detect_binary_files_with_prefix: false
+      missing_dso_whitelist:
+        - "*"
+      run_exports:
+        - libsanitizer {{ gcc_version }}
     requirements:
       build:
       host:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
       run:
-        - libgcc{{ runtime_suffix }} >={{ gcc_version }}
-        - libstdcxx{{ runtime_suffix }} >={{ gcc_version }}
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform or win]
-      missing_dso_whitelist:
-        - "*"
-      run_exports:
-        - libsanitizer {{ gcc_version }}
+        - libgcc >={{ gcc_version }}
+        - libstdcxx >={{ gcc_version }}
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
@@ -503,6 +499,15 @@ outputs:
   - name: libgomp
     target: {{ cross_target_platform }}
     script: install-libgomp.sh
+    build:
+      number: {{ build_num }}
+      skip: true                # [target_platform != cross_target_platform]
+      detect_binary_files_with_prefix: false
+      missing_dso_whitelist:
+        - "*"
+      run_exports:
+        strong:
+          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     requirements:
       build:
       host:
@@ -511,15 +516,6 @@ outputs:
         - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
       run_constrained:
         - msys2-conda-epoch <0.0a0    # [win]
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform]
-      missing_dso_whitelist:
-        - "*"
-      run_exports:
-        strong:
-          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
@@ -531,9 +527,16 @@ outputs:
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
       license: GPL-3.0-only WITH GCC-exception-3.1
 
-  - name: libgcc{{ runtime_suffix }}
+  - name: libgcc
     target: {{ cross_target_platform }}
     script: install-libgcc-no-gomp.sh
+    build:
+      number: {{ build_num }}
+      skip: true                # [target_platform != cross_target_platform]
+      detect_binary_files_with_prefix: false
+      missing_dso_whitelist:
+        - "*"
+      rpaths_patcher: patchelf
     requirements:
       build:
       host:
@@ -546,13 +549,8 @@ outputs:
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - msys2-conda-epoch <0.0a0    # [win]
-    build:
-      number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform]
-      missing_dso_whitelist:
-        - "*"
-      rpaths_patcher: patchelf
+        # avoid installing incompatible version of old name for this output
+        - libgcc-ng =={{ version }}=*_{{ build_num }}
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
@@ -568,6 +566,12 @@ outputs:
   - name: _openmp_mutex
     script: install-openmp_impl.sh
     version: {{ openmp_ver }}
+    build:
+      string: 2_gnu
+      skip: true    # [target_platform != cross_target_platform]
+      run_exports:
+        strong:
+          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     requirements:
       build:
       host:
@@ -580,12 +584,6 @@ outputs:
         # conflict with previous name
         - openmp_impl 9999
         - msys2-conda-epoch <0.0a0    # [win]
-    build:
-      string: 2_gnu
-      skip: True   # [target_platform != cross_target_platform]
-      run_exports:
-        strong:
-          - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
@@ -601,8 +599,8 @@ outputs:
     script: install-libgfortran.sh
     build:
       number: {{ build_num }}
-      detect_binary_files_with_prefix: False
-      skip: True   # [target_platform != cross_target_platform]
+      skip: true                # [target_platform != cross_target_platform]
+      detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
     requirements:
@@ -610,9 +608,9 @@ outputs:
       host:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
       run:
-        - libgcc{{ runtime_suffix }} >={{ gcc_version }}
+        - libgcc >={{ gcc_version }}
       run_constrained:
-        - libgfortran{{ runtime_suffix }} {{ gcc_version }}
+        - libgfortran {{ gcc_version }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
@@ -621,14 +619,17 @@ outputs:
       home: https://gcc.gnu.org/
       license: GPL-3.0-only WITH GCC-exception-3.1
 
-  - name: libgfortran{{ runtime_suffix }}
+  - name: libgfortran
     target: {{ cross_target_platform }}
     build:
-      skip: True   # [target_platform != cross_target_platform]
+      skip: true   # [target_platform != cross_target_platform]
       number: {{ build_num }}
     requirements:
       run:
         - {{ pin_subpackage('libgfortran' ~ libgfortran_soname, exact=True) }}
+      run_constrained:
+        # avoid installing incompatible version of old name for this output
+        - libgfortran-ng =={{ version }}=*_{{ build_num }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
@@ -637,6 +638,73 @@ outputs:
       home: https://gcc.gnu.org/
       license: GPL-3.0-only WITH GCC-exception-3.1
 
+  # compatibility outputs for previous naming of the runtime libraries
+  # with "-ng" suffix; for windows the suffix had never been introduced
+  {% if not cross_target_platform.startswith("win-") %}
+  - name: libgcc-ng
+    target: {{ cross_target_platform }}
+    build:
+      number: {{ build_num }}
+      skip: true    # [target_platform != cross_target_platform]
+      run_exports:
+        strong:
+          - libgcc
+    requirements:
+      host:
+        - {{ pin_subpackage("libgcc", exact=True) }}
+      run:
+        - {{ pin_subpackage("libgcc", exact=True) }}
+    test:
+      commands:
+        - echo "empty wrapper for compatibility with previous naming"
+    about:
+      summary: The GCC low-level runtime library
+      home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+      license: GPL-3.0-only WITH GCC-exception-3.1
+
+  - name: libstdcxx-ng
+    target: {{ cross_target_platform }}
+    script: install-libstdc++.sh
+    build:
+      number: {{ build_num }}
+      skip: true   # [target_platform != cross_target_platform]
+      run_exports:
+        strong:
+          - libstdcxx
+    requirements:
+      host:
+        - {{ pin_subpackage("libstdcxx", exact=True) }}
+      run:
+        - {{ pin_subpackage("libstdcxx", exact=True) }}
+    test:
+      commands:
+        - echo "empty wrapper for compatibility with previous naming"
+    about:
+      summary: The GNU C++ Runtime Library
+      home: https://gcc.gnu.org/
+      license: GPL-3.0-only WITH GCC-exception-3.1
+
+  - name: libgfortran-ng
+    target: {{ cross_target_platform }}
+    build:
+      number: {{ build_num }}
+      skip: true   # [target_platform != cross_target_platform]
+      run_exports:
+        strong:
+          - libgfortran
+    requirements:
+      host:
+        - {{ pin_subpackage('libgfortran', exact=True) }}
+      run:
+        - {{ pin_subpackage('libgfortran', exact=True) }}
+    test:
+      commands:
+        - echo "empty wrapper for compatibility with previous naming"
+    about:
+      summary: The GNU Fortran Runtime Library
+      home: https://gcc.gnu.org/
+      license: GPL-3.0-only WITH GCC-exception-3.1
+  {% endif %}
 
 about:
   summary: GNU Compiler Collection

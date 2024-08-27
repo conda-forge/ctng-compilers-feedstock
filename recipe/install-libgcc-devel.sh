@@ -13,7 +13,7 @@ pushd ${SRC_DIR}/build
 
 make -C ${CHOST}/libgcc prefix=${PREFIX} install
 
-# ${PREFIX}/lib/libgcc_s.so* goes into libgcc-ng output, but
+# ${PREFIX}/lib/libgcc_s.so* goes into libgcc output, but
 # avoid that the equivalents in ${PREFIX}/${CHOST}/lib end up
 # in gcc_impl_{{ cross_target_platform }}, c.f. install-gcc.sh
 mkdir -p ${PREFIX}/${CHOST}/lib
