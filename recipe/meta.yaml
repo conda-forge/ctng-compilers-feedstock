@@ -456,7 +456,7 @@ outputs:
         - {{ pin_subpackage("libgcc", exact=True) }}
       run_contrained:
         # avoid installing incompatible version of old name for this output
-        - libstdcxx-ng =={{ version }}.*=*_{{ build_num }}
+        - libstdcxx-ng =={{ version }}=*_{{ build_num }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libstdc++.so
@@ -550,7 +550,7 @@ outputs:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - msys2-conda-epoch <0.0a0    # [win]
         # avoid installing incompatible version of old name for this output
-        - libgcc-ng =={{ version }}.*=*_{{ build_num }}
+        - libgcc-ng =={{ version }}=*_{{ build_num }}
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
@@ -629,7 +629,7 @@ outputs:
         - {{ pin_subpackage('libgfortran' ~ libgfortran_soname, exact=True) }}
       run_constrained:
         # avoid installing incompatible version of old name for this output
-        - libgfortran-ng =={{ version }}.*=*_{{ build_num }}
+        - libgfortran-ng =={{ version }}=*_{{ build_num }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libgfortran.so
