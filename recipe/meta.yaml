@@ -24,7 +24,7 @@ package:
 
 source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
-    sha256: a0be066c02775002a0fa65ad3c65fb56a8bfd923d072a26ed148c0439ecdb68f   # [gcc_version == "14.1.0"]
+    sha256: 7d376d445f93126dc545e2c0086d0f647c3094aae081cdb78f42ce2bc25e7293   # [gcc_version == "14.2.0"]
     sha256: 3a2b10cab86e32358fdac871546d57e2700e9bdb5875ef33fff5b601265b9e32   # [gcc_version == "13.3.0"]
     sha256: 5a30de2be740062bb3ddd3fd13c9b1bb4584d8f85616d33f23a713439d714148   # [gcc_version == "12.4.0"]
     patches:
