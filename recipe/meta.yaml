@@ -34,6 +34,7 @@ source:
       {% if cross_target_platform.startswith("linux-") %}
       - patches/0004-add-ldl-to-libstdc___la_LDFLAGS.patch                          # [gcc_maj_ver == 14]
       - patches/0005-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
+      - patches/0006-fix-tzdb-for-newer-format.patch                                # [gcc_maj_ver == 14]
       {% else %}
       # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
