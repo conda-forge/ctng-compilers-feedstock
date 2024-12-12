@@ -5,7 +5,7 @@ c_stdlib:
 c_stdlib_version:
 - '2.17'
 cdt_name:
-- cos7
+- conda
 channel_sources:
 - conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
@@ -17,7 +17,7 @@ cross_target_stdlib:
 cross_target_stdlib_version:
 - '2.17'
 docker_image:
-- quay.io/condaforge/linux-anvil-cos7-x86_64
+- quay.io/condaforge/linux-anvil-x86_64:alma9
 gcc_maj_ver:
 - '12'
 gcc_version:
@@ -35,8 +35,6 @@ target_platform:
 triplet:
 - s390x-conda-linux-gnu
 zip_keys:
-- - c_stdlib_version
-  - cdt_name
 - - cross_target_stdlib_version
   - cross_target_stdlib
   - triplet
