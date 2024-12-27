@@ -1,15 +1,13 @@
-BUILD:
-- aarch64-conda_cos7-linux-gnu
+_libgcc_mutex:
+- 0.1 conda_forge
 binutils_version:
 - '2.40'
 c_stdlib:
 - sysroot
 c_stdlib_version:
 - '2.17'
-cdt_arch:
-- aarch64
 cdt_name:
-- cos7
+- conda
 channel_sources:
 - conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
@@ -19,13 +17,13 @@ cross_target_platform:
 cross_target_stdlib:
 - sysroot
 cross_target_stdlib_version:
-- '2.12'
+- '2.17'
 docker_image:
-- quay.io/condaforge/linux-anvil-cos7-x86_64
+- quay.io/condaforge/linux-anvil-x86_64:alma9
 gcc_maj_ver:
-- '14'
+- '12'
 gcc_version:
-- 14.2.0
+- 12.4.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
@@ -35,12 +33,10 @@ old_triplet:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-aarch64
+- linux-64
 triplet:
 - x86_64-conda-linux-gnu
 zip_keys:
-- - c_stdlib_version
-  - cdt_name
 - - cross_target_stdlib_version
   - cross_target_stdlib
   - triplet
