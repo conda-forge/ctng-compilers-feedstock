@@ -9,12 +9,3 @@ for tool in gcc g++ gfortran cpp gcc-ar gcc-nm gcc-ranlib c++; do
     rm ${PREFIX}/bin/${tool}${EXEEXT}
   fi
 done
-
-# Make a symlink from new gcc vendor to the old one
-for exe in `ls ${PREFIX}/bin/${triplet}-*`; do
-  nm=`basename ${exe}`
-  new_nm=${nm/"${triplet}-"/"${old_triplet}-"}
-  if [ ! -f ${PREFIX}/bin/${new_nm} ]; then
-    ln -s ${exe} ${PREFIX}/bin/${new_nm}
-  fi
-done
