@@ -11,7 +11,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-aarch64
+- linux-64
 cross_target_stdlib:
 - sysroot
 cross_target_stdlib_version:
@@ -26,19 +26,16 @@ libgfortran_soname:
 - '5'
 libgomp_ver:
 - 1.0.0
-old_triplet:
-- aarch64-conda_cos7-linux-gnu
 openmp_ver:
 - '4.5'
 target_platform:
 - linux-s390x
 triplet:
-- aarch64-conda-linux-gnu
+- x86_64-conda-linux-gnu
 zip_keys:
 - - cross_target_stdlib_version
   - cross_target_stdlib
   - triplet
-  - old_triplet
   - cross_target_platform
 - - gcc_version
   - gcc_maj_ver
