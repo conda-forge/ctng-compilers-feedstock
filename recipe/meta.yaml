@@ -501,6 +501,9 @@ outputs:
       run_exports:
         strong:
           - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
+          {% if cross_target_platform.startswith("win-") %}
+          - {{ pin_subpackage("libgomp", max_pin=None) }}
+          {% endif %}
     requirements:
       build:
       host:
