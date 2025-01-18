@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 1 %}
+{% set build_num = 2 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 14 %}
@@ -507,6 +507,9 @@ outputs:
       run_exports:
         strong:
           - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
+          {% if cross_target_platform.startswith("win-") %}
+          - {{ pin_subpackage("libgomp", max_pin=None) }}
+          {% endif %}
     requirements:
       build:
       host:
