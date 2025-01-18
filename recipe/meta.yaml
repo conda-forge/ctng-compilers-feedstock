@@ -174,6 +174,8 @@ outputs:
       files:
         - tests
       commands:
+        - echo "QEMU_LD_PREFIX: ${QEMU_LD_PREFIX}"
+        - ls "${QEMU_LD_PREFIX:-${PREFIX}}"
         - echo {{ c_stdlib }}
         - echo {{ c_stdlib_version }}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.so   # [target_platform == cross_target_platform]
