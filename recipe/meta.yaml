@@ -177,6 +177,9 @@ outputs:
         - echo "QEMU_LD_PREFIX ${QEMU_LD_PREFIX}"
         - ls "${QEMU_LD_PREFIX}"
         - ls "${QEMU_LD_PREFIX}/lib64"
+        - rm "${QEMU_LD_PREFIX}/lib"
+        - mv "${QEMU_LD_PREFIX}/lib64" "${QEMU_LD_PREFIX}/lib"
+        - ln -s "${QEMU_LD_PREFIX}/lib" "${QEMU_LD_PREFIX}/lib64"
         - echo {{ c_stdlib }}
         - echo {{ c_stdlib_version }}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.so   # [target_platform == cross_target_platform]
