@@ -175,8 +175,8 @@ outputs:
         - tests
       commands:
         - echo "QEMU_LD_PREFIX ${QEMU_LD_PREFIX}"
-        - ls "${QEMU_LD_PREFIX}"
-        - ls "${QEMU_LD_PREFIX}/lib64"
+        - ls -alh "${QEMU_LD_PREFIX}"
+        - ls -alh "${QEMU_LD_PREFIX}/lib64"
         - rm "${QEMU_LD_PREFIX}/lib"
         - mv "${QEMU_LD_PREFIX}/lib64" "${QEMU_LD_PREFIX}/lib"
         - ln -s "${QEMU_LD_PREFIX}/lib" "${QEMU_LD_PREFIX}/lib64"
