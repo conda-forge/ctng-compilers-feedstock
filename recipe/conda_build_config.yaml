@@ -43,12 +43,13 @@ libgomp_ver:
   - 1.0.0
 _libgcc_mutex:
   - 0.1 conda_forge
-channel_sources:
-  - conda-forge/label/sysroot-with-crypt,conda-forge
+channel_sources:                                        # [linux]
+  - conda-forge/label/sysroot-with-crypt,conda-forge    # [linux and not s390x]
 c_stdlib:          # [win]
   - m2w64-sysroot  # [win]
-c_stdlib_version:  # [win]
+c_stdlib_version:
   - 12             # [win]
+  - 2.28           # [linux and s390x]
 zip_keys:
   - - cross_target_stdlib_version
     - cross_target_stdlib
