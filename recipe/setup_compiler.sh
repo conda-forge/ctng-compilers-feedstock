@@ -15,7 +15,11 @@ if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
       )
     fi
     # Remove conda-forge/label/sysroot-with-crypt when GCC < 14 is dropped
-    conda create -p $SRC_DIR/cf-compilers -c conda-forge/label/sysroot-with-crypt -c conda-forge --yes --quiet \
+    channels="-c conda-forge"
+    if [[ "$target_platform" != "linux-s390x" ]]; then
+        channels="-c conda-forge/label/sysroot-with-crypt ${channels}"
+    fi
+    conda create -p $SRC_DIR/cf-compilers ${channels} --yes --quiet \
       "binutils_impl_${build_platform}" \
       "gcc_impl_${build_platform}" \
       "gxx_impl_${build_platform}" \
