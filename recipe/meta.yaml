@@ -174,7 +174,10 @@ outputs:
       files:
         - tests
       commands:
-        {% if target_platform != cross_target_platform %}
+        # this condition doesn't make sense for building cross-compilers,
+        # but it determines whether QEMU_LD_PREFIX gets set in
+        # https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/main/recipe/cross_compile_support.sh
+        {% if build_platform != target_platform %}
         - echo "QEMU_LD_PREFIX ${QEMU_LD_PREFIX}"
         - ls -alh "${QEMU_LD_PREFIX}"
         - ls -alh "${QEMU_LD_PREFIX}/lib64"
