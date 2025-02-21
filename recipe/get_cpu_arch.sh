@@ -6,8 +6,6 @@ get_cpu_arch() {
     CPU_ARCH="powerpc64le"
   elif [[ "$1" == *"-aarch64" ]]; then
     CPU_ARCH="aarch64"
-  elif [[ "$1" == *"-s390x" ]]; then
-    CPU_ARCH="s390x"
   else
     echo "Unknown architecture"
     exit 1
