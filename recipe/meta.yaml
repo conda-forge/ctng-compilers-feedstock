@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 1 %}
+{% set build_num = 2 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 14 %}
@@ -28,7 +28,6 @@ source:
     sha256: 3a2b10cab86e32358fdac871546d57e2700e9bdb5875ef33fff5b601265b9e32   # [gcc_version == "13.3.0"]
     sha256: 5a30de2be740062bb3ddd3fd13c9b1bb4584d8f85616d33f23a713439d714148   # [gcc_version == "12.4.0"]
     patches:
-      - patches/0001-cross-compile-older-glibc.patch   # [cross_target_stdlib_version == "2.12" and target_platform != "linux-64"]
       - patches/0002-allow-commands-in-main-specfile.patch
       - patches/0003-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver == 14]
       {% if cross_target_platform.startswith("linux-") %}
@@ -175,13 +174,10 @@ outputs:
       files:
         - tests
       commands:
-        - echo {{ old_triplet }}
         - echo {{ c_stdlib }}
         - echo {{ c_stdlib_version }}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.so   # [target_platform == cross_target_platform]
         - test `readlink ${PREFIX}/{{ triplet }}/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == cross_target_platform]
-        - test -f ${PREFIX}/bin/{{ old_triplet }}-gcc
-        - test -f ${PREFIX}/bin/{{ old_triplet }}-cpp
         - test -f ${PREFIX}/bin/{{ triplet }}-gcc
         - test -f ${PREFIX}/bin/{{ triplet }}-cpp
         - test ! -f ${PREFIX}/bin/gcc
@@ -312,7 +308,6 @@ outputs:
       files:
         - tests
       commands:
-        - test -f ${PREFIX}/bin/{{ old_triplet }}-g++
         - test -f ${PREFIX}/bin/{{ triplet }}-g++
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17    # [cross_target_platform != "win-64"]
@@ -399,7 +394,6 @@ outputs:
         - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.dll.a
         {% endif %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.a
-        - test -f ${PREFIX}/bin/{{ old_triplet }}-gfortran
         - test -f ${PREFIX}/bin/{{ triplet }}-gfortran
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
@@ -507,12 +501,13 @@ outputs:
       run_exports:
         strong:
           - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
+          {% if cross_target_platform.startswith("win-") %}
+          - {{ pin_subpackage("libgomp", max_pin=None) }}
+          {% endif %}
     requirements:
       build:
       host:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
-      run:
-        - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
       run_constrained:
         - msys2-conda-epoch <0.0a0    # [win]
     test:
@@ -543,7 +538,6 @@ outputs:
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
       run:
-        - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
@@ -577,11 +571,10 @@ outputs:
         - {{ pin_subpackage('libgomp', exact=True) }}
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
       run:
-        - _libgcc_mutex {{ _libgcc_mutex }}  # [linux64 or ppc64le]
         - libgomp >=7.5.0
       run_constrained:
         # conflict with previous name
-        - openmp_impl 9999
+        - openmp_impl <0.0a0
         - msys2-conda-epoch <0.0a0    # [win]
     test:
       commands:
