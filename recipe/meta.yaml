@@ -560,7 +560,7 @@ outputs:
     script: install-openmp_impl.sh
     version: {{ openmp_ver }}
     build:
-      string: 2_gnu
+      string: 3_gnu
       skip: true    # [target_platform != cross_target_platform]
       run_exports:
         strong:
