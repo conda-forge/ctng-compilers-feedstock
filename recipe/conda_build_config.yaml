@@ -3,6 +3,7 @@ triplet:
   - powerpc64le-conda-linux-gnu
   - aarch64-conda-linux-gnu
   - x86_64-w64-mingw32
+  - i686-w64-mingw32
 gcc_version:
   - 12.4.0
   - 13.3.0
@@ -22,15 +23,18 @@ cross_target_platform:
   - linux-ppc64le
   - linux-aarch64
   - win-64
+  - win-32
 cross_target_stdlib_version:
   - 2.17
   - 2.17
   - 2.17
   - 12
+  - 12
 cross_target_stdlib:
   - sysroot
   - sysroot
   - sysroot
+  - m2w64-sysroot
   - m2w64-sysroot
 # openmp versions
 openmp_ver:
