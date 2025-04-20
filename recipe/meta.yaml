@@ -61,6 +61,9 @@ source:
 build:
   number: {{ build_num }}
   skip: true  # [not (linux or win) or (win and cross_target_platform != "win-64")]
+  # no mingw patches for GCC 15 yet, check
+  # https://github.com/msys2/MINGW-packages/tree/master/mingw-w64-gcc
+  skip: true  # [cross_target_platform == "win-64"]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }}
