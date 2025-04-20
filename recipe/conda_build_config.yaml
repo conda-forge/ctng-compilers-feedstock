@@ -4,12 +4,15 @@ triplet:
   - aarch64-conda-linux-gnu
   - x86_64-w64-mingw32
 gcc_version:
-  - 13.3.0
+  - 15.1.0
   - 14.2.0
+  - 13.3.0
 gcc_maj_ver:
-  - 13
+  - 15
   - 14
+  - 13
 libgfortran_soname:
+  - 5
   - 5
   - 5
 binutils_version:

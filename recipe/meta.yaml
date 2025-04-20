@@ -2,7 +2,7 @@
 {% set build_num = 2 %}
 
 {% if gcc_maj_ver is not defined %}
-{% set gcc_maj_ver = 14 %}
+{% set gcc_maj_ver = 15 %}
 {% endif %}
 
 # libgcc-devel is a noarch: generic package that is built for
@@ -23,14 +23,16 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
+  - url: https://gcc.gnu.org/pub/gcc/snapshots/15.1.0-RC-20250418/gcc-15.1.0-RC-20250418.tar.gz  # [gcc_maj_ver == 15]
+  - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz                  # [gcc_maj_ver != 15]
+    sha256: 2b0801cd32e4643e7e9f69ba890bc517371e19ad964777dd748789b99797199b   # [gcc_version == "15.1.0"]
     sha256: 7d376d445f93126dc545e2c0086d0f647c3094aae081cdb78f42ce2bc25e7293   # [gcc_version == "14.2.0"]
     sha256: 3a2b10cab86e32358fdac871546d57e2700e9bdb5875ef33fff5b601265b9e32   # [gcc_version == "13.3.0"]
     patches:
       - patches/0002-allow-commands-in-main-specfile.patch
-      - patches/0003-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver == 14]
+      - patches/0003-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver != 13]
       {% if cross_target_platform.startswith("linux-") %}
-      - patches/0004-add-ldl-to-libstdc___la_LDFLAGS.patch                          # [gcc_maj_ver == 14]
+      - patches/0004-add-ldl-to-libstdc___la_LDFLAGS.patch                          # [gcc_maj_ver != 13]
       - patches/0005-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       - patches/0006-fix-tzdb-for-newer-format.patch                                # [gcc_maj_ver == 14]
       {% else %}
