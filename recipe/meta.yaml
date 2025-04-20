@@ -26,7 +26,6 @@ source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
     sha256: 7d376d445f93126dc545e2c0086d0f647c3094aae081cdb78f42ce2bc25e7293   # [gcc_version == "14.2.0"]
     sha256: 3a2b10cab86e32358fdac871546d57e2700e9bdb5875ef33fff5b601265b9e32   # [gcc_version == "13.3.0"]
-    sha256: 5a30de2be740062bb3ddd3fd13c9b1bb4584d8f85616d33f23a713439d714148   # [gcc_version == "12.4.0"]
     patches:
       - patches/0002-allow-commands-in-main-specfile.patch
       - patches/0003-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver == 14]
@@ -59,7 +58,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: true  # [not (linux or win) or (gcc_maj_ver == 12 and cross_target_platform == "win-64") or (win and cross_target_platform != "win-64")]
+  skip: true  # [not (linux or win) or (win and cross_target_platform != "win-64")]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }}
