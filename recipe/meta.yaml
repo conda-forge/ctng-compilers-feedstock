@@ -23,9 +23,8 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://gcc.gnu.org/pub/gcc/snapshots/15.1.0-RC-20250418/gcc-15.1.0-RC-20250418.tar.gz  # [gcc_maj_ver == 15]
-  - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz                  # [gcc_maj_ver != 15]
-    sha256: 2b0801cd32e4643e7e9f69ba890bc517371e19ad964777dd748789b99797199b   # [gcc_version == "15.1.0"]
+  - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
+    sha256: 51b9919ea69c980d7a381db95d4be27edf73b21254eb13d752a08003b4d013b1   # [gcc_version == "15.1.0"]
     sha256: 7d376d445f93126dc545e2c0086d0f647c3094aae081cdb78f42ce2bc25e7293   # [gcc_version == "14.2.0"]
     sha256: 3a2b10cab86e32358fdac871546d57e2700e9bdb5875ef33fff5b601265b9e32   # [gcc_version == "13.3.0"]
     patches:
