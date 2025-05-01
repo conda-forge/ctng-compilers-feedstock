@@ -389,7 +389,7 @@ outputs:
         - libgcc >={{ gcc_version }}
     test:
       requires:
-        - cmake >=3.11  # [x86_64 or aarch64 or ppc64le]
+        - cmake >=3.11,<4  # [x86_64 or aarch64 or ppc64le]
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
       commands:
         {% if cross_target_platform.startswith("linux-") %}
