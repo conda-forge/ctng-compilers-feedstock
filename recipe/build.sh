@@ -35,6 +35,9 @@ if [[ "$cross_target_platform" == "win-64" ]]; then
   # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
   sed -i 's#${prefix}/mingw/#${prefix}/${target}/sysroot/usr/#g' configure
   sed -i "s#/mingw/#/usr/#g" gcc/config/i386/mingw32.h
+else
+  # prevent mingw patches from being archived in linux conda packages
+  rm -rf ${RECIPE_DIR}/patches/mingw
 fi
 
 NATIVE_SYSTEM_HEADER_DIR=/usr/include
