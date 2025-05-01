@@ -34,7 +34,11 @@ if [[ "$cross_target_platform" == "win-64" ]]; then
   # do not expect ${prefix}/mingw symlink - this should be superceded by
   # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
   sed -i 's#${prefix}/mingw/#${prefix}/${target}/sysroot/usr/#g' configure
-  sed -i "s#/mingw/#/usr/#g" gcc/config/i386/mingw32.h
+  if [[ "$gcc_major_ver" == "13" || "$gcc_major_ver" == "14" ]]; then
+    sed -i "s#/mingw/#/usr/#g" gcc/config/i386/mingw32.h
+  else
+    sed -i "s#/mingw/#/usr/#g" gcc/config/mingw/mingw32.h
+  fi
 else
   # prevent mingw patches from being archived in linux conda packages
   rm -rf ${RECIPE_DIR}/patches/mingw
