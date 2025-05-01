@@ -35,8 +35,9 @@ source:
       - patches/0005-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       - patches/0006-fix-tzdb-for-newer-format.patch                                # [gcc_maj_ver == 14]
       {% else %}
-      # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
+      # for GCC 15: https://github.com/msys2/MINGW-packages/tree/f59921184b35858d4ceb91679578de0d62475cbf/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
+      # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
       - patches/mingw/{{ gcc_maj_ver }}/0002-Relocate-libintl.patch                                             # [gcc_maj_ver == 13]
       - patches/mingw/{{ gcc_maj_ver }}/0003-Windows-Follow-Posix-dir-exists-semantics-more-close.patch
       - patches/mingw/{{ gcc_maj_ver }}/0005-Windows-Don-t-ignore-native-system-header-dir.patch
@@ -47,7 +48,7 @@ source:
       - patches/mingw/{{ gcc_maj_ver }}/0012-Handle-spaces-in-path-for-default-manifest.patch
       - patches/mingw/{{ gcc_maj_ver }}/0014-gcc-9-branch-clone_function_name_1-Retain-any-stdcall-suffix.patch
       - patches/mingw/{{ gcc_maj_ver }}/0020-libgomp-Don-t-hard-code-MS-printf-attributes.patch
-      - patches/mingw/{{ gcc_maj_ver }}/0021-PR14940-Allow-a-PCH-to-be-mapped-to-a-different-addr.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0021-PR14940-Allow-a-PCH-to-be-mapped-to-a-different-addr.patch         # [gcc_maj_ver != 15]
       - patches/mingw/{{ gcc_maj_ver }}/0140-gcc-diagnostic-color.patch
       - patches/mingw/{{ gcc_maj_ver }}/0200-add-m-no-align-vector-insn-option-for-i386.patch
       - patches/mingw/{{ gcc_maj_ver }}/0300-override-builtin-printf-format.patch                               # [gcc_maj_ver == 13]
@@ -55,6 +56,7 @@ source:
       - patches/mingw/{{ gcc_maj_ver }}/2001-fix-building-rust-on-mingw-w64.patch
       - patches/mingw/{{ gcc_maj_ver }}/2f7e7bfa3c6327793cdcdcb5c770b93cecd49bd0.patch                          # [gcc_maj_ver == 13]
       - patches/mingw/{{ gcc_maj_ver }}/3eeb4801d6f45f6250fc77a6d3ab4e0115f8cfdd.patch                          # [gcc_maj_ver == 13]
+      - patches/mingw/{{ gcc_maj_ver }}/9002-native-tls.patch                                                   # [gcc_maj_ver == 15]
       {% endif %}
 
 build:
@@ -62,9 +64,6 @@ build:
   skip: true  # [not (linux or win) or (win and cross_target_platform != "win-64")]
   # debug: only GCC 15
   skip: true  # [gcc_maj_ver != 15]
-  # no mingw patches for GCC 15 yet, check
-  # https://github.com/msys2/MINGW-packages/tree/master/mingw-w64-gcc
-  skip: true  # [cross_target_platform == "win-64"]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }}
