@@ -218,7 +218,7 @@ outputs:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
       run:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
-        - conda-gcc-specs  # [gcc_maj_ver == 15]
+        - conda-gcc-specs  # [gcc_version != "14.2.0" and gcc_version != "13.3.0"]
     test:
       commands:
         - ${PREFIX}/bin/gcc -v
