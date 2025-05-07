@@ -11,7 +11,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cross_target_platform:
-- linux-64
+- linux-ppc64le
 cross_target_stdlib:
 - sysroot
 cross_target_stdlib_version:
@@ -19,9 +19,9 @@ cross_target_stdlib_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 gcc_maj_ver:
-- '12'
+- '15'
 gcc_version:
-- 12.4.0
+- 15.1.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
@@ -29,9 +29,9 @@ libgomp_ver:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-64
+- linux-aarch64
 triplet:
-- x86_64-conda-linux-gnu
+- powerpc64le-conda-linux-gnu
 zip_keys:
 - - cross_target_stdlib_version
   - cross_target_stdlib

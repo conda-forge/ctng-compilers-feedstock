@@ -2,7 +2,7 @@
 {% set build_num = 2 %}
 
 {% if gcc_maj_ver is not defined %}
-{% set gcc_maj_ver = 14 %}
+{% set gcc_maj_ver = 15 %}
 {% endif %}
 
 # libgcc-devel is a noarch: generic package that is built for
@@ -24,19 +24,20 @@ package:
 
 source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
+    sha256: 51b9919ea69c980d7a381db95d4be27edf73b21254eb13d752a08003b4d013b1   # [gcc_version == "15.1.0"]
     sha256: 7d376d445f93126dc545e2c0086d0f647c3094aae081cdb78f42ce2bc25e7293   # [gcc_version == "14.2.0"]
     sha256: 3a2b10cab86e32358fdac871546d57e2700e9bdb5875ef33fff5b601265b9e32   # [gcc_version == "13.3.0"]
-    sha256: 5a30de2be740062bb3ddd3fd13c9b1bb4584d8f85616d33f23a713439d714148   # [gcc_version == "12.4.0"]
     patches:
       - patches/0002-allow-commands-in-main-specfile.patch
-      - patches/0003-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver == 14]
+      - patches/0003-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver != 13]
       {% if cross_target_platform.startswith("linux-") %}
-      - patches/0004-add-ldl-to-libstdc___la_LDFLAGS.patch                          # [gcc_maj_ver == 14]
+      - patches/0004-add-ldl-to-libstdc___la_LDFLAGS.patch                          # [gcc_maj_ver != 13]
       - patches/0005-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       - patches/0006-fix-tzdb-for-newer-format.patch                                # [gcc_maj_ver == 14]
       {% else %}
-      # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
+      # for GCC 15: https://github.com/msys2/MINGW-packages/tree/f59921184b35858d4ceb91679578de0d62475cbf/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
+      # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
       - patches/mingw/{{ gcc_maj_ver }}/0002-Relocate-libintl.patch                                             # [gcc_maj_ver == 13]
       - patches/mingw/{{ gcc_maj_ver }}/0003-Windows-Follow-Posix-dir-exists-semantics-more-close.patch
       - patches/mingw/{{ gcc_maj_ver }}/0005-Windows-Don-t-ignore-native-system-header-dir.patch
@@ -47,7 +48,7 @@ source:
       - patches/mingw/{{ gcc_maj_ver }}/0012-Handle-spaces-in-path-for-default-manifest.patch
       - patches/mingw/{{ gcc_maj_ver }}/0014-gcc-9-branch-clone_function_name_1-Retain-any-stdcall-suffix.patch
       - patches/mingw/{{ gcc_maj_ver }}/0020-libgomp-Don-t-hard-code-MS-printf-attributes.patch
-      - patches/mingw/{{ gcc_maj_ver }}/0021-PR14940-Allow-a-PCH-to-be-mapped-to-a-different-addr.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0021-PR14940-Allow-a-PCH-to-be-mapped-to-a-different-addr.patch         # [gcc_maj_ver != 15]
       - patches/mingw/{{ gcc_maj_ver }}/0140-gcc-diagnostic-color.patch
       - patches/mingw/{{ gcc_maj_ver }}/0200-add-m-no-align-vector-insn-option-for-i386.patch
       - patches/mingw/{{ gcc_maj_ver }}/0300-override-builtin-printf-format.patch                               # [gcc_maj_ver == 13]
@@ -55,11 +56,12 @@ source:
       - patches/mingw/{{ gcc_maj_ver }}/2001-fix-building-rust-on-mingw-w64.patch
       - patches/mingw/{{ gcc_maj_ver }}/2f7e7bfa3c6327793cdcdcb5c770b93cecd49bd0.patch                          # [gcc_maj_ver == 13]
       - patches/mingw/{{ gcc_maj_ver }}/3eeb4801d6f45f6250fc77a6d3ab4e0115f8cfdd.patch                          # [gcc_maj_ver == 13]
+      - patches/mingw/{{ gcc_maj_ver }}/9002-native-tls.patch                                                   # [gcc_maj_ver == 15]
       {% endif %}
 
 build:
   number: {{ build_num }}
-  skip: true  # [not (linux or win) or (gcc_maj_ver == 12 and cross_target_platform == "win-64") or (win and cross_target_platform != "win-64")]
+  skip: true  # [not (linux or win) or (win and cross_target_platform != "win-64")]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }}
@@ -216,6 +218,7 @@ outputs:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
       run:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
+        - conda-gcc-specs  # [gcc_version != "14.2.0" and gcc_version != "13.3.0"]
     test:
       commands:
         - ${PREFIX}/bin/gcc -v
@@ -385,7 +388,7 @@ outputs:
         - libgcc >={{ gcc_version }}
     test:
       requires:
-        - cmake >=3.11  # [x86_64 or aarch64 or ppc64le]
+        - cmake >=3.11,<4  # [x86_64 or aarch64 or ppc64le]
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
       commands:
         {% if cross_target_platform.startswith("linux-") %}

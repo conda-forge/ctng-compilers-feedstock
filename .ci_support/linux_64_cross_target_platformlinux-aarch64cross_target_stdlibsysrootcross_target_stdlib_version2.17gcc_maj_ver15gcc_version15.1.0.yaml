@@ -19,9 +19,9 @@ cross_target_stdlib_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 gcc_maj_ver:
-- '12'
+- '15'
 gcc_version:
-- 12.4.0
+- 15.1.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
@@ -29,7 +29,7 @@ libgomp_ver:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-ppc64le
+- linux-64
 triplet:
 - aarch64-conda-linux-gnu
 zip_keys:
