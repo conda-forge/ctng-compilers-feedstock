@@ -21,7 +21,7 @@ docker_image:
 gcc_maj_ver:
 - '14'
 gcc_version:
-- 14.2.0
+- 14.3.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
@@ -29,7 +29,7 @@ libgomp_ver:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-ppc64le
+- linux-64
 triplet:
 - x86_64-w64-mingw32
 zip_keys:
