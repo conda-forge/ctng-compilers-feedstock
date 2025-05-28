@@ -25,15 +25,14 @@ package:
 source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
     sha256: 51b9919ea69c980d7a381db95d4be27edf73b21254eb13d752a08003b4d013b1   # [gcc_version == "15.1.0"]
-    sha256: 7d376d445f93126dc545e2c0086d0f647c3094aae081cdb78f42ce2bc25e7293   # [gcc_version == "14.2.0"]
+    sha256: ace8b8b0dbfe6abfc22f821cb093e195aa5498b7ccf7cd23e4424b9f14afed22   # [gcc_version == "14.3.0"]
     sha256: 3a2b10cab86e32358fdac871546d57e2700e9bdb5875ef33fff5b601265b9e32   # [gcc_version == "13.3.0"]
     patches:
-      - patches/0002-allow-commands-in-main-specfile.patch
-      - patches/0003-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver != 13]
+      - patches/0001-allow-commands-in-main-specfile.patch
+      - patches/0002-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver != 13]
       {% if cross_target_platform.startswith("linux-") %}
-      - patches/0004-add-ldl-to-libstdc___la_LDFLAGS.patch                          # [gcc_maj_ver != 13]
-      - patches/0005-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
-      - patches/0006-fix-tzdb-for-newer-format.patch                                # [gcc_maj_ver == 14]
+      - patches/0003-add-ldl-to-libstdc___la_LDFLAGS.patch                          # [gcc_maj_ver != 13]
+      - patches/0004-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       {% else %}
       # for GCC 15: https://github.com/msys2/MINGW-packages/tree/f59921184b35858d4ceb91679578de0d62475cbf/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
@@ -218,7 +217,7 @@ outputs:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
       run:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
-        - conda-gcc-specs  # [gcc_version != "14.2.0" and gcc_version != "13.3.0"]
+        - conda-gcc-specs  # [gcc_version != "13.3.0"]
     test:
       commands:
         - ${PREFIX}/bin/gcc -v
