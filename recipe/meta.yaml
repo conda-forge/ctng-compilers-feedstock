@@ -26,7 +26,7 @@ source:
   - url: https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
     sha256: 51b9919ea69c980d7a381db95d4be27edf73b21254eb13d752a08003b4d013b1   # [gcc_version == "15.1.0"]
     sha256: ace8b8b0dbfe6abfc22f821cb093e195aa5498b7ccf7cd23e4424b9f14afed22   # [gcc_version == "14.3.0"]
-    sha256: 3a2b10cab86e32358fdac871546d57e2700e9bdb5875ef33fff5b601265b9e32   # [gcc_version == "13.3.0"]
+    sha256: bf0baf3e570c9c74c17c8201f0196c6924b4bd98c90e69d6b2ac0cd823f33bbc   # [gcc_version == "13.4.0"]
     patches:
       - patches/0001-allow-commands-in-main-specfile.patch
       - patches/0002-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver != 13]
@@ -217,7 +217,7 @@ outputs:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
       run:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
-        - conda-gcc-specs  # [gcc_version != "13.3.0"]
+        - conda-gcc-specs
     test:
       commands:
         - ${PREFIX}/bin/gcc -v
