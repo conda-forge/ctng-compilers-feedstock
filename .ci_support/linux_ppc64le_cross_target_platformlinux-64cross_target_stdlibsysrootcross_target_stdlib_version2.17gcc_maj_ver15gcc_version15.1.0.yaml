@@ -32,6 +32,9 @@ target_platform:
 - linux-ppc64le
 triplet:
 - x86_64-conda-linux-gnu
+with_specs:
+- false
+- true
 zip_keys:
 - - cross_target_stdlib_version
   - cross_target_stdlib
