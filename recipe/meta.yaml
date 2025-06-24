@@ -212,6 +212,8 @@ outputs:
     script: install-symlinks.sh
     build:
       skip: true  # [target_platform != cross_target_platform]
+      track_features:            # [not with_specs]
+        - gcc_no_conda_specs     # [not with_specs]
     requirements:
       host:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
@@ -227,6 +229,13 @@ outputs:
       home: https://github.com/conda-forge/ctng-compilers-feedstock
       license: BSD-3-Clause
       license_file: LICENSE
+
+  - name: gcc-no-conda-specs
+    requirements:
+      run:
+        - gcc
+      run_constrained:
+        - conda-gcc-specs <0.0a0
 
   - name: conda-gcc-specs
     script: install-conda-specs.sh
