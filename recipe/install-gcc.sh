@@ -46,6 +46,10 @@ pushd ${SRC_DIR}/build
   make prefix=${PREFIX} install-fixincludes
   make -C gcc prefix=${PREFIX} install-mkheaders
 
+  if [[ -d ${TARGET}/libatomic ]]; then
+    make -C ${TARGET}/libatomic prefix=${PREFIX} install
+  fi
+
   if [[ -d ${TARGET}/libgomp ]]; then
     make -C ${TARGET}/libgomp prefix=${PREFIX} install
   fi
@@ -203,7 +207,7 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
   pushd ${PREFIX}/${TARGET}/lib
     if [[ "${TARGET}" != *mingw* ]]; then
       ln -sf ../../lib/libgomp.so libgomp.so
-      for lib in libgfortran libatomic libquadmath libitm lib{a,l,ub,t}san; do
+      for lib in libgfortran libatomic libquadmath libitm lib{a,hwa,l,ub,t}san; do
         for f in ${PREFIX}/lib/${lib}.so*; do
           ln -s ../../lib/$(basename $f) ${PREFIX}/${TARGET}/lib/$(basename $f)
         done
