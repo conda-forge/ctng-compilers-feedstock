@@ -12,7 +12,7 @@ pushd ${SRC_DIR}/build
   # TODO :: Also do this for libgfortran (and libstdc++ too probably?)
   sed -i.bak 's/.*cannot install.*/func_warning "Ignoring libtool error about cannot install to a directory not ending in"/' \
              ${CHOST}/libsanitizer/libtool
-  for lib in libsanitizer/{a,l,ub,t}san; do
+  for lib in libsanitizer/{a,hwa,l,ub,t}san; do
     # TODO :: Also do this for libgfortran (and libstdc++ too probably?)
     if [[ -f ${CHOST}/${lib}/libtool ]]; then
       sed -i.bak 's/.*cannot install.*/func_warning "Ignoring libtool error about cannot install to a directory not ending in"/' \
