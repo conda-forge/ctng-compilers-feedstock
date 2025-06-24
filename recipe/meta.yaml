@@ -493,7 +493,7 @@ outputs:
         - gcc_impl_{{ cross_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libasan.so
-        - test -f ${PREFIX}/lib/libhwasan.so
+        - test -f ${PREFIX}/lib/libhwasan.so   # [x86_64 or aarch64]
         - file ${PREFIX}/bin/{{ triplet }}-gcc
         - echo 'void main(){}' | {{ triplet }}-gcc -fsanitize=address -Wl,--fatal-warnings -x c -
     about:
