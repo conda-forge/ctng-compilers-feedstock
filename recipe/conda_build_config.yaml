@@ -44,7 +44,7 @@ c_stdlib:          # [win]
   - m2w64-sysroot  # [win]
 c_stdlib_version:  # [win]
   - 12             # [win]
-with_specs:
+with_conda_specs:
   - true
   - false
 zip_keys:

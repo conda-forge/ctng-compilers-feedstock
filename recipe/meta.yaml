@@ -212,8 +212,8 @@ outputs:
     script: install-symlinks.sh
     build:
       skip: true  # [target_platform != cross_target_platform]
-      track_features:            # [not with_specs]
-        - gcc_no_conda_specs     # [not with_specs]
+      track_features:            # [not with_conda_specs]
+        - gcc_no_conda_specs     # [not with_conda_specs]
     requirements:
       host:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
@@ -232,7 +232,7 @@ outputs:
 
   - name: gcc-no-conda-specs
     build:
-      skip: true   # [with_specs]
+      skip: true   # [with_conda_specs]
     requirements:
       run:
         - gcc
