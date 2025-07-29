@@ -219,7 +219,7 @@ outputs:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
       run:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
-        - conda-gcc-specs
+        - conda-gcc-specs        # [with_conda_specs]
     test:
       commands:
         - ${PREFIX}/bin/gcc -v
