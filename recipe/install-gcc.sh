@@ -46,6 +46,10 @@ pushd ${SRC_DIR}/build
   make prefix=${PREFIX} install-fixincludes
   make -C gcc prefix=${PREFIX} install-mkheaders
 
+  if [[ -d ${TARGET}/libatomic ]]; then
+    make -C ${TARGET}/libatomic prefix=${PREFIX} install
+  fi
+
   if [[ -d ${TARGET}/libgomp ]]; then
     make -C ${TARGET}/libgomp prefix=${PREFIX} install
   fi

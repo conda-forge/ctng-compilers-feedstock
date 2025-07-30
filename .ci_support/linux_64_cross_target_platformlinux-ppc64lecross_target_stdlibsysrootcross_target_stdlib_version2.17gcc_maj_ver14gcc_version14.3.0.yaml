@@ -32,6 +32,9 @@ target_platform:
 - linux-64
 triplet:
 - powerpc64le-conda-linux-gnu
+with_conda_specs:
+- false
+- true
 zip_keys:
 - - cross_target_stdlib_version
   - cross_target_stdlib

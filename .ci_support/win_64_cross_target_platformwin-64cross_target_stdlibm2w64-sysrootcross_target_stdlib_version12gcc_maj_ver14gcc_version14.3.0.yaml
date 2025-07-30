@@ -30,6 +30,9 @@ target_platform:
 - win-64
 triplet:
 - x86_64-w64-mingw32
+with_conda_specs:
+- false
+- true
 zip_keys:
 - - cross_target_stdlib_version
   - cross_target_stdlib

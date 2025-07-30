@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 3 %}
+{% set build_num = 4 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -212,12 +212,14 @@ outputs:
     script: install-symlinks.sh
     build:
       skip: true  # [target_platform != cross_target_platform]
+      track_features:            # [not with_conda_specs]
+        - gcc_no_conda_specs     # [not with_conda_specs]
     requirements:
       host:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
       run:
         - gcc_impl_{{ target_platform }} {{ gcc_version }}.*
-        - conda-gcc-specs
+        - conda-gcc-specs        # [with_conda_specs]
     test:
       commands:
         - ${PREFIX}/bin/gcc -v
@@ -227,6 +229,18 @@ outputs:
       home: https://github.com/conda-forge/ctng-compilers-feedstock
       license: BSD-3-Clause
       license_file: LICENSE
+
+  - name: gcc-no-conda-specs
+    build:
+      skip: true   # [with_conda_specs]
+    requirements:
+      run:
+        - gcc
+      run_constrained:
+        - conda-gcc-specs <0.0a0
+    test:
+      commands:
+        - gcc --version
 
   - name: conda-gcc-specs
     script: install-conda-specs.sh
