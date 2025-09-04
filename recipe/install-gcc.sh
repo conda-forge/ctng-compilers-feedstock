@@ -107,7 +107,7 @@ for opt; do
       exit 1;;
   esac
 done
-exec gcc $fl ${1+"$@"}
+exec ${TARGET}-c89${EXEEXT} $fl ${1+"$@"}
 EOF
 
   cat > ${PREFIX}/bin/${TARGET}-c99${EXEEXT} <<"EOF"
@@ -120,7 +120,7 @@ for opt; do
       exit 1;;
   esac
 done
-exec gcc $fl ${1+"$@"}
+exec ${TARGET}-c99${EXEEXT} $fl ${1+"$@"}
 EOF
 
   chmod 755 ${PREFIX}/bin/${TARGET}-c{8,9}9${EXEEXT}
