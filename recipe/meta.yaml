@@ -26,7 +26,7 @@ source:
   - url: 
       - https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
       - https://mirrors.ocf.berkeley.edu/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
-    sha256: 51b9919ea69c980d7a381db95d4be27edf73b21254eb13d752a08003b4d013b1   # [gcc_version == "15.1.0"]
+    sha256: 7294d65cc1a0558cb815af0ca8c7763d86f7a31199794ede3f630c0d1b0a5723   # [gcc_version == "15.2.0"]
     sha256: ace8b8b0dbfe6abfc22f821cb093e195aa5498b7ccf7cd23e4424b9f14afed22   # [gcc_version == "14.3.0"]
     sha256: bf0baf3e570c9c74c17c8201f0196c6924b4bd98c90e69d6b2ac0cd823f33bbc   # [gcc_version == "13.4.0"]
     patches:
