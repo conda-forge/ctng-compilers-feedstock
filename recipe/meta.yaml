@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 6 %}
+{% set build_num = 7 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -465,7 +465,7 @@ outputs:
         - {{ pin_subpackage("libgcc", exact=True) }}
       run:
         - {{ pin_subpackage("libgcc", exact=True) }}
-      run_contrained:
+      run_constrained:
         # avoid installing incompatible version of old name for this output
         - libstdcxx-ng =={{ version }}=*_{{ build_num }}
     test:
