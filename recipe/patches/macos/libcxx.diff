@@ -1,0 +1,11 @@
+--- gcc/cp/g++spec.cc	2025-10-24 18:38:46.452718757 -0700
++++ gcc/cp/g++spec.cc	2025-10-24 18:39:00.565987367 -0700
+@@ -97,7 +97,7 @@
+   int library = 0;
+ 
+   /* Which c++ runtime library to link.  */
+-  stdcxxlib_kind which_library = USE_LIBSTDCXX;
++  stdcxxlib_kind which_library = USE_LIBCXX;
+ 
+   /* The number of arguments being added to what's in argv, other than
+      libraries.  We use this to track the number of times we've inserted

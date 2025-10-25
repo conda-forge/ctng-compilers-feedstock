@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 7 %}
+{% set build_num = 8 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -24,7 +24,7 @@ package:
 
 source:
   - url: 
-      - https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
+      #- https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
       - https://mirrors.ocf.berkeley.edu/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
     sha256: 7294d65cc1a0558cb815af0ca8c7763d86f7a31199794ede3f630c0d1b0a5723   # [gcc_version == "15.2.0"]
     sha256: ace8b8b0dbfe6abfc22f821cb093e195aa5498b7ccf7cd23e4424b9f14afed22   # [gcc_version == "14.3.0"]
@@ -35,7 +35,7 @@ source:
       {% if cross_target_platform.startswith("linux-") %}
       - patches/0003-add-ldl-to-libstdc___la_LDFLAGS.patch                          # [gcc_maj_ver != 13]
       - patches/0004-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
-      {% else %}
+      {% elif cross_target_platform.startswith("win-") %}
       # for GCC 15: https://github.com/msys2/MINGW-packages/tree/f59921184b35858d4ceb91679578de0d62475cbf/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
       # for GCC 13: https://github.com/msys2/MINGW-packages/tree/4f1262b4e1072632eccf0958764f90d890b832ac/mingw-w64-gcc
@@ -58,11 +58,20 @@ source:
       - patches/mingw/{{ gcc_maj_ver }}/2f7e7bfa3c6327793cdcdcb5c770b93cecd49bd0.patch                          # [gcc_maj_ver == 13]
       - patches/mingw/{{ gcc_maj_ver }}/3eeb4801d6f45f6250fc77a6d3ab4e0115f8cfdd.patch                          # [gcc_maj_ver == 13]
       - patches/mingw/{{ gcc_maj_ver }}/9002-native-tls.patch                                                   # [gcc_maj_ver == 15]
+      {% elif cross_target_platform.startswith("osx-") %}
+      # all patches from https://github.com/Homebrew/formula-patches/tree/698885df7f624d0ce15bceb79a4d9760a473b502/gcc
+      # and edited with `s/-Wc,-nodefaultrpaths/-nodefaultrpaths`.
+      # in case of several patches per version, use newest one
+      - patches/macos/gcc-{{ version }}.diff   # [cross_target_platform == "osx-arm64"]
+      # from https://github.com/JuliaPackaging/Yggdrasil/blob/master/0_RootFS/GCCBootstrap%4014/bundled/patches/gcc/gcc1420-Increase-fallback-min-macOS-version-for-libgcc-to-10.8.patch
+      - patches/macos/0001-GCC-{{ gcc_maj_ver }}-Increase-fallback-min-macOS-version-for-libgc.patch   # [cross_target_platform == "osx-64" and gcc_maj_ver != 13]
+      # Make libcxx the default
+      - patches/macos/libcxx.diff
       {% endif %}
 
 build:
   number: {{ build_num }}
-  skip: true  # [not (linux or win) or (win and cross_target_platform != "win-64")]
+  skip: true  # [not (linux or win) or (win and cross_target_platform != "win-64") or cross_target_platform not in ("osx-64", "osx-arm64")]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }}
@@ -72,7 +81,7 @@ requirements:
     # Build dependencies are installed in setup_compilers.sh due to
     # conda-build bugs
   host:
-    - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
+    - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_platform not in ("osx-64", "osx-arm64")]
 
 outputs:
   - name: libgcc-devel_{{ cross_target_platform }}
@@ -88,7 +97,7 @@ outputs:
     requirements:
       build:
       host:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_platform not in ("osx-64", "osx-arm64")]
       run:
         - __unix   # [unix]
         - m2-conda-epoch    # [win]
@@ -99,6 +108,8 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc.a
         {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so
+        {% elif cross_target_platform.startswith("osx-") %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.dylib
         {% else %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.a
         {% endif %}
@@ -112,6 +123,7 @@ outputs:
     build:
       noarch: generic
       number: {{ libgcc_devel_build_num }}
+      skip: true  # [cross_target_stdlib_cxx != "libstdcxx"]
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
@@ -120,7 +132,7 @@ outputs:
     requirements:
       build:
       host:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_platform not in ("osx-64", "osx-arm64")]
       run:
         - __unix   # [unix]
         - m2-conda-epoch    # [win]
@@ -132,6 +144,8 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/include/c++/cstdio
         {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.so
+        {% elif cross_target_platform.startswith("osx-") %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.dylib
         {% else %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.dll.a
         {% endif %}
@@ -152,21 +166,29 @@ outputs:
     requirements:
       build:
       host:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
-        - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libstdcxx", exact=True) }}             # [target_platform == cross_target_platform]
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_platform not in ("osx-64", "osx-arm64")]
+        - {{ pin_subpackage("libgomp", exact=True) }}               # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
+        - {{ pin_subpackage("libstdcxx", exact=True) }}             # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
         - {{ pin_subpackage("libgcc", exact=True) }}                # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform and not win]
+        - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform and not (win or osx)]
       run:
+        {% if cross_target_platform.startswith("osx-") %}
+        # For the linker
+        - ld64_{{ cross_target_platform }}
+        # For the assembler which calls the integrated assembler in clang
+        - cctools_{{ cross_target_platform }}
+        - clang
+        {% else %}
         - binutils_impl_{{ cross_target_platform }} >={{ binutils_version }}
-        - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
-        - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform and not win]
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
         # libstdcxx is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx", max_pin=None) }}       # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libgcc", max_pin=None) }}          # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgomp", max_pin=None) }}         # [target_platform == cross_target_platform]
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
+        {% endif %}
+        - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
+        - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform and not (win or osx)]
+        - {{ pin_subpackage("libgcc", max_pin=None) }}          # [target_platform == cross_target_platform]
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
@@ -179,8 +201,8 @@ outputs:
       commands:
         - echo {{ c_stdlib }}
         - echo {{ c_stdlib_version }}
-        - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.so   # [target_platform == cross_target_platform]
-        - test `readlink ${PREFIX}/{{ triplet }}/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == cross_target_platform]
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.so   # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
+        - test `readlink ${PREFIX}/{{ triplet }}/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
         - test -f ${PREFIX}/bin/{{ triplet }}-gcc
         - test -f ${PREFIX}/bin/{{ triplet }}-cpp
         - test ! -f ${PREFIX}/bin/gcc
@@ -199,10 +221,14 @@ outputs:
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so
         - test -f ${PREFIX}/{{ triplet }}/lib/libsanitizer.spec
         - test -f ${PREFIX}/{{ triplet }}/lib/libasan_preinit.o
+        {% elif cross_target_platform.startswith("osx-") %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.dylib
+        - test -f ${PREFIX}/{{ triplet }}/lib/libsanitizer.spec
+        - test -f ${PREFIX}/{{ triplet }}/lib/libasan_preinit.o
         {% else %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.a
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libquadmath.a
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.a
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.a           # [cross_target_platform not in ("osx-64", "osx-arm64")]
         {% endif %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.spec
     about:
@@ -305,7 +331,7 @@ outputs:
     requirements:
       build:
       host:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_platform not in ("osx-64", "osx-arm64")]
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
       run:
@@ -313,13 +339,15 @@ outputs:
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         # not needed due to pinning above but marks this build as using the new sysroots
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
-        - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}
+        - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}   # [cross_target_stdlib_cxx == "libstdcxx"]
+        - libcxx-devel                                                                   # [cross_target_stdlib_cxx == "libcxx"]
         # for C++20 chrono support
         - tzdata
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
-        - libstdcxx >={{ gcc_version }}
+        - libstdcxx >={{ gcc_version }}                             # [cross_target_stdlib_cxx == "libstdcxx"]
+        - libcxx                                                    # [cross_target_stdlib_cxx == "libcxx"]
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
@@ -388,13 +416,13 @@ outputs:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         # not needed due to pinning above but marks this build as using the new sysroots
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_platform not in ("osx-64", "osx-arm64")]
       run:
         # For cpp and crt{i,n}.o
         - gcc_impl_{{ cross_target_platform }} >={{ gcc_version }}
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname, max_pin=None) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc", max_pin=None) }}                            # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libstdcxx", max_pin=None) }}                         # [target_platform == cross_target_platform]
+        - {{ pin_subpackage(cross_target_cxx_stdlib, max_pin=None) }}                         # [target_platform == cross_target_platform]
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
@@ -408,6 +436,8 @@ outputs:
       commands:
         {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.so
+        {% elif cross_target_platform.startswith("osx-") %}
+        - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.dylib
         {% else %}
         - test -f ${PREFIX}/{{ triplet }}/lib/libgfortran.dll.a
         {% endif %}
@@ -454,14 +484,14 @@ outputs:
     script: install-libstdc++.sh
     build:
       number: {{ build_num }}
-      skip: true                # [target_platform != cross_target_platform]
+      skip: true                # [target_platform != cross_target_platform or cross_target_stdlib_cxx != "libstdcxx"]
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
     requirements:
       build:
       host:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_platform not in ("osx-64", "osx-arm64")]
         - {{ pin_subpackage("libgcc", exact=True) }}
       run:
         - {{ pin_subpackage("libgcc", exact=True) }}
@@ -481,7 +511,7 @@ outputs:
     script: install-libsanitizer.sh
     build:
       number: {{ build_num }}
-      skip: true                # [target_platform != cross_target_platform or win]
+      skip: true                # [target_platform != cross_target_platform or win or osx]
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
@@ -490,7 +520,7 @@ outputs:
     requirements:
       build:
       host:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}  # [cross_target_platform not in ("osx-64", "osx-arm64")]
       run:
         - libgcc >={{ gcc_version }}
         - libstdcxx >={{ gcc_version }}
@@ -513,7 +543,7 @@ outputs:
     script: install-libgomp.sh
     build:
       number: {{ build_num }}
-      skip: true                # [target_platform != cross_target_platform]
+      skip: true                # [target_platform != cross_target_platform or osx]
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
@@ -553,11 +583,12 @@ outputs:
     requirements:
       build:
       host:
-        - {{ pin_subpackage("libgomp", exact=True) }}
-        - {{ pin_subpackage('_openmp_mutex', exact=True) }}
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
+        - {{ pin_subpackage("libgomp", exact=True) }}                                               # [not osx]
+        - {{ pin_subpackage('_openmp_mutex', exact=True) }}                                         # [not osx]
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}  # [not osx]
       run:
-        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
+        - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}                                       # [not osx]
+        - _openmp_mutex                                                                             # [osx]
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - msys2-conda-epoch <0.0a0    # [win]
@@ -567,9 +598,12 @@ outputs:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
       commands:
-        - test -f ${PREFIX}/lib/libgcc_s.so
-        - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
-        - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"
+        - test -f ${PREFIX}/lib/libgcc_s.so                                                         # [linux]
+        - test -f ${PREFIX}/lib/libgcc_s.1.dylib                                                    # [osx]
+        - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}                                   # [linux]
+        - test -f ${PREFIX}/lib/libgomp.{{ libgomp_ver[0:1] }}.dylib                                # [osx]
+        - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"   # [linux]
+        - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"   # [linux]
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
@@ -580,7 +614,7 @@ outputs:
     version: {{ openmp_ver }}
     build:
       string: 3_gnu
-      skip: true    # [target_platform != cross_target_platform]
+      skip: true    # [target_platform != cross_target_platform or osx]
       run_exports:
         strong:
           - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}
@@ -588,7 +622,7 @@ outputs:
       build:
       host:
         - {{ pin_subpackage('libgomp', exact=True) }}
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}  # [cross_target_platform not in ("osx-64", "osx-arm64")]
       run:
         - libgomp >=7.5.0
       run_constrained:
@@ -617,7 +651,7 @@ outputs:
     requirements:
       build:
       host:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_platform not in ("osx-64", "osx-arm64")]
       run:
         - libgcc >={{ gcc_version }}
       run_constrained:
@@ -651,7 +685,7 @@ outputs:
 
   # compatibility outputs for previous naming of the runtime libraries
   # with "-ng" suffix; for windows the suffix had never been introduced
-  {% if not cross_target_platform.startswith("win-") %}
+  {% if cross_target_platform.startswith("linux-") %}
   - name: libgcc-ng
     target: {{ cross_target_platform }}
     build:
@@ -678,7 +712,7 @@ outputs:
     script: install-libstdc++.sh
     build:
       number: {{ build_num }}
-      skip: true   # [target_platform != cross_target_platform]
+      skip: true   # [target_platform != cross_target_platform or cross_target_stdlib_cxx != "libstdcxx"]
       run_exports:
         strong:
           - libstdcxx

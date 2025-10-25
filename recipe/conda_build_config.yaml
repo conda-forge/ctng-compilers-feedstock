@@ -3,6 +3,8 @@ triplet:
   - powerpc64le-conda-linux-gnu
   - aarch64-conda-linux-gnu
   - x86_64-w64-mingw32
+  - x86_64-apple-darwin13.4.0
+  - arm64-apple-darwin20.0.0
 gcc_version:
   - 15.2.0
   - 14.3.0
@@ -16,22 +18,37 @@ libgfortran_soname:
   - 5
   - 5
 binutils_version:
-  - 2.40
+  - 2.44
 cross_target_platform:
   - linux-64
   - linux-ppc64le
   - linux-aarch64
   - win-64
+  - osx-64
+  - osx-arm64
 cross_target_stdlib_version:
   - 2.17
   - 2.17
   - 2.17
   - 12
+  - 10.13
+  - 11.0
 cross_target_stdlib:
   - sysroot
   - sysroot
   - sysroot
   - m2w64-sysroot
+  - macosx_deployment_target
+  - macosx_deployment_target
+cross_target_cxx_stdlib:
+  - libstdcxx
+  - libstdcxx
+  - libstdcxx
+  - libstdcxx
+  - libcxx
+  - libcxx
+MACOSX_SDK_VERSION:
+  - 11.0
 # openmp versions
 openmp_ver:
   - 4.5
@@ -50,6 +67,7 @@ with_conda_specs:
 zip_keys:
   - - cross_target_stdlib_version
     - cross_target_stdlib
+    - cross_target_cxx_stdlib
     - triplet
     - cross_target_platform
   - - gcc_version

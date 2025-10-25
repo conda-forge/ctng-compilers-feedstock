@@ -27,6 +27,8 @@ pushd ${SRC_DIR}/build
       if [[ "${triplet}" == *linux* ]]; then
         install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${TARGET}/lib/libgcc_s.so.1
         cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/${TARGET}/lib/libgcc_s.so
+      elif [[ "${triplet}" == *darwin* ]]; then
+        install -c -m 644 ./libgcc_s.1.dylib ${PREFIX}/${TARGET}/lib/libgcc_s.1.dylib
       else
         # import library, not static library
         install -c -m 644 ./shlib/libgcc_s.a ${PREFIX}/${TARGET}/lib/libgcc_s.a

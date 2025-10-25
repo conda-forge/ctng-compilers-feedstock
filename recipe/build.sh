@@ -30,6 +30,10 @@ for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy obj
   eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
 done
 
+if [[ "$cross_target_platform" == "osx-"* ]]; then
+  export DSYMUTIL_FOR_TARGET=${BUILD_PREFIX}/bin/dsymutil
+fi
+
 if [[ "$cross_target_platform" == "win-64" ]]; then
   # do not expect ${prefix}/mingw symlink - this should be superceded by
   # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
@@ -44,8 +48,14 @@ else
   rm -rf ${RECIPE_DIR}/patches/mingw
 fi
 
-NATIVE_SYSTEM_HEADER_DIR=/usr/include
-SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
+if [[ "${cross_target_platform}" != osx-* ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--with-sysroot=${PREFIX}/${TARGET}/sysroot)
+  GCC_CONFIGURE_OPTIONS+=(--with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot)
+else
+  GCC_CONFIGURE_OPTIONS+=(--with-gxx-libcxx-include-dir=${PREFIX})
+  GCC_CONFIGURE_OPTIONS+=(--with-build-sysroot=${SDKROOT})
+  GCC_CONFIGURE_OPTIONS+=(--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)
+fi
 
 # workaround a bug in gcc build files when using external binutils
 # and build != host == target
@@ -55,16 +65,17 @@ ls $BUILD_PREFIX/bin/
 
 ./contrib/download_prerequisites
 
+set +x
 # We want CONDA_PREFIX/usr/lib not CONDA_PREFIX/usr/lib64 and this
 # is the only way. It is incompatible with multilib (obviously).
 TINFO_FILES=$(find . -path "*/config/*/t-*")
 for TINFO_FILE in ${TINFO_FILES}; do
-  echo TINFO_FILE ${TINFO_FILE}
   sed -i.bak 's#^\(MULTILIB_OSDIRNAMES.*\)\(lib64\)#\1lib#g' ${TINFO_FILE}
   rm -f ${TINFO_FILE}.bak
   sed -i.bak 's#^\(MULTILIB_OSDIRNAMES.*\)\(libx32\)#\1lib#g' ${TINFO_FILE}
   rm -f ${TINFO_FILE}.bak
 done
+set -x
 
 # workaround for https://gcc.gnu.org/bugzilla//show_bug.cgi?id=80196
 if [[ "$gcc_version" == "11."* && "$build_platform" != "$target_platform" ]]; then
@@ -110,9 +121,7 @@ fi
   --disable-bootstrap \
   --disable-multilib \
   --enable-long-long \
-  --with-sysroot=${SYSROOT_DIR} \
-  --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
-  --with-native-system-header-dir=${NATIVE_SYSTEM_HEADER_DIR} \
+  --with-native-system-header-dir=/usr/include \
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 
