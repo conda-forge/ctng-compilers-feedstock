@@ -31,15 +31,15 @@ cross_target_stdlib_version:
   - 2.17
   - 2.17
   - 12
-  - 10.13
-  - 11.0
+  - 0
+  - 0
 cross_target_stdlib:
   - sysroot
   - sysroot
   - sysroot
   - m2w64-sysroot
-  - macosx_deployment_target
-  - macosx_deployment_target
+  - None
+  - None
 cross_target_cxx_stdlib:
   - libstdcxx
   - libstdcxx

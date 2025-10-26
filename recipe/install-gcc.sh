@@ -16,8 +16,8 @@ pushd ${SRC_DIR}/build
   sed -i.bak 's/install-collect2: collect2 /install-collect2: collect2$(exeext) /g' gcc/Makefile
   make -C gcc prefix=${PREFIX} install-driver install-cpp install-gcc-ar install-headers install-plugin install-lto-wrapper install-collect2
   # not sure if this is the same as the line above.  Run both, just in case
-  make -C lto-plugin prefix=${PREFIX} install
-  install -dm755 ${PREFIX}/lib/bfd-plugins/
+  make -C lto-plugin prefix=${PREFIX} install || true
+  install -dm755 ${PREFIX}/lib/bfd-plugins/ || true
 
   # statically linked, so this so does not exist
   # ln -s $PREFIX/lib/gcc/$TARGET/liblto_plugin.so ${PREFIX}/lib/bfd-plugins/
@@ -206,11 +206,17 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
   # making these this way so conda build doesn't muck with them
   pushd ${PREFIX}/${TARGET}/lib
     if [[ "${TARGET}" != *mingw* ]]; then
-      ln -sf ../../lib/libgomp.so libgomp.so
+      ln -sf ../../lib/libgomp${SHLIB_EXT} libgomp${SHLIB_EXT}
       for lib in libgfortran libatomic libquadmath libitm lib{a,hwa,l,ub,t}san; do
-        for f in ${PREFIX}/lib/${lib}.so*; do
-          ln -s ../../lib/$(basename $f) ${PREFIX}/${TARGET}/lib/$(basename $f)
-        done
+        if [[ "${TARGET}" == *linux* ]]; then
+          for f in ${PREFIX}/lib/${lib}.so*; do
+            ln -s ../../lib/$(basename $f) ${PREFIX}/${TARGET}/lib/$(basename $f)
+          done
+        elif [[ "${TARGET}" == *darwin* ]]; then
+          for f in ${PREFIX}/lib/${lib}.*dylib; do
+            ln -s ../../lib/$(basename $f) ${PREFIX}/${TARGET}/lib/$(basename $f)
+          done
+        fi
       done
     fi
 
@@ -225,11 +231,25 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
   popd
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
     if [[ -f "${PREFIX}/lib/lib${lib}.a" ]]; then
+     mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
      mv ${PREFIX}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
   done
-  for lib in libasan.so libatomic.so libgomp.so libhwasan.so libitm.so liblsan.so libquadmath.so libtsan.so libubsan.so libstdc++.so libstdc++.so.6 libgcc_s.so; do
-    if [[ -f "${PREFIX}/lib/${lib}" ]]; then
+  for lib in \
+      libasan${SHLIB_EXT} \
+      libatomic${SHLIB_EXT} \
+      libgomp${SHLIB_EXT} \
+      libhwasan${SHLIB_EXT} \
+      libitm${SHLIB_EXT} \
+      liblsan${SHLIB_EXT} \
+      libquadmath${SHLIB_EXT} \
+      libtsan${SHLIB_EXT} \
+      libubsan${SHLIB_EXT} \
+      libstdc++${SHLIB_EXT} \
+      libstdc++.so.6 \
+      libstdc++.6.dylib \
+      libgcc_s${SHLIB_EXT}; do
+    if [[ -f "${PREFIX}/lib/${lib}" && "${TARGET}" != *mingw* ]]; then
      # install a shared library here since the directory ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
      # has the highest preference and we want shared libraries to have the highest preference
      rm ${PREFIX}/lib/${lib}
@@ -245,9 +265,11 @@ else
   rm -f ${PREFIX}/share/info/*.info
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
     if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.a" ]]; then
+     mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
      mv ${PREFIX}/${TARGET}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
     if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.so" ]]; then
+     mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
      ln -sf ${PREFIX}/${TARGET}/lib/lib${lib}.so ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
   done

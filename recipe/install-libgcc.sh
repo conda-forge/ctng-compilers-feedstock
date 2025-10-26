@@ -75,6 +75,7 @@ if [[ "${PKG_NAME}" != gcc_impl* ]]; then
   # clean up empty folder
   rm -rf ${PREFIX}/lib/gcc
   rm -rf ${PREFIX}/lib/lib{a,hwa,l,ub,t}san.so*
+  rm -rf ${PREFIX}/lib/lib{a,hwa,l,ub,t}san.*dylib
 
   # Install Runtime Library Exception
   install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \

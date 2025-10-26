@@ -20,12 +20,17 @@ rm -f ${PREFIX}/${CHOST}/lib/libgomp.so
 rm -f ${PREFIX}/lib/libgomp.so.${libgomp_ver:0:1}
 rm -f ${PREFIX}/${CHOST}/lib/libgomp.so.${libgomp_ver:0:1}
 rm -f ${PREFIX}/${CHOST}/lib/libgomp.so.${libgomp_ver}
+rm -f ${PREFIX}/lib/libgomp.dylib
+rm -f ${PREFIX}/${CHOST}/lib/libgomp.dylib
+rm -f ${PREFIX}/lib/libgomp.${libgomp_ver:0:1}.dylib
+rm -f ${PREFIX}/${CHOST}/lib/libgomp.${libgomp_ver:0:1}.dylib
+rm -f ${PREFIX}/${CHOST}/lib/libgomp.${libgomp_ver}.dylib
 
 # (re)make the right links
 # note that this code is remaking more links than the ones we want in this
 # package but that is ok
 pushd ${PREFIX}/lib
-  if [[ "${TARGET}" != *mingw* ]]; then
+  if [[ "${cross_target_platform}" == "linux"-* ]]; then
     ln -s libgomp.so.${libgomp_ver} libgomp.so.${libgomp_ver:0:1}
   fi
 popd
