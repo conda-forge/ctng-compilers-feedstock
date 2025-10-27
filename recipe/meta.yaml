@@ -123,7 +123,7 @@ outputs:
     build:
       noarch: generic
       number: {{ libgcc_devel_build_num }}
-      skip: true  # [cross_target_stdlib_cxx != "libstdcxx"]
+      skip: true  # [cross_target_cxx_stdlib != "libstdcxx"]
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
@@ -339,15 +339,15 @@ outputs:
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         # not needed due to pinning above but marks this build as using the new sysroots
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
-        - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}   # [cross_target_stdlib_cxx == "libstdcxx"]
-        - libcxx-devel                                                                   # [cross_target_stdlib_cxx == "libcxx"]
+        - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}   # [cross_target_cxx_stdlib == "libstdcxx"]
+        - libcxx-devel                                                                   # [cross_target_cxx_stdlib == "libcxx"]
         # for C++20 chrono support
         - tzdata
     run_exports:
       # impose this requirement across the build/host boundary
       strong:
-        - libstdcxx >={{ gcc_version }}                             # [cross_target_stdlib_cxx == "libstdcxx"]
-        - libcxx                                                    # [cross_target_stdlib_cxx == "libcxx"]
+        - libstdcxx >={{ gcc_version }}                             # [cross_target_cxx_stdlib == "libstdcxx"]
+        - libcxx                                                    # [cross_target_cxx_stdlib == "libcxx"]
     test:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
@@ -484,7 +484,7 @@ outputs:
     script: install-libstdc++.sh
     build:
       number: {{ build_num }}
-      skip: true                # [target_platform != cross_target_platform or cross_target_stdlib_cxx != "libstdcxx"]
+      skip: true                # [target_platform != cross_target_platform or cross_target_cxx_stdlib != "libstdcxx"]
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
@@ -712,7 +712,7 @@ outputs:
     script: install-libstdc++.sh
     build:
       number: {{ build_num }}
-      skip: true   # [target_platform != cross_target_platform or cross_target_stdlib_cxx != "libstdcxx"]
+      skip: true   # [target_platform != cross_target_platform or cross_target_cxx_stdlib != "libstdcxx"]
       run_exports:
         strong:
           - libstdcxx
