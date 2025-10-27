@@ -422,7 +422,7 @@ outputs:
         - gcc_impl_{{ cross_target_platform }} >={{ gcc_version }}
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname, max_pin=None) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgcc", max_pin=None) }}                            # [target_platform == cross_target_platform]
-        - {{ pin_subpackage("libstdcxx", max_pin=None) }}                         # [target_platform == cross_target_platform and cross_target_cxx_stdlib == "libcxx"]
+        - {{ pin_subpackage("libstdcxx", max_pin=None) }}                         # [target_platform == cross_target_platform and cross_target_cxx_stdlib == "libstdcxx"]
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}
     run_exports:
       # impose this requirement across the build/host boundary
