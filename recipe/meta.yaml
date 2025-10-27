@@ -71,7 +71,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: true  # [not (linux or win) or (win and cross_target_platform != "win-64") or cross_target_platform not in ("osx-64", "osx-arm64")]
+  skip: true  # [not (linux or win) or (win and cross_target_platform != "win-64") or cross_target_platform not in ("osx-64", "osx-arm64") or (cross_target_platform in ("osx-64", "osx-arm64") and (build_platform != target_platform))]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }}
