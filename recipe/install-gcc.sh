@@ -212,20 +212,16 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
           for f in ${PREFIX}/lib/${lib}.so*; do
             ln -s ../../lib/$(basename $f) ${PREFIX}/${TARGET}/lib/$(basename $f)
           done
-        elif [[ "${TARGET}" == *darwin* ]]; then
-          for f in ${PREFIX}/lib/${lib}.*dylib; do
-            ln -s ../../lib/$(basename $f) ${PREFIX}/${TARGET}/lib/$(basename $f)
-          done
         fi
       done
     fi
 
     for f in ${PREFIX}/lib/*.spec; do
-      mv $f ${PREFIX}/${TARGET}/lib/$(basename $f)
+      mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
     done
     if [[ "${TARGET}" != *mingw* ]]; then
       for f in ${PREFIX}/lib/*.o; do
-        mv $f ${PREFIX}/${TARGET}/lib/$(basename $f)
+        mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
       done
     fi
   popd
@@ -259,8 +255,9 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
 else
   source ${RECIPE_DIR}/install-libgcc.sh
   for lib in libcc1; do
-    mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${TARGET}/lib/ || true
-    mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${TARGET}/lib/ || true
+    if [[ -f ${PREFIX}/lib/${lib}.so ]]; then
+      mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
   done
   rm -f ${PREFIX}/share/info/*.info
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
@@ -270,15 +267,22 @@ else
     fi
     if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.so" ]]; then
      mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-     ln -sf ${PREFIX}/${TARGET}/lib/lib${lib}.so ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+     mv ${PREFIX}/${TARGET}/lib/lib${lib}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
   done
 fi
 
 if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
-  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/${TARGET}/lib/libgomp.spec
+  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgomp.spec
 fi
 
 rm -f ${PREFIX}/share/info/dir
+
+if [[ "${TARGET}" == *darwin* ]]; then
+  mkdir -p ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}
+  for f in ar as nm ranlib strip ld; then
+    ln -sf ${PREFIX}/bin/${TARGET}-${f} ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}/${f}
+  fi
+fi
 
 source ${RECIPE_DIR}/make_tool_links.sh

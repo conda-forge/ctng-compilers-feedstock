@@ -18,12 +18,12 @@ make -C ${CHOST}/libgcc prefix=${PREFIX} install
 # in gcc_impl_{{ cross_target_platform }}, c.f. install-gcc.sh
 mkdir -p ${PREFIX}/${CHOST}/lib
 if [[ "${cross_target_platform}" == "linux-"* ]]; then
-  mv ${PREFIX}/lib/libgcc_s.so* ${PREFIX}/${CHOST}/lib
+  mv ${PREFIX}/lib/libgcc_s.so* ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
 elif [[ "${cross_target_platform}" == "osx-"* ]]; then
-  mv ${PREFIX}/lib/libgcc_s*.dylib ${PREFIX}/${CHOST}/lib
+  mv ${PREFIX}/lib/libgcc_s*.dylib ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
 else
   # import library, not static library
-  mv ${PREFIX}/lib/libgcc_s.a ${PREFIX}/${CHOST}/lib
+  mv ${PREFIX}/lib/libgcc_s.a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
   rm ${PREFIX}/lib/libgcc_s*.dll || true
 fi
 # This is in gcc_impl as it is gcc specific and clang has the same header
