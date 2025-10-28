@@ -103,7 +103,8 @@ outputs:
         - m2-conda-epoch    # [win]
     test:
       commands:
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/crtbegin.o
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/crtbegin.o    # [cross_target_platform not in ("osx-64", "osx-arm64")]
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/crtfastmath.o    # [cross_target_platform in ("osx-64", "osx-arm64")]
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_eh.a
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc.a
         {% if cross_target_platform.startswith("linux-") %}
