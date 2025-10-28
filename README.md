@@ -85,6 +85,84 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GNU C development libraries and object files
 
+About conda-gcc-specs
+---------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: conda-specific specfile for GNU C/C++ Compiler
+
+Documentation: https://gcc.gnu.org/onlinedocs/gcc/Spec-Files.html
+
+When installed, this optional package provides a specfile that
+directs gcc (and g++ or gfortran) to automatically:
+  * search for includes in $PREFIX/include
+  * link libraries in $PREFIX/lib
+  * set RPATH to $PREFIX/lib
+  * use RPATH instead of the newer RUNPATH
+This package is intended to aid usability of the compiler
+toolchain as a replacement for system-installed compilers.
+It should not be used in recipes.  Use the 'compiler(<lang>)'
+jinja function as described on
+https://conda-forge.org/docs/maintainer/knowledge_base.html#dep-compilers
+
+
+About gcc
+---------
+
+Home: https://github.com/conda-forge/ctng-compilers-feedstock
+
+Package license: BSD-3-Clause
+
+Summary: GNU C native compiler (symlinks)
+
+About gfortran
+--------------
+
+Home: https://github.com/conda-forge/ctng-compilers-feedstock
+
+Package license: BSD-3-Clause
+
+Summary: GNU Fortran native compiler (symlinks)
+
+About gxx
+---------
+
+Home: https://github.com/conda-forge/ctng-compilers-feedstock
+
+Package license: BSD-3-Clause
+
+Summary: GNU C++ native compiler (symlinks)
+
+About libgcc
+------------
+
+Home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GCC low-level runtime library
+
+About libgfortran
+-----------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU Fortran Runtime Library
+
+About libgfortran5
+------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU Fortran Runtime Library
+
 Current build status
 ====================
 
@@ -228,6 +306,48 @@ Current build status
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0" alt="variant">
                 </a>
               </td>
+            </tr><tr>
+              <td>osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0" alt="variant">
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -241,15 +361,22 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-conda--gcc--specs-green.svg)](https://anaconda.org/conda-forge/conda-gcc-specs) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/conda-gcc-specs.svg)](https://anaconda.org/conda-forge/conda-gcc-specs) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/conda-gcc-specs.svg)](https://anaconda.org/conda-forge/conda-gcc-specs) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/conda-gcc-specs.svg)](https://anaconda.org/conda-forge/conda-gcc-specs) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gcc-green.svg)](https://anaconda.org/conda-forge/gcc) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc.svg)](https://anaconda.org/conda-forge/gcc) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc.svg)](https://anaconda.org/conda-forge/gcc) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc.svg)](https://anaconda.org/conda-forge/gcc) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gcc--no--conda--specs-green.svg)](https://anaconda.org/conda-forge/gcc-no-conda-specs) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc-no-conda-specs.svg)](https://anaconda.org/conda-forge/gcc-no-conda-specs) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc-no-conda-specs.svg)](https://anaconda.org/conda-forge/gcc-no-conda-specs) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc-no-conda-specs.svg)](https://anaconda.org/conda-forge/gcc-no-conda-specs) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gcc__impl__osx--64-green.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc_impl_osx-64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc_impl_osx-64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc_impl_osx-64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gcc__impl__osx--arm64-green.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-arm64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-arm64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-arm64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-arm64) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran-green.svg)](https://anaconda.org/conda-forge/gfortran) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran.svg)](https://anaconda.org/conda-forge/gfortran) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran.svg)](https://anaconda.org/conda-forge/gfortran) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran.svg)](https://anaconda.org/conda-forge/gfortran) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran__impl__osx--64-green.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran_impl_osx-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran_impl_osx-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran_impl_osx-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran__impl__osx--arm64-green.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-arm64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-arm64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-arm64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-arm64) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gxx-green.svg)](https://anaconda.org/conda-forge/gxx) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx.svg)](https://anaconda.org/conda-forge/gxx) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx.svg)](https://anaconda.org/conda-forge/gxx) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx.svg)](https://anaconda.org/conda-forge/gxx) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gxx__impl__osx--64-green.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_osx-64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_osx-64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_osx-64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gxx__impl__osx--arm64-green.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-arm64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-arm64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-arm64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-arm64) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc-green.svg)](https://anaconda.org/conda-forge/libgcc) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc.svg)](https://anaconda.org/conda-forge/libgcc) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc.svg)](https://anaconda.org/conda-forge/libgcc) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc.svg)](https://anaconda.org/conda-forge/libgcc) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--devel__osx--64-green.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-devel_osx-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-devel_osx-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-devel_osx-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--devel__osx--arm64-green.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-arm64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-devel_osx-arm64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-arm64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-devel_osx-arm64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-arm64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-devel_osx-arm64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-arm64) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgfortran-green.svg)](https://anaconda.org/conda-forge/libgfortran) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgfortran.svg)](https://anaconda.org/conda-forge/libgfortran) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgfortran.svg)](https://anaconda.org/conda-forge/libgfortran) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgfortran.svg)](https://anaconda.org/conda-forge/libgfortran) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgfortran5-green.svg)](https://anaconda.org/conda-forge/libgfortran5) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgfortran5.svg)](https://anaconda.org/conda-forge/libgfortran5) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgfortran5.svg)](https://anaconda.org/conda-forge/libgfortran5) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgfortran5.svg)](https://anaconda.org/conda-forge/libgfortran5) |
 
 Installing ctng-compilers-feedstock
 ===================================
@@ -261,41 +388,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `gcc-no-conda-specs, gcc_impl_osx-64, gcc_impl_osx-arm64, gfortran_impl_osx-64, gfortran_impl_osx-arm64, gxx_impl_osx-64, gxx_impl_osx-arm64, libgcc-devel_osx-64, libgcc-devel_osx-arm64` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `conda-gcc-specs, gcc, gcc-no-conda-specs, gcc_impl_osx-64, gcc_impl_osx-arm64, gfortran, gfortran_impl_osx-64, gfortran_impl_osx-arm64, gxx, gxx_impl_osx-64, gxx_impl_osx-arm64, libgcc, libgcc-devel_osx-64, libgcc-devel_osx-arm64, libgfortran, libgfortran5` can be installed with `conda`:
 
 ```
-conda install gcc-no-conda-specs gcc_impl_osx-64 gcc_impl_osx-arm64 gfortran_impl_osx-64 gfortran_impl_osx-arm64 gxx_impl_osx-64 gxx_impl_osx-arm64 libgcc-devel_osx-64 libgcc-devel_osx-arm64
-```
-
-or with `mamba`:
-
-```
-mamba install gcc-no-conda-specs gcc_impl_osx-64 gcc_impl_osx-arm64 gfortran_impl_osx-64 gfortran_impl_osx-arm64 gxx_impl_osx-64 gxx_impl_osx-arm64 libgcc-devel_osx-64 libgcc-devel_osx-arm64
-```
-
-It is possible to list all of the versions of `gcc-no-conda-specs` available on your platform with `conda`:
-
-```
-conda search gcc-no-conda-specs --channel conda-forge
+conda install conda-gcc-specs gcc gcc-no-conda-specs gcc_impl_osx-64 gcc_impl_osx-arm64 gfortran gfortran_impl_osx-64 gfortran_impl_osx-arm64 gxx gxx_impl_osx-64 gxx_impl_osx-arm64 libgcc libgcc-devel_osx-64 libgcc-devel_osx-arm64 libgfortran libgfortran5
 ```
 
 or with `mamba`:
 
 ```
-mamba search gcc-no-conda-specs --channel conda-forge
+mamba install conda-gcc-specs gcc gcc-no-conda-specs gcc_impl_osx-64 gcc_impl_osx-arm64 gfortran gfortran_impl_osx-64 gfortran_impl_osx-arm64 gxx gxx_impl_osx-64 gxx_impl_osx-arm64 libgcc libgcc-devel_osx-64 libgcc-devel_osx-arm64 libgfortran libgfortran5
+```
+
+It is possible to list all of the versions of `conda-gcc-specs` available on your platform with `conda`:
+
+```
+conda search conda-gcc-specs --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search conda-gcc-specs --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search gcc-no-conda-specs --channel conda-forge
+mamba repoquery search conda-gcc-specs --channel conda-forge
 
-# List packages depending on `gcc-no-conda-specs`:
-mamba repoquery whoneeds gcc-no-conda-specs --channel conda-forge
+# List packages depending on `conda-gcc-specs`:
+mamba repoquery whoneeds conda-gcc-specs --channel conda-forge
 
-# List dependencies of `gcc-no-conda-specs`:
-mamba repoquery depends gcc-no-conda-specs --channel conda-forge
+# List dependencies of `conda-gcc-specs`:
+mamba repoquery depends conda-gcc-specs --channel conda-forge
 ```
 
 
