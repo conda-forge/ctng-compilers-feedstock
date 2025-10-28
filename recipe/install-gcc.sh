@@ -280,9 +280,9 @@ rm -f ${PREFIX}/share/info/dir
 
 if [[ "${TARGET}" == *darwin* ]]; then
   mkdir -p ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}
-  for f in ar as nm ranlib strip ld; then
+  for f in ar as nm ranlib strip ld; do
     ln -sf ${PREFIX}/bin/${TARGET}-${f} ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}/${f}
-  fi
+  done
 fi
 
 source ${RECIPE_DIR}/make_tool_links.sh
