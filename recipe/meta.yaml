@@ -195,7 +195,7 @@ outputs:
         - libgcc >={{ gcc_version }}
     test:
       requires:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_taget_stdlib != "None"]
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
       files:
         - tests
       commands:
