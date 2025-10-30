@@ -14,7 +14,7 @@ if [[ "$channel_targets" == *conda-forge* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose")
 fi
 
-for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy objdump ranlib readelf size strings strip; do
+for tool in addr2line ar as c++filt cc c++ dsymutil fc gcc g++ gfortran ld nm objcopy objdump ranlib readelf size strings strip; do
   tool_upper=$(echo $tool | tr a-z-+ A-Z_X)
   if [[ "$tool" == "cc" ]]; then
      tool=gcc
@@ -22,17 +22,13 @@ for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy obj
      tool=gfortran
   elif [[ "$tool" == "c++" ]]; then
      tool=g++
-  elif [[ "$target_platform" != "$build_platform" && "$tool" =~ ^(ar|nm|ranlib)$ ]]; then
+  elif [[ "$target_platform" != "$build_platform" && "$tool" =~ ^(ar|nm|ranlib)$ && "${TARGET}" != *darwin* ]]; then
      tool="gcc-${tool}"
   fi
   eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
   eval "export ${tool_upper}=\$BUILD_PREFIX/bin/\$HOST-\$tool"
   eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
 done
-
-if [[ "$cross_target_platform" == "osx-"* ]]; then
-  export DSYMUTIL_FOR_TARGET=${BUILD_PREFIX}/bin/dsymutil
-fi
 
 if [[ "$cross_target_platform" == "win-64" ]]; then
   # do not expect ${prefix}/mingw symlink - this should be superceded by
@@ -46,15 +42,6 @@ if [[ "$cross_target_platform" == "win-64" ]]; then
 else
   # prevent mingw patches from being archived in linux conda packages
   rm -rf ${RECIPE_DIR}/patches/mingw
-fi
-
-if [[ "${cross_target_platform}" != osx-* ]]; then
-  GCC_CONFIGURE_OPTIONS+=(--with-sysroot=${PREFIX}/${TARGET}/sysroot)
-  GCC_CONFIGURE_OPTIONS+=(--with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot)
-else
-  GCC_CONFIGURE_OPTIONS+=(--with-gxx-libcxx-include-dir=${PREFIX})
-  GCC_CONFIGURE_OPTIONS+=(--with-build-sysroot=${SDKROOT})
-  GCC_CONFIGURE_OPTIONS+=(--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)
 fi
 
 # workaround a bug in gcc build files when using external binutils
@@ -98,6 +85,20 @@ if [[ "$TARGET" == *linux* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--enable-threads=posix)
 fi
 
+if [[ "${TARGET}" == *darwin* ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)
+  GCC_CONFIGURE_OPTIONS+=(--with-build-sysroot=${SDKROOT})
+  GCC_CONFIGURE_OPTIONS+=(--enable-darwin-at-rpath)
+else
+  GCC_CONFIGURE_OPTIONS+=(--with-sysroot=${PREFIX}/${TARGET}/sysroot)
+  GCC_CONFIGURE_OPTIONS+=(--with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot)
+  GCC_CONFIGURE_OPTIONS+=(--enable-plugin)
+fi
+
+if [[ "${cross_target_cxx_stdlib}" == "libcxx" ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--disable-libstdcxx)
+fi
+
 ../configure \
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
@@ -115,7 +116,6 @@ fi
   --enable-libquadmath-support \
   --enable-lto \
   --enable-target-optspace \
-  --enable-plugin \
   --enable-gold \
   --disable-nls \
   --disable-bootstrap \
@@ -123,6 +123,7 @@ fi
   --enable-long-long \
   --with-native-system-header-dir=/usr/include \
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
+  --with-gxx-libcxx-include-dir="${PREFIX}/ilib/gcc/${TARGET}/${gcc_version}/../../../../include/c++/v1" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libgomp/config.log; false)

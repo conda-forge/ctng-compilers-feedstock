@@ -2,7 +2,7 @@
 
 source ${RECIPE_DIR}/setup_compiler.sh
 
-if [[ "$target_platform" == "win-"* ]]; then
+if [[ "${HOST}" == *mingw* ]]; then
   symlink_or_copy="cp"
 else
   symlink_or_copy="ln -sf"

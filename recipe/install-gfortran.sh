@@ -30,7 +30,7 @@ mkdir -p ${PREFIX}/${CHOST}/lib
 cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/lib
 
 pushd ${PREFIX}/bin
-  if [[ "${target_platform}" != "win-64" ]]; then
+  if [[ "${HOST}" != *mingw* ]]; then
     ln -sf ${CHOST}-gfortran${EXEEXT} ${CHOST}-f95${EXEEXT}
   else
     cp ${CHOST}-gfortran${EXEEXT} ${CHOST}-f95${EXEEXT}
@@ -47,7 +47,7 @@ install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/i
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-fortran/RUNTIME.LIBRARY.EXCEPTION
 
-if [[ "${target_platform}" != "${cross_target_platform}" ]]; then
+if [[ "${HOST}" != "${TARGET}" ]]; then
   if [[ ${triplet} == *linux* ]]; then
     cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/${CHOST}/lib/
   fi
@@ -66,7 +66,7 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-        ${BUILD_PREFIX}/bin/${CHOST}-strip --strip-all -v "${_file}" || :
+        ${BUILD_PREFIX}/bin/${HOST}-strip ${STRIP_ARGS} -v "${_file}" || :
       ;;
     esac
   done

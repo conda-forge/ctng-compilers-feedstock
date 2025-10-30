@@ -139,17 +139,11 @@ popd
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
 specdir=$PREFIX/lib/gcc/$TARGET/${gcc_version}
-if [[ "$build_platform" == "$target_platform" ]]; then
+if [[ "${BUILD}" == "${HOST}" ]]; then
     $PREFIX/bin/${TARGET}-gcc${EXEEXT} -dumpspecs > $specdir/specs
     # validate assumption that specs in build/gcc/specs are exactly the
     # same as dumped specs so that I don't need to depend on gcc_impl in conda-gcc-specs subpackage
     diff -s ${SRC_DIR}/build/gcc/specs $specdir/specs
-elif [[ "$target_platform" == "$cross_target_platform" && ${TARGET} != *mingw* ]]; then
-    # For support of of native specs, we need this
-    # This is the only place where we need QEMU.
-    # Remove this elif condition for local experimentation if you
-    # do not have QEMU setup
-    $PREFIX/bin/${TARGET}-gcc -dumpspecs > $specdir/specs
 else
     $BUILD_PREFIX/bin/${TARGET}-gcc -dumpspecs > $specdir/specs
     # validate assumption that specs in build/gcc/specs are exactly the
@@ -162,15 +156,19 @@ fi
 cp $specdir/specs $specdir/builtin.specs
 
 # modify the default specs to only have %include_noerr that includes an optional conda.specs
-# package installable via the conda-gcc-specs package where conda.specs (for $cross_target_platform
-# == $target_platform) will add the minimal set of flags for the 'native' toolchains to be useable
+# package installable via the conda-gcc-specs package where conda.specs (for ${TARGET}
+# == ${HOST}) will add the minimal set of flags for the 'native' toolchains to be useable
 # without anything additional set in the enviornment or extra cmdline args.
 echo  "%include_noerr <conda.specs>" >> $specdir/specs
 
 # We use double quotes here because we want $PREFIX and $TARGET to be expanded at build time
 #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
 #   package is installed.
-sed -i -e "/\*link_command:/,+1 s+%.*+& %{!static:-rpath ${PREFIX}/lib}+" $specdir/specs
+if [[ "${TARGET}" == *linux* ]]; then
+  sed -i -e "/\*link_command:/,+1 s+%.*+& %{!static:-rpath ${PREFIX}/lib}+" $specdir/specs
+elif [[ "${TARGET}" == *darwin* ]]; then
+  sed -i -e "s#@loader_path#${PREFIX}/lib#g" $specdir/specs
+fi
 
 
 # Install Runtime Library Exception
@@ -189,7 +187,7 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-        ${BUILD_PREFIX}/bin/${TARGET}-strip --strip-all -v "${_file}" || :
+        ${BUILD_PREFIX}/bin/${HOST}-strip ${STRIP_ARGS} -v "${_file}" || :
       ;;
     esac
   done
@@ -202,7 +200,7 @@ set -x
 mkdir -p ${PREFIX}/${TARGET}/lib
 mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 
-if [[ "$target_platform" == "$cross_target_platform" ]]; then
+if [[ "${HOST}" == "${TARGET}" ]]; then
   # making these this way so conda build doesn't muck with them
   pushd ${PREFIX}/${TARGET}/lib
     if [[ "${TARGET}" != *mingw* ]]; then

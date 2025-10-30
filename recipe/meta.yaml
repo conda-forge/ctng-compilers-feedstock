@@ -62,7 +62,7 @@ source:
       # all patches from https://github.com/Homebrew/formula-patches/tree/698885df7f624d0ce15bceb79a4d9760a473b502/gcc
       # and edited with `s/-Wc,-nodefaultrpaths/-nodefaultrpaths`.
       # in case of several patches per version, use newest one
-      - patches/macos/gcc-{{ version }}.diff   # [cross_target_platform == "osx-arm64"]
+      - patches/macos/gcc-{{ version }}.diff
       # from https://github.com/JuliaPackaging/Yggdrasil/blob/master/0_RootFS/GCCBootstrap%4014/bundled/patches/gcc/gcc1420-Increase-fallback-min-macOS-version-for-libgcc-to-10.8.patch
       - patches/macos/0001-GCC-{{ gcc_maj_ver }}-Increase-fallback-min-macOS-version-for-libgc.patch   # [cross_target_platform == "osx-64" and gcc_maj_ver != 13]
       # Make libcxx the default
@@ -224,8 +224,6 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libasan_preinit.o
         {% elif cross_target_platform.startswith("osx-") %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.dylib
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}//libsanitizer.spec
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}//libasan_preinit.o
         {% else %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.a
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libquadmath.a
@@ -341,7 +339,8 @@ outputs:
         # not needed due to pinning above but marks this build as using the new sysroots
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}                          # [cross_target_stdlib != "None"]
         - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}   # [cross_target_cxx_stdlib == "libstdcxx"]
-        - libcxx-devel                                                                   # [cross_target_cxx_stdlib == "libcxx"]
+        - libcxx-devel      # [cross_target_cxx_stdlib == "libcxx" and target_platform == cross_target_platform]
+        - libcxx-headers    # [cross_target_cxx_stdlib == "libcxx" and target_platform != cross_target_platform]
         # for C++20 chrono support
         - tzdata
     run_exports:

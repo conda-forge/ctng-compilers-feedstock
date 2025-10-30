@@ -1,11 +1,15 @@
 #!/bin/bash
 
+source $RECIPE_DIR/get_cpu_arch.sh
+
 export SDKROOT=${CONDA_BUILD_SYSROOT}
 unset CONDA_BUILD_SYSROOT
 
 extra_pkgs=()
 
-if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
+export BUILD_PREFIX=$SRC_DIR/cf-compilers
+
+if [[ ! -d  ${BUILD_PREFIX} ]]; then
     if [[ "$build_platform" != "$target_platform" ]]; then
       # we need a compiler to target cross_target_platform.
       # when build_platform == target_platform, the compiler
@@ -32,7 +36,7 @@ if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
       )
     fi
     # Remove conda-forge/label/sysroot-with-crypt when GCC < 14 is dropped
-    conda create -p $SRC_DIR/cf-compilers -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet \
+    conda create -p ${BUILD_PREFIX} -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet \
       "gcc_impl_${build_platform}" \
       "gxx_impl_${build_platform}" \
       "gfortran_impl_${build_platform}" \
@@ -41,16 +45,19 @@ if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
       "gfortran_impl_${target_platform}" \
       "${c_stdlib}_${target_platform}=${c_stdlib_version}" \
       ${extra_pkgs[@]}
+
+    if [[ "${cross_target_cxx_stdlib}" == "libcxx" ]]; then
+      CONDA_SUBDIR="${cross_target_platform}" conda create -p $SRC_DIR/cf-compilers-target -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet libcxx-devel
+      mkdir -p ${BUILD_PREFIX}/${TARGET}/lib
+      ln -sf $SRC_DIR/cf-compilers-target/lib/libc++* ${BUILD_PREFIX}/${TARGET}/lib
+    fi
 fi
 
 export PATH=$SRC_DIR/cf-compilers/bin:$PATH
-export BUILD_PREFIX=$SRC_DIR/cf-compilers
 
 if [[ "$target_platform" == "win-"* && "${PREFIX}" != *Library ]]; then
     export PREFIX=${PREFIX}/Library
 fi
-
-source $RECIPE_DIR/get_cpu_arch.sh
 
 if [[ "$cross_target_platform" == "osx-"* ]]; then
     ln -sf ${BUILD_PREFIX}/bin/llvm-cxxfilt ${BUILD_PREFIX}/bin/c++filt
@@ -62,3 +69,9 @@ else
   EXEEXT=""
 fi
 SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
+
+if [[ "$target_platform" == "osx-"* ]]; then
+  STRIP_ARGS=""
+else
+  STRIP_ARGS="--strip-all"
+fi

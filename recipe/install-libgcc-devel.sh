@@ -17,9 +17,9 @@ make -C ${CHOST}/libgcc prefix=${PREFIX} install
 # avoid that the equivalents in ${PREFIX}/${CHOST}/lib end up
 # in gcc_impl_{{ cross_target_platform }}, c.f. install-gcc.sh
 mkdir -p ${PREFIX}/${CHOST}/lib
-if [[ "${cross_target_platform}" == "linux-"* ]]; then
+if [[ "${TARGET}" == *linux* ]]; then
   mv ${PREFIX}/lib/libgcc_s.so* ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
-elif [[ "${cross_target_platform}" == "osx-"* ]]; then
+elif [[ "${TARGET}" == *darwin* ]]; then
   mv ${PREFIX}/lib/libgcc_s*.dylib ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}
 else
   # import library, not static library
