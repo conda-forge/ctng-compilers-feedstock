@@ -217,7 +217,8 @@ if [[ "${HOST}" == "${TARGET}" ]]; then
     for f in ${PREFIX}/lib/*.spec; do
       mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
     done
-    if [[ "${TARGET}" != *mingw* ]]; then
+    if [[ "${TARGET}" == *linux* ]]; then
+      # sanitizer preinit files
       for f in ${PREFIX}/lib/*.o; do
         mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
       done

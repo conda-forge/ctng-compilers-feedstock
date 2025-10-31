@@ -7,9 +7,9 @@ unset CONDA_BUILD_SYSROOT
 
 extra_pkgs=()
 
-export BUILD_PREFIX=$SRC_DIR/cf-compilers
+export CF_PREFIX=$SRC_DIR/cf-compilers
 
-if [[ ! -d  ${BUILD_PREFIX} ]]; then
+if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
     if [[ "$build_platform" != "$target_platform" ]]; then
       # we need a compiler to target cross_target_platform.
       # when build_platform == target_platform, the compiler
@@ -36,7 +36,7 @@ if [[ ! -d  ${BUILD_PREFIX} ]]; then
       )
     fi
     # Remove conda-forge/label/sysroot-with-crypt when GCC < 14 is dropped
-    conda create -p ${BUILD_PREFIX} -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet \
+    conda create -p ${CF_PREFIX} -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet \
       "gcc_impl_${build_platform}" \
       "gxx_impl_${build_platform}" \
       "gfortran_impl_${build_platform}" \
@@ -47,20 +47,22 @@ if [[ ! -d  ${BUILD_PREFIX} ]]; then
       ${extra_pkgs[@]}
 
     if [[ "${cross_target_cxx_stdlib}" == "libcxx" ]]; then
-      CONDA_SUBDIR="${cross_target_platform}" conda create -p $SRC_DIR/cf-compilers-target -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet libcxx-devel
-      mkdir -p ${BUILD_PREFIX}/${TARGET}/lib
-      ln -sf $SRC_DIR/cf-compilers-target/lib/libc++* ${BUILD_PREFIX}/${TARGET}/lib
+      CONDA_OVERRIDE_OSX=15.5 CONDA_SUBDIR="${cross_target_platform}" conda create -p $SRC_DIR/cf-compilers-target -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet libcxx-devel
+      mkdir -p ${CF_PREFIX}/${TARGET}/lib
+      ln -sf $SRC_DIR/cf-compilers-target/lib/libc++* ${CF_PREFIX}/${TARGET}/lib
+    fi
+    if [[ "$cross_target_platform" == "osx-"* ]]; then
+      ln -sf ${CF_PREFIX}/bin/llvm-cxxfilt ${CF_PREFIX}/bin/c++filt
     fi
 fi
+
+ln -sf ${CF_PREFIX}/${TARGET} ${BUILD_PREFIX}/${TARGET} || true
+ln -sf ${CF_PREFIX}/bin ${BUILD_PREFIX}/bin || true
 
 export PATH=$SRC_DIR/cf-compilers/bin:$PATH
 
 if [[ "$target_platform" == "win-"* && "${PREFIX}" != *Library ]]; then
     export PREFIX=${PREFIX}/Library
-fi
-
-if [[ "$cross_target_platform" == "osx-"* ]]; then
-    ln -sf ${BUILD_PREFIX}/bin/llvm-cxxfilt ${BUILD_PREFIX}/bin/c++filt
 fi
 
 if [[ "$target_platform" == "win-64" ]]; then

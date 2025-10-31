@@ -11,9 +11,12 @@ if [[ "${TARGET}" == *mingw* ]]; then
 elif [[ "${TARGET}" == *linux* ]]; then
   mkdir -p ${PREFIX}/lib
   cp -f --no-dereference ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/
-else
+elif [[ "${TARGET}" == *darwin* ]]; then
   mkdir -p ${PREFIX}/lib
-  cp -f --no-dereference ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.dylib* ${PREFIX}/lib/
+  cp -f --no-dereference ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.dylib ${PREFIX}/lib/
+else
+  echo "${TARGET} not handled"
+  exit 1
 fi
 
 # Install Runtime Library Exception

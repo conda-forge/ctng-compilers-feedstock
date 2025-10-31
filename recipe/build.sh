@@ -89,6 +89,7 @@ if [[ "${TARGET}" == *darwin* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)
   GCC_CONFIGURE_OPTIONS+=(--with-build-sysroot=${SDKROOT})
   GCC_CONFIGURE_OPTIONS+=(--enable-darwin-at-rpath)
+  export gcc_cv_ld64_version=955.13
 else
   GCC_CONFIGURE_OPTIONS+=(--with-sysroot=${PREFIX}/${TARGET}/sysroot)
   GCC_CONFIGURE_OPTIONS+=(--with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot)
@@ -123,7 +124,7 @@ fi
   --enable-long-long \
   --with-native-system-header-dir=/usr/include \
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
-  --with-gxx-libcxx-include-dir="${PREFIX}/ilib/gcc/${TARGET}/${gcc_version}/../../../../include/c++/v1" \
+  --with-gxx-libcxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/../../../../include/c++/v1" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libgomp/config.log; false)

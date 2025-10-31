@@ -19,8 +19,15 @@ if [[ "${TARGET}" == "${HOST}" ]]; then
     # We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
     #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
     #   package is installed.
-    sed -i -e "/\*link_command:/,+1 s+%.*+& %{\!static:-rpath ${PREFIX}/lib -rpath-link ${PREFIX}/lib} -L ${PREFIX}/lib/stubs -L ${PREFIX}/lib+" $specdir/conda.specs
-    if [[ "${TARGET}" != *mingw* ]]; then
+    if [[ "$TARGET" == *linux* ]]; then
+      NEW_LINK="-rpath ${PREFIX}/lib -rpath-link ${PREFIX}/lib} -L ${PREFIX}/lib/stubs -L ${PREFIX}/lib"
+    elif [[ "$TARGET" == *mingw* ]]; then
+      NEW_LINK="-L ${PREFIX}/lib"
+    elif [[ "$TARGET" == *darwin* ]]; then
+      NEW_LINK="-rpath ${PREFIX}/lib -L ${PREFIX}/lib"
+    fi
+    sed -i -e "/\*link_command:/,+1 s+%.*+& %{\!static:${NEW_LINK}+" $specdir/conda.specs
+    if [[ "${TARGET}" == *linux* ]]; then
       # put -disable-new-dtags at the front of the cmdline so that user provided -enable-new-dtags (in %l) can  override it
       sed -i -e "/\*link_command:/,+1 s+%(linker)+& -disable-new-dtags +" $specdir/conda.specs
     fi
