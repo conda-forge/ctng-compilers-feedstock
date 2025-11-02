@@ -122,6 +122,7 @@ fi
   --disable-bootstrap \
   --disable-multilib \
   --enable-long-long \
+  --without-zstd \
   --with-native-system-header-dir=/usr/include \
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
   --with-gxx-libcxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/../../../../include/c++/v1" \

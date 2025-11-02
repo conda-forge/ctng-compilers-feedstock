@@ -65,8 +65,10 @@ source:
       - patches/macos/gcc-{{ version }}.diff
       # from https://github.com/JuliaPackaging/Yggdrasil/blob/master/0_RootFS/GCCBootstrap%4014/bundled/patches/gcc/gcc1420-Increase-fallback-min-macOS-version-for-libgcc-to-10.8.patch
       - patches/macos/0001-GCC-{{ gcc_maj_ver }}-Increase-fallback-min-macOS-version-for-libgc.patch   # [cross_target_platform == "osx-64" and gcc_maj_ver != 13]
-      # Make libcxx the default
-      - patches/macos/libcxx.diff
+      # Make -stdlib=libcxx the default
+      - patches/macos/0002-Make-stdlib-libc-the-default-for-macos-platforms.patch
+      # call xcrun to get sdkroot
+      - patches/macos/0003-Find-macos-sysroot-by-calling-xcrun.patch
       {% endif %}
 
 build:
@@ -144,7 +146,6 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libsupc++.a
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/include/c++/cstdio
         {% if cross_target_platform.startswith("linux-") %}
-        - test -f ${PREFIX}/{{ triplet }}/lib/libstdc++.so
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.so
         {% else %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.dll.a
@@ -201,8 +202,8 @@ outputs:
       commands:
         - echo {{ c_stdlib }}
         - echo {{ c_stdlib_version }}
-        - test -f ${PREFIX}/{{ triplet }}/lib/libgomp.so   # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
-        - test `readlink ${PREFIX}/{{ triplet }}/lib/libgomp.so` == "../../lib/libgomp.so"  # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.so   # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
+        - test `readlink ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.so` == "../../../../lib/libgomp.so"  # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
         - test -f ${PREFIX}/bin/{{ triplet }}-gcc
         - test -f ${PREFIX}/bin/{{ triplet }}-cpp
         - test ! -f ${PREFIX}/bin/gcc
@@ -218,12 +219,12 @@ outputs:
         - ${CC} -Wall tests/hello_world.c -c -o hello_world.o -v
         - ${CC} -Wall hello_world.o -o hello_world -v
         {% if cross_target_platform.startswith("linux-") %}
-        - test -f ${PREFIX}/{{ triplet }}/lib/libgcc_s.so
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.so
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libsanitizer.spec
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libasan_preinit.o
         {% elif cross_target_platform.startswith("osx-") %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.dylib
+        - test ! -d ${PREFIX}/${triplet}
         {% else %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.a
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libquadmath.a
@@ -350,7 +351,7 @@ outputs:
         - libcxx                                                    # [cross_target_cxx_stdlib == "libcxx"]
     test:
       requires:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
       files:
         - tests
       commands:

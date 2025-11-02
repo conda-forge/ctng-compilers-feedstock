@@ -23,7 +23,6 @@ pushd ${SRC_DIR}/build
       chmod 644 ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_eh.a
       ${TARGET}-ranlib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_eh.a
 
-      mkdir -p ${PREFIX}/${TARGET}/lib
       if [[ "${triplet}" == *linux* ]]; then
         install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_s.so.1
         cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_s.so
@@ -71,7 +70,6 @@ fi
 find ${PREFIX}/lib -name "*\.la" -exec rm -rf {} \;
 
 if [[ "${PKG_NAME}" != gcc_impl* ]]; then
-  # mv ${PREFIX}/${TARGET}/lib/* ${PREFIX}/lib
   # clean up empty folder
   rm -rf ${PREFIX}/lib/gcc
   rm -rf ${PREFIX}/lib/lib{a,hwa,l,ub,t}san.so*

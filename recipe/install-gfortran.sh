@@ -6,6 +6,9 @@ set -e -x
 export CHOST="${triplet}"
 _libdir=libexec/gcc/${CHOST}/${PKG_VERSION}
 
+mkdir -p $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude
+mkdir -p $PREFIX/lib/gcc/${CHOST}/${gcc_version}/include
+
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
 #export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
@@ -26,8 +29,7 @@ for file in f951; do
   fi
 done
 
-mkdir -p ${PREFIX}/${CHOST}/lib
-cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/${CHOST}/lib
+cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
 
 pushd ${PREFIX}/bin
   if [[ "${HOST}" != *mingw* ]]; then
@@ -38,8 +40,6 @@ pushd ${PREFIX}/bin
 popd
 
 make install DESTDIR=$SRC_DIR/build-finclude
-mkdir -p $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude
-mkdir -p $PREFIX/lib/gcc/${CHOST}/${gcc_version}/include
 install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/* $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/
 install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/include/*.h $PREFIX/lib/gcc/${CHOST}/${gcc_version}/include/
 
@@ -49,10 +49,12 @@ install -Dm644 $SRC_DIR/COPYING.RUNTIME \
 
 if [[ "${HOST}" != "${TARGET}" ]]; then
   if [[ ${triplet} == *linux* ]]; then
-    cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/${CHOST}/lib/
+    cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
+  elif [[ ${triplet} == *darwin* ]]; then
+    cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   fi
 fi
-cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.*a ${PREFIX}/${CHOST}/lib/
+cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.*a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
 
 set +x
 # Strip executables, we may want to install to a different prefix
@@ -73,7 +75,7 @@ pushd ${PREFIX}
 popd
 
 if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
-  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/${CHOST}/lib/libgomp.spec
+  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/libgomp.spec
 fi
 
 rm -f ${PREFIX}/share/info/dir

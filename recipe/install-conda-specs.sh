@@ -20,13 +20,13 @@ if [[ "${TARGET}" == "${HOST}" ]]; then
     #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
     #   package is installed.
     if [[ "$TARGET" == *linux* ]]; then
-      NEW_LINK="-rpath ${PREFIX}/lib -rpath-link ${PREFIX}/lib} -L ${PREFIX}/lib/stubs -L ${PREFIX}/lib"
+      NEW_LINK="%{\!static:-rpath ${PREFIX}/lib -rpath-link ${PREFIX}/lib} -L ${PREFIX}/lib/stubs -L ${PREFIX}/lib"
     elif [[ "$TARGET" == *mingw* ]]; then
       NEW_LINK="-L ${PREFIX}/lib"
     elif [[ "$TARGET" == *darwin* ]]; then
-      NEW_LINK="-rpath ${PREFIX}/lib -L ${PREFIX}/lib"
+      NEW_LINK="%{\!static:-rpath ${PREFIX}/lib} -L ${PREFIX}/lib"
     fi
-    sed -i -e "/\*link_command:/,+1 s+%.*+& %{\!static:${NEW_LINK}+" $specdir/conda.specs
+    sed -i -e "/\*link_command:/,+1 s+%.*+& ${NEW_LINK}+" $specdir/conda.specs
     if [[ "${TARGET}" == *linux* ]]; then
       # put -disable-new-dtags at the front of the cmdline so that user provided -enable-new-dtags (in %l) can  override it
       sed -i -e "/\*link_command:/,+1 s+%(linker)+& -disable-new-dtags +" $specdir/conda.specs

@@ -197,36 +197,43 @@ set -x
 
 #${PREFIX}/bin/${TARGET}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
-mkdir -p ${PREFIX}/${TARGET}/lib
 mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 
 if [[ "${HOST}" == "${TARGET}" ]]; then
   # making these this way so conda build doesn't muck with them
-  pushd ${PREFIX}/${TARGET}/lib
-    if [[ "${TARGET}" != *mingw* ]]; then
-      ln -sf ../../lib/libgomp${SHLIB_EXT} libgomp${SHLIB_EXT}
+  if [[ "${TARGET}" == *linux* ]]; then
+    pushd ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+      ln -sf ../../../../lib/libgomp${SHLIB_EXT} libgomp${SHLIB_EXT}
       for lib in libgfortran libatomic libquadmath libitm lib{a,hwa,l,ub,t}san; do
-        if [[ "${TARGET}" == *linux* ]]; then
-          for f in ${PREFIX}/lib/${lib}.so*; do
-            ln -s ../../lib/$(basename $f) ${PREFIX}/${TARGET}/lib/$(basename $f)
-          done
-        fi
+        for f in ${PREFIX}/lib/${lib}.so*; do
+          ln -s ../../../../lib/$(basename $f) ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
+        done
       done
-    fi
+    popd
+  fi
+  if [[ "${TARGET}" == *darwin* ]]; then
+    pushd ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
+      ln -sf ../../../libomp.dylib libgomp.dylib
+    popd
+  fi
 
-    for f in ${PREFIX}/lib/*.spec; do
+  for f in ${PREFIX}/lib/*.spec; do
+    [ -e "$f" ] || continue
+    mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
+  done
+  for f in ${PREFIX}/${TARGET}/lib/*.spec; do
+    [ -e "$f" ] || continue
+    mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
+  done
+  if [[ "${TARGET}" == *linux* ]]; then
+    # sanitizer preinit files
+    for f in ${PREFIX}/lib/*.o; do
       mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
     done
-    if [[ "${TARGET}" == *linux* ]]; then
-      # sanitizer preinit files
-      for f in ${PREFIX}/lib/*.o; do
-        mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
-      done
-    fi
-  popd
+  fi
+  mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
     if [[ -f "${PREFIX}/lib/lib${lib}.a" ]]; then
-     mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
      mv ${PREFIX}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
   done
@@ -259,14 +266,17 @@ else
     fi
   done
   rm -f ${PREFIX}/share/info/*.info
+  mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
     if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.a" ]]; then
      mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
      mv ${PREFIX}/${TARGET}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
     if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.so" ]]; then
-     mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-     mv ${PREFIX}/${TARGET}/lib/lib${lib}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+     mv ${PREFIX}/${TARGET}/lib/lib${lib}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
+    fi
+    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.dylib" ]]; then
+     mv ${PREFIX}/${TARGET}/lib/lib${lib}.*dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
     fi
   done
 fi
@@ -274,14 +284,24 @@ fi
 if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
   mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgomp.spec
 fi
+if [[ -f ${PREFIX}/${TARGET}/lib/libgomp.spec ]]; then
+  mv ${PREFIX}/${TARGET}/lib/libgomp.spec ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgomp.spec
+fi
 
 rm -f ${PREFIX}/share/info/dir
 
+mkdir -p ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}
 if [[ "${TARGET}" == *darwin* ]]; then
-  mkdir -p ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}
-  for f in ar as nm ranlib strip ld; do
-    ln -sf ${PREFIX}/bin/${TARGET}-${f} ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}/${f}
-  done
+  TOOLS="ar as c++filt ld nm ranlib size strings strip"
+elif [[ "${TARGET}" == *linux* ]]; then
+  TOOLS=TOOLS="addr2line ar c++filt elfedit ld nm objcopy objdump ranlib readelf size strings strip"
+elif [[ "${TARGET}" == *mingw* ]]; then
+  TOOLS=""
+  #TOOLS=TOOLS="addr2line ar c++filt elfedit ld nm objcopy objdump ranlib readelf size strings strip dlltool dllwrap windmc windres"
 fi
+
+for f in ${TOOLS}; do
+  ln -sf ${PREFIX}/bin/${TARGET}-${f} ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}/${f}
+done
 
 source ${RECIPE_DIR}/make_tool_links.sh

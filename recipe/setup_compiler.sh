@@ -56,8 +56,10 @@ if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
     fi
 fi
 
-ln -sf ${CF_PREFIX}/${TARGET} ${BUILD_PREFIX}/${TARGET} || true
-ln -sf ${CF_PREFIX}/bin ${BUILD_PREFIX}/bin || true
+if [[ "${BUILD_PREFIX}" != "${PREFIX}" ]]; then
+  ln -sf ${CF_PREFIX}/${TARGET} ${BUILD_PREFIX}/${TARGET} || true
+  ln -sf ${CF_PREFIX}/bin ${BUILD_PREFIX}/bin || true
+fi
 
 export PATH=$SRC_DIR/cf-compilers/bin:$PATH
 
