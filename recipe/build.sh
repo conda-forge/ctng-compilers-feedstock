@@ -44,7 +44,7 @@ else
   rm -rf ${RECIPE_DIR}/patches/mingw
 fi
 
-if [[ "${TARGET} != *darwin* ]]; then
+if [[ "${TARGET}" != *darwin* ]]; then
   # prevent macos patches from being archived in linux conda packages
   rm -rf ${RECIPE_DIR}/patches/macos
 fi
