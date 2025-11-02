@@ -51,9 +51,6 @@ if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
       mkdir -p ${CF_PREFIX}/${TARGET}/lib
       ln -sf $SRC_DIR/cf-compilers-target/lib/libc++* ${CF_PREFIX}/${TARGET}/lib
     fi
-    if [[ "$cross_target_platform" == "osx-"* ]]; then
-      ln -sf ${CF_PREFIX}/bin/llvm-cxxfilt ${CF_PREFIX}/bin/c++filt
-    fi
 fi
 
 if [[ "${BUILD_PREFIX}" != "${PREFIX}" ]]; then
