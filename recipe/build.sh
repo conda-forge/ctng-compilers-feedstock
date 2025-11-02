@@ -22,7 +22,7 @@ for tool in addr2line ar as c++filt cc c++ dsymutil fc gcc g++ gfortran ld nm ob
      tool=gfortran
   elif [[ "$tool" == "c++" ]]; then
      tool=g++
-  elif [[ "$target_platform" != "$build_platform" && "$tool" =~ ^(ar|nm|ranlib)$ && "${TARGET}" != *darwin* ]]; then
+  elif [[ "${HOST}" != "${BUILD}" && "$tool" =~ ^(ar|nm|ranlib)$ && "${TARGET}" != *darwin* ]]; then
      tool="gcc-${tool}"
   fi
   eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
@@ -30,7 +30,7 @@ for tool in addr2line ar as c++filt cc c++ dsymutil fc gcc g++ gfortran ld nm ob
   eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
 done
 
-if [[ "$cross_target_platform" == "win-64" ]]; then
+if [[ "${TARGET}" == *mingw* ]]; then
   # do not expect ${prefix}/mingw symlink - this should be superceded by
   # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
   sed -i 's#${prefix}/mingw/#${prefix}/${target}/sysroot/usr/#g' configure
@@ -42,6 +42,11 @@ if [[ "$cross_target_platform" == "win-64" ]]; then
 else
   # prevent mingw patches from being archived in linux conda packages
   rm -rf ${RECIPE_DIR}/patches/mingw
+fi
+
+if [[ "${TARGET} != *darwin* ]]; then
+  # prevent macos patches from being archived in linux conda packages
+  rm -rf ${RECIPE_DIR}/patches/macos
 fi
 
 # workaround a bug in gcc build files when using external binutils
