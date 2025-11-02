@@ -15,7 +15,7 @@ index e83b7cdc0c9..b82e44a15d0 100644
  maybe_get_sysroot_from_sdkroot ()
  {
    const char *maybe_sysroot = getenv ("SDKROOT");
-+  char xcrun_command[] = "xcrun --show-sdk-path";
++  char xcrun_command[] = "/usr/bin/xcrun --show-sdk-path";
 +  char buf[1024];
 +  FILE *fp;
  
