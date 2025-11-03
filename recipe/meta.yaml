@@ -226,7 +226,7 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libsanitizer.spec
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libasan_preinit.o
         {% elif cross_target_platform.startswith("osx-") %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.dylib
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.1.dylib
         - test ! -d ${PREFIX}/${triplet}
         {% else %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.a
