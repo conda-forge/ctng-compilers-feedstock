@@ -10,7 +10,12 @@ set -e -x
 pushd ${SRC_DIR}/build
 
   if [[ "${PKG_NAME}" == "libgcc" ]]; then
-    make -C ${TARGET}/libgcc prefix=${PREFIX} install-shared
+    mkdir -p ${PREFIX}/lib
+    mkdir -p ${PREFIX}/bin
+    # install-shared target doesn't seem to work on macos
+    # make -C ${TARGET}/libgcc prefix=${PREFIX} install DESTDIR=${PWD}/tmp
+    make -C ${TARGET}/libgcc prefix=${PREFIX} install DESTDIR=${PWD}/tmp
+    install -c -m 644 ${PWD}/tmp/${PREFIX}/lib/* ${PREFIX}/lib/
     if [[ "${TARGET}" == *mingw* ]]; then
       mv $PREFIX/lib/libgcc_s*.dll $PREFIX/bin
     fi

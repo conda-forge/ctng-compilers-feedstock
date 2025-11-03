@@ -111,8 +111,11 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc.a
         {% if cross_target_platform.startswith("linux-") %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.so
-        {% elif cross_target_platform.startswith("osx-") %}
+        {% elif cross_target_platform == "osx-64" %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.dylib
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.1.dylib
+        {% elif cross_target_platform == "osx-arm64" %}
+        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.1.dylib
         {% else %}
         - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.a
         {% endif %}
@@ -182,7 +185,7 @@ outputs:
         - clang
         {% else %}
         - binutils_impl_{{ cross_target_platform }} >={{ binutils_version }}
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}    # [cross_target_stdlib != "None"]
         # libstdcxx is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx", max_pin=None) }}       # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgomp", max_pin=None) }}         # [target_platform == cross_target_platform]
@@ -527,7 +530,7 @@ outputs:
         - libstdcxx >={{ gcc_version }}
     test:
       requires:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  # [cross_target_stdlib != "None"]
         - gcc_impl_{{ cross_target_platform }}
       commands:
         - test -f ${PREFIX}/lib/libasan.so
@@ -557,12 +560,12 @@ outputs:
     requirements:
       build:
       host:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
       run_constrained:
         - msys2-conda-epoch <0.0a0    # [win]
     test:
       requires:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  # [cross_target_stdlib != "None"]
       commands:
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver }}
         - test ! -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}
@@ -586,7 +589,7 @@ outputs:
       host:
         - {{ pin_subpackage("libgomp", exact=True) }}                                               # [not osx]
         - {{ pin_subpackage('_openmp_mutex', exact=True) }}                                         # [not osx]
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}  # [not osx]
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
       run:
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}                                       # [not osx]
         - _openmp_mutex                                                                             # [osx]
@@ -597,7 +600,7 @@ outputs:
         - libgcc-ng =={{ version }}=*_{{ build_num }}
     test:
       requires:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }}  # [cross_target_stdlib != "None"]
       commands:
         - test -f ${PREFIX}/lib/libgcc_s.so                                                         # [linux]
         - test -f ${PREFIX}/lib/libgcc_s.1.dylib                                                    # [osx]
