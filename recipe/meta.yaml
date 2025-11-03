@@ -362,16 +362,16 @@ outputs:
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17    # [cross_target_platform != "win-64"]
         - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
-        - ${CXX} -Wall tests/hello_world.cpp -c -o hello_world.o --std=c++17
-        - ${CXX} -Wall hello_world.o -o hello_world --std=c++17
+        - ${CXX} -Wall tests/hello_world.cpp -c -o hello_world.o --std=c++17 -v
+        - ${CXX} -Wall hello_world.o -o hello_world --std=c++17 -v
 
         # test tzdb integration
       {% if (gcc_maj_ver|int >= 14) and cross_target_cxx_stdlib == "libstdcxx" %}
-        - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb-override.cpp -c -o tzdb-override.o
-        - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb.cpp -c -o tzdb.o
+        - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb-override.cpp -c -o tzdb-override.o -v
+        - ${CXX} -isystem ${PREFIX}/include --std=c++20 -Wall tests/tzdb.cpp -c -o tzdb.o -v
         {% if target_platform == cross_target_platform %}
-        - ${CXX} tzdb-override.o -o tzdb-override && ./tzdb-override
-        - ${CXX} tzdb.o -o tzdb && ./tzdb
+        - ${CXX} tzdb-override.o -o tzdb-override -v && ./tzdb-override
+        - ${CXX} tzdb.o -o tzdb -v && ./tzdb
         - strace ./tzdb 2>&1 | grep ${CONDA_PREFIX}/lib/../share/zoneinfo/tzdata.zi
         # also test without any environment activation
         - unset PREFIX
