@@ -15,7 +15,7 @@ pushd ${SRC_DIR}/build
     # install-shared target doesn't seem to work on macos
     # make -C ${TARGET}/libgcc prefix=${PREFIX} install DESTDIR=${PWD}/tmp
     make -C ${TARGET}/libgcc prefix=${PREFIX} install DESTDIR=${PWD}/tmp
-    install -c -m 644 ${PWD}/tmp/${PREFIX}/lib/* ${PREFIX}/lib/
+    install -c -m 644 ${PWD}/tmp/${PREFIX}/lib/* ${PREFIX}/lib/ || true
     if [[ "${TARGET}" == *mingw* ]]; then
       mv $PREFIX/lib/libgcc_s*.dll $PREFIX/bin
     fi
