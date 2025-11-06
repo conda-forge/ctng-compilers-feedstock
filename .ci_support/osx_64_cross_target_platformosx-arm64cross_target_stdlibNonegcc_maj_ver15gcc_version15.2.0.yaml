@@ -18,6 +18,8 @@ cross_target_platform:
 - osx-arm64
 cross_target_stdlib:
 - None
+docker_image:
+- quay.io/condaforge/linux-anvil-x86_64:alma9
 gcc_maj_ver:
 - '15'
 gcc_version:

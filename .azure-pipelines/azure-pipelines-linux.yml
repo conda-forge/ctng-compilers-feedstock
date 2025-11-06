@@ -32,6 +32,14 @@ jobs:
         CONFIG: linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0:
+        CONFIG: osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0:
+        CONFIG: osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
   timeoutInMinutes: 360
   variables: {}
 
