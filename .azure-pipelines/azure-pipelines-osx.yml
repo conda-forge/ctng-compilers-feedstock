@@ -8,20 +8,8 @@ jobs:
     vmImage: macOS-15
   strategy:
     matrix:
-      osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0:
-        CONFIG: osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0
-        UPLOAD_PACKAGES: 'True'
-      osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0:
-        CONFIG: osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0
-        UPLOAD_PACKAGES: 'True'
       osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0:
         CONFIG: osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0
-        UPLOAD_PACKAGES: 'True'
-      osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0:
-        CONFIG: osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0
-        UPLOAD_PACKAGES: 'True'
-      osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0:
-        CONFIG: osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0
         UPLOAD_PACKAGES: 'True'
       osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0:
         CONFIG: osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0

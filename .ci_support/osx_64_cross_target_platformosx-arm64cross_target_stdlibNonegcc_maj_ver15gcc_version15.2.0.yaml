@@ -11,15 +11,13 @@ c_stdlib_version:
 channel_sources:
 - conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge gcc-experimental
 cross_target_cxx_stdlib:
 - libcxx
 cross_target_platform:
 - osx-arm64
 cross_target_stdlib:
 - None
-cross_target_stdlib_version:
-- '0'
 gcc_maj_ver:
 - '15'
 gcc_version:
@@ -38,8 +36,7 @@ with_conda_specs:
 - false
 - true
 zip_keys:
-- - cross_target_stdlib_version
-  - cross_target_stdlib
+- - cross_target_stdlib
   - cross_target_cxx_stdlib
   - triplet
   - cross_target_platform

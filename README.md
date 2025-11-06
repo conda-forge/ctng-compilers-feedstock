@@ -181,38 +181,10 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -223,38 +195,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -265,38 +209,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -307,38 +223,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -381,14 +269,14 @@ Current release info
 Installing ctng-compilers-feedstock
 ===================================
 
-Installing `ctng-compilers-feedstock` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `ctng-compilers-feedstock` from the `conda-forge/label/gcc-experimental` channel can be achieved by adding `conda-forge/label/gcc-experimental` to your channels with:
 
 ```
-conda config --add channels conda-forge
+conda config --add channels conda-forge/label/gcc-experimental
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `conda-gcc-specs, gcc, gcc-no-conda-specs, gcc_impl_osx-64, gcc_impl_osx-arm64, gfortran, gfortran_impl_osx-64, gfortran_impl_osx-arm64, gxx, gxx_impl_osx-64, gxx_impl_osx-arm64, libgcc, libgcc-devel_osx-64, libgcc-devel_osx-arm64, libgfortran, libgfortran5` can be installed with `conda`:
+Once the `conda-forge/label/gcc-experimental` channel has been enabled, `conda-gcc-specs, gcc, gcc-no-conda-specs, gcc_impl_osx-64, gcc_impl_osx-arm64, gfortran, gfortran_impl_osx-64, gfortran_impl_osx-arm64, gxx, gxx_impl_osx-64, gxx_impl_osx-arm64, libgcc, libgcc-devel_osx-64, libgcc-devel_osx-arm64, libgfortran, libgfortran5` can be installed with `conda`:
 
 ```
 conda install conda-gcc-specs gcc gcc-no-conda-specs gcc_impl_osx-64 gcc_impl_osx-arm64 gfortran gfortran_impl_osx-64 gfortran_impl_osx-arm64 gxx gxx_impl_osx-64 gxx_impl_osx-arm64 libgcc libgcc-devel_osx-64 libgcc-devel_osx-arm64 libgfortran libgfortran5
@@ -403,26 +291,26 @@ mamba install conda-gcc-specs gcc gcc-no-conda-specs gcc_impl_osx-64 gcc_impl_os
 It is possible to list all of the versions of `conda-gcc-specs` available on your platform with `conda`:
 
 ```
-conda search conda-gcc-specs --channel conda-forge
+conda search conda-gcc-specs --channel conda-forge/label/gcc-experimental
 ```
 
 or with `mamba`:
 
 ```
-mamba search conda-gcc-specs --channel conda-forge
+mamba search conda-gcc-specs --channel conda-forge/label/gcc-experimental
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search conda-gcc-specs --channel conda-forge
+mamba repoquery search conda-gcc-specs --channel conda-forge/label/gcc-experimental
 
 # List packages depending on `conda-gcc-specs`:
-mamba repoquery whoneeds conda-gcc-specs --channel conda-forge
+mamba repoquery whoneeds conda-gcc-specs --channel conda-forge/label/gcc-experimental
 
 # List dependencies of `conda-gcc-specs`:
-mamba repoquery depends conda-gcc-specs --channel conda-forge
+mamba repoquery depends conda-gcc-specs --channel conda-forge/label/gcc-experimental
 ```
 
 
