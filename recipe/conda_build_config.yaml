@@ -56,6 +56,8 @@ libgomp_ver:
   - 1.0.0
 channel_sources:
   - conda-forge/label/sysroot-with-crypt,conda-forge
+channel_targets:
+  - conda-forge gcc-experimental
 # we could use stdlib("m2w64_c"), but this allows uniform use in setup_compiler.sh
 c_stdlib:          # [win]
   - m2w64-sysroot  # [win]

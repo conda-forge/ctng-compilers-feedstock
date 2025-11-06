@@ -36,7 +36,7 @@ if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
       )
     fi
     # Remove conda-forge/label/sysroot-with-crypt when GCC < 14 is dropped
-    conda create -p ${CF_PREFIX} -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet \
+    conda create -p ${CF_PREFIX} -c conda-forge/label/gcc-experimental -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet \
       "gcc_impl_${build_platform}" \
       "gxx_impl_${build_platform}" \
       "gfortran_impl_${build_platform}" \
