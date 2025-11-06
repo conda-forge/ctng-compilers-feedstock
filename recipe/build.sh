@@ -14,7 +14,7 @@ if [[ "$channel_targets" == *conda-forge* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose")
 fi
 
-for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy objdump ranlib readelf size strings strip; do
+for tool in addr2line ar as c++filt cc c++ dsymutil fc gcc g++ gfortran ld nm objcopy objdump ranlib readelf size strings strip; do
   tool_upper=$(echo $tool | tr a-z-+ A-Z_X)
   if [[ "$tool" == "cc" ]]; then
      tool=gcc
@@ -22,7 +22,7 @@ for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy obj
      tool=gfortran
   elif [[ "$tool" == "c++" ]]; then
      tool=g++
-  elif [[ "$target_platform" != "$build_platform" && "$tool" =~ ^(ar|nm|ranlib)$ ]]; then
+  elif [[ "${HOST}" != "${BUILD}" && "$tool" =~ ^(ar|nm|ranlib)$ && "${TARGET}" != *darwin* ]]; then
      tool="gcc-${tool}"
   fi
   eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
@@ -30,7 +30,7 @@ for tool in addr2line ar as c++filt cc c++ fc gcc g++ gfortran ld nm objcopy obj
   eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
 done
 
-if [[ "$cross_target_platform" == "win-64" ]]; then
+if [[ "${TARGET}" == *mingw* ]]; then
   # do not expect ${prefix}/mingw symlink - this should be superceded by
   # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
   sed -i 's#${prefix}/mingw/#${prefix}/${target}/sysroot/usr/#g' configure
@@ -44,8 +44,10 @@ else
   rm -rf ${RECIPE_DIR}/patches/mingw
 fi
 
-NATIVE_SYSTEM_HEADER_DIR=/usr/include
-SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
+if [[ "${TARGET}" != *darwin* ]]; then
+  # prevent macos patches from being archived in linux conda packages
+  rm -rf ${RECIPE_DIR}/patches/macos
+fi
 
 # workaround a bug in gcc build files when using external binutils
 # and build != host == target
@@ -55,16 +57,17 @@ ls $BUILD_PREFIX/bin/
 
 ./contrib/download_prerequisites
 
+set +x
 # We want CONDA_PREFIX/usr/lib not CONDA_PREFIX/usr/lib64 and this
 # is the only way. It is incompatible with multilib (obviously).
 TINFO_FILES=$(find . -path "*/config/*/t-*")
 for TINFO_FILE in ${TINFO_FILES}; do
-  echo TINFO_FILE ${TINFO_FILE}
   sed -i.bak 's#^\(MULTILIB_OSDIRNAMES.*\)\(lib64\)#\1lib#g' ${TINFO_FILE}
   rm -f ${TINFO_FILE}.bak
   sed -i.bak 's#^\(MULTILIB_OSDIRNAMES.*\)\(libx32\)#\1lib#g' ${TINFO_FILE}
   rm -f ${TINFO_FILE}.bak
 done
+set -x
 
 # workaround for https://gcc.gnu.org/bugzilla//show_bug.cgi?id=80196
 if [[ "$gcc_version" == "11."* && "$build_platform" != "$target_platform" ]]; then
@@ -87,6 +90,21 @@ if [[ "$TARGET" == *linux* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--enable-threads=posix)
 fi
 
+if [[ "${TARGET}" == *darwin* ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)
+  GCC_CONFIGURE_OPTIONS+=(--with-build-sysroot=${SDKROOT})
+  GCC_CONFIGURE_OPTIONS+=(--enable-darwin-at-rpath)
+  export gcc_cv_ld64_version=955.13
+else
+  GCC_CONFIGURE_OPTIONS+=(--with-sysroot=${PREFIX}/${TARGET}/sysroot)
+  GCC_CONFIGURE_OPTIONS+=(--with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot)
+  GCC_CONFIGURE_OPTIONS+=(--enable-plugin)
+fi
+
+if [[ "${cross_target_cxx_stdlib}" == "libcxx" ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--disable-libstdcxx)
+fi
+
 ../configure \
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
@@ -104,16 +122,15 @@ fi
   --enable-libquadmath-support \
   --enable-lto \
   --enable-target-optspace \
-  --enable-plugin \
   --enable-gold \
   --disable-nls \
   --disable-bootstrap \
   --disable-multilib \
   --enable-long-long \
-  --with-sysroot=${SYSROOT_DIR} \
-  --with-build-sysroot=${BUILD_PREFIX}/${TARGET}/sysroot \
-  --with-native-system-header-dir=${NATIVE_SYSTEM_HEADER_DIR} \
+  --without-zstd \
+  --with-native-system-header-dir=/usr/include \
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
+  --with-gxx-libcxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/../../../../include/c++/v1" \
   "${GCC_CONFIGURE_OPTIONS[@]}"
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libgomp/config.log; false)

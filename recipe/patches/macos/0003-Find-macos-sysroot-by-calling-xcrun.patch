@@ -1,0 +1,80 @@
+From 108b798d7b98215637a44b614775dac7cad8d7b6 Mon Sep 17 00:00:00 2001
+From: Isuru Fernando <isuruf@gmail.com>
+Date: Fri, 31 Oct 2025 16:29:06 -0700
+Subject: [PATCH 3/3] Find macos sysroot by calling xcrun
+
+---
+ gcc/config/darwin-driver.cc | 47 +++++++++++++++++++++++++++++++++----
+ 1 file changed, 43 insertions(+), 4 deletions(-)
+
+diff --git a/gcc/config/darwin-driver.cc b/gcc/config/darwin-driver.cc
+index e83b7cdc0c9..b82e44a15d0 100644
+--- a/gcc/config/darwin-driver.cc
++++ b/gcc/config/darwin-driver.cc
+@@ -239,6 +239,9 @@ static const char *
+ maybe_get_sysroot_from_sdkroot ()
+ {
+   const char *maybe_sysroot = getenv ("SDKROOT");
++  char xcrun_command[] = "/usr/bin/xcrun --show-sdk-path";
++  char buf[1024];
++  FILE *fp;
+ 
+   /* We'll use the same rules as the clang driver, for compatibility.
+      1) The path must be absolute
+@@ -246,13 +249,49 @@ maybe_get_sysroot_from_sdkroot ()
+ 	sysroot semantics to be applied to it.
+      3) It must exist (actually, we'll check it's readable too).  */
+ 
+-   if (maybe_sysroot  == NULL
++  if (!(maybe_sysroot == NULL
+        || *maybe_sysroot != '/'
+        || strlen (maybe_sysroot) == 1
+-       || access (maybe_sysroot, R_OK) == -1)
+-    return NULL;
++       || access (maybe_sysroot, R_OK) == -1)) {
++    return xstrndup (maybe_sysroot, strlen (maybe_sysroot));
++  }
++  
++  maybe_sysroot = getenv ("CONDA_BUILD_SYSROOT");
++  if (!(maybe_sysroot == NULL
++       || *maybe_sysroot != '/'
++       || strlen (maybe_sysroot) == 1
++       || access (maybe_sysroot, R_OK) == -1)) {
++    return xstrndup (maybe_sysroot, strlen (maybe_sysroot));
++  }
++
++  maybe_sysroot = "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk";
++  if (access (maybe_sysroot, R_OK) != -1) {
++    return xstrndup (maybe_sysroot, strlen (maybe_sysroot));
++  }
++
++  maybe_sysroot = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk2";
++  if (access (maybe_sysroot, R_OK) != -1) {
++    return xstrndup (maybe_sysroot, strlen (maybe_sysroot));
++  }
++
++#ifdef __APPLE__
++    fp = popen(xcrun_command, "r");
++    if (fp == NULL)
++        return NULL;
++    if (fgets(buf, sizeof(buf), fp) == NULL) {
++        pclose(fp);
++        return NULL;
++    }
++    int status = pclose(fp);
++    if (status == -1) {
++        return NULL;
++    }
++    buf[strcspn(buf, "\n")] = 0;
++    return xstrndup (buf, strlen (buf));
++#endif
++
++  return NULL;
+ 
+-  return xstrndup (maybe_sysroot, strlen (maybe_sysroot));
+ }
+ 
+ /* Handle the deduction of m32/m64 from -arch flags and the interactions
+-- 
+2.45.2
+

@@ -1,6 +1,15 @@
 #!/bin/bash
-if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
-    extra_pkgs=()
+
+source $RECIPE_DIR/get_cpu_arch.sh
+
+export SDKROOT=${CONDA_BUILD_SYSROOT}
+unset CONDA_BUILD_SYSROOT
+
+extra_pkgs=()
+
+export CF_PREFIX=$SRC_DIR/cf-compilers
+
+if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
     if [[ "$build_platform" != "$target_platform" ]]; then
       # we need a compiler to target cross_target_platform.
       # when build_platform == target_platform, the compiler
@@ -14,30 +23,46 @@ if [[ ! -d  $SRC_DIR/cf-compilers ]]; then
         "gfortran_impl_${cross_target_platform}=${gcc_version}"
       )
     fi
+    if [[ "${cross_target_platform}" != "osx-"* ]]; then
+      extra_pkgs+=(
+        "binutils_impl_${cross_target_platform}=${binutils_version}"
+        "${cross_target_stdlib}_${cross_target_platform}=${cross_target_stdlib_version}"
+      )
+    else
+      extra_pkgs+=(
+        "clang"
+        "cctools_${cross_target_platform}"
+        "ld64_${cross_target_platform}"
+      )
+    fi
     # Remove conda-forge/label/sysroot-with-crypt when GCC < 14 is dropped
-    conda create -p $SRC_DIR/cf-compilers -c conda-forge/label/sysroot-with-crypt -c conda-forge --yes --quiet \
-      "binutils_impl_${build_platform}" \
+    conda create -p ${CF_PREFIX} -c conda-forge/label/gcc-experimental -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet \
       "gcc_impl_${build_platform}" \
       "gxx_impl_${build_platform}" \
       "gfortran_impl_${build_platform}" \
-      "binutils_impl_${target_platform}=${binutils_version}" \
       "gcc_impl_${target_platform}" \
       "gxx_impl_${target_platform}" \
       "gfortran_impl_${target_platform}" \
       "${c_stdlib}_${target_platform}=${c_stdlib_version}" \
-      "binutils_impl_${cross_target_platform}=${binutils_version}" \
-      "${cross_target_stdlib}_${cross_target_platform}=${cross_target_stdlib_version}" \
       ${extra_pkgs[@]}
+
+    if [[ "${cross_target_cxx_stdlib}" == "libcxx" ]]; then
+      CONDA_OVERRIDE_OSX=15.5 CONDA_SUBDIR="${cross_target_platform}" conda create -p $SRC_DIR/cf-compilers-target -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet libcxx-devel
+      mkdir -p ${CF_PREFIX}/${TARGET}/lib
+      ln -sf $SRC_DIR/cf-compilers-target/lib/libc++* ${CF_PREFIX}/${TARGET}/lib
+    fi
+fi
+
+if [[ "${BUILD_PREFIX}" != "${PREFIX}" ]]; then
+  ln -sf ${CF_PREFIX}/${TARGET} ${BUILD_PREFIX}/${TARGET} || true
+  ln -sf ${CF_PREFIX}/bin ${BUILD_PREFIX}/bin || true
 fi
 
 export PATH=$SRC_DIR/cf-compilers/bin:$PATH
-export BUILD_PREFIX=$SRC_DIR/cf-compilers
 
 if [[ "$target_platform" == "win-"* && "${PREFIX}" != *Library ]]; then
     export PREFIX=${PREFIX}/Library
 fi
-
-source $RECIPE_DIR/get_cpu_arch.sh
 
 if [[ "$target_platform" == "win-64" ]]; then
   EXEEXT=".exe"
@@ -45,3 +70,9 @@ else
   EXEEXT=""
 fi
 SYSROOT_DIR=${PREFIX}/${TARGET}/sysroot
+
+if [[ "$target_platform" == "osx-"* ]]; then
+  STRIP_ARGS=""
+else
+  STRIP_ARGS="--strip-all"
+fi
