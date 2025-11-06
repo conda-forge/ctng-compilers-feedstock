@@ -10,7 +10,12 @@ set -e -x
 pushd ${SRC_DIR}/build
 
   if [[ "${PKG_NAME}" == "libgcc" ]]; then
-    make -C ${TARGET}/libgcc prefix=${PREFIX} install-shared
+    mkdir -p ${PREFIX}/lib
+    mkdir -p ${PREFIX}/bin
+    # install-shared target doesn't seem to work on macos
+    # make -C ${TARGET}/libgcc prefix=${PREFIX} install DESTDIR=${PWD}/tmp
+    make -C ${TARGET}/libgcc prefix=${PREFIX} install DESTDIR=${PWD}/tmp
+    install -c -m 644 ${PWD}/tmp/${PREFIX}/lib/* ${PREFIX}/lib/ || true
     if [[ "${TARGET}" == *mingw* ]]; then
       mv $PREFIX/lib/libgcc_s*.dll $PREFIX/bin
     fi
@@ -23,13 +28,14 @@ pushd ${SRC_DIR}/build
       chmod 644 ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_eh.a
       ${TARGET}-ranlib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_eh.a
 
-      mkdir -p ${PREFIX}/${TARGET}/lib
       if [[ "${triplet}" == *linux* ]]; then
-        install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/${TARGET}/lib/libgcc_s.so.1
-        cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/${TARGET}/lib/libgcc_s.so
+        install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_s.so.1
+        cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_s.so
+      elif [[ "${triplet}" == *darwin* ]]; then
+        install -c -m 644 ./libgcc_s.1.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_s.1.dylib
       else
         # import library, not static library
-        install -c -m 644 ./shlib/libgcc_s.a ${PREFIX}/${TARGET}/lib/libgcc_s.a
+        install -c -m 644 ./shlib/libgcc_s.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_s.a
       fi
     popd
   fi
@@ -69,10 +75,10 @@ fi
 find ${PREFIX}/lib -name "*\.la" -exec rm -rf {} \;
 
 if [[ "${PKG_NAME}" != gcc_impl* ]]; then
-  # mv ${PREFIX}/${TARGET}/lib/* ${PREFIX}/lib
   # clean up empty folder
   rm -rf ${PREFIX}/lib/gcc
   rm -rf ${PREFIX}/lib/lib{a,hwa,l,ub,t}san.so*
+  rm -rf ${PREFIX}/lib/lib{a,hwa,l,ub,t}san.*dylib
 
   # Install Runtime Library Exception
   install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \

@@ -17,7 +17,6 @@ pushd ${SRC_DIR}/build
 popd
 
 mkdir -p ${PREFIX}/lib
-#mv ${PREFIX}/${CHOST}/lib/* ${PREFIX}/lib
 
 # no static libs
 find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;

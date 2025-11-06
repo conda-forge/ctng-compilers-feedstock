@@ -26,7 +26,9 @@ done
 #make -C $CHOST/libstdc++-v3/src prefix=${PREFIX} install
 #make -C $CHOST/libstdc++-v3/include prefix=${PREFIX} install
 #make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX} install
-make -C $CHOST/libstdc++-v3/python prefix=${PREFIX} install
+if [[ "$cross_target_cxx_stdlib" == "libstdcxx" ]]; then
+  make -C $CHOST/libstdc++-v3/python prefix=${PREFIX} install
+fi
 
 # Probably don't want to do this for cross-compilers
 # mkdir -p ${PREFIX}/share/gdb/auto-load/usr/lib/
@@ -35,8 +37,6 @@ make -C $CHOST/libstdc++-v3/python prefix=${PREFIX} install
 make -C libcpp prefix=${PREFIX} install
 
 popd
-
-mkdir -p ${PREFIX}/lib/gcc/${CHOST}/${PKG_VERSION}
 
 set +x
 # Strip executables, we may want to install to a different prefix
@@ -50,7 +50,7 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-       ${BUILD_PREFIX}/bin/${CHOST}-strip --strip-all -v "${_file}" || :
+       ${BUILD_PREFIX}/bin/${HOST}-strip ${STRIP_ARGS} -v "${_file}" || :
       ;;
     esac
   done

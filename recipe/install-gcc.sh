@@ -16,8 +16,8 @@ pushd ${SRC_DIR}/build
   sed -i.bak 's/install-collect2: collect2 /install-collect2: collect2$(exeext) /g' gcc/Makefile
   make -C gcc prefix=${PREFIX} install-driver install-cpp install-gcc-ar install-headers install-plugin install-lto-wrapper install-collect2
   # not sure if this is the same as the line above.  Run both, just in case
-  make -C lto-plugin prefix=${PREFIX} install
-  install -dm755 ${PREFIX}/lib/bfd-plugins/
+  make -C lto-plugin prefix=${PREFIX} install || true
+  install -dm755 ${PREFIX}/lib/bfd-plugins/ || true
 
   # statically linked, so this so does not exist
   # ln -s $PREFIX/lib/gcc/$TARGET/liblto_plugin.so ${PREFIX}/lib/bfd-plugins/
@@ -139,17 +139,11 @@ popd
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
 specdir=$PREFIX/lib/gcc/$TARGET/${gcc_version}
-if [[ "$build_platform" == "$target_platform" ]]; then
+if [[ "${BUILD}" == "${HOST}" ]]; then
     $PREFIX/bin/${TARGET}-gcc${EXEEXT} -dumpspecs > $specdir/specs
     # validate assumption that specs in build/gcc/specs are exactly the
     # same as dumped specs so that I don't need to depend on gcc_impl in conda-gcc-specs subpackage
     diff -s ${SRC_DIR}/build/gcc/specs $specdir/specs
-elif [[ "$target_platform" == "$cross_target_platform" && ${TARGET} != *mingw* ]]; then
-    # For support of of native specs, we need this
-    # This is the only place where we need QEMU.
-    # Remove this elif condition for local experimentation if you
-    # do not have QEMU setup
-    $PREFIX/bin/${TARGET}-gcc -dumpspecs > $specdir/specs
 else
     $BUILD_PREFIX/bin/${TARGET}-gcc -dumpspecs > $specdir/specs
     # validate assumption that specs in build/gcc/specs are exactly the
@@ -162,15 +156,19 @@ fi
 cp $specdir/specs $specdir/builtin.specs
 
 # modify the default specs to only have %include_noerr that includes an optional conda.specs
-# package installable via the conda-gcc-specs package where conda.specs (for $cross_target_platform
-# == $target_platform) will add the minimal set of flags for the 'native' toolchains to be useable
+# package installable via the conda-gcc-specs package where conda.specs (for ${TARGET}
+# == ${HOST}) will add the minimal set of flags for the 'native' toolchains to be useable
 # without anything additional set in the enviornment or extra cmdline args.
 echo  "%include_noerr <conda.specs>" >> $specdir/specs
 
 # We use double quotes here because we want $PREFIX and $TARGET to be expanded at build time
 #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
 #   package is installed.
-sed -i -e "/\*link_command:/,+1 s+%.*+& %{!static:-rpath ${PREFIX}/lib}+" $specdir/specs
+if [[ "${TARGET}" == *linux* ]]; then
+  sed -i -e "/\*link_command:/,+1 s+%.*+& %{!static:-rpath ${PREFIX}/lib}+" $specdir/specs
+elif [[ "${TARGET}" == *darwin* ]]; then
+  sed -i -e "s#@loader_path#${PREFIX}/lib#g" $specdir/specs
+fi
 
 
 # Install Runtime Library Exception
@@ -189,7 +187,7 @@ pushd ${PREFIX}
       *script*executable*)
       ;;
       *executable*)
-        ${BUILD_PREFIX}/bin/${TARGET}-strip --strip-all -v "${_file}" || :
+        ${BUILD_PREFIX}/bin/${HOST}-strip ${STRIP_ARGS} -v "${_file}" || :
       ;;
     esac
   done
@@ -199,37 +197,61 @@ set -x
 
 #${PREFIX}/bin/${TARGET}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
-mkdir -p ${PREFIX}/${TARGET}/lib
 mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 
-if [[ "$target_platform" == "$cross_target_platform" ]]; then
+if [[ "${HOST}" == "${TARGET}" ]]; then
   # making these this way so conda build doesn't muck with them
-  pushd ${PREFIX}/${TARGET}/lib
-    if [[ "${TARGET}" != *mingw* ]]; then
-      ln -sf ../../lib/libgomp.so libgomp.so
+  if [[ "${TARGET}" == *linux* ]]; then
+    pushd ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+      ln -sf ../../../../lib/libgomp${SHLIB_EXT} libgomp${SHLIB_EXT}
       for lib in libgfortran libatomic libquadmath libitm lib{a,hwa,l,ub,t}san; do
         for f in ${PREFIX}/lib/${lib}.so*; do
-          ln -s ../../lib/$(basename $f) ${PREFIX}/${TARGET}/lib/$(basename $f)
+          ln -s ../../../../lib/$(basename $f) ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
         done
       done
-    fi
+    popd
+  fi
+  if [[ "${TARGET}" == *darwin* ]]; then
+    pushd ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
+      ln -sf ../../../libomp.dylib libgomp.dylib
+    popd
+  fi
 
-    for f in ${PREFIX}/lib/*.spec; do
-      mv $f ${PREFIX}/${TARGET}/lib/$(basename $f)
+  for f in ${PREFIX}/lib/*.spec; do
+    [ -e "$f" ] || continue
+    mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
+  done
+  for f in ${PREFIX}/${TARGET}/lib/*.spec; do
+    [ -e "$f" ] || continue
+    mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
+  done
+  if [[ "${TARGET}" == *linux* ]]; then
+    # sanitizer preinit files
+    for f in ${PREFIX}/lib/*.o; do
+      mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
     done
-    if [[ "${TARGET}" != *mingw* ]]; then
-      for f in ${PREFIX}/lib/*.o; do
-        mv $f ${PREFIX}/${TARGET}/lib/$(basename $f)
-      done
-    fi
-  popd
+  fi
+  mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
     if [[ -f "${PREFIX}/lib/lib${lib}.a" ]]; then
      mv ${PREFIX}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
   done
-  for lib in libasan.so libatomic.so libgomp.so libhwasan.so libitm.so liblsan.so libquadmath.so libtsan.so libubsan.so libstdc++.so libstdc++.so.6 libgcc_s.so; do
-    if [[ -f "${PREFIX}/lib/${lib}" ]]; then
+  for lib in \
+      libasan${SHLIB_EXT} \
+      libatomic${SHLIB_EXT} \
+      libgomp${SHLIB_EXT} \
+      libhwasan${SHLIB_EXT} \
+      libitm${SHLIB_EXT} \
+      liblsan${SHLIB_EXT} \
+      libquadmath${SHLIB_EXT} \
+      libtsan${SHLIB_EXT} \
+      libubsan${SHLIB_EXT} \
+      libstdc++${SHLIB_EXT} \
+      libstdc++.so.6 \
+      libstdc++.6.dylib \
+      libgcc_s${SHLIB_EXT}; do
+    if [[ -f "${PREFIX}/lib/${lib}" && "${TARGET}" != *mingw* ]]; then
      # install a shared library here since the directory ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
      # has the highest preference and we want shared libraries to have the highest preference
      rm ${PREFIX}/lib/${lib}
@@ -239,24 +261,47 @@ if [[ "$target_platform" == "$cross_target_platform" ]]; then
 else
   source ${RECIPE_DIR}/install-libgcc.sh
   for lib in libcc1; do
-    mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${TARGET}/lib/ || true
-    mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/${TARGET}/lib/ || true
+    if [[ -f ${PREFIX}/lib/${lib}.so ]]; then
+      mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
   done
   rm -f ${PREFIX}/share/info/*.info
+  mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
     if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.a" ]]; then
+     mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
      mv ${PREFIX}/${TARGET}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
     if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.so" ]]; then
-     ln -sf ${PREFIX}/${TARGET}/lib/lib${lib}.so ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+     mv ${PREFIX}/${TARGET}/lib/lib${lib}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
+    fi
+    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.dylib" ]]; then
+     mv ${PREFIX}/${TARGET}/lib/lib${lib}.*dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
     fi
   done
 fi
 
 if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
-  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/${TARGET}/lib/libgomp.spec
+  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgomp.spec
+fi
+if [[ -f ${PREFIX}/${TARGET}/lib/libgomp.spec ]]; then
+  mv ${PREFIX}/${TARGET}/lib/libgomp.spec ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgomp.spec
 fi
 
 rm -f ${PREFIX}/share/info/dir
+
+mkdir -p ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}
+if [[ "${TARGET}" == *darwin* ]]; then
+  TOOLS="ar as c++filt ld nm ranlib size strings strip"
+elif [[ "${TARGET}" == *linux* ]]; then
+  TOOLS=TOOLS="addr2line ar c++filt elfedit ld nm objcopy objdump ranlib readelf size strings strip"
+elif [[ "${TARGET}" == *mingw* ]]; then
+  TOOLS=""
+  #TOOLS=TOOLS="addr2line ar c++filt elfedit ld nm objcopy objdump ranlib readelf size strings strip dlltool dllwrap windmc windres"
+fi
+
+for f in ${TOOLS}; do
+  ln -sf ${PREFIX}/bin/${TARGET}-${f} ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}/${f}
+done
 
 source ${RECIPE_DIR}/make_tool_links.sh

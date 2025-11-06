@@ -7,7 +7,7 @@ cd build
 make -C ${triplet}/libgomp prefix=${PREFIX} install-toolexeclibLTLIBRARIES
 rm ${PREFIX}/lib/libgomp.a ${PREFIX}/lib/libgomp.la
 
-if [[ "$target_platform" == "linux-"* ]]; then
+if [[ "${HOST}" == *linux* ]]; then
   rm ${PREFIX}/lib/libgomp.so.1
   rm ${PREFIX}/lib/libgomp.so
   ln -sf ${PREFIX}/lib/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so

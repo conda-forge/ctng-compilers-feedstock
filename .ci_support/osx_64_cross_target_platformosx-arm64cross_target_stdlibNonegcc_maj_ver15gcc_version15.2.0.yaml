@@ -1,23 +1,23 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.13'
+MACOSX_SDK_VERSION:
+- '11.0'
 binutils_version:
-- '2.40'
+- '2.44'
 c_stdlib:
-- sysroot
+- macosx_deployment_target
 c_stdlib_version:
-- '2.17'
-cdt_name:
-- conda
+- '10.13'
 channel_sources:
 - conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge gcc-experimental
+cross_target_cxx_stdlib:
+- libcxx
 cross_target_platform:
-- linux-ppc64le
+- osx-arm64
 cross_target_stdlib:
-- sysroot
-cross_target_stdlib_version:
-- '2.17'
-docker_image:
-- quay.io/condaforge/linux-anvil-x86_64:alma9
+- None
 gcc_maj_ver:
 - '15'
 gcc_version:
@@ -26,18 +26,18 @@ libgfortran_soname:
 - '5'
 libgomp_ver:
 - 1.0.0
-openmp_ver:
-- '4.5'
+macos_machine:
+- x86_64-apple-darwin13.4.0
 target_platform:
-- linux-ppc64le
+- osx-64
 triplet:
-- powerpc64le-conda-linux-gnu
+- arm64-apple-darwin20.0.0
 with_conda_specs:
 - false
 - true
 zip_keys:
-- - cross_target_stdlib_version
-  - cross_target_stdlib
+- - cross_target_stdlib
+  - cross_target_cxx_stdlib
   - triplet
   - cross_target_platform
 - - gcc_version
