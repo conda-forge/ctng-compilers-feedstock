@@ -19,8 +19,7 @@ pushd ${SRC_DIR}/build
   make -C lto-plugin prefix=${PREFIX} install || true
   install -dm755 ${PREFIX}/lib/bfd-plugins/ || true
 
-  # statically linked, so this so does not exist
-  # ln -s $PREFIX/lib/gcc/$TARGET/liblto_plugin.so ${PREFIX}/lib/bfd-plugins/
+  ln -s ${PREFIX}/${_libdir}/liblto_plugin.so ${PREFIX}/lib/bfd-plugins/
 
   make -C libcpp prefix=${PREFIX} install
 
