@@ -3127,7 +3127,7 @@ diff --git a/gcc/config/aarch64/driver-aarch64.cc b/gcc/config/aarch64/driver-aa
 index 9d99554dbc2..21002c3b560 100644
 --- a/gcc/config/aarch64/driver-aarch64.cc
 +++ b/gcc/config/aarch64/driver-aarch64.cc
-@@ -28,6 +28,76 @@
+@@ -28,6 +28,77 @@
  #include "aarch64-protos.h"
  #include "aarch64-feature-deps.h"
  
@@ -3135,6 +3135,7 @@ index 9d99554dbc2..21002c3b560 100644
 +/* Default architecture to use if -mcpu=native did not detect a known CPU.  */
 +#if TARGET_MACHO
 +#define DEFAULT_ARCH "apple-m1"
++#define DEFAULT_CPU "generic-armv8-a"
 +#else
 +#define DEFAULT_ARCH "8A"
 +#define DEFAULT_CPU "generic-armv8-a"
