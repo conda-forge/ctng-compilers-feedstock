@@ -144,6 +144,12 @@ if [[ "${BUILD}" == "${HOST}" ]]; then
     # validate assumption that specs in build/gcc/specs are exactly the
     # same as dumped specs so that I don't need to depend on gcc_impl in conda-gcc-specs subpackage
     diff -s ${SRC_DIR}/build/gcc/specs $specdir/specs
+elif [[ "${HOST}" == "${TARGET}" && "${TARGET}" == *linux* && "${BUILD}" == *linux* ]]; then
+    # For support of of native specs, we need this
+    # This is the only place where we need QEMU.
+    # Remove this elif condition for local experimentation if you
+    # do not have QEMU setup
+    $PREFIX/bin/${HOST}-gcc -dumpspecs > $specdir/specs
 else
     $BUILD_PREFIX/bin/${TARGET}-gcc -dumpspecs > $specdir/specs
     # validate assumption that specs in build/gcc/specs are exactly the
