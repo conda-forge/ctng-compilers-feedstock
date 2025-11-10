@@ -57,9 +57,8 @@ ls $BUILD_PREFIX/bin/
 
 ./contrib/download_prerequisites
 
-for f in isl mpfr; do
-  cp $BUILD_PREFIX/share/gnuconfig/config.* mpfr/
-  cp $BUILD_PREFIX/share/gnuconfig/config.* isl/
+for f in isl mpfr mpc; do
+  cp $BUILD_PREFIX/share/gnuconfig/config.* $f/
 done
 
 set +x
