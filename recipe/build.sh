@@ -57,6 +57,11 @@ ls $BUILD_PREFIX/bin/
 
 ./contrib/download_prerequisites
 
+for f in isl mpfr; do
+  cp $BUILD_PREFIX/share/gnuconfig/config.* mpfr/
+  cp $BUILD_PREFIX/share/gnuconfig/config.* isl/
+done
+
 set +x
 # We want CONDA_PREFIX/usr/lib not CONDA_PREFIX/usr/lib64 and this
 # is the only way. It is incompatible with multilib (obviously).

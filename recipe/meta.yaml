@@ -69,6 +69,8 @@ source:
       - patches/macos/0002-Make-stdlib-libc-the-default-for-macos-platforms.patch
       # call xcrun to get sdkroot
       - patches/macos/0003-Find-macos-sysroot-by-calling-xcrun.patch
+      # needed to cross compile aarch64
+      - patches/macos/aarch64-cross.patch
       {% endif %}
 
 build:
