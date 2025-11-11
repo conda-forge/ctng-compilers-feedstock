@@ -35,6 +35,11 @@ if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
         "ld64_${cross_target_platform}"
       )
     fi
+    if [[ "${build_platform}" == "osx-"* ]]; then
+      extra_pkgs+=(
+        "make"
+      )
+    fi
     # Remove conda-forge/label/sysroot-with-crypt when GCC < 14 is dropped
     conda create -p ${CF_PREFIX} -c conda-forge/label/gcc-experimental -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet \
       "gcc_impl_${build_platform}" \
