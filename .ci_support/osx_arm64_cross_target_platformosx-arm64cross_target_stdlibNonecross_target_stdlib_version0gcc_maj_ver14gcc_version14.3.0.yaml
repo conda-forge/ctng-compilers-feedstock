@@ -21,9 +21,9 @@ cross_target_stdlib:
 cross_target_stdlib_version:
 - '0'
 gcc_maj_ver:
-- '15'
+- '14'
 gcc_version:
-- 15.2.0
+- 14.3.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
