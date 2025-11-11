@@ -76,7 +76,7 @@ build:
   skip: true  # [(win and cross_target_platform != "win-64") or cross_target_platform not in ("osx-64", "osx-arm64") or gcc_maj_ver != 15]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
-    - {{ cross_target_stdlib }}_{{ cross_target_platform }}
+    - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
 
 requirements:
   build:
@@ -95,7 +95,7 @@ outputs:
       missing_dso_whitelist:
         - "*"
       ignore_run_exports_from:
-        - {{ cross_target_stdlib }}_{{ cross_target_platform }}
+        - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
     requirements:
       build:
       host:
