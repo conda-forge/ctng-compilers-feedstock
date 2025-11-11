@@ -50,12 +50,12 @@ install -Dm644 $SRC_DIR/COPYING.RUNTIME \
 
 if [[ "${HOST}" != "${TARGET}" ]]; then
   if [[ ${triplet} == *linux* ]]; then
-    cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
+    cp -f -P ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
   elif [[ ${triplet} == *darwin* ]]; then
-    cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    cp -f -P ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   fi
 fi
-cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.*a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
+cp -f -P ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.*a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
 
 set +x
 # Strip executables, we may want to install to a different prefix

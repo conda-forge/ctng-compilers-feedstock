@@ -10,10 +10,10 @@ if [[ "${TARGET}" == *mingw* ]]; then
   cp ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.dll ${PREFIX}/bin/
 elif [[ "${TARGET}" == *linux* ]]; then
   mkdir -p ${PREFIX}/lib
-  cp -f --no-dereference ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/
+  cp -f -P ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/
 elif [[ "${TARGET}" == *darwin* ]]; then
   mkdir -p ${PREFIX}/lib
-  cp -f --no-dereference ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.dylib ${PREFIX}/lib/
+  cp -f -P ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.dylib ${PREFIX}/lib/
 else
   echo "${TARGET} not handled"
   exit 1
