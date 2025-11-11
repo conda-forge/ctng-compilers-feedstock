@@ -80,6 +80,7 @@ if [[ "${PKG_NAME}" != gcc_impl* ]]; then
   rm -rf ${PREFIX}/lib/lib{a,hwa,l,ub,t}san.so*
   rm -rf ${PREFIX}/lib/lib{a,hwa,l,ub,t}san.*dylib
 
+  mkdir -p ${PREFIX}/share/licenses/gcc-libs
   # Install Runtime Library Exception
   install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION

@@ -15,6 +15,7 @@ else
   rm ${PREFIX}/lib/libgomp.dll.a
 fi
 
+mkdir -p ${PREFIX}/share/licenses/gcc-libs
 # Install Runtime Library Exception
 install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION.gomp_copy

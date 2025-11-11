@@ -19,6 +19,7 @@ else
   exit 1
 fi
 
+mkdir -p ${PREFIX}/share/licenses/libgfortran
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/libgfortran/RUNTIME.LIBRARY.EXCEPTION
