@@ -176,6 +176,7 @@ elif [[ "${TARGET}" == *darwin* ]]; then
   sed -i -e "s#@loader_path#${PREFIX}/lib#g" $specdir/specs
 fi
 
+mkdir -p ${PREFIX}/share/licenses/gcc
 
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
