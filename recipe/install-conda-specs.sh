@@ -5,6 +5,8 @@ source ${RECIPE_DIR}/setup_compiler.sh
 set -ex
 export CHOST="${triplet}"
 specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
+mkdir -p ${specdir}
+
 if [[ "${TARGET}" == "${HOST}" ]]; then
     cp ${SRC_DIR}/build/gcc/specs ${SRC_DIR}/build/gcc/conda.specs
     install -Dm644 ${SRC_DIR}/build/gcc/conda.specs $specdir
