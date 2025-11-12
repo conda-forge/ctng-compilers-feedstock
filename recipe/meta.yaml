@@ -64,7 +64,7 @@ source:
       # in case of several patches per version, use newest one
       - patches/macos/gcc-{{ version }}.diff
       # from https://github.com/JuliaPackaging/Yggdrasil/blob/master/0_RootFS/GCCBootstrap%4014/bundled/patches/gcc/gcc1420-Increase-fallback-min-macOS-version-for-libgcc-to-10.8.patch
-      - patches/macos/0001-GCC-{{ gcc_maj_ver }}-Increase-fallback-min-macOS-version-for-libgc.patch   # [cross_target_platform == "osx-64" and gcc_maj_ver != 13]
+      - patches/macos/0001-GCC-{{ gcc_maj_ver }}-Increase-fallback-min-macOS-version-for-libgc.patch   # [cross_target_platform == "osx-64"]
       # Make -stdlib=libcxx the default
       - patches/macos/0002-Make-stdlib-libc-the-default-for-macos-platforms.patch
       # call xcrun to get sdkroot
