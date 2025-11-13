@@ -291,19 +291,19 @@ outputs:
         - specdir=$PREFIX/lib/gcc/{{ triplet }}/{{ gcc_version }}
         - test -f $specdir/conda.specs
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
-        - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print $1":"}' | grep "${specdir}/specs:${specdir}/conda.specs:"
+        - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print $1":"}' | grep "${specdir}/specs:${specdir}/conda.specs:"  # [linux]
         - cp tests/libhowdy.h $PREFIX/include/
         - ${CC} -shared -fpic -o $PREFIX/lib/libhowdy.so tests/libhowdy.c
         - ${CC} -o howdy-dso tests/howdy-dso.c -lhowdy
         - ./howdy-dso
-        -    grep RPATH   <({{ triplet }}-readelf -d howdy-dso)
-        - "! grep RUNPATH <({{ triplet }}-readelf -d howdy-dso)"
-        - ${CC} -Wl,-enable-new-dtags -o howdy-dso-runpath tests/howdy-dso.c -lhowdy
-        - ./howdy-dso-runpath
-        - "! grep RPATH   <({{ triplet }}-readelf -d howdy-dso-runpath)"
-        -    grep RUNPATH <({{ triplet }}-readelf -d howdy-dso-runpath)
-        - echo | ${CC} -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/,/^End of search/ {print}' | tail -n2 | head -n1 | grep "$PREFIX/include"
-        - echo | ${CC} -isystem "$PREFIX/include" -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/, /^End of search/ {print}' | head -n2 | tail -n1 | grep "$PREFIX/include"
+        -    grep RPATH   <({{ triplet }}-readelf -d howdy-dso)    # [linux]
+        - "! grep RUNPATH <({{ triplet }}-readelf -d howdy-dso)"   # [linux]
+        - ${CC} -Wl,-enable-new-dtags -o howdy-dso-runpath tests/howdy-dso.c -lhowdy  # [linux]
+        - ./howdy-dso-runpath                                                         # [linux]
+        - "! grep RPATH   <({{ triplet }}-readelf -d howdy-dso-runpath)"              # [linux]
+        -    grep RUNPATH <({{ triplet }}-readelf -d howdy-dso-runpath)               # [linux]
+        - echo | ${CC} -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/,/^End of search/ {print}' | tail -n2 | head -n1 | grep "$PREFIX/include"  # [linux]
+        - echo | ${CC} -isystem "$PREFIX/include" -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/, /^End of search/ {print}' | head -n2 | tail -n1 | grep "$PREFIX/include"  # [linux]
 
     about:
       summary: conda-specific specfile for GNU C/C++ Compiler
