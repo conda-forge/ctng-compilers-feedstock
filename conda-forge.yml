@@ -1,5 +1,6 @@
 azure:
   free_disk_space: true
+  store_build_artifacts: true
 build_platform:
   linux_ppc64le: linux_64
   linux_aarch64: linux_64
