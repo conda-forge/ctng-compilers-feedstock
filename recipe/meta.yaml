@@ -219,7 +219,7 @@ outputs:
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address  # [cross_target_platform != "win-64"]
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v                     # [cross_target_platform != "win-64"]
         - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
-        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
+        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform and linux]
         - ${CC} -Wall tests/hello_world.c -c -o hello_world.o -v
         - ${CC} -Wall hello_world.o -o hello_world -v
         {% if cross_target_platform.startswith("linux-") %}
