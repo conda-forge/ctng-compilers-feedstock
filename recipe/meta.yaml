@@ -663,7 +663,7 @@ outputs:
         - libgfortran {{ gcc_version }}
     test:
       commands:
-        - test -f ${PREFIX}/lib/libgfortran.so
+        - test -f ${PREFIX}/lib/libgfortran${SHLIB_EXT}
     about:
       summary: The GNU Fortran Runtime Library
       home: https://gcc.gnu.org/
@@ -682,7 +682,7 @@ outputs:
         - libgfortran-ng =={{ version }}=*_{{ build_num }}
     test:
       commands:
-        - test -f ${PREFIX}/lib/libgfortran.so
+        - test -f ${PREFIX}/lib/libgfortran${SHLIB_EXT}
     about:
       summary: The GNU Fortran Runtime Library
       home: https://gcc.gnu.org/
