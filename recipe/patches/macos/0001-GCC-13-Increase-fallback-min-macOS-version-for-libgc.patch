@@ -1,8 +1,12 @@
 From c84ff5f29ce36e1b5f253ab08cdb8e8952fa3f26 Mon Sep 17 00:00:00 2001
-From: Isuru Fernando <isuruf@gmail.com>
+From: =?UTF-8?q?Mos=C3=A8=20Giordano?= <mose@gnu.org>
 Date: Tue, 11 Nov 2025 17:20:16 -0800
 Subject: [PATCH] GCC 13: Increase fallback min macOS version for libgcc to
  10.8
+
+`-mmacosx-version-min=10.5` seems to cause problems with ld64 from cctools
+(https://github.com/JuliaPackaging/Yggdrasil/pull/10132#issuecomment-2569925646),
+and in any case in Julia/BinaryBuilder we support macOS 10.12 at minimum.
 
 Backport of GCC 14 patch to 13
 ---
