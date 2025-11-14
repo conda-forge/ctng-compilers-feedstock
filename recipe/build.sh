@@ -92,6 +92,7 @@ if [[ "$TARGET" == *linux* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--enable-libsanitizer)
   GCC_CONFIGURE_OPTIONS+=(--enable-default-pie)
   GCC_CONFIGURE_OPTIONS+=(--enable-threads=posix)
+  GCC_CONFIGURE_OPTIONS+=(--enable-__cxa_atexit)
 fi
 
 if [[ "${TARGET}" == *darwin* ]]; then
@@ -118,15 +119,11 @@ fi
   --host=$HOST \
   --target=$TARGET \
   --enable-languages=c,c++,fortran,objc,obj-c++ \
-  --enable-__cxa_atexit \
-  --disable-libmudflap \
   --enable-libgomp \
   --disable-libssp \
   --enable-libquadmath \
   --enable-libquadmath-support \
   --enable-lto \
-  --enable-target-optspace \
-  --enable-gold \
   --disable-nls \
   --disable-bootstrap \
   --disable-multilib \

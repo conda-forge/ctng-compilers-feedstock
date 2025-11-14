@@ -264,7 +264,7 @@ outputs:
 
   - name: gcc-no-conda-specs
     build:
-      skip: true   # [with_conda_specs and target_platform != cross_target_platform]
+      skip: true   # [with_conda_specs or target_platform != cross_target_platform]
     requirements:
       run:
         - gcc
