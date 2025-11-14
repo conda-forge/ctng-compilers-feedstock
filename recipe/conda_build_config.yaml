@@ -1,4 +1,4 @@
-triplet:
+TARGET:
   - x86_64-conda-linux-gnu
   - powerpc64le-conda-linux-gnu
   - aarch64-conda-linux-gnu
@@ -70,7 +70,7 @@ zip_keys:
   - - cross_target_stdlib_version
     - cross_target_stdlib
     - cross_target_cxx_stdlib
-    - triplet
+    - TARGET
     - cross_target_platform
   - - gcc_version
     - gcc_maj_ver

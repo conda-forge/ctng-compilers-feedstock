@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 9 %}
+{% set build_num = 10 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -106,19 +106,19 @@ outputs:
     test:
       commands:
         - echo {{ cross_target_stdlib_version }}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/crtbegin.o    # [cross_target_platform not in ("osx-64", "osx-arm64")]
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/crtfastmath.o    # [cross_target_platform in ("osx-64", "osx-arm64")]
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_eh.a
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/crtbegin.o    # [cross_target_platform not in ("osx-64", "osx-arm64")]
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/crtfastmath.o    # [cross_target_platform in ("osx-64", "osx-arm64")]
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_eh.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc.a
         {% if cross_target_platform.startswith("linux-") %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.so
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.so
         {% elif cross_target_platform == "osx-64" %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.dylib
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.1.dylib
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.1.dylib
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.1.1.dylib
         {% elif cross_target_platform == "osx-arm64" %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.1.dylib
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.1.1.dylib
         {% else %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.a
         {% endif %}
     about:
       summary: The GNU C development libraries and object files
@@ -145,14 +145,14 @@ outputs:
         - m2-conda-epoch    # [win]
     test:
       commands:
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.a
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++fs.a
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libsupc++.a
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/include/c++/cstdio
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libstdc++.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libstdc++fs.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libsupc++.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/include/c++/cstdio
         {% if cross_target_platform.startswith("linux-") %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.so
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libstdc++.so
         {% else %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libstdc++.dll.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libstdc++.dll.a
         {% endif %}
     about:
       summary: The GNU C++ headers and development libraries
@@ -206,10 +206,10 @@ outputs:
       commands:
         - echo {{ c_stdlib }}
         - echo {{ c_stdlib_version }}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.so   # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
-        - test `readlink ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.so` == "../../../../lib/libgomp.so"  # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
-        - test -f ${PREFIX}/bin/{{ triplet }}-gcc
-        - test -f ${PREFIX}/bin/{{ triplet }}-cpp
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgomp.so   # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
+        - test `readlink ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgomp.so` == "../../../../lib/libgomp.so"  # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
+        - test -f ${PREFIX}/bin/{{ TARGET }}-gcc
+        - test -f ${PREFIX}/bin/{{ TARGET }}-cpp
         - test ! -f ${PREFIX}/bin/gcc
         - test ! -f ${PREFIX}/bin/cpp
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
@@ -219,22 +219,22 @@ outputs:
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address  # [cross_target_platform != "win-64"]
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v                     # [cross_target_platform != "win-64"]
         - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
-        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform and linux]
+        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ TARGET }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform and linux]
         - ${CC} -Wall tests/hello_world.c -c -o hello_world.o -v
         - ${CC} -Wall hello_world.o -o hello_world -v
         {% if cross_target_platform.startswith("linux-") %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.so
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libsanitizer.spec
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libasan_preinit.o
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.so
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libsanitizer.spec
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libasan_preinit.o
         {% elif cross_target_platform.startswith("osx-") %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.1.1.dylib
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.1.1.dylib
         - test ! -d ${PREFIX}/${triplet}
         {% else %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgcc_s.a
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libquadmath.a
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libquadmath.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgomp.a
         {% endif %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgomp.spec
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgomp.spec
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
@@ -288,7 +288,7 @@ outputs:
       files:
         - tests
       commands:
-        - specdir=$PREFIX/lib/gcc/{{ triplet }}/{{ gcc_version }}
+        - specdir=$PREFIX/lib/gcc/{{ TARGET }}/{{ gcc_version }}
         - test -f $specdir/conda.specs
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print $1":"}' | grep "${specdir}/specs:${specdir}/conda.specs:"  # [linux]
@@ -296,12 +296,12 @@ outputs:
         - ${CC} -shared -fpic -o $PREFIX/lib/libhowdy.so tests/libhowdy.c
         - ${CC} -o howdy-dso tests/howdy-dso.c -lhowdy
         - ./howdy-dso
-        -    grep RPATH   <({{ triplet }}-readelf -d howdy-dso)    # [linux]
-        - "! grep RUNPATH <({{ triplet }}-readelf -d howdy-dso)"   # [linux]
+        -    grep RPATH   <({{ TARGET }}-readelf -d howdy-dso)    # [linux]
+        - "! grep RUNPATH <({{ TARGET }}-readelf -d howdy-dso)"   # [linux]
         - ${CC} -Wl,-enable-new-dtags -o howdy-dso-runpath tests/howdy-dso.c -lhowdy  # [linux]
         - ./howdy-dso-runpath                                                         # [linux]
-        - "! grep RPATH   <({{ triplet }}-readelf -d howdy-dso-runpath)"              # [linux]
-        -    grep RUNPATH <({{ triplet }}-readelf -d howdy-dso-runpath)               # [linux]
+        - "! grep RPATH   <({{ TARGET }}-readelf -d howdy-dso-runpath)"              # [linux]
+        -    grep RUNPATH <({{ TARGET }}-readelf -d howdy-dso-runpath)               # [linux]
         - echo | ${CC} -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/,/^End of search/ {print}' | tail -n2 | head -n1 | grep "$PREFIX/include"  # [linux]
         - echo | ${CC} -isystem "$PREFIX/include" -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/, /^End of search/ {print}' | head -n2 | tail -n1 | grep "$PREFIX/include"  # [linux]
 
@@ -359,7 +359,7 @@ outputs:
       files:
         - tests
       commands:
-        - test -f ${PREFIX}/bin/{{ triplet }}-g++
+        - test -f ${PREFIX}/bin/{{ TARGET }}-g++
         - CXX=$(${PREFIX}/bin/*-gcc -dumpmachine)-g++
         - ${CXX} -Wall tests/aligned_alloc.cpp -c -o cpp_aligned.o --std=c++17    # [cross_target_platform != "win-64"]
         - ${CXX} -Wall cpp_aligned.o -o cpp_aligned --std=c++17 && ./cpp_aligned  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
@@ -440,14 +440,14 @@ outputs:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
       commands:
         {% if cross_target_platform.startswith("linux-") %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgfortran.so
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgfortran.so
         {% elif cross_target_platform.startswith("osx-") %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgfortran.dylib
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgfortran.dylib
         {% else %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgfortran.dll.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgfortran.dll.a
         {% endif %}
-        - test -f ${PREFIX}/lib/gcc/{{ triplet }}/{{ gcc_version }}/libgfortran.a
-        - test -f ${PREFIX}/bin/{{ triplet }}-gfortran
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgfortran.a
+        - test -f ${PREFIX}/bin/{{ TARGET }}-gfortran
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'
         - find $PREFIX/lib -iname ISO_Fortran_binding.h | grep '.'
@@ -536,8 +536,8 @@ outputs:
       commands:
         - test -f ${PREFIX}/lib/libasan.so
         - test -f ${PREFIX}/lib/libhwasan.so   # [x86_64 or aarch64]
-        - file ${PREFIX}/bin/{{ triplet }}-gcc
-        - echo 'void main(){}' | {{ triplet }}-gcc -fsanitize=address -Wl,--fatal-warnings -x c -
+        - file ${PREFIX}/bin/{{ TARGET }}-gcc
+        - echo 'void main(){}' | {{ TARGET }}-gcc -fsanitize=address -Wl,--fatal-warnings -x c -
     about:
       summary: The GCC runtime libraries for sanitizers
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html

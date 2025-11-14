@@ -3,12 +3,12 @@
 source ${RECIPE_DIR}/setup_compiler.sh
 set -e -x
 
-export CHOST="${triplet}"
-_libdir=libexec/gcc/${CHOST}/${PKG_VERSION}
+
+_libdir=libexec/gcc/${TARGET}/${PKG_VERSION}
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
-#export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
+#export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${TARGET}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
 
 pushd ${SRC_DIR}/build
 
@@ -23,16 +23,16 @@ for file in cc1plus; do
 done
 
 # Following 3 are in libstdcxx-devel
-#make -C $CHOST/libstdc++-v3/src prefix=${PREFIX} install
-#make -C $CHOST/libstdc++-v3/include prefix=${PREFIX} install
-#make -C $CHOST/libstdc++-v3/libsupc++ prefix=${PREFIX} install
+#make -C $TARGET/libstdc++-v3/src prefix=${PREFIX} install
+#make -C $TARGET/libstdc++-v3/include prefix=${PREFIX} install
+#make -C $TARGET/libstdc++-v3/libsupc++ prefix=${PREFIX} install
 if [[ "$cross_target_cxx_stdlib" == "libstdcxx" ]]; then
-  make -C $CHOST/libstdc++-v3/python prefix=${PREFIX} install
+  make -C $TARGET/libstdc++-v3/python prefix=${PREFIX} install
 fi
 
 # Probably don't want to do this for cross-compilers
 # mkdir -p ${PREFIX}/share/gdb/auto-load/usr/lib/
-# cp ${SRC_DIR}/gcc_built/${CHOST}/sysroot/lib/libstdc++.so.6.*-gdb.py ${PREFIX}/share/gdb/auto-load/usr/lib/
+# cp ${SRC_DIR}/gcc_built/${TARGET}/sysroot/lib/libstdc++.so.6.*-gdb.py ${PREFIX}/share/gdb/auto-load/usr/lib/
 
 make -C libcpp prefix=${PREFIX} install
 

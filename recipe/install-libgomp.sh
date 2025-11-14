@@ -4,7 +4,7 @@ source ${RECIPE_DIR}/setup_compiler.sh
 
 cd build
 
-make -C ${triplet}/libgomp prefix=${PREFIX} install-toolexeclibLTLIBRARIES
+make -C ${TARGET}/libgomp prefix=${PREFIX} install-toolexeclibLTLIBRARIES
 rm ${PREFIX}/lib/libgomp.a ${PREFIX}/lib/libgomp.la
 
 if [[ "${HOST}" == *linux* ]]; then
