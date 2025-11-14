@@ -176,6 +176,7 @@ elif [[ "${TARGET}" == *darwin* ]]; then
   sed -i -e "s#@loader_path#${PREFIX}/lib#g" $specdir/specs
 fi
 
+mkdir -p ${PREFIX}/share/licenses/gcc
 
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
@@ -207,21 +208,17 @@ mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 
 if [[ "${HOST}" == "${TARGET}" ]]; then
   # making these this way so conda build doesn't muck with them
-  if [[ "${TARGET}" == *linux* ]]; then
-    pushd ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-      ln -sf ../../../../lib/libgomp${SHLIB_EXT} libgomp${SHLIB_EXT}
-      for lib in libgfortran libatomic libquadmath libitm lib{a,hwa,l,ub,t}san; do
-        for f in ${PREFIX}/lib/${lib}.so*; do
-          ln -s ../../../../lib/$(basename $f) ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
-        done
-      done
-    popd
-  fi
-  if [[ "${TARGET}" == *darwin* ]]; then
-    pushd ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
+  pushd ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    if [[ "${TARGET}" == *darwin* ]]; then
       ln -sf ../../../libomp.dylib libgomp.dylib
-    popd
-  fi
+    elif [[ "${TARGET}" == *linux* ]]; then
+      ln -sf ../../../../lib/libgomp${SHLIB_EXT} libgomp${SHLIB_EXT}
+    fi
+    for libname in libgfortran libatomic libquadmath libitm lib{a,hwa,l,ub,t}san; do
+      [ -e "${PREFIX}/lib/${libname}${SHLIB_EXT}" ] || continue
+      ln -s ../../../../lib/${libname}${SHLIB_EXT} ${libname}${SHLIB_EXT}
+    done
+  popd
 
   for f in ${PREFIX}/lib/*.spec; do
     [ -e "$f" ] || continue

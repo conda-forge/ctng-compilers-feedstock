@@ -5,8 +5,11 @@ source ${RECIPE_DIR}/setup_compiler.sh
 set -ex
 export CHOST="${triplet}"
 specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
+mkdir -p ${specdir}
+
 if [[ "${TARGET}" == "${HOST}" ]]; then
-    install -Dm644 -T ${SRC_DIR}/build/gcc/specs $specdir/conda.specs
+    cp ${SRC_DIR}/build/gcc/specs ${SRC_DIR}/build/gcc/conda.specs
+    install -Dm644 ${SRC_DIR}/build/gcc/conda.specs $specdir
 
     # Add specs when we're not cross compiling so that the toolchain works more like a system
     # toolchain (i.e. conda installed libs can be #include <>'d and linked without adding any

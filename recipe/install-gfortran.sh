@@ -43,18 +43,19 @@ make install DESTDIR=$SRC_DIR/build-finclude
 install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/* $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/
 install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/include/*.h $PREFIX/lib/gcc/${CHOST}/${gcc_version}/include/
 
+mkdir -p ${PREFIX}/share/licenses/gcc-fortran
 # Install Runtime Library Exception
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-fortran/RUNTIME.LIBRARY.EXCEPTION
 
 if [[ "${HOST}" != "${TARGET}" ]]; then
   if [[ ${triplet} == *linux* ]]; then
-    cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
+    cp -f -P ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
   elif [[ ${triplet} == *darwin* ]]; then
-    cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    cp -f -P ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   fi
 fi
-cp -f --no-dereference ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.*a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
+cp -f -P ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.*a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
 
 set +x
 # Strip executables, we may want to install to a different prefix

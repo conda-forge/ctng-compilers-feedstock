@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 8 %}
+{% set build_num = 9 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -64,7 +64,7 @@ source:
       # in case of several patches per version, use newest one
       - patches/macos/gcc-{{ version }}.diff
       # from https://github.com/JuliaPackaging/Yggdrasil/blob/master/0_RootFS/GCCBootstrap%4014/bundled/patches/gcc/gcc1420-Increase-fallback-min-macOS-version-for-libgcc-to-10.8.patch
-      - patches/macos/0001-GCC-{{ gcc_maj_ver }}-Increase-fallback-min-macOS-version-for-libgc.patch   # [cross_target_platform == "osx-64" and gcc_maj_ver != 13]
+      - patches/macos/0001-GCC-{{ gcc_maj_ver }}-Increase-fallback-min-macOS-version-for-libgc.patch   # [cross_target_platform == "osx-64"]
       # Make -stdlib=libcxx the default
       - patches/macos/0002-Make-stdlib-libc-the-default-for-macos-platforms.patch
       # call xcrun to get sdkroot
@@ -73,7 +73,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: true  # [(win and cross_target_platform != "win-64") or cross_target_platform not in ("osx-64", "osx-arm64") or gcc_maj_ver != 15]
+  skip: true  # [(win and cross_target_platform != "win-64") or cross_target_platform not in ("osx-64", "osx-arm64") or (cross_target_platform in ("osx-64", "osx-arm64") and gcc_maj_ver < 15)]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
@@ -219,7 +219,7 @@ outputs:
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address  # [cross_target_platform != "win-64"]
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v                     # [cross_target_platform != "win-64"]
         - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
-        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
+        - ${CC} -Wall c_aligned.o -o c_aligned -Wl,-rpath,/foo && {{ triplet }}-readelf -d c_aligned | grep RPATH | grep "/foo:${PREFIX}/lib"  # [cross_target_platform == target_platform and linux]
         - ${CC} -Wall tests/hello_world.c -c -o hello_world.o -v
         - ${CC} -Wall hello_world.o -o hello_world -v
         {% if cross_target_platform.startswith("linux-") %}
@@ -264,7 +264,7 @@ outputs:
 
   - name: gcc-no-conda-specs
     build:
-      skip: true   # [with_conda_specs]
+      skip: true   # [with_conda_specs and target_platform != cross_target_platform]
     requirements:
       run:
         - gcc
@@ -291,19 +291,19 @@ outputs:
         - specdir=$PREFIX/lib/gcc/{{ triplet }}/{{ gcc_version }}
         - test -f $specdir/conda.specs
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
-        - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print $1":"}' | grep "${specdir}/specs:${specdir}/conda.specs:"
+        - echo | ${CC} -E -v -x c - |& grep '^Reading specs from' | awk '{print $NF}' | xargs readlink -e | awk -v ORS= '{print $1":"}' | grep "${specdir}/specs:${specdir}/conda.specs:"  # [linux]
         - cp tests/libhowdy.h $PREFIX/include/
         - ${CC} -shared -fpic -o $PREFIX/lib/libhowdy.so tests/libhowdy.c
         - ${CC} -o howdy-dso tests/howdy-dso.c -lhowdy
         - ./howdy-dso
-        -    grep RPATH   <({{ triplet }}-readelf -d howdy-dso)
-        - "! grep RUNPATH <({{ triplet }}-readelf -d howdy-dso)"
-        - ${CC} -Wl,-enable-new-dtags -o howdy-dso-runpath tests/howdy-dso.c -lhowdy
-        - ./howdy-dso-runpath
-        - "! grep RPATH   <({{ triplet }}-readelf -d howdy-dso-runpath)"
-        -    grep RUNPATH <({{ triplet }}-readelf -d howdy-dso-runpath)
-        - echo | ${CC} -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/,/^End of search/ {print}' | tail -n2 | head -n1 | grep "$PREFIX/include"
-        - echo | ${CC} -isystem "$PREFIX/include" -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/, /^End of search/ {print}' | head -n2 | tail -n1 | grep "$PREFIX/include"
+        -    grep RPATH   <({{ triplet }}-readelf -d howdy-dso)    # [linux]
+        - "! grep RUNPATH <({{ triplet }}-readelf -d howdy-dso)"   # [linux]
+        - ${CC} -Wl,-enable-new-dtags -o howdy-dso-runpath tests/howdy-dso.c -lhowdy  # [linux]
+        - ./howdy-dso-runpath                                                         # [linux]
+        - "! grep RPATH   <({{ triplet }}-readelf -d howdy-dso-runpath)"              # [linux]
+        -    grep RUNPATH <({{ triplet }}-readelf -d howdy-dso-runpath)               # [linux]
+        - echo | ${CC} -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/,/^End of search/ {print}' | tail -n2 | head -n1 | grep "$PREFIX/include"  # [linux]
+        - echo | ${CC} -isystem "$PREFIX/include" -E -Wp,-v -x c - |& awk '/include <\.\.\.> search starts/, /^End of search/ {print}' | head -n2 | tail -n1 | grep "$PREFIX/include"  # [linux]
 
     about:
       summary: conda-specific specfile for GNU C/C++ Compiler
@@ -663,7 +663,7 @@ outputs:
         - libgfortran {{ gcc_version }}
     test:
       commands:
-        - test -f ${PREFIX}/lib/libgfortran.so
+        - test -f ${PREFIX}/lib/libgfortran${SHLIB_EXT}
     about:
       summary: The GNU Fortran Runtime Library
       home: https://gcc.gnu.org/
@@ -682,7 +682,7 @@ outputs:
         - libgfortran-ng =={{ version }}=*_{{ build_num }}
     test:
       commands:
-        - test -f ${PREFIX}/lib/libgfortran.so
+        - test -f ${PREFIX}/lib/libgfortran${SHLIB_EXT}
     about:
       summary: The GNU Fortran Runtime Library
       home: https://gcc.gnu.org/

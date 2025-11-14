@@ -15,7 +15,7 @@ pushd ${SRC_DIR}/build
     # install-shared target doesn't seem to work on macos
     # make -C ${TARGET}/libgcc prefix=${PREFIX} install DESTDIR=${PWD}/tmp
     make -C ${TARGET}/libgcc prefix=${PREFIX} install DESTDIR=${PWD}/tmp
-    install -c -m 644 ${PWD}/tmp/${PREFIX}/lib/* ${PREFIX}/lib/ || true
+    install -c -m 644 ${PWD}/tmp/${PREFIX}/lib/lib* ${PREFIX}/lib || true
     if [[ "${TARGET}" == *mingw* ]]; then
       mv $PREFIX/lib/libgcc_s*.dll $PREFIX/bin
     fi
@@ -80,6 +80,7 @@ if [[ "${PKG_NAME}" != gcc_impl* ]]; then
   rm -rf ${PREFIX}/lib/lib{a,hwa,l,ub,t}san.so*
   rm -rf ${PREFIX}/lib/lib{a,hwa,l,ub,t}san.*dylib
 
+  mkdir -p ${PREFIX}/share/licenses/gcc-libs
   # Install Runtime Library Exception
   install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION
