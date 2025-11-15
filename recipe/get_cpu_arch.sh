@@ -32,4 +32,9 @@ get_triplet() {
 
 export BUILD="$(get_triplet $build_platform)"
 export HOST="$(get_triplet $target_platform)"
-export TARGET="$(get_triplet $cross_target_platform)"
+export TARGET_REF="$(get_triplet $cross_target_platform)"
+
+if [[ "${TARGET}" != "${TARGET_REF}" ]]; then
+  echo "TARGET: ${TARGET} does not match expected ${TARGET_REF}"
+  exit 1
+fi

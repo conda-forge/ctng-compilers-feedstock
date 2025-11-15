@@ -28,10 +28,10 @@ pushd ${SRC_DIR}/build
       chmod 644 ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_eh.a
       ${TARGET}-ranlib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_eh.a
 
-      if [[ "${triplet}" == *linux* ]]; then
+      if [[ "${TARGET}" == *linux* ]]; then
         install -c -m 644 ./libgcc_s.so.1 ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_s.so.1
         cp $RECIPE_DIR/libgcc_s.so.ldscript ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_s.so
-      elif [[ "${triplet}" == *darwin* ]]; then
+      elif [[ "${TARGET}" == *darwin* ]]; then
         install -c -m 644 ./libgcc_s.1.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgcc_s.1.dylib
       else
         # import library, not static library

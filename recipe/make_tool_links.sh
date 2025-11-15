@@ -3,8 +3,8 @@
 # to prefix-tool and delete the un-prefixed one to get back ct-ng behaviour
 for tool in gcc g++ gfortran cpp gcc-ar gcc-nm gcc-ranlib c++; do
   if [ -f ${PREFIX}/bin/${tool}${EXEEXT} ]; then
-    if [ ! -f ${PREFIX}/bin/${triplet}-${tool}${EXEEXT} ]; then
-      cp ${PREFIX}/bin/${tool}${EXEEXT} ${PREFIX}/bin/${triplet}-${tool}${EXEEXT}
+    if [ ! -f ${PREFIX}/bin/${TARGET}-${tool}${EXEEXT} ]; then
+      cp ${PREFIX}/bin/${tool}${EXEEXT} ${PREFIX}/bin/${TARGET}-${tool}${EXEEXT}
     fi
     rm ${PREFIX}/bin/${tool}${EXEEXT}
   fi

@@ -3,22 +3,22 @@
 source ${RECIPE_DIR}/setup_compiler.sh
 set -e -x
 
-export CHOST="${triplet}"
-_libdir=libexec/gcc/${CHOST}/${PKG_VERSION}
 
-mkdir -p $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude
-mkdir -p $PREFIX/lib/gcc/${CHOST}/${gcc_version}/include
+_libdir=libexec/gcc/${TARGET}/${PKG_VERSION}
+
+mkdir -p $PREFIX/lib/gcc/${TARGET}/${gcc_version}/finclude
+mkdir -p $PREFIX/lib/gcc/${TARGET}/${gcc_version}/include
 
 # libtool wants to use ranlib that is here, macOS install doesn't grok -t etc
 # .. do we need this scoped over the whole file though?
-#export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${CHOST}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
+#export PATH=${SRC_DIR}/gcc_built/bin:${SRC_DIR}/.build/${TARGET}/buildtools/bin:${SRC_DIR}/.build/tools/bin:${PATH}
 
 pushd ${SRC_DIR}/build
 
 # adapted from Arch install script from https://github.com/archlinuxarm/PKGBUILDs/blob/master/core/gcc/PKGBUILD
 # We cannot make install since .la files are not relocatable so libtool deliberately prevents it:
-# libtool: install: error: cannot install `libgfortran.la' to a directory not ending in ${SRC_DIR}/work/gcc_built/${CHOST}/lib/../lib
-make -C ${CHOST}/libgfortran prefix=${PREFIX} all-multi libgfortran.spec ieee_arithmetic.mod ieee_exceptions.mod ieee_features.mod config.h
+# libtool: install: error: cannot install `libgfortran.la' to a directory not ending in ${SRC_DIR}/work/gcc_built/${TARGET}/lib/../lib
+make -C ${TARGET}/libgfortran prefix=${PREFIX} all-multi libgfortran.spec ieee_arithmetic.mod ieee_exceptions.mod ieee_features.mod config.h
 make -C gcc prefix=${PREFIX} fortran.install-{common,man,info}
 
 # How it used to be:
@@ -29,19 +29,19 @@ for file in f951; do
   fi
 done
 
-cp ${CHOST}/libgfortran/libgfortran.spec ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
+cp ${TARGET}/libgfortran/libgfortran.spec ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
 
 pushd ${PREFIX}/bin
   if [[ "${HOST}" != *mingw* ]]; then
-    ln -sf ${CHOST}-gfortran${EXEEXT} ${CHOST}-f95${EXEEXT}
+    ln -sf ${TARGET}-gfortran${EXEEXT} ${TARGET}-f95${EXEEXT}
   else
-    cp ${CHOST}-gfortran${EXEEXT} ${CHOST}-f95${EXEEXT}
+    cp ${TARGET}-gfortran${EXEEXT} ${TARGET}-f95${EXEEXT}
   fi
 popd
 
 make install DESTDIR=$SRC_DIR/build-finclude
-install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/* $PREFIX/lib/gcc/${CHOST}/${gcc_version}/finclude/
-install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${CHOST}/${gcc_version}/include/*.h $PREFIX/lib/gcc/${CHOST}/${gcc_version}/include/
+install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${TARGET}/${gcc_version}/finclude/* $PREFIX/lib/gcc/${TARGET}/${gcc_version}/finclude/
+install -Dm644 $SRC_DIR/build-finclude/$PREFIX/lib/gcc/${TARGET}/${gcc_version}/include/*.h $PREFIX/lib/gcc/${TARGET}/${gcc_version}/include/
 
 mkdir -p ${PREFIX}/share/licenses/gcc-fortran
 # Install Runtime Library Exception
@@ -49,13 +49,13 @@ install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-fortran/RUNTIME.LIBRARY.EXCEPTION
 
 if [[ "${HOST}" != "${TARGET}" ]]; then
-  if [[ ${triplet} == *linux* ]]; then
-    cp -f -P ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
-  elif [[ ${triplet} == *darwin* ]]; then
-    cp -f -P ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran*.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+  if [[ ${TARGET} == *linux* ]]; then
+    cp -f -P ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+  elif [[ ${TARGET} == *darwin* ]]; then
+    cp -f -P ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   fi
 fi
-cp -f -P ${SRC_DIR}/build/${CHOST}/libgfortran/.libs/libgfortran.*a ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/
+cp -f -P ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
 
 set +x
 # Strip executables, we may want to install to a different prefix
@@ -76,7 +76,7 @@ pushd ${PREFIX}
 popd
 
 if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
-  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/lib/gcc/${CHOST}/${gcc_version}/libgomp.spec
+  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgomp.spec
 fi
 
 rm -f ${PREFIX}/share/info/dir

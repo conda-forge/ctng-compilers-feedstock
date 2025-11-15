@@ -3,8 +3,8 @@
 source ${RECIPE_DIR}/setup_compiler.sh
 
 set -ex
-export CHOST="${triplet}"
-specdir=$PREFIX/lib/gcc/$CHOST/${gcc_version}
+
+specdir=$PREFIX/lib/gcc/$TARGET/${gcc_version}
 mkdir -p ${specdir}
 
 if [[ "${TARGET}" == "${HOST}" ]]; then
@@ -19,7 +19,7 @@ if [[ "${TARGET}" == "${HOST}" ]]; then
     # It is not to be relied on by conda-forge package recipes and best practice is still to set the
     # appropriate FLAGS vars (either via compiler activation scripts or explicitly in the recipe)
     #
-    # We use double quotes here because we want $PREFIX and $CHOST to be expanded at build time
+    # We use double quotes here because we want $PREFIX and $TARGET to be expanded at build time
     #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
     #   package is installed.
     if [[ "$TARGET" == *linux* ]]; then
