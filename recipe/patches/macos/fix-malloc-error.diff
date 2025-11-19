@@ -1,0 +1,15 @@
+# isuruf: I have no clue why the malloc error happened in the first place
+
+diff --git a/gcc/common/config/aarch64/aarch64-common.cc b/gcc/common/config/aarch64/aarch64-common.cc
+index b9ed83642ad..e8a0e6153cd 100644
+--- a/gcc/common/config/aarch64/aarch64-common.cc
++++ b/gcc/common/config/aarch64/aarch64-common.cc
+@@ -722,7 +722,7 @@ aarch64_get_arch_string_for_assembler (aarch64_arch arch,
+     if (entry->arch == arch)
+ 	break;
+ 
+-  std::string outstr = entry->name
++  std::string outstr = std::string(entry->name)
+ 	+ aarch64_get_extension_string_for_isa_flags (flags, entry->flags);
+ 
+   return outstr;
