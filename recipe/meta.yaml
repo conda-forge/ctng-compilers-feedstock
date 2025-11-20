@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 10 %}
+{% set build_num = 11 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -69,6 +69,7 @@ source:
       - patches/macos/0002-Make-stdlib-libc-the-default-for-macos-platforms.patch
       # call xcrun to get sdkroot
       - patches/macos/0003-Find-macos-sysroot-by-calling-xcrun.patch
+      - patches/macos/fix-malloc-error.diff
       {% endif %}
 
 build:

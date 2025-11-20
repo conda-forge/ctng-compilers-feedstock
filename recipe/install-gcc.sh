@@ -307,4 +307,12 @@ for f in ${TOOLS}; do
   ln -sf ${PREFIX}/bin/${TARGET}-${f} ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}/${f}
 done
 
+if [[ "${TARGET}" == *darwin* ]]; then
+  # stdio.h from the SDK is vendored and "fixed" here, but we need to allow
+  # using different SDKs
+  rm -f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include-fixed/stdio.h
+  # same here, but we need to support __FLT_EVAL_METHOD__=16 on older SDKs
+  cp ${RECIPE_DIR}/include-fixed-math.h ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include-fixed/math.h
+fi
+
 source ${RECIPE_DIR}/make_tool_links.sh
