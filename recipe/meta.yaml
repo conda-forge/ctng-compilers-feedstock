@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 11 %}
+{% set build_num = 12 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -74,7 +74,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: true  # [(win and cross_target_platform != "win-64") or cross_target_platform not in ("osx-64", "osx-arm64") or (cross_target_platform in ("osx-64", "osx-arm64") and gcc_maj_ver < 15)]
+  skip: true  # [(win and cross_target_platform != "win-64") or (cross_target_platform in ("osx-64", "osx-arm64") and gcc_maj_ver < 15)]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
