@@ -11,7 +11,7 @@ c_stdlib_version:
 channel_sources:
 - conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
-- conda-forge gcc-experimental
+- conda-forge main
 cross_target_cxx_stdlib:
 - libcxx
 cross_target_platform:
@@ -28,6 +28,10 @@ gcc_version:
 - 15.2.0
 libgfortran_soname:
 - '5'
+libgomp_ver:
+- 1.0.0
+openmp_ver:
+- '4.5'
 target_platform:
 - linux-aarch64
 with_conda_specs:

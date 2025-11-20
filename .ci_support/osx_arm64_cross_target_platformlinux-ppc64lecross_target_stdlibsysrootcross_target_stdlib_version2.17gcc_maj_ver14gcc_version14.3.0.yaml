@@ -1,0 +1,48 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '11.0'
+MACOSX_SDK_VERSION:
+- '11.0'
+TARGET:
+- powerpc64le-conda-linux-gnu
+binutils_version:
+- '2.44'
+c_stdlib:
+- macosx_deployment_target
+c_stdlib_version:
+- '11.0'
+channel_sources:
+- conda-forge/label/sysroot-with-crypt,conda-forge
+channel_targets:
+- conda-forge main
+cross_target_cxx_stdlib:
+- libstdcxx
+cross_target_platform:
+- linux-ppc64le
+cross_target_stdlib:
+- sysroot
+cross_target_stdlib_version:
+- '2.17'
+gcc_maj_ver:
+- '14'
+gcc_version:
+- 14.3.0
+libgfortran_soname:
+- '5'
+libgomp_ver:
+- 1.0.0
+macos_machine:
+- arm64-apple-darwin20.0.0
+target_platform:
+- osx-arm64
+with_conda_specs:
+- false
+- true
+zip_keys:
+- - cross_target_stdlib_version
+  - cross_target_stdlib
+  - cross_target_cxx_stdlib
+  - TARGET
+  - cross_target_platform
+- - gcc_version
+  - gcc_maj_ver
+  - libgfortran_soname
