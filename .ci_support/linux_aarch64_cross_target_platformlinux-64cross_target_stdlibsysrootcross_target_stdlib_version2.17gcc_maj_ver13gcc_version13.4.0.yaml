@@ -3,7 +3,7 @@ MACOSX_SDK_VERSION:
 TARGET:
 - x86_64-conda-linux-gnu
 binutils_version:
-- '2.44'
+- '2.45'
 c_stdlib:
 - sysroot
 c_stdlib_version:

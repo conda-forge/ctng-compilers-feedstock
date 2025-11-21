@@ -5,7 +5,7 @@ MACOSX_SDK_VERSION:
 TARGET:
 - x86_64-apple-darwin13.4.0
 binutils_version:
-- '2.44'
+- '2.45'
 c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
