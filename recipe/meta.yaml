@@ -600,7 +600,6 @@ outputs:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
       run:
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}                                       # [not osx]
-        - _openmp_mutex                                                                             # [osx]
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - msys2-conda-epoch <0.0a0    # [win]
@@ -613,7 +612,6 @@ outputs:
         - test -f ${PREFIX}/lib/libgcc_s.so                                                         # [linux]
         - test -f ${PREFIX}/lib/libgcc_s.1.dylib                                                    # [osx]
         - test -f ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}                                   # [linux]
-        - test -f ${PREFIX}/lib/libgomp.{{ libgomp_ver[0:1] }}.dylib                                # [osx]
         - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"   # [linux]
         - test `readlink ${PREFIX}/lib/libgomp.so.{{ libgomp_ver[0:1] }}` == "libgomp.so.{{ libgomp_ver }}"   # [linux]
     about:
