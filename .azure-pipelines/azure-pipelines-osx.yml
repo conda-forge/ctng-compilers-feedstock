@@ -8,22 +8,151 @@ jobs:
     vmImage: macOS-15
   strategy:
     matrix:
+      ? osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-64cros_h69247dbe
+      ? osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-64cros_h759c4b4a
+      ? osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-64cros_hb2331ffd
+      ? osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-aarch6_h5109ec79
+      ? osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-aarch6_hce49d2aa
+      ? osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-aarch6_h3c1d2d65
+      ? osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-ppc64l_h8167382f
+      ? osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-ppc64l_h858e32b2
+      ? osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-ppc64l_hf4738459
+      osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0:
+        CONFIG: osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformosx-64cross__hd141813e
+      osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0:
+        CONFIG: osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformosx-64cross__hbc725174
       osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0:
         CONFIG: osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         SHORT_CONFIG: osx_64_cross_target_platformosx-64cross__h68155d17
+      osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0:
+        CONFIG: osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformosx-arm64cro_h0ef21e00
+      osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0:
+        CONFIG: osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformosx-arm64cro_h69685f7f
       osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0:
         CONFIG: osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         SHORT_CONFIG: osx_64_cross_target_platformosx-arm64cro_h803991d4
+      ? osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformwin-64cross__hd0fbefdd
+      ? osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformwin-64cross__hff5e55cc
+      ? osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_cross_target_platformwin-64cross__h716bebef
+      ? osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-64c_hadd2410f
+      ? osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-64c_ha6b8c6d1
+      ? osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-64c_h5018df16
+      ? osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-aar_hee2d3922
+      ? osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-aar_h9dd1cfc2
+      ? osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-aar_hbc45c0e6
+      ? osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-ppc_he030da56
+      ? osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-ppc_h2567c130
+      ? osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-ppc_h09418c13
+      osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0:
+        CONFIG: osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformosx-64cro_he51c3652
+      osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0:
+        CONFIG: osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformosx-64cro_h16f3621b
       osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0:
         CONFIG: osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         SHORT_CONFIG: osx_arm64_cross_target_platformosx-64cro_h4799ba8c
+      osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0:
+        CONFIG: osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformosx-arm64_h83419015
+      osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0:
+        CONFIG: osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformosx-arm64_h637afcf9
       osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0:
         CONFIG: osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         SHORT_CONFIG: osx_arm64_cross_target_platformosx-arm64_h1e102690
+      ? osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformwin-64cro_hf24969d1
+      ? osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformwin-64cro_h9f17b62e
+      ? osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_cross_target_platformwin-64cro_h132010c2
+    maxParallel: 19
   timeoutInMinutes: 360
   variables: {}
 
