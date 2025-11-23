@@ -26,6 +26,9 @@ if [[ "${HOST}" == "${TARGET}" ]]; then
     fi
 else
     mv $PREFIX/${TARGET}/lib/lib*.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    if [[ "${HOST}" == *linux* ]]; then
+        mv ${PREFIX}/${TARGET}/lib/libstdc++.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    fi
 fi
 
 popd

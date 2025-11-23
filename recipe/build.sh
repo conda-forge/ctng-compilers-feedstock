@@ -110,6 +110,10 @@ if [[ "${cross_target_cxx_stdlib}" == "libcxx" ]]; then
   GCC_CONFIGURE_OPTIONS+=(--disable-libstdcxx)
 fi
 
+if [[ "${BUILD}" == "${HOST}" && "${HOST}" != "${TARGET}" && "${TARGET}" != *darwin* ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--enable-lto)
+fi
+
 ../configure \
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
@@ -123,7 +127,6 @@ fi
   --disable-libssp \
   --enable-libquadmath \
   --enable-libquadmath-support \
-  --enable-lto \
   --disable-nls \
   --disable-bootstrap \
   --disable-multilib \
