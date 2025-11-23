@@ -22,7 +22,7 @@ for tool in addr2line ar as c++filt cc c++ dsymutil fc gcc g++ gfortran ld nm ob
      tool=gfortran
   elif [[ "$tool" == "c++" ]]; then
      tool=g++
-  elif [[ "$tool" =~ ^(ar|nm|ranlib)$ && "${TARGET}" != *darwin* ]]; then
+  elif [[ "$tool" =~ ^(ar|nm|ranlib)$ && "${TARGET}" != *darwin* && -f $BUILD_PREFIX/bin/${TARGET}-gcc-${tool} ]]; then
      tool="gcc-${tool}"
   fi
   eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
