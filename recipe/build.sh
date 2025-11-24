@@ -110,7 +110,7 @@ if [[ "${cross_target_cxx_stdlib}" == "libcxx" ]]; then
   GCC_CONFIGURE_OPTIONS+=(--disable-libstdcxx)
 fi
 
-if [[ "${BUILD}" == "${HOST}" && "${HOST}" != "${TARGET}" && "${TARGET}" != *darwin* ]]; then
+if [[ ! ("${BUILD}" == "${HOST}" && "${HOST}" != "${TARGET}") && "${TARGET}" != *darwin* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--enable-lto)
 fi
 
