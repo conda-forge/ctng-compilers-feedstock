@@ -44,6 +44,10 @@ else
   rm -rf ${RECIPE_DIR}/patches/mingw
 fi
 
+if [[ "${BUILD}" == *darwin* ]]; then
+  find ./ -name 'configure' -type f -exec sed -i -e 's/tmp_nm \-B/tmp_nm/g' {} \;
+fi
+
 if [[ "${TARGET}" != *darwin* ]]; then
   # prevent macos patches from being archived in linux conda packages
   rm -rf ${RECIPE_DIR}/patches/macos
