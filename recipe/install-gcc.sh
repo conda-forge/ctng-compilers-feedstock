@@ -220,20 +220,6 @@ if [[ "${HOST}" == "${TARGET}" ]]; then
     done
   popd
 
-  for f in ${PREFIX}/lib/*.spec; do
-    [ -e "$f" ] || continue
-    mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
-  done
-  for f in ${PREFIX}/${TARGET}/lib/*.spec; do
-    [ -e "$f" ] || continue
-    mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
-  done
-  if [[ "${TARGET}" == *linux* ]]; then
-    # sanitizer preinit files
-    for f in ${PREFIX}/lib/*.o; do
-      mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
-    done
-  fi
   mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
     if [[ -f "${PREFIX}/lib/lib${lib}.a" ]]; then
@@ -281,16 +267,31 @@ else
     if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.dylib" ]]; then
      mv ${PREFIX}/${TARGET}/lib/lib${lib}.*dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
     fi
+    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.so" ]]; then
+     mv ${PREFIX}/${TARGET}/lib/lib${lib}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
+    fi
   done
 fi
 
-if [[ -f ${PREFIX}/lib/libgomp.spec ]]; then
-  mv ${PREFIX}/lib/libgomp.spec ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgomp.spec
+for f in ${PREFIX}/lib/*.spec; do
+  [ -e "$f" ] || continue
+  mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
+done
+for f in ${PREFIX}/${TARGET}/lib/*.spec; do
+  [ -e "$f" ] || continue
+  mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
+done
+if [[ "${TARGET}" == *linux* ]]; then
+  # sanitizer preinit files
+  for f in ${PREFIX}/lib/*.o; do
+    [ -e "$f" ] || continue
+    mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
+  done
+  for f in ${PREFIX}/${TARGET}/lib/*.o; do
+    [ -e "$f" ] || continue
+    mv $f ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/$(basename $f)
+  done
 fi
-if [[ -f ${PREFIX}/${TARGET}/lib/libgomp.spec ]]; then
-  mv ${PREFIX}/${TARGET}/lib/libgomp.spec ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgomp.spec
-fi
-
 rm -f ${PREFIX}/share/info/dir
 
 mkdir -p ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}
