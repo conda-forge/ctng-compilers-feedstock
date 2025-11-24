@@ -19,14 +19,14 @@ mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 
 if [[ "${HOST}" == "${TARGET}" ]]; then
     mv $PREFIX/lib/lib*.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-    if [[ "${HOST}" == *linux* ]]; then
+    if [[ "${TARGET}" == *linux* ]]; then
         mv ${PREFIX}/lib/libstdc++.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     else
         rm ${PREFIX}/bin/libstdc++*.dll
     fi
 else
     mv $PREFIX/${TARGET}/lib/lib*.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-    if [[ "${HOST}" == *linux* ]]; then
+    if [[ "${TARGET}" == *linux* ]]; then
         mv ${PREFIX}/${TARGET}/lib/libstdc++.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
 fi
