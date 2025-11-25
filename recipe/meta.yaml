@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 12 %}
+{% set build_num = 13 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -178,6 +178,7 @@ outputs:
         - {{ pin_subpackage("libgcc", exact=True) }}                # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform and not (win or osx)]
+        - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
       run:
         {% if cross_target_platform.startswith("osx-") %}
         # For the linker
@@ -341,6 +342,7 @@ outputs:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}   # [cross_target_cxx_stdlib == "libstdcxx"]
       run:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
@@ -600,6 +602,7 @@ outputs:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
       run:
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}                                       # [not osx]
+        - _openmp_mutex                                                                             # [osx]
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - msys2-conda-epoch <0.0a0    # [win]

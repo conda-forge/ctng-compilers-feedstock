@@ -205,73 +205,45 @@ set -x
 #${PREFIX}/bin/${TARGET}-gcc "${RECIPE_DIR}"/c11threads.c -std=c11
 
 mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
+if [[ "${TARGET}" != *darwin* ]]; then
+  INSTALL_LIBGOMP="gomp"
+fi
 
 if [[ "${HOST}" == "${TARGET}" ]]; then
   # making these this way so conda build doesn't muck with them
   pushd ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     if [[ "${TARGET}" == *darwin* ]]; then
       ln -sf ../../../libomp.dylib libgomp.dylib
-    elif [[ "${TARGET}" == *linux* ]]; then
-      ln -sf ../../../../lib/libgomp${SHLIB_EXT} libgomp${SHLIB_EXT}
     fi
-    for libname in libgfortran libatomic libquadmath libitm lib{a,hwa,l,ub,t}san; do
-      [ -e "${PREFIX}/lib/${libname}${SHLIB_EXT}" ] || continue
-      ln -s ../../../../lib/${libname}${SHLIB_EXT} ${libname}${SHLIB_EXT}
+    for name in atomic ${INSTALL_LIBGOMP:-} cc1 itm quadmath {a,hwa,l,t,ub}san; do
+      [ -e "${PREFIX}/lib/lib${name}${SHLIB_EXT}" ] || continue
+      ln -s ../../../${name}${SHLIB_EXT} ${name}${SHLIB_EXT}
     done
   popd
-
-  mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-  for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
-    if [[ -f "${PREFIX}/lib/lib${lib}.a" ]]; then
-     mv ${PREFIX}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-    fi
-  done
-  for lib in \
-      libasan${SHLIB_EXT} \
-      libatomic${SHLIB_EXT} \
-      libgomp${SHLIB_EXT} \
-      libhwasan${SHLIB_EXT} \
-      libitm${SHLIB_EXT} \
-      liblsan${SHLIB_EXT} \
-      libquadmath${SHLIB_EXT} \
-      libtsan${SHLIB_EXT} \
-      libubsan${SHLIB_EXT} \
-      libstdc++${SHLIB_EXT} \
-      libstdc++.so.6 \
-      libstdc++.6.dylib \
-      libgcc_s${SHLIB_EXT}; do
-    if [[ -f "${PREFIX}/lib/${lib}" && "${TARGET}" != *mingw* ]]; then
-     # install a shared library here since the directory ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
-     # has the highest preference and we want shared libraries to have the highest preference
-     rm ${PREFIX}/lib/${lib}
-     ln -sf ${PREFIX}/lib/${lib} ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-    fi
-  done
 else
   source ${RECIPE_DIR}/install-libgcc.sh
-  for lib in libcc1; do
-    if [[ -f ${PREFIX}/lib/${lib}.so ]]; then
-      mv ${PREFIX}/lib/${lib}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-    fi
-  done
   rm -f ${PREFIX}/share/info/*.info
-  mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-  for lib in asan atomic gomp hwasan itm lsan quadmath tsan ubsan; do
-    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.a" ]]; then
-     mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-     mv ${PREFIX}/${TARGET}/lib/lib${lib}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+  # TODO: create a TBD file libgomp.tbd that re-exports libomp.dylib
+  # and remove libgomp.dylib symlink from _openmp_mutex
+  for name in atomic ${INSTALL_LIBGOMP:-} cc1 itm quadmath {a,hwa,l,t,ub}san; do
+    if [[ -f "${PREFIX}/${TARGET}/lib/lib${name}.so" ]]; then
+      mv ${PREFIX}/${TARGET}/lib/lib${name}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
     fi
-    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.so" ]]; then
-     mv ${PREFIX}/${TARGET}/lib/lib${lib}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
-    fi
-    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.dylib" ]]; then
-     mv ${PREFIX}/${TARGET}/lib/lib${lib}.*dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
-    fi
-    if [[ -f "${PREFIX}/${TARGET}/lib/lib${lib}.so" ]]; then
-     mv ${PREFIX}/${TARGET}/lib/lib${lib}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
+    if [[ -f "${PREFIX}/${TARGET}/lib/lib${name}.dylib" ]]; then
+      mv ${PREFIX}/${TARGET}/lib/lib${name}.*dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
     fi
   done
 fi
+  
+mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+for name in atomic ${INSTALL_LIBGOMP:-} itm quadmath {a,hwa,l,t,ub}san; do
+  if [[ -f "${PREFIX}/lib/lib${name}.a" ]]; then
+   mv ${PREFIX}/lib/lib${name}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+  fi
+  if [[ -f "${PREFIX}/${TARGET}/lib/lib${name}.a" ]]; then
+   mv ${PREFIX}/${TARGET}/lib/lib${name}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+  fi
+done
 
 for f in ${PREFIX}/lib/*.spec; do
   [ -e "$f" ] || continue
