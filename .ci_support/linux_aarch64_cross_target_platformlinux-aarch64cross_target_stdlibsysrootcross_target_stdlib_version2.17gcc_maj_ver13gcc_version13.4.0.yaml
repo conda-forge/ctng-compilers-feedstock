@@ -1,0 +1,48 @@
+MACOSX_SDK_VERSION:
+- '11.0'
+TARGET:
+- aarch64-conda-linux-gnu
+binutils_version:
+- '2.45'
+c_stdlib:
+- sysroot
+c_stdlib_version:
+- '2.17'
+channel_sources:
+- conda-forge/label/sysroot-with-crypt,conda-forge
+channel_targets:
+- conda-forge main
+cross_target_cxx_stdlib:
+- libstdcxx
+cross_target_platform:
+- linux-aarch64
+cross_target_stdlib:
+- sysroot
+cross_target_stdlib_version:
+- '2.17'
+docker_image:
+- quay.io/condaforge/linux-anvil-x86_64:alma9
+gcc_maj_ver:
+- '13'
+gcc_version:
+- 13.4.0
+libgfortran_soname:
+- '5'
+libgomp_ver:
+- 1.0.0
+openmp_ver:
+- '4.5'
+target_platform:
+- linux-aarch64
+with_conda_specs:
+- false
+- true
+zip_keys:
+- - cross_target_stdlib_version
+  - cross_target_stdlib
+  - cross_target_cxx_stdlib
+  - TARGET
+  - cross_target_platform
+- - gcc_version
+  - gcc_maj_ver
+  - libgfortran_soname

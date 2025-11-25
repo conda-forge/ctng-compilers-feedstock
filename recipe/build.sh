@@ -22,7 +22,7 @@ for tool in addr2line ar as c++filt cc c++ dsymutil fc gcc g++ gfortran ld nm ob
      tool=gfortran
   elif [[ "$tool" == "c++" ]]; then
      tool=g++
-  elif [[ "${HOST}" != "${BUILD}" && "$tool" =~ ^(ar|nm|ranlib)$ && "${TARGET}" != *darwin* ]]; then
+  elif [[ "$tool" =~ ^(ar|nm|ranlib)$ && "${TARGET}" != *darwin* && -f $BUILD_PREFIX/bin/${TARGET}-gcc-${tool} ]]; then
      tool="gcc-${tool}"
   fi
   eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
@@ -33,15 +33,19 @@ done
 if [[ "${TARGET}" == *mingw* ]]; then
   # do not expect ${prefix}/mingw symlink - this should be superceded by
   # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
-  sed -i 's#${prefix}/mingw/#${prefix}/${target}/sysroot/usr/#g' configure
+  sed -i.bak 's#${prefix}/mingw/#${prefix}/${target}/sysroot/usr/#g' configure
   if [[ "$gcc_maj_ver" == "13" || "$gcc_maj_ver" == "14" ]]; then
-    sed -i "s#/mingw/#/usr/#g" gcc/config/i386/mingw32.h
+    sed -i.bak "s#/mingw/#/usr/#g" gcc/config/i386/mingw32.h
   else
-    sed -i "s#/mingw/#/usr/#g" gcc/config/mingw/mingw32.h
+    sed -i.bak "s#/mingw/#/usr/#g" gcc/config/mingw/mingw32.h
   fi
 else
   # prevent mingw patches from being archived in linux conda packages
   rm -rf ${RECIPE_DIR}/patches/mingw
+fi
+
+if [[ "${BUILD}" == *darwin* ]]; then
+  find ./ -name 'configure' -type f -exec sed -i -e 's/tmp_nm \-B/tmp_nm/g' {} \;
 fi
 
 if [[ "${TARGET}" != *darwin* ]]; then
@@ -110,6 +114,10 @@ if [[ "${cross_target_cxx_stdlib}" == "libcxx" ]]; then
   GCC_CONFIGURE_OPTIONS+=(--disable-libstdcxx)
 fi
 
+if [[ ! ("${BUILD}" == "${HOST}" && "${HOST}" != "${TARGET}") && "${TARGET}" != *darwin* ]]; then
+  GCC_CONFIGURE_OPTIONS+=(--enable-lto)
+fi
+
 ../configure \
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
@@ -123,7 +131,6 @@ fi
   --disable-libssp \
   --enable-libquadmath \
   --enable-libquadmath-support \
-  --enable-lto \
   --disable-nls \
   --disable-bootstrap \
   --disable-multilib \

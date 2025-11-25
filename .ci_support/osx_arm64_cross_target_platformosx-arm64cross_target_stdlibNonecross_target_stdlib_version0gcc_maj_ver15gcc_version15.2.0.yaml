@@ -5,7 +5,7 @@ MACOSX_SDK_VERSION:
 TARGET:
 - arm64-apple-darwin20.0.0
 binutils_version:
-- '2.44'
+- '2.45'
 c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
@@ -13,7 +13,7 @@ c_stdlib_version:
 channel_sources:
 - conda-forge/label/sysroot-with-crypt,conda-forge
 channel_targets:
-- conda-forge gcc-experimental
+- conda-forge main
 cross_target_cxx_stdlib:
 - libcxx
 cross_target_platform:
