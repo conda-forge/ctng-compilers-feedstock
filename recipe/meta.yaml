@@ -192,6 +192,7 @@ outputs:
         # libstdcxx is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx", max_pin=None) }}       # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgomp", max_pin=None) }}         # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}
         {% endif %}
         - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
         - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform and not (win or osx)]
@@ -230,6 +231,7 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libasan_preinit.o
         {% elif cross_target_platform.startswith("osx-") %}
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.1.1.dylib
+        - ls ${PREFIX}/{{ TARGET }} || true
         - test ! -d ${PREFIX}/{{ TARGET }}
         {% else %}
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.a
