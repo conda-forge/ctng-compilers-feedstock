@@ -52,16 +52,16 @@ if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
       gnuconfig \
       ${extra_pkgs[@]}
 
-    if [[ "${cross_target_cxx_stdlib}" == "libcxx" ]]; then
+    if [[ "${TARGET}" == *darwin* ]]; then
       CONDA_OVERRIDE_OSX=15.5 CONDA_SUBDIR="${cross_target_platform}" conda create -p $SRC_DIR/cf-compilers-target -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet libcxx-devel
       mkdir -p ${CF_PREFIX}/${TARGET}/lib
       ln -sf $SRC_DIR/cf-compilers-target/lib/libc++* ${CF_PREFIX}/${TARGET}/lib
 
-      if [[ "${HOST}" != "${TARGET}" && "${HOST}" == *darwin* ]]; then
-        CONDA_OVERRIDE_OSX=15.5 CONDA_SUBDIR="${target_platform}" conda create -p $SRC_DIR/cf-compilers-host -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet libcxx-devel
-        mkdir -p ${CF_PREFIX}/${HOST}/lib
-        ln -sf $SRC_DIR/cf-compilers-host/lib/libc++* ${CF_PREFIX}/${HOST}/lib
-      fi
+    fi
+    if [[ "${HOST}" == *darwin* && "${HOST}" != "${TARGET}" ]]; then
+      CONDA_OVERRIDE_OSX=15.5 CONDA_SUBDIR="${target_platform}" conda create -p $SRC_DIR/cf-compilers-host -c conda-forge/label/sysroot-with-crypt -c conda-forge --use-local --yes --quiet libcxx-devel
+      mkdir -p ${CF_PREFIX}/${HOST}/lib
+      ln -sf $SRC_DIR/cf-compilers-host/lib/libc++* ${CF_PREFIX}/${HOST}/lib
     fi
 fi
 
