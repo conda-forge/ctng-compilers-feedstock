@@ -217,7 +217,7 @@ if [[ "${HOST}" == "${TARGET}" ]]; then
     fi
     for name in atomic ${INSTALL_LIBGOMP:-} cc1 itm quadmath {a,hwa,l,t,ub}san; do
       [ -e "${PREFIX}/lib/lib${name}${SHLIB_EXT}" ] || continue
-      ln -s ../../../${name}${SHLIB_EXT} ${name}${SHLIB_EXT}
+      ln -s ../../../lib${name}${SHLIB_EXT} lib${name}${SHLIB_EXT}
     done
   popd
 else
