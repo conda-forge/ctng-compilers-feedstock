@@ -224,7 +224,8 @@ if [[ "${HOST}" == "${TARGET}" ]]; then
 else
   source ${RECIPE_DIR}/install-libgcc.sh
   if [[ "${TARGET}" == *darwin* ]]; then
-    rm -rf ${PREFIX}/${TARGET}/lib/libgomp*
+    rm -rf ${PREFIX}/${TARGET}/lib/libgomp.*dylib
+    rm -rf ${PREFIX}/${TARGET}/lib/libgomp.a
   fi
   rm -f ${PREFIX}/share/info/*.info
   # TODO: create a TBD file libgomp.tbd that re-exports libomp.dylib
