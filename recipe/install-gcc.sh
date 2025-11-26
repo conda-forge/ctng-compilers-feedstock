@@ -208,7 +208,8 @@ mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 
 if [[ "${HOST}" == "${TARGET}" ]]; then
   if [[ "${TARGET}" == *darwin* ]]; then
-    rm -rf ${PREFIX}/lib/libgomp*
+    rm -rf ${PREFIX}/lib/libgomp.*dylib
+    rm -rf ${PREFIX}/lib/libgomp.a
   fi
   # making these this way so conda build doesn't muck with them
   pushd ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
