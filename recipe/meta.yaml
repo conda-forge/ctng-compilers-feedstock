@@ -231,7 +231,7 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libasan_preinit.o
         {% elif cross_target_platform.startswith("osx-") %}
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.1.1.dylib
-        - ls ${PREFIX}/{{ TARGET }} || true
+        - find ${PREFIX}/{{ TARGET }} || true
         - test ! -d ${PREFIX}/{{ TARGET }}
         {% else %}
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.a

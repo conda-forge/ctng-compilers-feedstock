@@ -49,8 +49,10 @@ install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-fortran/RUNTIME.LIBRARY.EXCEPTION
 
 if [[ "${HOST}" == "${TARGET}" ]]; then
-  if [[ ${TARGET} != *mingw* ]]; then
-    ln -sf ${PREFIX}/lib/libgfortran${SHLIB_EXT} ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgfortran${SHLIB_EXT}
+  if [[ ${TARGET} == *linux* ]]; then
+    ln -sf ${PREFIX}/lib/libgfortran.so ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgfortran.so
+  elif [[ ${TARGET} == *darwin* ]]; then
+    ln -sf ${PREFIX}/lib/libgfortran.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgfortran.dylib
   fi
 else
   if [[ ${TARGET} == *linux* ]]; then
