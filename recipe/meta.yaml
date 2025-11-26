@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 12 %}
+{% set build_num = 13 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -74,7 +74,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: true  # [(win and cross_target_platform != "win-64") or (cross_target_platform in ("osx-64", "osx-arm64") and gcc_maj_ver < 15)]
+  skip: true  # [(win and cross_target_platform != "win-64") or ((cross_target_platform in ("osx-64", "osx-arm64") or osx) and gcc_maj_ver < 15)]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
@@ -178,6 +178,7 @@ outputs:
         - {{ pin_subpackage("libgcc", exact=True) }}                # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform and not (win or osx)]
+        - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
       run:
         {% if cross_target_platform.startswith("osx-") %}
         # For the linker
@@ -191,6 +192,7 @@ outputs:
         # libstdcxx is a runtime dep of gcc because LTO requires it.
         - {{ pin_subpackage("libstdcxx", max_pin=None) }}       # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libgomp", max_pin=None) }}         # [target_platform == cross_target_platform]
+        - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}
         {% endif %}
         - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
         - {{ pin_subpackage("libsanitizer", exact=True) }}      # [target_platform == cross_target_platform and not (win or osx)]
@@ -229,6 +231,7 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libasan_preinit.o
         {% elif cross_target_platform.startswith("osx-") %}
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.1.1.dylib
+        - find ${PREFIX}/{{ TARGET }} || true
         - test ! -d ${PREFIX}/{{ TARGET }}
         {% else %}
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgcc_s.a
@@ -250,7 +253,7 @@ outputs:
     requirements:
       host:
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
       run:
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         - conda-gcc-specs        # [with_conda_specs]
@@ -340,7 +343,8 @@ outputs:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}   # [cross_target_cxx_stdlib == "libstdcxx"]
       run:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
@@ -395,7 +399,7 @@ outputs:
     requirements:
       host:
         - {{ pin_subpackage("gxx_impl_" ~ cross_target_platform, exact=True) }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
         - {{ pin_subpackage("gcc", exact=True) }}
       run:
         - {{ pin_subpackage("gxx_impl_" ~ cross_target_platform, exact=True) }}
@@ -424,7 +428,7 @@ outputs:
       host:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
         # not needed due to pinning above but marks this build as using the new sysroots
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
       run:
@@ -474,7 +478,7 @@ outputs:
       host:
         - {{ pin_subpackage("gfortran_impl_" ~ cross_target_platform, exact=True) }}
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
         - {{ pin_subpackage("gcc", exact=True) }}
       run:
         - {{ pin_subpackage("gfortran_impl_" ~ cross_target_platform, exact=True) }}
@@ -539,7 +543,7 @@ outputs:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  # [cross_target_stdlib != "None"]
         - gcc_impl_{{ cross_target_platform }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
       commands:
         - test -f ${PREFIX}/lib/libasan.so
         - test -f ${PREFIX}/lib/libhwasan.so   # [x86_64 or aarch64]
@@ -600,6 +604,7 @@ outputs:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
       run:
         - {{ pin_subpackage("_openmp_mutex", max_pin=None) }}                                       # [not osx]
+        - _openmp_mutex                                                                             # [osx]
       run_constrained:
         - {{ pin_subpackage("libgomp", exact=True) }}
         - msys2-conda-epoch <0.0a0    # [win]

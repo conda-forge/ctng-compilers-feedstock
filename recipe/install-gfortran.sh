@@ -48,7 +48,13 @@ mkdir -p ${PREFIX}/share/licenses/gcc-fortran
 install -Dm644 $SRC_DIR/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-fortran/RUNTIME.LIBRARY.EXCEPTION
 
-if [[ "${HOST}" != "${TARGET}" ]]; then
+if [[ "${HOST}" == "${TARGET}" ]]; then
+  if [[ ${TARGET} == *linux* ]]; then
+    ln -sf ${PREFIX}/lib/libgfortran.so ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgfortran.so
+  elif [[ ${TARGET} == *darwin* ]]; then
+    ln -sf ${PREFIX}/lib/libgfortran.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/libgfortran.dylib
+  fi
+else
   if [[ ${TARGET} == *linux* ]]; then
     cp -f -P ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   elif [[ ${TARGET} == *darwin* ]]; then
