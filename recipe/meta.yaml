@@ -74,7 +74,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: true  # [(win and cross_target_platform != "win-64") or (cross_target_platform in ("osx-64", "osx-arm64") and gcc_maj_ver < 15)]
+  skip: true  # [(win and cross_target_platform != "win-64") or ((cross_target_platform in ("osx-64", "osx-arm64") or osx) and gcc_maj_ver < 15)]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
@@ -253,7 +253,7 @@ outputs:
     requirements:
       host:
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
       run:
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         - conda-gcc-specs        # [with_conda_specs]
@@ -343,7 +343,7 @@ outputs:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
         - {{ pin_subpackage("libstdcxx-devel_" ~ cross_target_platform, exact=True) }}   # [cross_target_cxx_stdlib == "libstdcxx"]
       run:
         # For cpp and crt{i,n}.o
@@ -399,7 +399,7 @@ outputs:
     requirements:
       host:
         - {{ pin_subpackage("gxx_impl_" ~ cross_target_platform, exact=True) }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
         - {{ pin_subpackage("gcc", exact=True) }}
       run:
         - {{ pin_subpackage("gxx_impl_" ~ cross_target_platform, exact=True) }}
@@ -428,7 +428,7 @@ outputs:
       host:
         # For cpp and crt{i,n}.o
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
         # not needed due to pinning above but marks this build as using the new sysroots
         - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
       run:
@@ -478,7 +478,7 @@ outputs:
       host:
         - {{ pin_subpackage("gfortran_impl_" ~ cross_target_platform, exact=True) }}
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
         - {{ pin_subpackage("gcc", exact=True) }}
       run:
         - {{ pin_subpackage("gfortran_impl_" ~ cross_target_platform, exact=True) }}
@@ -543,7 +543,7 @@ outputs:
       requires:
         - {{ cross_target_stdlib }}_{{ cross_target_platform }}  # [cross_target_stdlib != "None"]
         - gcc_impl_{{ cross_target_platform }}
-        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* boostrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
+        - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
       commands:
         - test -f ${PREFIX}/lib/libasan.so
         - test -f ${PREFIX}/lib/libhwasan.so   # [x86_64 or aarch64]
