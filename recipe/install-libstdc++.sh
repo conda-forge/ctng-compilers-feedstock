@@ -19,7 +19,7 @@ popd
 mkdir -p ${PREFIX}/lib
 
 # no static libs
-find ${PREFIX}/lib -name "*\.a" -exec rm -rf {} \;
+find ${PREFIX}/lib -name "*\.a" ! -name "*\.dll\.a" -exec rm -rf {} \;
 # no libtool files
 find ${PREFIX}/lib -name "*\.la" -exec rm -rf {} \;
 

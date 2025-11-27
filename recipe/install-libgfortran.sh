@@ -7,7 +7,9 @@ rm -f ${PREFIX}/lib/libgfortran* || true
 
 if [[ "${TARGET}" == *mingw* ]]; then
   mkdir -p ${PREFIX}/bin/
+  mkdir -p ${PREFIX}/lib/
   cp ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.dll ${PREFIX}/bin/
+  cp ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran.dll.a ${PREFIX}/lib/
 elif [[ "${TARGET}" == *linux* ]]; then
   mkdir -p ${PREFIX}/lib
   cp -f -P ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran*.so* ${PREFIX}/lib/

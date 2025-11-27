@@ -11,8 +11,6 @@ if [[ "${HOST}" == *linux* ]]; then
   rm ${PREFIX}/lib/libgomp.so.1
   rm ${PREFIX}/lib/libgomp.so
   ln -sf ${PREFIX}/lib/libgomp.so.${libgomp_ver} ${PREFIX}/lib/libgomp.so
-else
-  rm ${PREFIX}/lib/libgomp.dll.a
 fi
 
 mkdir -p ${PREFIX}/share/licenses/gcc-libs
