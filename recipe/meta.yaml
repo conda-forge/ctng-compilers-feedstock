@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 14 %}
+{% set build_num = 15 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -124,6 +124,7 @@ outputs:
     about:
       summary: The GNU C development libraries and object files
       home: https://gcc.gnu.org/
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libstdcxx-devel_{{ cross_target_platform }}
@@ -158,6 +159,7 @@ outputs:
     about:
       summary: The GNU C++ headers and development libraries
       home: https://gcc.gnu.org/
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: gcc_impl_{{ cross_target_platform }}
@@ -242,6 +244,7 @@ outputs:
     about:
       summary: GNU C Compiler
       home: https://gcc.gnu.org/
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: gcc
@@ -264,6 +267,7 @@ outputs:
     about:
       summary: GNU C native compiler (symlinks)
       home: https://github.com/conda-forge/ctng-compilers-feedstock
+      dev_url: https://github.com/conda-forge/ctng-compilers-feedstock
       license: BSD-3-Clause
       license_file: LICENSE
 
@@ -325,6 +329,7 @@ outputs:
           jinja function as described on
           https://conda-forge.org/docs/maintainer/knowledge_base.html#dep-compilers
       home: https://gcc.gnu.org/
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
       doc_url: https://gcc.gnu.org/onlinedocs/gcc/Spec-Files.html
 
@@ -390,6 +395,7 @@ outputs:
     about:
       summary: GNU C++ Compiler
       home: https://gcc.gnu.org/
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: gxx
@@ -411,6 +417,7 @@ outputs:
     about:
       summary: GNU C++ native compiler (symlinks)
       home: https://github.com/conda-forge/ctng-compilers-feedstock
+      dev_url: https://github.com/conda-forge/ctng-compilers-feedstock
       license: BSD-3-Clause
       license_file: LICENSE
 
@@ -468,6 +475,7 @@ outputs:
     about:
       summary: GNU Fortran Compiler
       home: https://gcc.gnu.org/
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: gfortran
@@ -491,6 +499,7 @@ outputs:
     about:
       summary: GNU Fortran native compiler (symlinks)
       home: https://github.com/conda-forge/ctng-compilers-feedstock
+      dev_url: https://github.com/conda-forge/ctng-compilers-feedstock
       license: BSD-3-Clause
       license_file: LICENSE
 
@@ -519,6 +528,7 @@ outputs:
     about:
       summary: The GNU C++ Runtime Library
       home: https://gcc.gnu.org/
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libsanitizer
@@ -552,6 +562,7 @@ outputs:
     about:
       summary: The GCC runtime libraries for sanitizers
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libgomp
@@ -584,6 +595,7 @@ outputs:
     about:
       summary: The GCC OpenMP implementation.
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libgcc
@@ -622,6 +634,7 @@ outputs:
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: _openmp_mutex
@@ -653,6 +666,7 @@ outputs:
       license: BSD-3-Clause
       license_file: LICENSE
       home: https://github.com/conda-forge/ctng-compilers-feedstock
+      dev_url: https://github.com/conda-forge/ctng-compilers-feedstock
 
   - name: libgfortran{{ libgfortran_soname }}
     target: {{ cross_target_platform }}
@@ -696,6 +710,7 @@ outputs:
     about:
       summary: The GNU Fortran Runtime Library
       home: https://gcc.gnu.org/
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   # compatibility outputs for previous naming of the runtime libraries
@@ -720,6 +735,7 @@ outputs:
     about:
       summary: The GCC low-level runtime library
       home: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libstdcxx-ng
@@ -742,6 +758,7 @@ outputs:
     about:
       summary: The GNU C++ Runtime Library
       home: https://gcc.gnu.org/
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
 
   - name: libgfortran-ng
@@ -763,12 +780,14 @@ outputs:
     about:
       summary: The GNU Fortran Runtime Library
       home: https://gcc.gnu.org/
+      dev_url: https://gcc.gnu.org/git/gcc.git
       license: GPL-3.0-only WITH GCC-exception-3.1
   {% endif %}
 
 about:
   summary: GNU Compiler Collection
   home: https://gcc.gnu.org/
+  dev_url: https://gcc.gnu.org/git/gcc.git
   license: GPL-3.0-only WITH GCC-exception-3.1
   license_file:
     - COPYING
