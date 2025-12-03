@@ -24,12 +24,15 @@ if [[ "${TARGET}" == "${HOST}" ]]; then
     #   package is installed.
     if [[ "$TARGET" == *linux* ]]; then
       NEW_LINK="%{\!static:-rpath ${PREFIX}/lib -rpath-link ${PREFIX}/lib} -L ${PREFIX}/lib/stubs -L ${PREFIX}/lib"
+      sed -i -e "/\*link_command:/,+1 s+%.*+& ${NEW_LINK}+" $specdir/conda.specs
     elif [[ "$TARGET" == *mingw* ]]; then
       NEW_LINK="-L ${PREFIX}/lib"
+      sed -i -e "/\*link_command:/,+1 s+%.*+& ${NEW_LINK}+" $specdir/conda.specs
     elif [[ "$TARGET" == *darwin* ]]; then
       NEW_LINK="%{\!static:-rpath ${PREFIX}/lib} -L ${PREFIX}/lib"
+      sed -i -e "/\*link_command:/,+1 s+%\(.*\)\}\}\}\}\}\}\}\}\}\}+%\1\}\}\} ${NEW_LINK}\}\}\}\}\}\}\}+" $specdir/conda.specs
+      sed -i -e "s+@loader_path+${PREFIX}/lib+g" $specdir/conda.specs
     fi
-    sed -i -e "/\*link_command:/,+1 s+%.*+& ${NEW_LINK}+" $specdir/conda.specs
     if [[ "${TARGET}" == *linux* ]]; then
       # put -disable-new-dtags at the front of the cmdline so that user provided -enable-new-dtags (in %l) can  override it
       sed -i -e "/\*link_command:/,+1 s+%(linker)+& -disable-new-dtags +" $specdir/conda.specs
@@ -40,6 +43,7 @@ if [[ "${TARGET}" == "${HOST}" ]]; then
     # cc1_options also get used for cc1plus... at least in 11.2.0
     sed -i -e "/\*cc1_options:/,+1 s+%.*+& -idirafter ${PREFIX}/include+" $specdir/conda.specs
 
+    rm $specdir/conda.specs-e
 else
     # does it even make sense to do anything here?  Could do something with %:getenv(BUILD_PREFIX  /include) 
     # but in the case that we aren't inside conda-build, it will cause gcc to fatal
