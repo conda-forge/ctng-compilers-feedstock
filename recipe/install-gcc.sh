@@ -156,10 +156,11 @@ echo  "%include_noerr <conda.specs>" >> $specdir/specs
 #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
 #   package is installed.
 if [[ "${TARGET}" == *linux* ]]; then
-  sed -i -e "/\*link_command:/,+1 s+%.*+& %{!static:-rpath ${PREFIX}/lib}+" $specdir/specs
+  sed -i.bak "/\*link_command:/,+1 s+%.*+& %{!static:-rpath ${PREFIX}/lib}+" $specdir/specs
 elif [[ "${TARGET}" == *darwin* ]]; then
-  sed -i -e "s#@loader_path#${PREFIX}/lib#g" $specdir/specs
+  sed -i.bak "s#@loader_path#${PREFIX}/lib#g" $specdir/specs
 fi
+rm -f $specdir/specs.bak
 
 mkdir -p ${PREFIX}/share/licenses/gcc
 
