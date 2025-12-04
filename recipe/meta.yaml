@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 14 %}
+{% set build_num = 15 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -259,7 +259,9 @@ outputs:
         - conda-gcc-specs        # [with_conda_specs]
     test:
       commands:
+        - echo "int main (void) {return 0;}" > conftest.c
         - ${PREFIX}/bin/gcc -v
+        - ${PREFIX}/bin/gcc conftest.c -c -v
         - ${PREFIX}/bin/gcov -v
     about:
       summary: GNU C native compiler (symlinks)

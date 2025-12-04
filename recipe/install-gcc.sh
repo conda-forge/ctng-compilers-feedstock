@@ -139,23 +139,8 @@ popd
 #   setting LINK_LIBGCC_SPECS on make
 #   setting LINK_LIBGCC_SPECS in gcc/Makefile
 specdir=$PREFIX/lib/gcc/$TARGET/${gcc_version}
-if [[ "${BUILD}" == "${HOST}" ]]; then
-    $PREFIX/bin/${TARGET}-gcc${EXEEXT} -dumpspecs > $specdir/specs
-    # validate assumption that specs in build/gcc/specs are exactly the
-    # same as dumped specs so that I don't need to depend on gcc_impl in conda-gcc-specs subpackage
-    diff -s ${SRC_DIR}/build/gcc/specs $specdir/specs
-elif [[ "${HOST}" == "${TARGET}" && "${TARGET}" == *linux* && "${BUILD}" == *linux* ]]; then
-    # For support of of native specs, we need this
-    # This is the only place where we need QEMU.
-    # Remove this elif condition for local experimentation if you
-    # do not have QEMU setup
-    $PREFIX/bin/${HOST}-gcc -dumpspecs > $specdir/specs
-else
-    $BUILD_PREFIX/bin/${TARGET}-gcc -dumpspecs > $specdir/specs
-    # validate assumption that specs in build/gcc/specs are exactly the
-    # same as dumped specs so that I don't need to depend on gcc_impl in conda-gcc-specs subpackage
-    diff -s ${SRC_DIR}/build/gcc/specs $specdir/specs
-fi
+cp ${SRC_DIR}/build/gcc/specs $specdir/specs
+cat $specdir/specs
 
 # make a copy of the specs without our additions so that people can choose not to use them
 # by passing -specs=builtin.specs
@@ -171,10 +156,11 @@ echo  "%include_noerr <conda.specs>" >> $specdir/specs
 #   and recorded in the specs file.  It will undergo a prefix replacement when our compiler
 #   package is installed.
 if [[ "${TARGET}" == *linux* ]]; then
-  sed -i -e "/\*link_command:/,+1 s+%.*+& %{!static:-rpath ${PREFIX}/lib}+" $specdir/specs
+  sed -i.bak "/\*link_command:/,+1 s+%.*+& %{!static:-rpath ${PREFIX}/lib}+" $specdir/specs
 elif [[ "${TARGET}" == *darwin* ]]; then
-  sed -i -e "s#@loader_path#${PREFIX}/lib#g" $specdir/specs
+  sed -i.bak "s#@loader_path#${PREFIX}/lib#g" $specdir/specs
 fi
+rm -f $specdir/specs.bak
 
 mkdir -p ${PREFIX}/share/licenses/gcc
 
