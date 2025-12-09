@@ -4,6 +4,17 @@ set -ex
 
 source ${RECIPE_DIR}/setup_compiler.sh
 
+if [[ -d zlib2 ]]; then
+  # Use custom configure, Makefile from gcc source
+  rm zlib2/Makefile
+  rm zlib2/Makefile.in
+  rm zlib2/configure
+  mv zlib/Makefile.in zlib2/
+  mv zlib/configure zlib2/
+  rm -rf zlib
+  mv zlib2 zlib
+fi
+
 # ensure patch is applied
 grep 'conda-forge:: allow' gcc/gcc.c*
 
@@ -14,20 +25,31 @@ if [[ "$channel_targets" == *conda-forge* ]]; then
   GCC_CONFIGURE_OPTIONS+=(--with-bugurl="https://github.com/conda-forge/ctng-compilers-feedstock/issues/new/choose")
 fi
 
-for tool in addr2line ar as c++filt cc c++ dsymutil fc gcc g++ gfortran ld nm objcopy objdump ranlib readelf size strings strip; do
-  tool_upper=$(echo $tool | tr a-z-+ A-Z_X)
-  if [[ "$tool" == "cc" ]]; then
-     tool=gcc
-  elif [[ "$tool" == "fc" ]]; then
-     tool=gfortran
-  elif [[ "$tool" == "c++" ]]; then
-     tool=g++
-  elif [[ "$tool" =~ ^(ar|nm|ranlib)$ && "${TARGET}" != *darwin* && -f $BUILD_PREFIX/bin/${TARGET}-gcc-${tool} ]]; then
-     tool="gcc-${tool}"
-  fi
-  eval "export ${tool_upper}_FOR_BUILD=\$BUILD_PREFIX/bin/\$BUILD-\$tool"
-  eval "export ${tool_upper}=\$BUILD_PREFIX/bin/\$HOST-\$tool"
-  eval "export ${tool_upper}_FOR_TARGET=\$BUILD_PREFIX/bin/\$TARGET-\$tool"
+for ENV_TYPE in BUILD HOST TARGET; do
+  for tool in addr2line ar as c++filt cc c++ dsymutil fc gcc g++ gfortran ld nm objcopy objdump ranlib readelf size strings strip; do
+    tool_env=$(echo $tool | tr a-z-+ A-Z_X)
+    if [[ "${ENV_TYPE}" != "HOST" ]]; then
+      tool_env="${tool_env}_FOR_${ENV_TYPE}"
+    fi
+    if [[ "$tool" == "cc" ]]; then
+       if [[ "${!ENV_TYPE}" == *darwin* && "${ENV_TYPE}" != "TARGET" ]]; then
+         tool=clang
+       else
+         tool=gcc
+       fi
+    elif [[ "$tool" == "fc" ]]; then
+       tool=gfortran
+    elif [[ "$tool" == "c++" ]]; then
+       if [[ "${!ENV_TYPE}" == *darwin* && "${ENV_TYPE}" != "TARGET" ]]; then
+         tool=clang++
+       else
+         tool=g++
+       fi
+    elif [[ "${!ENV_TYPE}" != *darwin* && -f $BUILD_PREFIX/bin/${!ENV_TYPE}-gcc-${tool} ]]; then
+       tool="gcc-${tool}"
+    fi
+    eval "export ${tool_env}=$BUILD_PREFIX/bin/${!ENV_TYPE}-$tool"
+  done
 done
 
 if [[ "${TARGET}" == *mingw* ]]; then
