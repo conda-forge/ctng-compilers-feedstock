@@ -79,7 +79,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: true  # [(win and cross_target_platform != "win-64") or ((cross_target_platform in ("osx-64", "osx-arm64") or osx) and gcc_maj_ver < 15)]
+  skip: true  # [(win and cross_target_platform != "win-64") or ((cross_target_platform in ("osx-64", "osx-arm64") or osx) and gcc_maj_ver < 15) or (gcc_maj_ver == 13 and cross_target_platform == "linux-riscv64")]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
