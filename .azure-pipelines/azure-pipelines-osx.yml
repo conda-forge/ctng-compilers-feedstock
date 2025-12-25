@@ -64,7 +64,7 @@ jobs:
       : CONFIG: osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         SHORT_CONFIG: osx_arm64_cross_target_platformwin-64cro_h132010c2
-    maxParallel: 9
+    maxParallel: 7
   timeoutInMinutes: 360
   variables: {}
 
