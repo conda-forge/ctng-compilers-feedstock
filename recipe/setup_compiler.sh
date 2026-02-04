@@ -31,6 +31,7 @@ if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
     else
       extra_pkgs+=(
         "clang"
+        "clangxx"
         "cctools_${cross_target_platform}"
         "ld64_${cross_target_platform}"
       )
