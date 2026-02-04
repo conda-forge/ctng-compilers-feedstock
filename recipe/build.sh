@@ -161,6 +161,6 @@ fi
   --with-native-system-header-dir=/usr/include \
   --with-gxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/c++" \
   --with-gxx-libcxx-include-dir="${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/../../../../include/c++/v1" \
-  "${GCC_CONFIGURE_OPTIONS[@]}"
+  "${GCC_CONFIGURE_OPTIONS[@]}" || (cat config.log; false)
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libgomp/config.log; false)
