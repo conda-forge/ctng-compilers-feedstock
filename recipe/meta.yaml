@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 16 %}
+{% set build_num = 17 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -217,8 +217,8 @@ outputs:
         - test `readlink ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgomp.so` == "../../../libgomp.so"  # [target_platform == cross_target_platform and cross_target_platform not in ("osx-64", "osx-arm64")]
         - test -f ${PREFIX}/bin/{{ TARGET }}-gcc
         - test -f ${PREFIX}/bin/{{ TARGET }}-cpp
-        - test ! -f ${PREFIX}/bin/gcc
-        - test ! -f ${PREFIX}/bin/cpp
+        - test ! -f ${PREFIX}/bin/gcc   # [cross_target_platform not in ("osx-64", "osx-arm64")]
+        - test ! -f ${PREFIX}/bin/cpp   # [cross_target_platform not in ("osx-64", "osx-arm64")]
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -Wl,-v -march=native  # [target_platform == cross_target_platform and (x86_64 or s390x)]
         # This test does not work well with QEMU
