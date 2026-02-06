@@ -141,7 +141,7 @@ if [[ ! ("${BUILD}" == "${HOST}" && "${HOST}" != "${TARGET}") && "${TARGET}" != 
 fi
 
 if [[ "$TARGET" == *riscv64* ]]; then
-  # According to discussions with core members, https://hackmd.io/@conda-community/SJ_oFitUZg
+  # According to discussions with core members, https://github.com/conda/governance/blob/main/meetings/archive/20260204-conda-ecosystem.md
   # we have decided to continue using the rv64gc architecture in GCC 15, 
   # and switch to the rva23u64 architecture in GCC 16 and later.
   # GCC 16 will support new profile representations, so we don't need to specify long extension names anymore.

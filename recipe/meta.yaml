@@ -32,7 +32,6 @@ source:
     patches:
       - patches/0001-allow-commands-in-main-specfile.patch
       - patches/0002-patch-zoneinfo_dir_override-to-point-to-our-tzdata.patch       # [gcc_maj_ver != 13]
-      - patches/0005-gcc-riscv-extensions.patch                                     # [gcc_maj_ver == 15]
       {% if cross_target_platform.startswith("linux-") %}
       - patches/0003-add-ldl-to-libstdc___la_LDFLAGS.patch                          # [gcc_maj_ver != 13]
       - patches/0004-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
