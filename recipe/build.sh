@@ -141,25 +141,12 @@ if [[ ! ("${BUILD}" == "${HOST}" && "${HOST}" != "${TARGET}") && "${TARGET}" != 
 fi
 
 if [[ "$TARGET" == *riscv64* ]]; then
-  # GCC < 15 does not support the RVA23U64 profile.
-  # In this way, we can use GCC 14 to build rv64gc packages at first, 
-  # and when we switch to version 15 or later, 
-  # we can automatically switch to RVA23U64 and gradually replace the existing packages.
-  # The 'RVA23 Profiles' specification is available in
-  # https://drive.google.com/file/d/12QKRm92cLcEk8-5J9NI91m0fAQOxqNAq/view
-  if [[ "${gcc_maj_ver:-0}" -ge 15 ]]; then
-    RV_EXT="i m a f d c b v zic64b \
-      zicbom zicbop zicboz ziccamoa ziccif \
-      zicclsm ziccrse zicntr zicond zicsr \
-      zifencei zihintntl zihintpause zihpm zimop \
-      zmmul za64rs zaamo zalrsc zawrs zfa \
-      zfhmin zca zcb zcd zcmop zba zbb \
-      zbs zkt zvbb zve32f zve32x zve64d \
-      zve64f zve64x zvfhmin zvkb zvkt zvl128b \
-      zvl32b zvl64b supm"
-    # Normalize whitespace then replace spaces with underscores: "i m a ..." -> "i_m_a_..."
-    RV_EXT="$(echo "${RV_EXT}" | tr -s '[:space:]' ' ' | sed -e 's/^ *//' -e 's/ *$//')"
-    GCC_CONFIGURE_OPTIONS+=(--with-arch="rv64${RV_EXT// /_}")
+  # According to discussions with core members, https://hackmd.io/@conda-community/SJ_oFitUZg
+  # we have decided to continue using the rv64gc architecture in GCC 15, 
+  # and switch to the rva23u64 architecture in GCC 16 and later.
+  # GCC 16 will support new profile representations, so we don't need to specify long extension names anymore.
+  if [[ "${gcc_maj_ver:-0}" -ge 16 ]]; then
+    GCC_CONFIGURE_OPTIONS+=(--with-arch="rva23u64")
   else
     GCC_CONFIGURE_OPTIONS+=(--with-arch=rv64gc)
   fi
