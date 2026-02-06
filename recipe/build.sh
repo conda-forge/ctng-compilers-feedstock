@@ -140,6 +140,19 @@ if [[ ! ("${BUILD}" == "${HOST}" && "${HOST}" != "${TARGET}") && "${TARGET}" != 
   GCC_CONFIGURE_OPTIONS+=(--enable-lto)
 fi
 
+if [[ "$TARGET" == *riscv64* ]]; then
+  # According to discussions with core members, https://github.com/conda/governance/blob/main/meetings/archive/20260204-conda-ecosystem.md
+  # we have decided to continue using the rv64gc architecture in GCC 15, 
+  # and switch to the rva23u64 architecture in GCC 16 and later.
+  # GCC 16 will support new profile representations, so we don't need to specify long extension names anymore.
+  if [[ "${gcc_maj_ver:-0}" -ge 16 ]]; then
+    GCC_CONFIGURE_OPTIONS+=(--with-arch="rva23u64")
+  else
+    GCC_CONFIGURE_OPTIONS+=(--with-arch=rv64gc)
+  fi
+  GCC_CONFIGURE_OPTIONS+=(--with-abi=lp64d)
+fi
+
 ../configure \
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \

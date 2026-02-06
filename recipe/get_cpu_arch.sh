@@ -8,6 +8,8 @@ get_cpu_arch() {
     CPU_ARCH="aarch64"
   elif [[ "$1" == *"-s390x" ]]; then
     CPU_ARCH="s390x"
+  elif [[ "$1" == *"-riscv64" ]]; then
+    CPU_ARCH="riscv64"
   else
     echo "Unknown architecture"
     exit 1

@@ -53,6 +53,21 @@ jobs:
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
         SHORT_CONFIG: linux_64_cross_target_platformlinux-ppc6_had6975b1
+      ? linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_64_cross_target_platformlinux-risc_h63a547c9
+      ? linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_64_cross_target_platformlinux-risc_hcf922850
+      ? linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_64_cross_target_platformlinux-risc_h2b64cf76
       linux_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0:
         CONFIG: linux_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0
         UPLOAD_PACKAGES: 'True'
@@ -143,6 +158,21 @@ jobs:
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
         SHORT_CONFIG: linux_aarch64_cross_target_platformlinux_h781ee426
+      ? linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_aarch64_cross_target_platformlinux_h89489fdd
+      ? linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_aarch64_cross_target_platformlinux_hef94d347
+      ? linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_aarch64_cross_target_platformlinux_h62de91ac
       linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0:
         CONFIG: linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0
         UPLOAD_PACKAGES: 'True'
@@ -233,6 +263,21 @@ jobs:
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
         SHORT_CONFIG: linux_ppc64le_cross_target_platformlinux_hffec007b
+      ? linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_ppc64le_cross_target_platformlinux_hcbb6ca2f
+      ? linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_ppc64le_cross_target_platformlinux_h116864d8
+      ? linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_ppc64le_cross_target_platformlinux_h25515ef1
       linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0:
         CONFIG: linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0
         UPLOAD_PACKAGES: 'True'
@@ -278,6 +323,111 @@ jobs:
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
         SHORT_CONFIG: linux_ppc64le_cross_target_platformwin-6_h7b0ee56d
+      ? linux_riscv64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_hdcec9a7d
+      ? linux_riscv64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_h5f0081ff
+      ? linux_riscv64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_h1851051f
+      ? linux_riscv64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_hd3d1c88f
+      ? linux_riscv64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_h96b1c016
+      ? linux_riscv64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_ha03bf848
+      ? linux_riscv64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_h96761a5b
+      ? linux_riscv64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_ha2214bc2
+      ? linux_riscv64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_h682cefc7
+      ? linux_riscv64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_hbe0d6078
+      ? linux_riscv64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_ha122735f
+      ? linux_riscv64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: linux_riscv64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformlinux_hda5c41bb
+      linux_riscv64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0:
+        CONFIG: linux_riscv64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformosx-6_hac63c9b3
+      linux_riscv64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0:
+        CONFIG: linux_riscv64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformosx-6_ha6a4637a
+      linux_riscv64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0:
+        CONFIG: linux_riscv64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformosx-6_had6ed8af
+      ? linux_riscv64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: linux_riscv64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformosx-a_h22b1cdd2
+      ? linux_riscv64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: linux_riscv64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformosx-a_h8d7c006a
+      ? linux_riscv64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: linux_riscv64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformosx-a_hef715f38
+      ? linux_riscv64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
+      : CONFIG: linux_riscv64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformwin-6_h8ff1df49
+      ? linux_riscv64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
+      : CONFIG: linux_riscv64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformwin-6_h7b58eee8
+      ? linux_riscv64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
+      : CONFIG: linux_riscv64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_riscv64_cross_target_platformwin-6_h9d6a043f
       ? win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
       : CONFIG: win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
         UPLOAD_PACKAGES: 'True'
@@ -293,7 +443,7 @@ jobs:
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
         SHORT_CONFIG: win_64_cross_target_platformwin-64cross__h0c47fcd3
-    maxParallel: 31
+    maxParallel: 43
   timeoutInMinutes: 360
   variables: {}
 
