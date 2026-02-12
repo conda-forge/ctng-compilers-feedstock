@@ -634,7 +634,9 @@ outputs:
     script: install-openmp_impl.sh
     version: {{ openmp_ver }}
     build:
-      string: 3_gnu
+      # have higher priority than llvm
+      string: 20_gnu
+      number: 20
       skip: true    # [target_platform != cross_target_platform or osx]
       run_exports:
         strong:
