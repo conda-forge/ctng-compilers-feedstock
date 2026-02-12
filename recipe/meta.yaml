@@ -635,6 +635,7 @@ outputs:
     version: {{ openmp_ver }}
     build:
       string: 3_gnu
+      number: 3
       skip: true    # [target_platform != cross_target_platform or osx]
       run_exports:
         strong:
