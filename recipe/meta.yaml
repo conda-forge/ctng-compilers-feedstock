@@ -89,6 +89,7 @@ requirements:
     # conda-build bugs
   host:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}  # [cross_target_stdlib != "None"]
+    - zstd
 
 outputs:
   - name: libgcc-devel_{{ cross_target_platform }}
@@ -183,6 +184,7 @@ outputs:
         - {{ pin_subpackage("libgfortran" ~ libgfortran_soname) }}  # [target_platform == cross_target_platform]
         - {{ pin_subpackage("libsanitizer", exact=True) }}          # [target_platform == cross_target_platform and not (win or osx)]
         - {{ pin_subpackage("libgcc-devel_" ~ cross_target_platform, exact=True) }}
+        - zstd
       run:
         {% if cross_target_platform.startswith("osx-") %}
         # For the linker
