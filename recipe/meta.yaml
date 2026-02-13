@@ -78,7 +78,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: true  # [(win and cross_target_platform != "win-64") or ((cross_target_platform in ("osx-64", "osx-arm64") or osx) and gcc_maj_ver < 15)]
+  skip: true  # [(win and cross_target_platform != "win-64") or ((cross_target_platform in ("osx-64", "osx-arm64") or osx) and gcc_maj_ver < 15) or (gcc_maj_ver == 13 and cross_target_platform == "linux-riscv64")]
   detect_binary_files_with_prefix: false
   ignore_run_exports_from:
     - {{ cross_target_stdlib }}_{{ cross_target_platform }} {{ cross_target_stdlib_version }}
@@ -222,7 +222,7 @@ outputs:
         - CC=$(${PREFIX}/bin/*-gcc -dumpmachine)-gcc
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -Wl,-v -march=native  # [target_platform == cross_target_platform and (x86_64 or s390x)]
         # This test does not work well with QEMU
-        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -Wl,-v -mcpu=native   # [target_platform == cross_target_platform and (not x86_64 and not s390x and not ppc64le)]
+        - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -Wl,-v -mcpu=native   # [target_platform == cross_target_platform and (not x86_64 and not s390x and not ppc64le and not riscv64)]
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v -fsanitize=address  # [cross_target_platform != "win-64"]
         - ${CC} -Wall tests/aligned_alloc.c -c -o c_aligned.o -v                     # [cross_target_platform != "win-64"]
         - ${CC} -Wall c_aligned.o -o c_aligned -v && ./c_aligned   # [cross_target_platform == target_platform and cross_target_platform != "win-64"]
