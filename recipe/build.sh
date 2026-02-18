@@ -144,7 +144,7 @@ fi
   --prefix="$PREFIX" \
   --with-slibdir="$PREFIX/lib" \
   --libdir="$PREFIX/lib" \
-  --mandir="$PREFIX/man" \
+  --mandir="$PREFIX/share/man" \
   --build=$BUILD \
   --host=$HOST \
   --target=$TARGET \
