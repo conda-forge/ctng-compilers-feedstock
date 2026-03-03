@@ -14,4 +14,7 @@ conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
+os_version:
+  # necessary due to glibc constraints for cross-compiling riscv
+  linux_64: alma10
 test: native_and_emulated
