@@ -31,6 +31,7 @@ if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
     else
       extra_pkgs+=(
         "clang"
+        "clangxx"
         "cctools_${cross_target_platform}"
         "ld64_${cross_target_platform}"
       )
@@ -65,15 +66,21 @@ if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
     fi
     if [[ "${TARGET}" == *darwin* && ! -f "${CF_PREFIX}/bin/${TARGET}-clang" ]]; then
       ln -sf "${CF_PREFIX}/bin/clang" "${CF_PREFIX}/bin/${TARGET}-clang"
-      ln -sf "${CF_PREFIX}/bin/clang" "${CF_PREFIX}/bin/${TARGET}-clang++"
+    fi
+    if [[ "${TARGET}" == *darwin* && ! -f "${CF_PREFIX}/bin/${TARGET}-clang++" ]]; then
+      ln -sf "${CF_PREFIX}/bin/${TARGET}-clang" "${CF_PREFIX}/bin/${TARGET}-clang++"
     fi
     if [[ "${HOST}" == *darwin* && ! -f "${CF_PREFIX}/bin/${HOST}-clang" ]]; then
       ln -sf "${CF_PREFIX}/bin/clang" "${CF_PREFIX}/bin/${HOST}-clang"
-      ln -sf "${CF_PREFIX}/bin/clang" "${CF_PREFIX}/bin/${HOST}-clang++"
+    fi
+    if [[ "${HOST}" == *darwin* && ! -f "${CF_PREFIX}/bin/${HOST}-clang++" ]]; then
+      ln -sf "${CF_PREFIX}/bin/${HOST}-clang" "${CF_PREFIX}/bin/${HOST}-clang++"
     fi
     if [[ "${BUILD}" == *darwin* && ! -f "${CF_PREFIX}/bin/${BUILD}-clang" ]]; then
       ln -sf "${CF_PREFIX}/bin/clang" "${CF_PREFIX}/bin/${BUILD}-clang"
-      ln -sf "${CF_PREFIX}/bin/clang" "${CF_PREFIX}/bin/${BUILD}-clang++"
+    fi
+    if [[ "${BUILD}" == *darwin* && ! -f "${CF_PREFIX}/bin/${BUILD}-clang++" ]]; then
+      ln -sf "${CF_PREFIX}/bin/${BUILD}-clang" "${CF_PREFIX}/bin/${BUILD}-clang++"
     fi
 fi
 
