@@ -1,7 +1,7 @@
 MACOSX_SDK_VERSION:
 - '11.0'
 TARGET:
-- x86_64-apple-darwin13.4.0
+- powerpc64le-conda-linux-gnu
 binutils_version:
 - '2.45'
 c_stdlib:
@@ -13,19 +13,19 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cross_target_cxx_stdlib:
-- libcxx
+- libstdcxx
 cross_target_platform:
-- osx-64
+- linux-ppc64le
 cross_target_stdlib:
-- None
+- sysroot
 cross_target_stdlib_version:
-- '0'
+- '2.17'
 docker_image:
-- quay.io/condaforge/linux-anvil-x86_64:alma9
+- quay.io/condaforge/linux-anvil-x86_64:alma10
 gcc_maj_ver:
-- '13'
+- '15'
 gcc_version:
-- 13.4.0
+- 15.2.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
@@ -33,7 +33,7 @@ libgomp_ver:
 openmp_ver:
 - '4.5'
 target_platform:
-- linux-ppc64le
+- linux-riscv64
 with_conda_specs:
 - false
 - true
