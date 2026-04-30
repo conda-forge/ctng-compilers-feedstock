@@ -8,11 +8,9 @@ TARGET:
 gcc_version:
   - 15.2.0
   - 14.3.0
-  - 13.4.0
 gcc_maj_ver:
   - 15
   - 14
-  - 13
 libgfortran_soname:
   - 5
   - 5
