@@ -26,6 +26,7 @@ source:
   - url: 
       #- https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
       - https://mirrors.ocf.berkeley.edu/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
+    sha256: 48be131b8c719db967cf0265a0ccb0cab2a3b224d5bb42f84904f0c1744213e6   # [gcc_version == "16.1.0"]
     sha256: 7294d65cc1a0558cb815af0ca8c7763d86f7a31199794ede3f630c0d1b0a5723   # [gcc_version == "15.2.0"]
     sha256: ace8b8b0dbfe6abfc22f821cb093e195aa5498b7ccf7cd23e4424b9f14afed22   # [gcc_version == "14.3.0"]
     patches:
@@ -35,20 +36,23 @@ source:
       - patches/0003-add-ldl-to-libstdc___la_LDFLAGS.patch
       - patches/0004-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       {% elif cross_target_platform.startswith("win-") %}
+      # for GCC 16: https://github.com/msys2/MINGW-packages/tree/2386f7b596fed897fa1f0dcdc56743251b47361c/mingw-w64-gcc
       # for GCC 15: https://github.com/msys2/MINGW-packages/tree/f59921184b35858d4ceb91679578de0d62475cbf/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
       - patches/mingw/{{ gcc_maj_ver }}/0003-Windows-Follow-Posix-dir-exists-semantics-more-close.patch
-      - patches/mingw/{{ gcc_maj_ver }}/0005-Windows-Don-t-ignore-native-system-header-dir.patch
+      - patches/mingw/{{ gcc_maj_ver }}/0005-Windows-Don-t-ignore-native-system-header-dir.patch                # [gcc_maj_ver != 16]
       - patches/mingw/{{ gcc_maj_ver }}/0007-Build-EXTRA_GNATTOOLS-for-Ada.patch
       - patches/mingw/{{ gcc_maj_ver }}/0008-Prettify-linking-no-undefined.patch
       - patches/mingw/{{ gcc_maj_ver }}/0011-Enable-shared-gnat-implib.patch
       - patches/mingw/{{ gcc_maj_ver }}/0012-Handle-spaces-in-path-for-default-manifest.patch
       - patches/mingw/{{ gcc_maj_ver }}/0014-gcc-9-branch-clone_function_name_1-Retain-any-stdcall-suffix.patch
       - patches/mingw/{{ gcc_maj_ver }}/0020-libgomp-Don-t-hard-code-MS-printf-attributes.patch
-      - patches/mingw/{{ gcc_maj_ver }}/0021-PR14940-Allow-a-PCH-to-be-mapped-to-a-different-addr.patch         # [gcc_maj_ver != 15]
+      - patches/mingw/{{ gcc_maj_ver }}/0021-PR14940-Allow-a-PCH-to-be-mapped-to-a-different-addr.patch         # [gcc_maj_ver == 14]
+      - patches/mingw/{{ gcc_maj_ver }}/0022-unset-native-system-header-dir.patch                               # [gcc_maj_ver == 16]
       - patches/mingw/{{ gcc_maj_ver }}/0140-gcc-diagnostic-color.patch
       - patches/mingw/{{ gcc_maj_ver }}/0200-add-m-no-align-vector-insn-option-for-i386.patch
       - patches/mingw/{{ gcc_maj_ver }}/2001-fix-building-rust-on-mingw-w64.patch
+      - patches/mingw/{{ gcc_maj_ver }}/3001-fix-codeview-crashes.patch                                         # [gcc_maj_ver == 16]
       - patches/mingw/{{ gcc_maj_ver }}/9002-native-tls.patch                                                   # [gcc_maj_ver == 15]
       {% elif cross_target_platform.startswith("osx-") %}
       # all patches from https://github.com/Homebrew/formula-patches/tree/698885df7f624d0ce15bceb79a4d9760a473b502/gcc
@@ -61,7 +65,7 @@ source:
       - patches/macos/0002-Make-stdlib-libc-the-default-for-macos-platforms.patch
       # call xcrun to get sdkroot
       - patches/macos/0003-Find-macos-sysroot-by-calling-xcrun.patch
-      - patches/macos/fix-malloc-error.diff
+      - patches/macos/0004-fix-malloc-error.patch
       {% endif %}
   # Need an up-to-date zlib for recent clang
   - url: https://github.com/madler/zlib/releases/download/v1.3.1/zlib-1.3.1.tar.gz

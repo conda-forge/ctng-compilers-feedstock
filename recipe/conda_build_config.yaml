@@ -6,9 +6,11 @@ TARGET:
   - x86_64-apple-darwin13.4.0
   - arm64-apple-darwin20.0.0
 gcc_version:
+  - 16.1.0
   - 15.2.0
   - 14.3.0
 gcc_maj_ver:
+  - 16
   - 15
   - 14
 libgfortran_soname:

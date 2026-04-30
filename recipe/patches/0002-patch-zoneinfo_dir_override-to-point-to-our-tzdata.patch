@@ -1,22 +1,21 @@
-From 92dc5e74592f57dbc9c2b421e2e348d88d3439f6 Mon Sep 17 00:00:00 2001
+From f3d318dc2e29fcc252666a621c2c5e1a6f6c3693 Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Fri, 21 Jun 2024 12:41:07 +1100
 Subject: [PATCH 2/4] patch zoneinfo_dir_override to point to our tzdata
 
 ---
- libstdc++-v3/src/c++20/tzdb.cc | 78 ++++++++++++++++++++++++++++------
- 1 file changed, 65 insertions(+), 13 deletions(-)
+ libstdc++-v3/src/c++20/tzdb.cc | 80 +++++++++++++++++++++++++++++-----
+ 1 file changed, 69 insertions(+), 11 deletions(-)
 
 diff --git a/libstdc++-v3/src/c++20/tzdb.cc b/libstdc++-v3/src/c++20/tzdb.cc
-index 72f20e7f828..8d4feb99902 100644
+index b0fbfc46a6d..2b665d8d25a 100644
 --- a/libstdc++-v3/src/c++20/tzdb.cc
 +++ b/libstdc++-v3/src/c++20/tzdb.cc
-@@ -37,8 +37,13 @@
- #include <mutex>      // mutex
- #include <filesystem> // filesystem::read_symlink
+@@ -65,6 +65,16 @@
+ # define USE_ATOMIC_SHARED_PTR 0
+ #endif
  
--#ifndef _AIX
--# include <cstdlib>   // getenv
++// moved here because the diff-context further up changed between GCC 15&16
 +#if defined(__linux__) || defined(__APPLE__)
 +# include <dlfcn.h>   // dladdr
 +# include <cstdlib>   // free, malloc, realpath
@@ -24,10 +23,12 @@ index 72f20e7f828..8d4feb99902 100644
 +# include <limits.h>  // PATH_MAX
 +#elif defined(_WIN32)
 +# include <windows.h>
++#endif
++
+ #if USE_ATOMIC_SHARED_PTR && ! USE_ATOMIC_LIST_HEAD
+ # error Unsupported combination
  #endif
- 
- #if defined __GTHREADS && ATOMIC_POINTER_LOCK_FREE == 2
-@@ -64,25 +68,73 @@
+@@ -79,25 +89,73 @@
  
  namespace __gnu_cxx
  {
