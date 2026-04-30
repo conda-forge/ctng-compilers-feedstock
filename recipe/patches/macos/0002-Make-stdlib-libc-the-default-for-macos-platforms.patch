@@ -1,7 +1,7 @@
-From 8da34b08fa475ffa4e10f895ece4e48015604eaa Mon Sep 17 00:00:00 2001
+From ce5905376f9c1cc85afb127891a7d5dcdc74fb2a Mon Sep 17 00:00:00 2001
 From: Isuru Fernando <isuruf@gmail.com>
 Date: Fri, 31 Oct 2025 16:28:46 -0700
-Subject: [PATCH 2/3] Make -stdlib=libc++ the default for macos platforms
+Subject: [PATCH 2/4] Make -stdlib=libc++ the default for macos platforms
 
 ---
  gcc/c-family/c.opt | 2 +-
@@ -9,10 +9,10 @@ Subject: [PATCH 2/3] Make -stdlib=libc++ the default for macos platforms
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/gcc/c-family/c.opt b/gcc/c-family/c.opt
-index 75b6531860e..fd97be7bdc0 100644
+index 3d96a73ecee..d5b677e3f8f 100644
 --- a/gcc/c-family/c.opt
 +++ b/gcc/c-family/c.opt
-@@ -2779,7 +2779,7 @@ C ObjC Alias(std=c23)
+@@ -2855,7 +2855,7 @@ C ObjC Alias(std=c23)
  Conform to the ISO 2023 C standard (published in 2024).
  
  stdlib=
@@ -22,7 +22,7 @@ index 75b6531860e..fd97be7bdc0 100644
  and runtime.
  
 diff --git a/gcc/cp/g++spec.cc b/gcc/cp/g++spec.cc
-index 165a91d45cd..26799676329 100644
+index ab6482d4f5d..c8b01c71e69 100644
 --- a/gcc/cp/g++spec.cc
 +++ b/gcc/cp/g++spec.cc
 @@ -97,7 +97,7 @@ lang_specific_driver (struct cl_decoded_option **in_decoded_options,
@@ -34,6 +34,3 @@ index 165a91d45cd..26799676329 100644
  
    /* The number of arguments being added to what's in argv, other than
       libraries.  We use this to track the number of times we've inserted
--- 
-2.45.2
-
