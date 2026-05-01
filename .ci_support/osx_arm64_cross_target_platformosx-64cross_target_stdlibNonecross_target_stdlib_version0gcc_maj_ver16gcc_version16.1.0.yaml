@@ -23,17 +23,17 @@ cross_target_stdlib:
 cross_target_stdlib_version:
 - '0'
 gcc_maj_ver:
-- '15'
+- '16'
 gcc_version:
-- 15.2.0
+- 16.1.0
 libgfortran_soname:
 - '5'
 libgomp_ver:
 - 1.0.0
 macos_machine:
-- x86_64-apple-darwin13.4.0
+- arm64-apple-darwin20.0.0
 target_platform:
-- osx-64
+- osx-arm64
 with_conda_specs:
 - false
 - true
