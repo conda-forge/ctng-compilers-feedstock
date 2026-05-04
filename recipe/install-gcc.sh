@@ -202,7 +202,7 @@ if [[ "${HOST}" == "${TARGET}" ]]; then
     if [[ "${TARGET}" == *darwin* ]]; then
       ln -sf ../../../libomp.dylib libgomp.dylib
     fi
-    for name in atomic gomp cc1 itm quadmath {a,hwa,l,t,ub}san; do
+    for name in atomic atomic_asneeded gomp cc1 itm quadmath {a,hwa,l,t,ub}san; do
       [ -e "${PREFIX}/lib/lib${name}${SHLIB_EXT}" ] || continue
       ln -s ../../../lib${name}${SHLIB_EXT} lib${name}${SHLIB_EXT}
     done
@@ -216,7 +216,7 @@ else
   rm -f ${PREFIX}/share/info/*.info
   # TODO: create a TBD file libgomp.tbd that re-exports libomp.dylib
   # and remove libgomp.dylib symlink from _openmp_mutex
-  for name in atomic gomp cc1 itm quadmath {a,hwa,l,t,ub}san; do
+  for name in atomic atomic_asneeded gomp cc1 itm quadmath {a,hwa,l,t,ub}san; do
     if [[ -f "${PREFIX}/${TARGET}/lib/lib${name}.so" ]]; then
       mv ${PREFIX}/${TARGET}/lib/lib${name}.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || true
     fi
@@ -227,7 +227,7 @@ else
 fi
   
 mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-for name in atomic gomp itm quadmath {a,hwa,l,t,ub}san; do
+for name in atomic atomic_asneeded gomp itm quadmath {a,hwa,l,t,ub}san; do
   if [[ -f "${PREFIX}/lib/lib${name}.a" ]]; then
    mv ${PREFIX}/lib/lib${name}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   fi
