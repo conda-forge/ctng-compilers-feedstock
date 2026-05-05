@@ -1,4 +1,4 @@
-From 86369ec6c37896394546f3b01f9c447c4f4188ae Mon Sep 17 00:00:00 2001
+From 67bd9104daa40f907a8d1ff4c7e3e866f83f5d56 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Tue, 12 Jun 2018 05:26:24 +0000
 Subject: [PATCH 4/4] Hardcode HAVE_ALIGNED_ALLOC=1 in libstdc++-v3/configure
@@ -8,10 +8,10 @@ Subject: [PATCH 4/4] Hardcode HAVE_ALIGNED_ALLOC=1 in libstdc++-v3/configure
  1 file changed, 16 insertions(+)
 
 diff --git a/libstdc++-v3/configure b/libstdc++-v3/configure
-index 18053ab7eae..44b6a72f775 100755
+index 6713e4504b1..d0a89e85ed2 100755
 --- a/libstdc++-v3/configure
 +++ b/libstdc++-v3/configure
-@@ -26405,6 +26405,11 @@ _ACEOF
+@@ -26580,6 +26580,11 @@ _ACEOF
  fi
  done
  
@@ -23,7 +23,7 @@ index 18053ab7eae..44b6a72f775 100755
  
    # For iconv support.
  
-@@ -38403,6 +38408,9 @@ _ACEOF
+@@ -38771,6 +38776,9 @@ _ACEOF
  fi
  done
  
@@ -33,7 +33,7 @@ index 18053ab7eae..44b6a72f775 100755
      ;;
  
    *-fuchsia*)
-@@ -42318,6 +42326,10 @@ fi
+@@ -42692,6 +42700,10 @@ fi
  done
  
  
@@ -44,7 +44,7 @@ index 18053ab7eae..44b6a72f775 100755
      ;;
    *-mingw32*)
  
-@@ -45924,6 +45936,10 @@ _ACEOF
+@@ -46304,6 +46316,10 @@ _ACEOF
  fi
  done
  

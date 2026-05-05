@@ -1,4 +1,4 @@
-From c54fd2dea14134d3e51c17ca5442e0ae2dc16462 Mon Sep 17 00:00:00 2001
+From 88fbb79fe6eedd09c595a8fb410fc178380d3dd8 Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Mon, 15 Jul 2024 19:16:05 +1100
 Subject: [PATCH 3/4] add `-ldl` to libstdc___la_LDFLAGS
@@ -13,10 +13,10 @@ Co-Authored-By: Isuru Fernando <isuruf@gmail.com>
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/libstdc++-v3/src/Makefile.am b/libstdc++-v3/src/Makefile.am
-index 37ba1491dea..5b69f43ecd8 100644
+index 35a497a1588..557a4085357 100644
 --- a/libstdc++-v3/src/Makefile.am
 +++ b/libstdc++-v3/src/Makefile.am
-@@ -161,7 +161,7 @@ libstdc___darwin_rpath += -Wl,-rpath,@loader_path
+@@ -163,7 +163,7 @@ libstdc___darwin_rpath += -Wl,-rpath,@loader_path
  endif
  
  libstdc___la_LDFLAGS = \
@@ -26,10 +26,10 @@ index 37ba1491dea..5b69f43ecd8 100644
  libstdc___la_LINK = $(CXXLINK) $(libstdc___la_LDFLAGS) $(lt_host_flags)
  
 diff --git a/libstdc++-v3/src/Makefile.in b/libstdc++-v3/src/Makefile.in
-index 1bdf0daa88f..ab28e14804e 100644
+index 811d0a5ce4a..36525968ec0 100644
 --- a/libstdc++-v3/src/Makefile.in
 +++ b/libstdc++-v3/src/Makefile.in
-@@ -566,7 +566,7 @@ libstdc___la_DEPENDENCIES = \
+@@ -571,7 +571,7 @@ libstdc___la_DEPENDENCIES = \
  @ENABLE_DARWIN_AT_RPATH_TRUE@	-Wc,-nodefaultrpaths \
  @ENABLE_DARWIN_AT_RPATH_TRUE@	-Wl,-rpath,@loader_path
  libstdc___la_LDFLAGS = \
