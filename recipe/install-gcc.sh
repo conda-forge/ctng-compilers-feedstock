@@ -228,10 +228,12 @@ fi
   
 mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
 for name in atomic atomic_asneeded gomp itm quadmath {a,hwa,l,t,ub}san; do
-  if [[ -f "${PREFIX}/lib/lib${name}.a" ]]; then
+  # depending on the order of iteration (and thus file moves), symlinks from one lib to another
+  # (e.g. libatomic_asneeded.a -> libatomic.a) might not be valid; allow broken symlinks with -L
+  if [[ -e "${PREFIX}/lib/lib${name}.a" || -L "${PREFIX}/lib/lib${name}.a" ]]; then
    mv ${PREFIX}/lib/lib${name}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   fi
-  if [[ -f "${PREFIX}/${TARGET}/lib/lib${name}.a" ]]; then
+  if [[ -e "${PREFIX}/${TARGET}/lib/lib${name}.a" || -L "${PREFIX}/${TARGET}/lib/lib${name}.a" ]]; then
    mv ${PREFIX}/${TARGET}/lib/lib${name}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
   fi
 done
