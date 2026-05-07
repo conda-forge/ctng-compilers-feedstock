@@ -261,10 +261,9 @@ mkdir -p ${PREFIX}/libexec/gcc/${TARGET}/${gcc_version}
 if [[ "${TARGET}" == *darwin* ]]; then
   TOOLS="ar as c++filt ld nm ranlib size strings strip"
 elif [[ "${TARGET}" == *linux* ]]; then
-  TOOLS=TOOLS="addr2line ar c++filt elfedit ld nm objcopy objdump ranlib readelf size strings strip"
+  TOOLS="addr2line ar c++filt elfedit ld nm objcopy objdump ranlib readelf size strings strip"
 elif [[ "${TARGET}" == *mingw* ]]; then
   TOOLS=""
-  #TOOLS=TOOLS="addr2line ar c++filt elfedit ld nm objcopy objdump ranlib readelf size strings strip dlltool dllwrap windmc windres"
 fi
 
 for f in ${TOOLS}; do
