@@ -21,7 +21,7 @@ cross_target_stdlib:
 cross_target_stdlib_version:
 - '12'
 docker_image:
-- quay.io/condaforge/linux-anvil-x86_64:alma9
+- quay.io/condaforge/linux-anvil-x86_64:alma10
 gcc_maj_ver:
 - '15'
 gcc_version:

@@ -13,15 +13,6 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU Compiler Collection
 
-About _openmp_mutex
--------------------
-
-Home: https://github.com/conda-forge/ctng-compilers-feedstock
-
-Package license: BSD-3-Clause
-
-Summary: OpenMP Implementation Mutex
-
 About conda-gcc-specs
 ---------------------
 
@@ -74,6 +65,15 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 Summary: GNU C Compiler
 
 About gcc_impl_linux-ppc64le
+----------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU C Compiler
+
+About gcc_impl_linux-riscv64
 ----------------------------
 
 Home: https://gcc.gnu.org/
@@ -145,6 +145,15 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU Fortran Compiler
 
+About gfortran_impl_linux-riscv64
+---------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU Fortran Compiler
+
 About gfortran_impl_osx-64
 --------------------------
 
@@ -208,6 +217,15 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: GNU C++ Compiler
 
+About gxx_impl_linux-riscv64
+----------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: GNU C++ Compiler
+
 About gxx_impl_osx-64
 ---------------------
 
@@ -244,6 +262,33 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GCC low-level runtime library
 
+About libgfortran
+-----------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU Fortran Runtime Library
+
+About libgfortran5
+------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU Fortran Runtime Library
+
+About _openmp_mutex
+-------------------
+
+Home: https://github.com/conda-forge/ctng-compilers-feedstock
+
+Package license: BSD-3-Clause
+
+Summary: OpenMP Implementation Mutex
+
 About libgcc-devel_linux-64
 ---------------------------
 
@@ -263,6 +308,15 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 Summary: The GNU C development libraries and object files
 
 About libgcc-devel_linux-ppc64le
+--------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU C development libraries and object files
+
+About libgcc-devel_linux-riscv64
 --------------------------------
 
 Home: https://gcc.gnu.org/
@@ -307,26 +361,8 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 
 Summary: The GCC low-level runtime library
 
-About libgfortran
------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU Fortran Runtime Library
-
 About libgfortran-ng
 --------------------
-
-Home: https://gcc.gnu.org/
-
-Package license: GPL-3.0-only WITH GCC-exception-3.1
-
-Summary: The GNU Fortran Runtime Library
-
-About libgfortran5
-------------------
 
 Home: https://gcc.gnu.org/
 
@@ -380,6 +416,15 @@ Package license: GPL-3.0-only WITH GCC-exception-3.1
 Summary: The GNU C++ headers and development libraries
 
 About libstdcxx-devel_linux-ppc64le
+-----------------------------------
+
+Home: https://gcc.gnu.org/
+
+Package license: GPL-3.0-only WITH GCC-exception-3.1
+
+Summary: The GNU C++ headers and development libraries
+
+About libstdcxx-devel_linux-riscv64
 -----------------------------------
 
 Home: https://gcc.gnu.org/
@@ -487,17 +532,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0</td>
+              <td>linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -505,20 +543,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -613,17 +637,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0</td>
+              <td>linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -631,20 +648,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -739,17 +742,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0</td>
+              <td>linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -757,20 +753,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -802,38 +784,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -844,20 +798,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
@@ -865,17 +805,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0</td>
+              <td>osx_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -886,38 +819,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -928,38 +833,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -970,20 +847,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
@@ -991,17 +854,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0</td>
+              <td>osx_arm64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -1012,38 +868,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver14gcc_version14.3.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8107&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ctng-compilers-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -1094,6 +922,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gcc__impl__linux--64-green.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc_impl_linux-64.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc_impl_linux-64.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc_impl_linux-64.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gcc__impl__linux--aarch64-green.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-aarch64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc_impl_linux-aarch64.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-aarch64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc_impl_linux-aarch64.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-aarch64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc_impl_linux-aarch64.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-aarch64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gcc__impl__linux--ppc64le-green.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-ppc64le) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc_impl_linux-ppc64le.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-ppc64le) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc_impl_linux-ppc64le.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-ppc64le) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc_impl_linux-ppc64le.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-ppc64le) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gcc__impl__linux--riscv64-green.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-riscv64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc_impl_linux-riscv64.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-riscv64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc_impl_linux-riscv64.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-riscv64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc_impl_linux-riscv64.svg)](https://anaconda.org/conda-forge/gcc_impl_linux-riscv64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gcc__impl__osx--64-green.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc_impl_osx-64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc_impl_osx-64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc_impl_osx-64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gcc__impl__osx--arm64-green.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-arm64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-arm64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-arm64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gcc_impl_osx-arm64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gcc__impl__win--64-green.svg)](https://anaconda.org/conda-forge/gcc_impl_win-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gcc_impl_win-64.svg)](https://anaconda.org/conda-forge/gcc_impl_win-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gcc_impl_win-64.svg)](https://anaconda.org/conda-forge/gcc_impl_win-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gcc_impl_win-64.svg)](https://anaconda.org/conda-forge/gcc_impl_win-64) |
@@ -1101,6 +930,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran__impl__linux--64-green.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran_impl_linux-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran_impl_linux-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran_impl_linux-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran__impl__linux--aarch64-green.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-aarch64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran_impl_linux-aarch64.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-aarch64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran_impl_linux-aarch64.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-aarch64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran_impl_linux-aarch64.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-aarch64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran__impl__linux--ppc64le-green.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-ppc64le) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran_impl_linux-ppc64le.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-ppc64le) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran_impl_linux-ppc64le.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-ppc64le) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran_impl_linux-ppc64le.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-ppc64le) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran__impl__linux--riscv64-green.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-riscv64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran_impl_linux-riscv64.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-riscv64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran_impl_linux-riscv64.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-riscv64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran_impl_linux-riscv64.svg)](https://anaconda.org/conda-forge/gfortran_impl_linux-riscv64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran__impl__osx--64-green.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran_impl_osx-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran_impl_osx-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran_impl_osx-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran__impl__osx--arm64-green.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-arm64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-arm64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-arm64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gfortran_impl_osx-arm64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gfortran__impl__win--64-green.svg)](https://anaconda.org/conda-forge/gfortran_impl_win-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gfortran_impl_win-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_win-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gfortran_impl_win-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_win-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gfortran_impl_win-64.svg)](https://anaconda.org/conda-forge/gfortran_impl_win-64) |
@@ -1108,6 +938,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gxx__impl__linux--64-green.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_linux-64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_linux-64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_linux-64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gxx__impl__linux--aarch64-green.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-aarch64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_linux-aarch64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-aarch64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_linux-aarch64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-aarch64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_linux-aarch64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-aarch64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gxx__impl__linux--ppc64le-green.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-ppc64le) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_linux-ppc64le.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-ppc64le) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_linux-ppc64le.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-ppc64le) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_linux-ppc64le.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-ppc64le) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gxx__impl__linux--riscv64-green.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-riscv64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_linux-riscv64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-riscv64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_linux-riscv64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-riscv64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_linux-riscv64.svg)](https://anaconda.org/conda-forge/gxx_impl_linux-riscv64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gxx__impl__osx--64-green.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_osx-64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_osx-64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_osx-64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gxx__impl__osx--arm64-green.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-arm64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-arm64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-arm64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_osx-arm64.svg)](https://anaconda.org/conda-forge/gxx_impl_osx-arm64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gxx__impl__win--64-green.svg)](https://anaconda.org/conda-forge/gxx_impl_win-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gxx_impl_win-64.svg)](https://anaconda.org/conda-forge/gxx_impl_win-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gxx_impl_win-64.svg)](https://anaconda.org/conda-forge/gxx_impl_win-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gxx_impl_win-64.svg)](https://anaconda.org/conda-forge/gxx_impl_win-64) |
@@ -1115,6 +946,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--devel__linux--64-green.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-devel_linux-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-devel_linux-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-devel_linux-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--devel__linux--aarch64-green.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-aarch64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-devel_linux-aarch64.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-aarch64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-devel_linux-aarch64.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-aarch64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-devel_linux-aarch64.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-aarch64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--devel__linux--ppc64le-green.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-ppc64le) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-devel_linux-ppc64le.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-ppc64le) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-devel_linux-ppc64le.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-ppc64le) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-devel_linux-ppc64le.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-ppc64le) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--devel__linux--riscv64-green.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-riscv64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-devel_linux-riscv64.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-riscv64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-devel_linux-riscv64.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-riscv64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-devel_linux-riscv64.svg)](https://anaconda.org/conda-forge/libgcc-devel_linux-riscv64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--devel__osx--64-green.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-devel_osx-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-devel_osx-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-devel_osx-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--devel__osx--arm64-green.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-arm64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-devel_osx-arm64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-arm64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-devel_osx-arm64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-arm64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-devel_osx-arm64.svg)](https://anaconda.org/conda-forge/libgcc-devel_osx-arm64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgcc--devel__win--64-green.svg)](https://anaconda.org/conda-forge/libgcc-devel_win-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgcc-devel_win-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_win-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgcc-devel_win-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_win-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgcc-devel_win-64.svg)](https://anaconda.org/conda-forge/libgcc-devel_win-64) |
@@ -1128,6 +960,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libstdcxx--devel__linux--64-green.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libstdcxx-devel_linux-64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libstdcxx-devel_linux-64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libstdcxx-devel_linux-64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libstdcxx--devel__linux--aarch64-green.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-aarch64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libstdcxx-devel_linux-aarch64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-aarch64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libstdcxx-devel_linux-aarch64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-aarch64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libstdcxx-devel_linux-aarch64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-aarch64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libstdcxx--devel__linux--ppc64le-green.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-ppc64le) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libstdcxx-devel_linux-ppc64le.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-ppc64le) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libstdcxx-devel_linux-ppc64le.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-ppc64le) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libstdcxx-devel_linux-ppc64le.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-ppc64le) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libstdcxx--devel__linux--riscv64-green.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-riscv64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libstdcxx-devel_linux-riscv64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-riscv64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libstdcxx-devel_linux-riscv64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-riscv64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libstdcxx-devel_linux-riscv64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_linux-riscv64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libstdcxx--devel__win--64-green.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_win-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libstdcxx-devel_win-64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_win-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libstdcxx-devel_win-64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_win-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libstdcxx-devel_win-64.svg)](https://anaconda.org/conda-forge/libstdcxx-devel_win-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libstdcxx--ng-green.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libstdcxx-ng.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libstdcxx-ng.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libstdcxx-ng.svg)](https://anaconda.org/conda-forge/libstdcxx-ng) |
 
@@ -1141,16 +974,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `_openmp_mutex, conda-gcc-specs, gcc, gcc-no-conda-specs, gcc_impl_linux-64, gcc_impl_linux-aarch64, gcc_impl_linux-ppc64le, gcc_impl_osx-64, gcc_impl_osx-arm64, gcc_impl_win-64, gfortran, gfortran_impl_linux-64, gfortran_impl_linux-aarch64, gfortran_impl_linux-ppc64le, gfortran_impl_osx-64, gfortran_impl_osx-arm64, gfortran_impl_win-64, gxx, gxx_impl_linux-64, gxx_impl_linux-aarch64, gxx_impl_linux-ppc64le, gxx_impl_osx-64, gxx_impl_osx-arm64, gxx_impl_win-64, libgcc, libgcc-devel_linux-64, libgcc-devel_linux-aarch64, libgcc-devel_linux-ppc64le, libgcc-devel_osx-64, libgcc-devel_osx-arm64, libgcc-devel_win-64, libgcc-ng, libgfortran, libgfortran-ng, libgfortran5, libgomp, libsanitizer, libstdcxx, libstdcxx-devel_linux-64, libstdcxx-devel_linux-aarch64, libstdcxx-devel_linux-ppc64le, libstdcxx-devel_win-64, libstdcxx-ng` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `_openmp_mutex, conda-gcc-specs, gcc, gcc-no-conda-specs, gcc_impl_linux-64, gcc_impl_linux-aarch64, gcc_impl_linux-ppc64le, gcc_impl_linux-riscv64, gcc_impl_osx-64, gcc_impl_osx-arm64, gcc_impl_win-64, gfortran, gfortran_impl_linux-64, gfortran_impl_linux-aarch64, gfortran_impl_linux-ppc64le, gfortran_impl_linux-riscv64, gfortran_impl_osx-64, gfortran_impl_osx-arm64, gfortran_impl_win-64, gxx, gxx_impl_linux-64, gxx_impl_linux-aarch64, gxx_impl_linux-ppc64le, gxx_impl_linux-riscv64, gxx_impl_osx-64, gxx_impl_osx-arm64, gxx_impl_win-64, libgcc, libgcc-devel_linux-64, libgcc-devel_linux-aarch64, libgcc-devel_linux-ppc64le, libgcc-devel_linux-riscv64, libgcc-devel_osx-64, libgcc-devel_osx-arm64, libgcc-devel_win-64, libgcc-ng, libgfortran, libgfortran-ng, libgfortran5, libgomp, libsanitizer, libstdcxx, libstdcxx-devel_linux-64, libstdcxx-devel_linux-aarch64, libstdcxx-devel_linux-ppc64le, libstdcxx-devel_linux-riscv64, libstdcxx-devel_win-64, libstdcxx-ng` can be installed with `conda`:
 
 ```
-conda install _openmp_mutex conda-gcc-specs gcc gcc-no-conda-specs gcc_impl_linux-64 gcc_impl_linux-aarch64 gcc_impl_linux-ppc64le gcc_impl_osx-64 gcc_impl_osx-arm64 gcc_impl_win-64 gfortran gfortran_impl_linux-64 gfortran_impl_linux-aarch64 gfortran_impl_linux-ppc64le gfortran_impl_osx-64 gfortran_impl_osx-arm64 gfortran_impl_win-64 gxx gxx_impl_linux-64 gxx_impl_linux-aarch64 gxx_impl_linux-ppc64le gxx_impl_osx-64 gxx_impl_osx-arm64 gxx_impl_win-64 libgcc libgcc-devel_linux-64 libgcc-devel_linux-aarch64 libgcc-devel_linux-ppc64le libgcc-devel_osx-64 libgcc-devel_osx-arm64 libgcc-devel_win-64 libgcc-ng libgfortran libgfortran-ng libgfortran5 libgomp libsanitizer libstdcxx libstdcxx-devel_linux-64 libstdcxx-devel_linux-aarch64 libstdcxx-devel_linux-ppc64le libstdcxx-devel_win-64 libstdcxx-ng
+conda install _openmp_mutex conda-gcc-specs gcc gcc-no-conda-specs gcc_impl_linux-64 gcc_impl_linux-aarch64 gcc_impl_linux-ppc64le gcc_impl_linux-riscv64 gcc_impl_osx-64 gcc_impl_osx-arm64 gcc_impl_win-64 gfortran gfortran_impl_linux-64 gfortran_impl_linux-aarch64 gfortran_impl_linux-ppc64le gfortran_impl_linux-riscv64 gfortran_impl_osx-64 gfortran_impl_osx-arm64 gfortran_impl_win-64 gxx gxx_impl_linux-64 gxx_impl_linux-aarch64 gxx_impl_linux-ppc64le gxx_impl_linux-riscv64 gxx_impl_osx-64 gxx_impl_osx-arm64 gxx_impl_win-64 libgcc libgcc-devel_linux-64 libgcc-devel_linux-aarch64 libgcc-devel_linux-ppc64le libgcc-devel_linux-riscv64 libgcc-devel_osx-64 libgcc-devel_osx-arm64 libgcc-devel_win-64 libgcc-ng libgfortran libgfortran-ng libgfortran5 libgomp libsanitizer libstdcxx libstdcxx-devel_linux-64 libstdcxx-devel_linux-aarch64 libstdcxx-devel_linux-ppc64le libstdcxx-devel_linux-riscv64 libstdcxx-devel_win-64 libstdcxx-ng
 ```
 
 or with `mamba`:
 
 ```
-mamba install _openmp_mutex conda-gcc-specs gcc gcc-no-conda-specs gcc_impl_linux-64 gcc_impl_linux-aarch64 gcc_impl_linux-ppc64le gcc_impl_osx-64 gcc_impl_osx-arm64 gcc_impl_win-64 gfortran gfortran_impl_linux-64 gfortran_impl_linux-aarch64 gfortran_impl_linux-ppc64le gfortran_impl_osx-64 gfortran_impl_osx-arm64 gfortran_impl_win-64 gxx gxx_impl_linux-64 gxx_impl_linux-aarch64 gxx_impl_linux-ppc64le gxx_impl_osx-64 gxx_impl_osx-arm64 gxx_impl_win-64 libgcc libgcc-devel_linux-64 libgcc-devel_linux-aarch64 libgcc-devel_linux-ppc64le libgcc-devel_osx-64 libgcc-devel_osx-arm64 libgcc-devel_win-64 libgcc-ng libgfortran libgfortran-ng libgfortran5 libgomp libsanitizer libstdcxx libstdcxx-devel_linux-64 libstdcxx-devel_linux-aarch64 libstdcxx-devel_linux-ppc64le libstdcxx-devel_win-64 libstdcxx-ng
+mamba install _openmp_mutex conda-gcc-specs gcc gcc-no-conda-specs gcc_impl_linux-64 gcc_impl_linux-aarch64 gcc_impl_linux-ppc64le gcc_impl_linux-riscv64 gcc_impl_osx-64 gcc_impl_osx-arm64 gcc_impl_win-64 gfortran gfortran_impl_linux-64 gfortran_impl_linux-aarch64 gfortran_impl_linux-ppc64le gfortran_impl_linux-riscv64 gfortran_impl_osx-64 gfortran_impl_osx-arm64 gfortran_impl_win-64 gxx gxx_impl_linux-64 gxx_impl_linux-aarch64 gxx_impl_linux-ppc64le gxx_impl_linux-riscv64 gxx_impl_osx-64 gxx_impl_osx-arm64 gxx_impl_win-64 libgcc libgcc-devel_linux-64 libgcc-devel_linux-aarch64 libgcc-devel_linux-ppc64le libgcc-devel_linux-riscv64 libgcc-devel_osx-64 libgcc-devel_osx-arm64 libgcc-devel_win-64 libgcc-ng libgfortran libgfortran-ng libgfortran5 libgomp libsanitizer libstdcxx libstdcxx-devel_linux-64 libstdcxx-devel_linux-aarch64 libstdcxx-devel_linux-ppc64le libstdcxx-devel_linux-riscv64 libstdcxx-devel_win-64 libstdcxx-ng
 ```
 
 It is possible to list all of the versions of `_openmp_mutex` available on your platform with `conda`:
