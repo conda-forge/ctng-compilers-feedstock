@@ -2,10 +2,8 @@ azure:
   free_disk_space: true
   store_build_artifacts: true
 build_platform:
-  linux_aarch64: linux_64
   linux_ppc64le: linux_64
   osx_64: osx_64
-  osx_arm64: osx_64
   win_64: linux_64
 conda_build:
   pkg_format: '2'
@@ -16,4 +14,7 @@ github:
 os_version:
   # necessary due to glibc constraints for cross-compiling riscv
   linux_64: alma10
+provider:
+  linux_aarch64: default
+  osx_arm64: default
 test: native_and_emulated
