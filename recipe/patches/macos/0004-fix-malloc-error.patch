@@ -1,0 +1,23 @@
+From 90d0e6989e3b71906156b54ec257106e1b579c48 Mon Sep 17 00:00:00 2001
+From: Isuru Fernando <isuruf@gmail.com>
+Date: Wed, 19 Nov 2025 14:59:11 -0800
+Subject: [PATCH 4/4] fix malloc error
+
+isuruf: I have no clue why the malloc error happened in the first place
+---
+ gcc/common/config/aarch64/aarch64-common.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gcc/common/config/aarch64/aarch64-common.cc b/gcc/common/config/aarch64/aarch64-common.cc
+index ae467f140e3..d15fcd1f852 100644
+--- a/gcc/common/config/aarch64/aarch64-common.cc
++++ b/gcc/common/config/aarch64/aarch64-common.cc
+@@ -749,7 +749,7 @@ aarch64_get_arch_string_for_assembler (aarch64_arch arch,
+     if (entry->arch == arch)
+ 	break;
+ 
+-  std::string outstr = entry->name
++  std::string outstr = std::string(entry->name)
+ 	+ aarch64_get_extension_string_for_isa_flags (flags, entry->flags);
+ 
+   return outstr;

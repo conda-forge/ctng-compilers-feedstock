@@ -14,84 +14,168 @@ jobs:
         VMIMAGE: macOS-15
         store_build_artifacts: true
         SHORT_CONFIG: osx_64_cross_target_platformlinux-64cros_hb2331ffd
+      ? osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+      : CONFIG: osx_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-64cros_h7f310e31
       ? osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
       : CONFIG: osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         store_build_artifacts: true
         SHORT_CONFIG: osx_64_cross_target_platformlinux-aarch6_h3c1d2d65
+      ? osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+      : CONFIG: osx_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-aarch6_hfc602f24
       ? osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
       : CONFIG: osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         store_build_artifacts: true
         SHORT_CONFIG: osx_64_cross_target_platformlinux-ppc64l_hf4738459
+      ? osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+      : CONFIG: osx_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-ppc64l_h4ce8feea
       ? osx_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
       : CONFIG: osx_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         store_build_artifacts: true
         SHORT_CONFIG: osx_64_cross_target_platformlinux-riscv6_hfb3bcdd8
+      ? osx_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver16gcc_version16.1.0
+      : CONFIG: osx_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_64_cross_target_platformlinux-riscv6_hc9bc952d
       osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0:
         CONFIG: osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         store_build_artifacts: true
         SHORT_CONFIG: osx_64_cross_target_platformosx-64cross__h68155d17
+      osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0:
+        CONFIG: osx_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_64_cross_target_platformosx-64cross__h4c0e9372
       osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0:
         CONFIG: osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         store_build_artifacts: true
         SHORT_CONFIG: osx_64_cross_target_platformosx-arm64cro_h803991d4
+      osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0:
+        CONFIG: osx_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_64_cross_target_platformosx-arm64cro_h3b24ea51
       ? osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
       : CONFIG: osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         store_build_artifacts: true
         SHORT_CONFIG: osx_64_cross_target_platformwin-64cross__h716bebef
+      ? osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver16gcc_version16.1.0
+      : CONFIG: osx_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_64_cross_target_platformwin-64cross__h9c94b5bc
       ? osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
       : CONFIG: osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
         store_build_artifacts: true
         SHORT_CONFIG: osx_arm64_cross_target_platformlinux-64c_h5018df16
+      ? osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-64c_hd250847d
       ? osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
       : CONFIG: osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
         store_build_artifacts: true
         SHORT_CONFIG: osx_arm64_cross_target_platformlinux-aar_hbc45c0e6
+      ? osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-aar_hba0c32ee
       ? osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
       : CONFIG: osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
         store_build_artifacts: true
         SHORT_CONFIG: osx_arm64_cross_target_platformlinux-ppc_h09418c13
+      ? osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-ppc_h6a40a09c
       ? osx_arm64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
       : CONFIG: osx_arm64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
         store_build_artifacts: true
         SHORT_CONFIG: osx_arm64_cross_target_platformlinux-ris_h0960fff6
+      ? osx_arm64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver16gcc_version16.1.0
+      : CONFIG: osx_arm64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_arm64_cross_target_platformlinux-ris_h03cd3416
       osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0:
         CONFIG: osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
         store_build_artifacts: true
         SHORT_CONFIG: osx_arm64_cross_target_platformosx-64cro_h4799ba8c
+      osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0:
+        CONFIG: osx_arm64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_arm64_cross_target_platformosx-64cro_he908efca
       osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0:
         CONFIG: osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
         store_build_artifacts: true
         SHORT_CONFIG: osx_arm64_cross_target_platformosx-arm64_h1e102690
+      osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0:
+        CONFIG: osx_arm64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_arm64_cross_target_platformosx-arm64_hcbbe4e80
       ? osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
       : CONFIG: osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
         store_build_artifacts: true
         SHORT_CONFIG: osx_arm64_cross_target_platformwin-64cro_h132010c2
+      ? osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver16gcc_version16.1.0
+      : CONFIG: osx_arm64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver16gcc_version16.1.0
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        store_build_artifacts: true
+        SHORT_CONFIG: osx_arm64_cross_target_platformwin-64cro_hb8cb17f8
   timeoutInMinutes: 360
   variables: {}
 
