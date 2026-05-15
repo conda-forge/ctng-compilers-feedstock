@@ -23,9 +23,9 @@ cross_target_stdlib_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-aarch64:alma10
 gcc_maj_ver:
-- '14'
+- '16'
 gcc_version:
-- 14.3.0
+- 16.1.0
 libgfortran_soname:
 - '5'
 libgomp_ver:

@@ -22,12 +22,6 @@ jobs:
       max-parallel: 50
       matrix:
         include:
-          - CONFIG: linux_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
           - CONFIG: linux_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -40,7 +34,7 @@ jobs:
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+          - CONFIG: linux_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
@@ -58,7 +52,7 @@ jobs:
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+          - CONFIG: linux_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
@@ -76,7 +70,19 @@ jobs:
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+          - CONFIG: linux_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            runs_on: ['ubuntu-latest']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
           - CONFIG: linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            runs_on: ['ubuntu-latest']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+          - CONFIG: linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
@@ -88,13 +94,19 @@ jobs:
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+          - CONFIG: linux_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            runs_on: ['ubuntu-latest']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
           - CONFIG: linux_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
+          - CONFIG: linux_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
@@ -112,7 +124,7 @@ jobs:
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+          - CONFIG: linux_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
@@ -122,92 +134,110 @@ jobs:
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+          - CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+          - CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+          - CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+          - CONFIG: linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver16gcc_version16.1.0
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+          - CONFIG: linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+          - CONFIG: linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+          - CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            runs_on: ['ubuntu-24.04-arm']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
           - CONFIG: linux_ppc64le_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -220,7 +250,7 @@ jobs:
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
@@ -238,7 +268,7 @@ jobs:
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
@@ -256,7 +286,19 @@ jobs:
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver16gcc_version16.1.0
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            runs_on: ['ubuntu-latest']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
           - CONFIG: linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            runs_on: ['ubuntu-latest']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
@@ -268,13 +310,19 @@ jobs:
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+          - CONFIG: linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            runs_on: ['ubuntu-latest']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
           - CONFIG: linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
+          - CONFIG: linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
@@ -292,7 +340,7 @@ jobs:
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
+          - CONFIG: linux_ppc64le_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
@@ -305,6 +353,12 @@ jobs:
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
           - CONFIG: win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            runs_on: ['ubuntu-latest']
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+          - CONFIG: win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver16gcc_version16.1.0
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
