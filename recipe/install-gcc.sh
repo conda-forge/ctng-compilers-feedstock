@@ -229,7 +229,11 @@ fi
 mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
 for name in atomic gomp itm quadmath {a,hwa,l,t,ub}san; do
   if [[ -f "${PREFIX}/lib/lib${name}.a" ]]; then
-   mv ${PREFIX}/lib/lib${name}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+   cp -a ${PREFIX}/lib/lib${name}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+   # keep the mingw import libraries (*.dll.a) in place: they belong to the
+   # libgcc/libgomp runtime outputs, which select their files from the same
+   # staging prefix as this output
+   find ${PREFIX}/lib -maxdepth 1 -name "lib${name}.*a" ! -name "*.dll.a" -delete
   fi
   if [[ -f "${PREFIX}/${TARGET}/lib/lib${name}.a" ]]; then
    mv ${PREFIX}/${TARGET}/lib/lib${name}.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/

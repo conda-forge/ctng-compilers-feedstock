@@ -2,9 +2,12 @@
 
 source ${RECIPE_DIR}/setup_compiler.sh
 
-cd build
-
+# use pushd/popd (not a relative cd): this script is sourced by
+# install-all.sh, which does not run from ${SRC_DIR}
+pushd ${SRC_DIR}/build
 make -C ${TARGET}/libgomp prefix=${PREFIX} install-toolexeclibLTLIBRARIES
+popd
+
 rm ${PREFIX}/lib/libgomp.a ${PREFIX}/lib/libgomp.la
 
 if [[ "${HOST}" == *linux* ]]; then

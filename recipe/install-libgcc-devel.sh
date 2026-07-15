@@ -13,13 +13,14 @@ pushd ${SRC_DIR}/build
 
 make -C ${TARGET}/libgcc prefix=${PREFIX} install
 
-# ${PREFIX}/lib/libgcc_s.so* goes into libgcc output, but
-# avoid that the equivalents in ${PREFIX}/lib/gcc/TARGET/gcc_version end up
-# in gcc_impl_{{ cross_target_platform }}, c.f. install-gcc.sh
+# Copy (not move): all outputs are selected from one shared staging prefix,
+# so ${PREFIX}/lib/libgcc_s* has to stay in place for the libgcc output while
+# the copies in ${PREFIX}/lib/gcc/TARGET/gcc_version go into this output
+# (for cross-compilers the leftovers in ${PREFIX}/lib are simply not packaged).
 if [[ "${TARGET}" == *linux* ]]; then
-  mv ${PREFIX}/lib/libgcc_s.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
+  cp -a ${PREFIX}/lib/libgcc_s.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 elif [[ "${TARGET}" == *darwin* ]]; then
-  mv ${PREFIX}/lib/libgcc_s*.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
+  cp -a ${PREFIX}/lib/libgcc_s*.dylib ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 else
   # import library, not static library
   mv ${PREFIX}/lib/libgcc_s.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/

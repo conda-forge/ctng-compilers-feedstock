@@ -28,8 +28,6 @@ gcc_version:
 - 15.2.0
 libgfortran_soname:
 - '5'
-libgomp_ver:
-- 1.0.0
 macos_machine:
 - x86_64-apple-darwin13.4.0
 target_platform:

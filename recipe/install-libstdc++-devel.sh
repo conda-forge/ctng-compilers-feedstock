@@ -16,11 +16,14 @@ make -C $TARGET/libstdc++-v3/libsupc++ prefix=${PREFIX} install
 mkdir -p ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}
 
 if [[ "${HOST}" == "${TARGET}" ]]; then
-    mv $PREFIX/lib/lib*.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    # Copy (not move): all outputs are selected from one shared staging
+    # prefix, so the runtime library below ${PREFIX}/lib (and the DLLs in
+    # ${PREFIX}/bin, which used to be deleted here) has to stay in place for
+    # the libstdcxx output while the copies in
+    # ${PREFIX}/lib/gcc/TARGET/gcc_version go into this output.
+    cp -a $PREFIX/lib/lib*.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     if [[ "${TARGET}" == *linux* ]]; then
-        mv ${PREFIX}/lib/libstdc++.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
-    else
-        rm ${PREFIX}/bin/libstdc++*.dll
+        cp -a ${PREFIX}/lib/libstdc++.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
 else
     mv $PREFIX/${TARGET}/lib/lib*.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/

@@ -62,8 +62,12 @@ if [[ "${TARGET}" == *mingw* ]]; then
     sed -i.bak "s#/mingw/#/usr/#g" gcc/config/mingw/mingw32.h
   fi
 else
-  # prevent mingw patches from being archived in linux conda packages
-  rm -rf ${RECIPE_DIR}/patches/mingw
+  # prevent mingw patches from being archived in linux conda packages;
+  # only on CI: unlike conda-build, rattler-build's RECIPE_DIR is the real
+  # recipe directory, so this would delete files from a local checkout
+  if [[ -n "${CI:-}" ]]; then
+    rm -rf ${RECIPE_DIR}/patches/mingw
+  fi
 fi
 
 if [[ "${BUILD}" == *darwin* ]]; then
@@ -72,7 +76,10 @@ fi
 
 if [[ "${TARGET}" != *darwin* ]]; then
   # prevent macos patches from being archived in linux conda packages
-  rm -rf ${RECIPE_DIR}/patches/macos
+  # (CI-only, see the mingw case above)
+  if [[ -n "${CI:-}" ]]; then
+    rm -rf ${RECIPE_DIR}/patches/macos
+  fi
 fi
 
 # workaround a bug in gcc build files when using external binutils
@@ -179,3 +186,5 @@ fi
   "${GCC_CONFIGURE_OPTIONS[@]}" || (cat config.log; false)
 
 make -j${CPU_COUNT} || (cat ${TARGET}/libgomp/config.log; false)
+
+source "${RECIPE_DIR}/install-all.sh"

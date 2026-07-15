@@ -22,347 +22,705 @@ jobs:
       max-parallel: 50
       matrix:
         include:
-          - CONFIG: linux_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
+          - CONFIG: linux_64_cross_target_platformlinux-64cross_target_stdlibsysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_64_cross_target_platformlinux-64cr_hdc6860e7
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformlinux-64cross_target_stdlibsysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_64_cross_target_platformlinux-64cr_h06cd2b6b
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformlinux-64cross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_64_cross_target_platformlinux-64cr_h05ea9307
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_64_cross_target_platformlinux-aarc_h20004a30
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_64_cross_target_platformlinux-aarc_ha572b761
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_64_cross_target_platformlinux-aarc_h96890cd0
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_64_cross_target_platformlinux-ppc6_h494292e3
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_64_cross_target_platformlinux-ppc6_h5440f9b0
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_64_cross_target_platformlinux-ppc6_h94a07a05
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_64_cross_target_platformlinux-risc_hb8921539
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_64_cross_target_platformosx-64cros_hab63abda
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_64_cross_target_platformosx-arm64c_h1b1309f6
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_64_cross_target_platformwin-64cros_h652a6f14
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_64_cross_target_platformwin-64cros_h6a1a9c22
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_64_cross_target_platformwin-64cros_h0937646f
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformlinux_hced36f94
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformlinux_hfd134310
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformlinux-64cross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformlinux_hdd7d1bff
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformlinux_h4ea0b703
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformlinux_h31162545
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformlinux-aarch64cross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformlinux_h9161f751
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformlinux_h7ba2147e
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformlinux_hfd67532e
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformlinux_h9eaa47c1
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformlinux-riscv64cross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformlinux_h569e4d3c
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformosx-6_hcae321d5
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformosx-a_h56f3e0de
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformwin-6_hf78a984b
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformwin-6_ha4482a4b
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_aarch64_cross_target_platformwin-6_h3317306a
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-64cross_target_stdlibsysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformlinux_hc70acfc9
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-64cross_target_stdlibsysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformlinux_h284e6082
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-64cross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformlinux_h6fc13498
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64cross_target_stdlibsysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformlinux_hfd3ddd88
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64cross_target_stdlibsysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformlinux_hd735cbdc
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64cross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-aarch64cross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformlinux_h7d2f7830
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformlinux_h1972bd71
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformlinux_h1f638627
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootcross_target_stdlib_version2.17gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-ppc64lecross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformlinux_h48b9b711
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootcross_target_stdlib_version2.39gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformlinux-riscv64cross_target_stdlibsysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformlinux_h0f5282f3
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformosx-64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformosx-6_h7e4cd8c1
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonecross_target_stdlib_version0gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformosx-arm64cross_target_stdlibNonegcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformosx-a_hbfe0ee4f
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootgcc_maj_ver13gcc_version13.4.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformwin-6_hba0f82a2
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootgcc_maj_ver14gcc_version14.3.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformwin-6_he922f19d
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
-          - CONFIG: linux_ppc64le_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
+            STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
             os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
             runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootgcc_maj_ver15gcc_version15.2.0
+            CONFIG_SHORT: linux_ppc64le_cross_target_platformwin-6_hf86b5f7d
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: quick
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
           - CONFIG: win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver13gcc_version13.4.0
-            STORE_BUILD_ARTIFACTS: False
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
+            CONFIG_SHORT: win_64_cross_target_platformwin-64cross__hab066655
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: C:\\bld\\
+            docker_run_args: 
+            free_disk_space: quick
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: C:\Miniforge
           - CONFIG: win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver14gcc_version14.3.0
-            STORE_BUILD_ARTIFACTS: False
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
+            CONFIG_SHORT: win_64_cross_target_platformwin-64cross__hf2c64d31
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: C:\\bld\\
+            docker_run_args: 
+            free_disk_space: quick
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: C:\Miniforge
           - CONFIG: win_64_cross_target_platformwin-64cross_target_stdlibm2w64-sysrootcross_target_stdlib_version12gcc_maj_ver15gcc_version15.2.0
-            STORE_BUILD_ARTIFACTS: False
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
+            CONFIG_SHORT: win_64_cross_target_platformwin-64cross__h0c47fcd3
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: C:\\bld\\
+            docker_run_args: 
+            free_disk_space: quick
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: C:\Miniforge
     steps:
 
     - name: Checkout code
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
+    - name: Manage disk space
+      env:
+        FREE_DISK_SPACE: ${{ matrix.free_disk_space }}
+        OS: ${{ matrix.os }}
+      shell: bash
+      run: |
+        .scripts/free_disk_space.sh "${FREE_DISK_SPACE}"
+    - name: Configure binfmt_misc
+      if: matrix.os == 'ubuntu'
+      shell: bash
+      run: |
+        if [[ "$(uname -m)" == "x86_64" ]]; then
+          docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
+        fi
+
     - name: Build on Linux
       id: build-linux
       if: matrix.os == 'ubuntu'
       env:
-        CONFIG: ${{ matrix.CONFIG }}
-        UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
-        DOCKER_IMAGE: ${{ matrix.DOCKER_IMAGE }}
         CI: github_actions
-        CONDA_FORGE_DOCKER_RUN_ARGS: "${{ matrix.CONDA_FORGE_DOCKER_RUN_ARGS }}"
+        CONDA_BLD_PATH: ${{ matrix.build_workspace_dir }}
+        CONDA_FORGE_DOCKER_RUN_ARGS: ${{ matrix.docker_run_args }}
+        CONFIG: ${{ matrix.CONFIG }}
+        MINIFORGE_HOME: ${{ matrix.tools_install_dir }}
+        DOCKER_IMAGE: ${{ matrix.DOCKER_IMAGE }}
+        UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
+        RATTLER_BUILD_COLOR: always
+        RATTLER_BUILD_ENABLE_GITHUB_INTEGRATION: 'true'
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
         FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
         STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
       shell: bash
       run: |
-        if [[ "$(uname -m)" == "x86_64" ]]; then
-          echo "::group::Configure binfmt_misc"
-          docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
-        fi
+        export CONDA_BLD_PATH="${CONDA_BLD_PATH/#~/${HOME}}"
+        export FEEDSTOCK_NAME="$(basename $GITHUB_REPOSITORY)"
+        export GIT_BRANCH="$(basename $GITHUB_REF)"
+        export MINIFORGE_HOME="${MINIFORGE_HOME/#~/${HOME}}"
         export flow_run_id="github_$GITHUB_RUN_ID"
         export remote_url="https://github.com/$GITHUB_REPOSITORY"
         export sha="$GITHUB_SHA"
-        export FEEDSTOCK_NAME="$(basename $GITHUB_REPOSITORY)"
-        export GIT_BRANCH="$(basename $GITHUB_REF)"
         if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
           export IS_PR_BUILD="True"
         else
           export IS_PR_BUILD="False"
         fi
-        echo "::endgroup::"
         ./.scripts/run_docker_build.sh
 
     - name: Build on macOS
       id: build-macos
       if: matrix.os == 'macos'
       env:
-        CONFIG: ${{ matrix.CONFIG }}
-        UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
         CI: github_actions
+        CONDA_BLD_PATH: ${{ matrix.build_workspace_dir }}
+        CONFIG: ${{ matrix.CONFIG }}
+        MINIFORGE_HOME: ${{ matrix.tools_install_dir }}
+        UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
+        RATTLER_BUILD_COLOR: always
+        RATTLER_BUILD_ENABLE_GITHUB_INTEGRATION: 'true'
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
         FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
         STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
       shell: bash
       run: |
+        export CONDA_BLD_PATH="${CONDA_BLD_PATH/#~/${HOME}}"
+        export FEEDSTOCK_NAME="$(basename $GITHUB_REPOSITORY)"
+        export GIT_BRANCH="$(basename $GITHUB_REF)"
+        export MINIFORGE_HOME="${MINIFORGE_HOME/#~/${HOME}}"
         export flow_run_id="github_$GITHUB_RUN_ID"
         export remote_url="https://github.com/$GITHUB_REPOSITORY"
         export sha="$GITHUB_SHA"
-        export FEEDSTOCK_NAME="$(basename $GITHUB_REPOSITORY)"
-        export GIT_BRANCH="$(basename $GITHUB_REF)"
         if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
           export IS_PR_BUILD="True"
         else
@@ -380,14 +738,90 @@ jobs:
         set "sha=%GITHUB_SHA%"
         call ".scripts\run_win_build.bat"
       env:
-        # default value; make it explicit, as it needs to match with artefact
-        # generation below. Not configurable for now, can be revisited later
-        CONDA_BLD_PATH: C:\bld
-        MINIFORGE_HOME: ${{ contains(runner.arch, 'ARM') && 'C' || 'D' }}:\Miniforge
-        PYTHONUNBUFFERED: 1
-        CONFIG: ${{ matrix.CONFIG }}
         CI: github_actions
+        CONDA_BLD_PATH: ${{ matrix.build_workspace_dir }}
+        CONFIG: ${{ matrix.CONFIG }}
+        MINIFORGE_HOME: ${{ matrix.tools_install_dir }}
+        PYTHONUNBUFFERED: 1
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
+        RATTLER_BUILD_COLOR: always
+        RATTLER_BUILD_ENABLE_GITHUB_INTEGRATION: 'true'
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
         FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
         STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
+
+    - name: Determine build outcome
+      # this is to merge the status of the linux/osx/win builds into
+      # something we can easily reuse during artefact generation
+      id: determine-status
+      if: ${{ always() }}
+      shell: bash
+      env:
+        OS: ${{ matrix.os }}
+      run: |
+        if [[ "$OS" == "ubuntu" ]]; then
+          STATUS=${{ steps.build-linux.outcome }}
+        elif [[ "$OS" == "macos" ]]; then
+          STATUS=${{ steps.build-macos.outcome }}
+        elif [[ "$OS" == "windows" ]]; then
+          STATUS=${{ steps.build-windows.outcome }}
+        fi
+        if [ -z "$STATUS" ]; then
+          # steps that never ran will have empty status
+          STATUS="cancelled"
+        fi
+        echo "status=$STATUS" >> $GITHUB_OUTPUT
+
+    - name: Prepare conda build artifacts
+      continue-on-error: true
+      id: prepare-artifacts
+      shell: bash
+      # we do not want to trigger artefact creation if the build was cancelled
+      if: ${{ always() && steps.determine-status.outputs.status != 'cancelled' && matrix.STORE_BUILD_ARTIFACTS }}
+      env:
+        CI: github_actions
+        CONDA_BLD_PATH: ${{ matrix.build_workspace_dir }}
+        CONFIG: ${{ matrix.CONFIG }}
+        CONFIG_SHORT: ${{ matrix.CONFIG_SHORT }}
+        JOB_STATUS: ${{ steps.determine-status.outputs.status }}
+        OS: ${{ matrix.os }}
+      run: |
+        export ARTIFACT_STAGING_DIR="$GITHUB_WORKSPACE"
+        export CI_RUN_ID=$GITHUB_RUN_ID
+        export CONDA_BLD_PATH="${CONDA_BLD_PATH/#~/${HOME}}"
+        export FEEDSTOCK_NAME="$(basename $GITHUB_REPOSITORY)"
+        export MINIFORGE_HOME="${MINIFORGE_HOME/#~/${HOME}}"
+        # Archive everything in CONDA_BLD_PATH except environments
+        # Archive the CONDA_BLD_PATH environments only when the job fails
+        # Use different prefix for successful and failed build artifacts
+        # so random failures don't prevent rebuilds from creating artifacts.
+        if [ $JOB_STATUS == "failure" ]; then
+          export BLD_ARTIFACT_PREFIX="conda_artifacts"
+          export ENV_ARTIFACT_PREFIX="conda_envs"
+        else
+          export BLD_ARTIFACT_PREFIX="conda_pkgs"
+        fi
+        if [ $OS == "windows" ]; then
+          pwsh -Command ". '.scripts/create_conda_build_artifacts.bat'"
+        else
+          ./.scripts/create_conda_build_artifacts.sh
+        fi
+
+    - name: Store conda build artifacts
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      if: ${{ always() && steps.prepare-artifacts.outcome == 'success' }}
+      with:
+        name: ${{ steps.prepare-artifacts.outputs.BLD_ARTIFACT_NAME }}
+        path: ${{ steps.prepare-artifacts.outputs.BLD_ARTIFACT_PATH }}
+        retention-days: 14
+      continue-on-error: true
+
+    - name: Store conda build environment artifacts
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # only relevant if build failed, see above
+      if: ${{ always() && steps.determine-status.outputs.status == 'failure' && steps.prepare-artifacts.outcome == 'success' }}
+      with:
+        name: ${{ steps.prepare-artifacts.outputs.ENV_ARTIFACT_NAME }}
+        path: ${{ steps.prepare-artifacts.outputs.ENV_ARTIFACT_PATH }}
+        retention-days: 14
+      continue-on-error: true
