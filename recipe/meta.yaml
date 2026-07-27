@@ -18,6 +18,12 @@
 {% set cross_target_platform = "linux-64" %}
 {% endif %}
 
+{% if cross_target_platform == "linux-riscv64" %}
+{% set package_cross_compiled_runtime = true %}
+{% else %}
+{% set package_cross_compiled_runtime = false %}
+{% endif %}
+
 package:
   name: gcc_compilers
   version: {{ version }}
@@ -505,7 +511,9 @@ outputs:
     script: install-libstdc++.sh
     build:
       number: {{ build_num }}
-      skip: true                # [target_platform != cross_target_platform or cross_target_cxx_stdlib != "libstdcxx"]
+      {% if target_platform != cross_target_platform and not (package_cross_compiled_runtime and build_platform == target_platform) %}
+      skip: true
+      {% endif %}
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
@@ -532,7 +540,9 @@ outputs:
     script: install-libsanitizer.sh
     build:
       number: {{ build_num }}
-      skip: true                # [target_platform != cross_target_platform or win or osx]
+      {% if target_platform != cross_target_platform and not (package_cross_compiled_runtime and build_platform == target_platform) %}
+      skip: true
+      {% endif %}
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
@@ -565,7 +575,9 @@ outputs:
     script: install-libgomp.sh
     build:
       number: {{ build_num }}
-      skip: true                # [target_platform != cross_target_platform or osx]
+      {% if target_platform != cross_target_platform and not (package_cross_compiled_runtime and build_platform == target_platform) %}
+      skip: true
+      {% endif %}
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
@@ -597,7 +609,9 @@ outputs:
     script: install-libgcc-no-gomp.sh
     build:
       number: {{ build_num }}
-      skip: true                # [target_platform != cross_target_platform]
+      {% if target_platform != cross_target_platform and not (package_cross_compiled_runtime and build_platform == target_platform) %}
+      skip: true
+      {% endif %}
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
@@ -667,7 +681,9 @@ outputs:
     script: install-libgfortran.sh
     build:
       number: {{ build_num }}
-      skip: true                # [target_platform != cross_target_platform]
+      {% if target_platform != cross_target_platform and not (package_cross_compiled_runtime and build_platform == target_platform) %}
+      skip: true
+      {% endif %}
       detect_binary_files_with_prefix: false
       missing_dso_whitelist:
         - "*"
@@ -690,7 +706,9 @@ outputs:
   - name: libgfortran
     target: {{ cross_target_platform }}
     build:
-      skip: true   # [target_platform != cross_target_platform]
+      {% if target_platform != cross_target_platform and not (package_cross_compiled_runtime and build_platform == target_platform) %}
+      skip: true
+      {% endif %}
       number: {{ build_num }}
     requirements:
       run:
@@ -708,7 +726,7 @@ outputs:
 
   # compatibility outputs for previous naming of the runtime libraries
   # with "-ng" suffix; for windows the suffix had never been introduced
-  {% if cross_target_platform.startswith("linux-") %}
+  {% if cross_target_platform in ("linux-64", "linux-ppc64le", "linux-aarch64") %}
   - name: libgcc-ng
     target: {{ cross_target_platform }}
     build:
