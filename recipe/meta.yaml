@@ -36,7 +36,8 @@ source:
       - patches/0003-add-ldl-to-libstdc___la_LDFLAGS.patch
       - patches/0004-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       {% elif cross_target_platform.startswith("win-") %}
-      # for GCC 16: https://github.com/msys2/MINGW-packages/tree/2386f7b596fed897fa1f0dcdc56743251b47361c/mingw-w64-gcc
+      # for GCC 16: https://github.com/msys2/MINGW-packages/tree/e6355dfd38fd8cfad757e21c068f0e09d5137d5f/mingw-w64-gcc
+      #             (from https://github.com/msys2/MINGW-packages/pull/29280)
       # for GCC 15: https://github.com/msys2/MINGW-packages/tree/f59921184b35858d4ceb91679578de0d62475cbf/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
       - patches/mingw/{{ gcc_maj_ver }}/0003-Windows-Follow-Posix-dir-exists-semantics-more-close.patch
@@ -47,7 +48,7 @@ source:
       - patches/mingw/{{ gcc_maj_ver }}/0012-Handle-spaces-in-path-for-default-manifest.patch
       - patches/mingw/{{ gcc_maj_ver }}/0014-gcc-9-branch-clone_function_name_1-Retain-any-stdcall-suffix.patch
       - patches/mingw/{{ gcc_maj_ver }}/0020-libgomp-Don-t-hard-code-MS-printf-attributes.patch
-      - patches/mingw/{{ gcc_maj_ver }}/0022-unset-native-system-header-dir.patch                               # [gcc_maj_ver == 16]
+      - patches/mingw/{{ gcc_maj_ver }}/0022-avoid-hardcoding-mingw.patch                                       # [gcc_maj_ver == 16]
       - patches/mingw/{{ gcc_maj_ver }}/0140-gcc-diagnostic-color.patch
       - patches/mingw/{{ gcc_maj_ver }}/0200-add-m-no-align-vector-insn-option-for-i386.patch
       - patches/mingw/{{ gcc_maj_ver }}/2001-fix-building-rust-on-mingw-w64.patch
