@@ -53,13 +53,15 @@ for ENV_TYPE in BUILD HOST TARGET; do
 done
 
 if [[ "${TARGET}" == *mingw* ]]; then
-  # do not expect ${prefix}/mingw symlink - this should be superceded by
-  # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
-  sed -i.bak 's#${prefix}/mingw/#${prefix}/${target}/sysroot/usr/#g' configure
-  if [[ "$gcc_maj_ver" == "13" || "$gcc_maj_ver" == "14" ]]; then
-    sed -i.bak "s#/mingw/#/usr/#g" gcc/config/i386/mingw32.h
-  else
-    sed -i.bak "s#/mingw/#/usr/#g" gcc/config/mingw/mingw32.h
+  if [[ "${gcc_maj_ver:-0}" -lt 16 ]]; then
+    # do not expect ${prefix}/mingw symlink - this should be superceded by
+    # 0005-Windows-Don-t-ignore-native-system-header-dir.patch .. but isn't!
+    sed -i.bak 's#${prefix}/mingw/#${prefix}/${target}/sysroot/usr/#g' configure
+    if [[ "$gcc_maj_ver" == "13" || "$gcc_maj_ver" == "14" ]]; then
+      sed -i.bak "s#/mingw/#/usr/#g" gcc/config/i386/mingw32.h
+    else
+      sed -i.bak "s#/mingw/#/usr/#g" gcc/config/mingw/mingw32.h
+    fi
   fi
 else
   # prevent mingw patches from being archived in linux conda packages
