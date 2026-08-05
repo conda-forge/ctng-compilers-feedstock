@@ -36,7 +36,7 @@ source:
       - patches/0003-add-ldl-to-libstdc___la_LDFLAGS.patch
       - patches/0004-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       {% elif cross_target_platform.startswith("win-") %}
-      # for GCC 16: https://github.com/msys2/MINGW-packages/tree/a37e1b7290568986dbc601327f7401931de0a15b/mingw-w64-gcc
+      # for GCC 16: https://github.com/msys2/MINGW-packages/tree/ed8e233c510976ffa2dd35c09b77507743f5a5eb/mingw-w64-gcc
       #             (from https://github.com/msys2/MINGW-packages/pull/29280)
       # for GCC 15: https://github.com/msys2/MINGW-packages/tree/f59921184b35858d4ceb91679578de0d62475cbf/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
