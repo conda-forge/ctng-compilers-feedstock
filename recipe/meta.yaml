@@ -24,7 +24,7 @@ package:
 
 source:
   - url: 
-      #- https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
+      - https://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
       - https://mirrors.ocf.berkeley.edu/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
     sha256: 071d00a097579e5ef7ce97fc4a9e58e73fd3503c0a013c765c970370a5a53b9b   # [gcc_version == "16.2.0"]
     sha256: d6c1a7d2da0f2a3bc52c7d02fdd4a531ead78fd694dd31cae1ca532cf5e2b7e3   # [gcc_version == "15.3.0"]
