@@ -1,0 +1,26 @@
+From fcfb84cdbde9564d38c99acc20e158fc53d6fd9a Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Wed, 9 Sep 2026 16:49:13 +0200
+Subject: [PATCH] keep value of STANDARD_STARTFILE_PREFIX_2
+
+See https://github.com/conda-forge/ctng-compilers-feedstock/issues/229#issuecomment-5558377609
+and follow-up comments
+
+Suggested-By: Zhongteng Gui <dragon-archer@outlook.com>
+---
+ gcc/config/mingw/mingw32.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gcc/config/mingw/mingw32.h b/gcc/config/mingw/mingw32.h
+index 92bb71fcee5..eaec65469b4 100644
+--- a/gcc/config/mingw/mingw32.h
++++ b/gcc/config/mingw/mingw32.h
+@@ -231,7 +231,7 @@ along with GCC; see the file COPYING3.  If not see
+   crtend.o%s"
+ 
+ /* Override startfile prefix defaults.  */
+-#if !defined(STANDARD_STARTFILE_PREFIX_2) && !defined(CROSS_DIRECTORY_STRUCTURE)
++#if 0 /* Conda-forge always uses /usr/lib for now */
+ #define STANDARD_STARTFILE_PREFIX_2 "" /* MSYS2 doesn't use /usr/lib for MINGW */
+ #endif
+ 

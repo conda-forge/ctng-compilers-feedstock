@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 4 %}
+{% set build_num = 5 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -37,6 +37,7 @@ source:
       - patches/0004-Hardcode-HAVE_ALIGNED_ALLOC-1-in-libstdc-v3-configur.patch
       {% elif cross_target_platform.startswith("win-") %}
       # for GCC 16: https://github.com/msys2/MINGW-packages/tree/fc4afbaccc4fc855b2c96a881cc1a5bc81ab41d2/mingw-w64-gcc
+      #             + patch 0022b
       # for GCC 15: https://github.com/msys2/MINGW-packages/tree/f59921184b35858d4ceb91679578de0d62475cbf/mingw-w64-gcc
       # for GCC 14: https://github.com/msys2/MINGW-packages/tree/331bf945d21af562d228ed46bda21c8272d1e76e/mingw-w64-gcc
       - patches/mingw/{{ gcc_maj_ver }}/0002-i386-Keep-SEH-enabled-for-Win64-sysv_abi-functions.patch           # [gcc_maj_ver == 16]
@@ -50,6 +51,8 @@ source:
       - patches/mingw/{{ gcc_maj_ver }}/0020-libgomp-Don-t-hard-code-MS-printf-attributes.patch
       - patches/mingw/{{ gcc_maj_ver }}/0021-bootstrap-gnattools-Pass-target-sysroot-flags-to-boo.patch         # [gcc_maj_ver == 16]
       - patches/mingw/{{ gcc_maj_ver }}/0022-mingw-Remove-outdated-mingw-stuff.patch                            # [gcc_maj_ver == 16]
+      # fix-up for conda-forge setup, see https://github.com/conda-forge/ctng-compilers-feedstock/issues/229
+      - patches/mingw/{{ gcc_maj_ver }}/0022b-keep-value-of-STANDARD_STARTFILE_PREFIX_2.patch                   # [gcc_maj_ver == 16]
       - patches/mingw/{{ gcc_maj_ver }}/0023-Ada-Don-t-export-gnat1-s-symbols-on-PE-hosts.patch                 # [gcc_maj_ver == 16]
       - patches/mingw/{{ gcc_maj_ver }}/0024-libgfortran-Guard-locale-restoration-for-formatted-I0.patch        # [gcc_maj_ver == 16]
       - patches/mingw/{{ gcc_maj_ver }}/0025-libgfortran-Copy-LC_NUMERIC-string-for-formatted-IO.patch          # [gcc_maj_ver == 16]

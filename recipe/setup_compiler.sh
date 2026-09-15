@@ -39,6 +39,10 @@ if [[ ! -d ${SRC_DIR}/cf-compilers ]]; then
     if [[ "${build_platform}" == "osx-"* ]]; then
       extra_pkgs+=(
         "make"
+        # with newer libcxx, compilation in vendored isl 0.24 code fails with:
+        #   error: field has incomplete type 'std::exception_ptr'
+        # c.f. https://forge.sourceware.org/gcc/gcc/src/tag/releases/gcc-16.2.0/contrib/download_prerequisites#L71
+        "libcxx-devel<23"
       )
     fi
     conda create -p ${CF_PREFIX} -c conda-forge --use-local --yes --quiet \
