@@ -87,18 +87,6 @@ for f in isl mpfr mpc/build-aux; do
   cp $BUILD_PREFIX/share/gnuconfig/config.* $f/
 done
 
-set +x
-# We want CONDA_PREFIX/usr/lib not CONDA_PREFIX/usr/lib64 and this
-# is the only way. It is incompatible with multilib (obviously).
-TINFO_FILES=$(find . -path "*/config/*/t-*")
-for TINFO_FILE in ${TINFO_FILES}; do
-  sed -i.bak 's#^\(MULTILIB_OSDIRNAMES.*\)\(lib64\)#\1lib#g' ${TINFO_FILE}
-  rm -f ${TINFO_FILE}.bak
-  sed -i.bak 's#^\(MULTILIB_OSDIRNAMES.*\)\(libx32\)#\1lib#g' ${TINFO_FILE}
-  rm -f ${TINFO_FILE}.bak
-done
-set -x
-
 # workaround for https://gcc.gnu.org/bugzilla//show_bug.cgi?id=80196
 if [[ "$gcc_version" == "11."* && "$build_platform" != "$target_platform" ]]; then
   sed -i.bak 's@-I$glibcxx_srcdir/libsupc++@-I$glibcxx_srcdir/libsupc++ -nostdinc++@g' libstdc++-v3/configure
@@ -175,6 +163,7 @@ fi
   --disable-nls \
   --disable-bootstrap \
   --disable-multilib \
+  --enable-multiarch \
   --enable-long-long \
   --without-zstd \
   --with-native-system-header-dir=/usr/include \
