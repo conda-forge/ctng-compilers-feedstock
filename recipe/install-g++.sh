@@ -57,3 +57,4 @@ pushd ${PREFIX}
 popd
 
 source ${RECIPE_DIR}/make_tool_links.sh
+rm -rf ${PREFIX}/lib64

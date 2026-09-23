@@ -93,6 +93,10 @@ if [[ "${BUILD_PREFIX}" != "${PREFIX}" ]]; then
   ln -sf ${CF_PREFIX}/share ${BUILD_PREFIX}/share || true
 fi
 
+mkdir -p ${PREFIX}/lib
+rm -rf ${PREFIX}/lib64
+ln -sf ${PREFIX}/lib ${PREFIX}/lib64
+
 export PATH=$SRC_DIR/cf-compilers/bin:$PATH
 
 if [[ "$target_platform" == "win-"* && "${PREFIX}" != *Library ]]; then

@@ -51,3 +51,4 @@ else
     # is consitent with when it creates the conda-gcc-specs package
     false
 fi
+rm -rf ${PREFIX}/lib64

@@ -31,3 +31,4 @@ fi
 
 popd
 
+rm -rf ${PREFIX}/lib64
