@@ -89,4 +89,3 @@ if [[ "${PKG_NAME}" != gcc_impl* ]]; then
 fi
 
 rm -f ${PREFIX}/share/info/dir
-rm -rf ${PREFIX}/lib64
