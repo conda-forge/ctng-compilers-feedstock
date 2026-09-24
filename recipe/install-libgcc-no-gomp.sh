@@ -35,3 +35,4 @@ pushd ${PREFIX}/lib
   fi
 popd
 rm -rf ${PREFIX}/lib64
+rm -rf ${PREFIX}/${TARGET}/lib64

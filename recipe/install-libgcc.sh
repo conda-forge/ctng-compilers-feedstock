@@ -16,6 +16,7 @@ pushd ${SRC_DIR}/build
     # make -C ${TARGET}/libgcc prefix=${PREFIX} install DESTDIR=${PWD}/tmp
     make -C ${TARGET}/libgcc prefix=${PREFIX} install DESTDIR=${PWD}/tmp
     install -c -m 644 ${PWD}/tmp/${PREFIX}/lib/lib* ${PREFIX}/lib || true
+    install -c -m 644 ${PWD}/tmp/${PREFIX}/lib64/lib* ${PREFIX}/lib || true
     if [[ "${TARGET}" == *mingw* ]]; then
       mv $PREFIX/lib/libgcc_s*.dll $PREFIX/bin
     fi

@@ -18,3 +18,4 @@ mkdir -p ${PREFIX}/share/licenses/gcc-libs
 install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION.gomp_copy
 rm -rf ${PREFIX}/lib64
+rm -rf ${PREFIX}/${TARGET}/lib64

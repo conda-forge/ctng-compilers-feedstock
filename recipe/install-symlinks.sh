@@ -27,3 +27,4 @@ for tool in ${TOOLS}; do
   $symlink_or_copy ${PREFIX}/bin/${TARGET}-${tool}${EXEEXT} ${PREFIX}/bin/${tool}${EXEEXT}
 done
 rm -rf ${PREFIX}/lib64
+rm -rf ${PREFIX}/${TARGET}/lib64
