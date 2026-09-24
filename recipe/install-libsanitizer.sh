@@ -30,3 +30,5 @@ popd
 find ${PREFIX}/lib -name "*\.a" ! -name "*\.dll\.a" -exec rm -rf {} \;
 # no libtool files
 find ${PREFIX}/lib -name "*\.la" -exec rm -rf {} \;
+rm -rf ${PREFIX}/lib64
+rm -rf ${PREFIX}/${TARGET}/lib64

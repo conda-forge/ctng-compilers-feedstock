@@ -88,3 +88,5 @@ fi
 rm -f ${PREFIX}/share/info/dir
 
 source ${RECIPE_DIR}/make_tool_links.sh
+rm -rf ${PREFIX}/lib64
+rm -rf ${PREFIX}/${TARGET}/lib64

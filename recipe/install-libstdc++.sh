@@ -27,3 +27,5 @@ mkdir -p ${PREFIX}/share/licenses/libstdc++
 # Install Runtime Library Exception
 install -Dm644 ${SRC_DIR}/COPYING.RUNTIME \
         ${PREFIX}/share/licenses/libstdc++/RUNTIME.LIBRARY.EXCEPTION
+rm -rf ${PREFIX}/lib64
+rm -rf ${PREFIX}/${TARGET}/lib64

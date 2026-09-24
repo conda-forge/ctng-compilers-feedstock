@@ -23,11 +23,13 @@ if [[ "${HOST}" == "${TARGET}" ]]; then
         rm ${PREFIX}/bin/libstdc++*.dll
     fi
 else
-    mv $PREFIX/${TARGET}/lib/lib*.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+    mv $PREFIX/${TARGET}/lib/lib*.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || mv $PREFIX/${TARGET}/lib64/lib*.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     if [[ "${TARGET}" == *linux* ]]; then
-        mv ${PREFIX}/${TARGET}/lib/libstdc++.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+        mv ${PREFIX}/${TARGET}/lib/libstdc++.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/ || mv ${PREFIX}/${TARGET}/lib64/libstdc++.so* ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
     fi
 fi
 
 popd
 
+rm -rf ${PREFIX}/lib64
+rm -rf ${PREFIX}/${TARGET}/lib64

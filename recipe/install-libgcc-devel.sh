@@ -32,3 +32,5 @@ rm -rf ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/include/unwind.h
 
 popd
 
+rm -rf ${PREFIX}/lib64
+rm -rf ${PREFIX}/${TARGET}/lib64

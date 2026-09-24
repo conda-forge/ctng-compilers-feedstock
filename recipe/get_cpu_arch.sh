@@ -1,3 +1,5 @@
+#!/bin/bash
+
 get_cpu_arch() {
   local CPU_ARCH
   if [[ "$1" == *"-64" ]]; then
