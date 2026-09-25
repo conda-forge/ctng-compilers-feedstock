@@ -38,10 +38,15 @@ if [[ "${TARGET}" == "${HOST}" ]]; then
       sed -i.bak "/\*link_command:/,+1 s+%(linker)+& -disable-new-dtags +" $specdir/conda.specs
     fi
     # use -idirafter to put the conda "system" includes where /usr/local/include would typically go
-    # in a system-packaged non-cross compiler
-    sed -i.bak "/\*cpp_options:/,+1 s+%.*+& -idirafter ${PREFIX}/include+" $specdir/conda.specs
+    # in a system-packaged non-cross compiler. The order when using the system-linux-sysroot is
+    #   1. user passed -I
+    #   2. user passed -isystem
+    #   3. <PREFIX>/include
+    #   4. <SYSROOT>/usr/local/include
+    #   5. <SYSROOT>/usr/include
+    sed -i.bak "/\*cpp_options:/,+1 s+%.*+& -isystem ${PREFIX}/include+" $specdir/conda.specs
     # cc1_options also get used for cc1plus... at least in 11.2.0
-    sed -i.bak "/\*cc1_options:/,+1 s+%.*+& -idirafter ${PREFIX}/include+" $specdir/conda.specs
+    sed -i.bak "/\*cc1_options:/,+1 s+%.*+& -isystem ${PREFIX}/include+" $specdir/conda.specs
 
     rm $specdir/conda.specs.bak
 else
