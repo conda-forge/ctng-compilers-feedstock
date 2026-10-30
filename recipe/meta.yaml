@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 7 %}
+{% set build_num = 8 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -473,6 +473,10 @@ outputs:
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgfortran.dll.a
         {% endif %}
         - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libgfortran.a
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libcaf_single.a
+        {% if cross_target_platform.startswith("linux-") and gcc_maj_ver|int >= 16 %}
+        - test -f ${PREFIX}/lib/gcc/{{ TARGET }}/{{ gcc_version }}/libcaf_shmem.a
+        {% endif %}
         - test -f ${PREFIX}/bin/{{ TARGET }}-gfortran
         - find $PREFIX/lib -iname omp_lib.mod | grep '.'
         - find $PREFIX/lib -iname omp_lib.h | grep '.'

@@ -29,6 +29,20 @@ if [[ "${target_platform}" == "${build_platform}" ]]; then
   fi
   rm -f omp-threadprivate
 
+  "${PREFIX}/bin/${TARGET}-gfortran" -fcoarray=lib -o coarray coarray.f90 -lcaf_single -v || exit 1
+  if [[ "${cross_target_platform}" == "${build_platform}" ]]; then
+    ./coarray || exit 1
+  fi
+  rm -f coarray
+
+  if [[ "${TARGET}" == *linux* && $("${PREFIX}/bin/${TARGET}-gfortran" -dumpversion | cut -d. -f1) -ge 16 ]]; then
+    "${PREFIX}/bin/${TARGET}-gfortran" -fcoarray=lib -o coarray coarray.f90 -lcaf_shmem -v || exit 1
+    if [[ "${cross_target_platform}" == "${build_platform}" ]]; then
+      GFORTRAN_NUM_IMAGES=2 ./coarray || exit 1
+    fi
+    rm -f coarray
+  fi
+
   ${TARGET}-gfortran -v
   ${TARGET}-gfortran -E -dM - </dev/null
 fi
