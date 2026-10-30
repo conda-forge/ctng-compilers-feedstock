@@ -36,7 +36,10 @@ if [[ "${target_platform}" == "${build_platform}" ]]; then
   rm -f coarray
 
   if [[ "${TARGET}" == *linux* && $("${PREFIX}/bin/${TARGET}-gfortran" -dumpversion | cut -d. -f1) -ge 16 ]]; then
-    "${PREFIX}/bin/${TARGET}-gfortran" -fcoarray=lib -o coarray coarray.f90 -lcaf_shmem -v || exit 1
+    # libcaf_shmem is a static archive and cannot record its own dependencies;
+    # with the glibc 2.17 sysroot its pthread and shm_open symbols are in
+    # libpthread and librt, not libc.
+    "${PREFIX}/bin/${TARGET}-gfortran" -fcoarray=lib -o coarray coarray.f90 -lcaf_shmem -pthread -lrt -v || exit 1
     if [[ "${cross_target_platform}" == "${build_platform}" ]]; then
       GFORTRAN_NUM_IMAGES=2 ./coarray || exit 1
     fi
