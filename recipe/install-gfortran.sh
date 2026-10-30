@@ -62,6 +62,14 @@ else
   fi
 fi
 cp -f -P ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/libgfortran.*a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+# Coarray runtimes for -fcoarray=lib: GCC installs these static libraries next
+# to libgfortran.a. libcaf_shmem (GCC >=16) is only built when the target has
+# process-shared pthreads.
+for _caf in libcaf_single libcaf_shmem; do
+  if [[ -f ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/${_caf}.a ]]; then
+    cp -f ${SRC_DIR}/build/${TARGET}/libgfortran/.libs/${_caf}.a ${PREFIX}/lib/gcc/${TARGET}/${gcc_version}/
+  fi
+done
 
 set +x
 # Strip executables, we may want to install to a different prefix
