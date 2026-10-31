@@ -265,6 +265,8 @@ outputs:
         - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
       run:
         - binutils  # [linux]
+        - cctools  # [osx]
+        - ld64  # [osx]
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         - conda-gcc-specs        # [with_conda_specs]
     test:
