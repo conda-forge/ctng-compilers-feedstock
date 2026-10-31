@@ -1,5 +1,5 @@
 {% set version = gcc_version %}
-{% set build_num = 7 %}
+{% set build_num = 8 %}
 
 {% if gcc_maj_ver is not defined %}
 {% set gcc_maj_ver = 15 %}
@@ -264,6 +264,9 @@ outputs:
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         - binutils_impl_{{ cross_target_platform }} {{ binutils_version }}.* bootstrap_*   # [cross_target_platform not in ("osx-arm64", "osx-64")]
       run:
+        - binutils  # [linux or win]
+        - cctools  # [osx]
+        - ld64  # [osx]
         - {{ pin_subpackage("gcc_impl_" ~ cross_target_platform, exact=True) }}
         - conda-gcc-specs        # [with_conda_specs]
     test:
